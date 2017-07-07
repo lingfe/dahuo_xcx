@@ -1,0 +1,128 @@
+/**index.wxss**/
+.container{
+  width: 750rpx;
+  height: auto;
+  background-color: #90B396;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/**头**/
+.dahuo_top {
+  width: 750rpx;
+  height: 100rpx;
+  background-color: #fff;
+  position: absolute;
+  top:0%;
+}
+.top_left {
+  line-height: 100rpx;
+  margin-left: 3%;
+  float: left;
+}
+.top_zho {
+  width: 6em;
+  float: left;
+  margin-left: 20%;
+  text-align: center;
+}
+.top_zho button {
+  background-color: #CDCDB4;
+  height: 3.0em;
+  color: #fff;
+  width: 10em;
+  line-height: 3.5em;
+  margin-top: 0.5em;
+}
+.top_right {
+  line-height: 100rpx;
+  margin-top: 0.7em;
+  float:right;
+  margin-right: 3%;
+}
+.top_right image {
+  width:50rpx;
+  height:50rpx;
+  float: left;
+}
+
+
+/**内容**/
+.dahuo_neiro{
+  width: auto;
+  margin-left: 1.2em;
+  margin-top: 3em;
+}
+.neiro {
+  width: 680rpx;
+  background-color: #fff;
+  height: auto;
+  margin-top: 1em;
+  float: left;
+}
+.neiro_img{
+  width: 220rpx;
+  height: 200rpx;
+  float: left;
+}
+.neiro_img image{
+  width: 220rpx;
+  height: 200rpx;
+}
+.neiro_data {
+  width: 450rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  float: left;
+}
+.data_titile {
+  color: green;
+}
+.data_pro {
+  width: 450rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+  font-size: 16px;
+}
+.data_pro text {
+  color: red;
+}
+.data_biaoqian {
+  width: 450rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+}
+.data_biaoqian text{
+  margin-right: 3em;
+  font-size: 12px;
+}
+.data_info{
+  width: 680rpx;
+  background-color: #fff;
+  height: 3em;
+  border-top: 1px solid #000;
+  margin-top: 3rpx;
+  float: left;
+}
+
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}

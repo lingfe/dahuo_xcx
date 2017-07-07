@@ -1,0 +1,55 @@
+
+<view class="dahuo page">
+  <!-- 列表 -->
+  <view wx:for-items="{{array}}"> {{item}} </view>
+
+  <!-- 条件渲染 -->
+  <view wx:if="{{view == 'WEBVIEW'}}"> WEBVIEW </view>
+  <view wx:elif="{{view == 'APP'}}"> APP </view>
+  <view wx:else="{{view == 'MINA'}}"> MINA IS NOT APP </view>
+
+  <!-- 模板 -->
+  <template name="staffName">
+    <view>
+      FirstName: {{firstName}}, LastName: {{lastName}}
+    </view>
+  </template>
+
+  <template is="staffName" data="{{...staffA}}"></template>
+  <template is="staffName" data="{{...staffB}}"></template>
+  <template is="staffName" data="{{...staffC}}"></template>
+
+
+  <!-- 事件 -->
+  <view bindtap="add" style="width:50px;height:50px;color:red;"> {{count}} </view>
+
+  <!--组合  也可以在Mustache内直接进行组合，构成新的对象或者数组-->
+  <!--数组-->
+  <view wx:for-items="{{[zero, 1, 2, 3, 4]}}"> {{item}} </view>
+  
+  <!--对象-->
+  <template is="objectCombine" data="{{for: a, bar: b}}"></template>
+  <template name="objectCombine">
+    <view>
+      for: {{for}}, bar: {{bar}}
+    </view>
+  </template>
+
+  <!-- 也可以用扩展运算符...来将一个对象展开 -->
+  <template is="objectCombine2" data="{{...obj1, ...obj2, e: 5}}"></template>
+  <template name="objectCombine2">
+    <view>
+      a: {{a}}, b: {{b}},c: {{c}}, d: {{d}},e:{{e}},f:{{f}}
+    </view>
+  </template>
+<navigator url="../logs/logs">跳转到新页面</navigator>
+<navigator url="../index/index" open-type="redirect">在当前页打开</navigator>
+<navigator url="../index/index" open-type="switchTab">切换到首页Tab</navigator>
+
+<view>
+    <navigator url="../logs/logs" hover-class="changestyle">页面跳转，可以返回</navigator>
+</view>
+<view>
+    <navigator url="../logs/logs" hover-class="changestyle" redirect>页面跳转，无法返回</navigator>
+</view>
+</view>

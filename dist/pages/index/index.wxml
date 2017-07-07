@@ -1,0 +1,109 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view scroll-x="false" style="height: {{ windowHeight+'px'}}" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower">
+  <!-- 头部 start  -->
+  <view class="dahuo_top">
+    <picker bindchange="setAddressInfo" value="{{addressIndex}}"  range="{{address}}">
+        <view class="top_left"><text>{{address[addressIndex]}}</text></view>
+    </picker>
+    <view class="top_zho">
+      <picker bindchange="stInfo" value="{{priceIndex}}"  range="{{PriceRange}}">
+        <button style="font-size:25rpx;"><view>{{PriceRange[priceIndex]}}</view></button>
+      </picker>
+    </view>
+    <navigator url="/pages/search/search" >
+        <view class="top_right"><image class="kind-list__img" src="/example/images/icon_nav_search.png"></image></view>
+    </navigator>
+  </view>
+  <!-- 头部 end  -->
+
+  <!-- 内容 end  -->
+  <view class="dahuo_neiro">
+    <navigator url="/pages/index/info/info" >
+    <view class="neiro">
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <text class="data_titile">花果园火锅店亏本转让..</text>
+         <text class="data_pro">搭伙金额   <text>0.8</text>万</text>
+         <text class="data_biaoqian">
+            <text>生意转让</text>
+            <text>餐饮业</text>
+            <text>12分钟前</text>
+         </text>
+      </view>
+      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+    </view>
+    </navigator>
+
+    <navigator url="/pages/index/info/info" >
+    <view class="neiro">
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <text class="data_titile">花果园火锅店亏本转让..</text>
+         <text class="data_pro">搭伙金额   <text>2.5</text>万</text>
+         <text class="data_biaoqian">
+            <text>生意转让</text>
+            <text>餐饮业</text>
+            <text>12分钟前</text>
+         </text>
+      </view>
+      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+    </view>
+    </navigator>
+
+    <navigator url="/pages/index/info/info" >
+    <view class="neiro">
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <text class="data_titile">花果园火锅店亏本转让..</text>
+         <text class="data_pro">搭伙金额   <text>1.3</text>万</text>
+         <text class="data_biaoqian">
+            <text>生意转让</text>
+            <text>餐饮业</text>
+            <text>12分钟前</text>
+         </text>
+      </view>
+      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+    </view>
+    </navigator>
+
+    <navigator url="/pages/index/info/info" >
+    <view class="neiro">
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <text class="data_titile">花果园火锅店亏本转让..</text>
+         <text class="data_pro">搭伙金额   <text>3</text>万</text>
+         <text class="data_biaoqian">
+            <text>生意转让</text>
+            <text>餐饮业</text>
+            <text>12分钟前</text>
+         </text>
+      </view>
+      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+    </view>
+    </navigator>
+
+    <navigator url="/pages/index/info/info" >
+    <view class="neiro">
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <text class="data_titile">花果园火锅店亏本转让..</text>
+         <text class="data_pro">搭伙金额   <text>5</text>万</text>
+         <text class="data_biaoqian">
+            <text>生意转让</text>
+            <text>餐饮业</text>
+            <text>12分钟前</text>
+         </text>
+      </view>
+      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+    </view>
+    </navigator>
+  </view>
+  <!-- 内容 end  -->
+  
+  <!--item底部 start-->
+  <!--item底部 end-->
+  </scroll-view>
+</view>
+<loading hidden="{{isHiddenLoading}}">加载中...</loading>
+<toast duration="1500" bindchange="closeToast" hidden="{{isHiddenToast}}">加载完成</toast>
