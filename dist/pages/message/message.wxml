@@ -1,6 +1,6 @@
 <view  stytle=" overflow-x: hidden; overflow-y: auto;">
 <view class="serach">
-<view class="serach_view_show" bindtap="bindtap"> 搜索</view>
+<view class="serach_view_show" bindtap="bindtap"> 搜索搭伙人</view>
 </view>
   <view class="message__list">
      <block wx:for="{{messages}}">

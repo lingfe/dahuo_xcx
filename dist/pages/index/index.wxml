@@ -1,4 +1,9 @@
-<!--index.wxml-->
+<!--
+ *   作者:  lingfe 
+ *   时间:  2017-7-7
+ *   描述:  信息页面，首页
+ * 
+ *-->
 <view class="container">
   <scroll-view scroll-x="false" style="height: {{ windowHeight+'px'}}" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower">
   <!-- 头部 start  -->
