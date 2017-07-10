@@ -45,6 +45,10 @@ App({
     },
     //用户数据
     globalData: {
-      userInfo: null
+      userInfo: null,
+      fundsLayout: null,
+      projectDescription:null,
+      incomeDescription:null,
+      introduce:null
     }
 });

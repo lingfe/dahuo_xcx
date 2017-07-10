@@ -1,23 +1,25 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/release/release",
+    "pages/index/release/partnership/partnership",
+    "pages/index/release/partnership/fundsLayout/fundsLayout",
+    "pages/index/release/partnership/introduce/introduce",
+    "pages/index/release/partnership/projectDescription/projectDescription",
+    "pages/index/release/partnership/incomeDescription/incomeDescription",
+    "pages/index/info/info",
     "pages/dahuo/dahuo",
     "pages/logs/logs",
-    "pages/index/info/info",
     "pages/search/search",
-    
     "pages/message/message",
     "pages/message/chat/chat",
     "pages/message/search/search",
-
     "example/index",
-
     "example/button/button",
     "example/list/list",
     "example/input/input",
     "example/slider/slider",
     "example/uploader/uploader",
-
     "example/article/article",
     "example/badge/badge",
     "example/flex/flex",
@@ -29,7 +31,6 @@
     "example/panel/panel",
     "example/preview/preview",
     "example/progress/progress",
-
     "example/actionsheet/actionsheet",
     "example/dialog/dialog",
     "example/msg/msg",
@@ -37,57 +38,56 @@
     "example/msg/msg_fail",
     "example/picker/picker",
     "example/toast/toast",
-
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-
     "example/searchbar/searchbar"
+    
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "搭伙团队",
-    "navigationBarBackgroundColor": "#000",
+    "navigationBarBackgroundColor": "#00BFFF",
     "backgroundColor": "#f8f8f8",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "light"
   },
-    "tabBar": {
-      "color": "#000",
-      "backgroundColor": "#fff",
-      "selectedColor": "red",
-      "list": [
-        {
-          "pagePath": "pages/index/index",
-          "text": "搭伙",
-          "iconPath": "images/tab_contact_normal.png",
-          "selectedIconPath": "images/tab_contact_selected.png"
-        },
-        {
-          "pagePath": "pages/dahuo/dahuo",
-          "text": "发布+",
-          "iconPath": "images/zan.png",
-          "selectedIconPath": "images/zan.png"
-        },
-        {
-          "pagePath": "pages/message/message",
-          "text": "聊天",
-          "iconPath": "images/tab_message_normal.png",
-          "selectedIconPath": "images/tab_message_selected.png"
-        },
-        {
-           "pagePath": "example/index",
-           "text": "weUL",
-           "iconPath": "images/zan.png",
-           "selectedIconPath": "images/zan.png"
-        },
-        {
-          "pagePath":"pages/logs/logs",
-          "text":"日志",
-          "iconPath": "images/zan.png",
-          "selectedIconPath": "images/zan.png"
-        }
-      ]
-    },
+  "tabBar": {
+    "color": "#000",
+    "backgroundColor": "#fff",
+    "selectedColor": "red",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "搭伙",
+        "iconPath": "images/dahuo_1.png",
+        "selectedIconPath": "images/dahuo_0.png"
+      },
+      {
+        "pagePath": "pages/dahuo/dahuo",
+        "text": "个人",
+        "iconPath": "images/user_1.png",
+        "selectedIconPath": "images/user_0.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "聊天",
+        "iconPath": "images/tab_message_normal.png",
+        "selectedIconPath": "images/tab_message_selected.png"
+      },
+      {
+        "pagePath": "example/index",
+        "text": "weUL",
+        "iconPath": "images/zan.png",
+        "selectedIconPath": "images/zan.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "images/zan.png",
+        "selectedIconPath": "images/zan.png"
+      }
+    ]
+  },
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,

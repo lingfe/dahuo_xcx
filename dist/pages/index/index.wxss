@@ -7,7 +7,7 @@
 .container{
   width: 750rpx;
   height: auto;
-  background-color: #90B396;
+  background-color: #F8F8FF;
 }
 
 .userinfo {
@@ -42,6 +42,7 @@
   width: 10em;
   line-height: 3.5em;
   margin-top: 0.5em;
+  background-image: url("../images/zan.png");
 }
 .top_right {
   line-height: 100rpx;
@@ -50,8 +51,8 @@
   margin-right: 3%;
 }
 .top_right image {
-  width:50rpx;
-  height:50rpx;
+  width:60rpx;
+  height:49rpx;
   float: left;
 }
 
@@ -59,11 +60,11 @@
 /**内容**/
 .dahuo_neiro{
   width: auto;
-  margin-left: 1.2em;
+  margin-left: 0.8em;
   margin-top: 3em;
 }
 .neiro {
-  width: 680rpx;
+  width: 700rpx;
   background-color: #fff;
   height: auto;
   margin-top: 1em;
@@ -103,10 +104,13 @@
   line-height: 50rpx;
   float: left;
 }
-.data_biaoqian text{
-  margin-right: 3em;
+.data_biaoqian_view{
+  margin-right: 1em;
   font-size: 12px;
+  float: left;
+  margin-top: 0.3em;
 }
+
 .data_info{
   width: 680rpx;
   background-color: #fff;
@@ -116,6 +120,16 @@
   float: left;
 }
 
+/** 发布样式 **/
+.release{
+ position: fixed;
+ right: 1.3em;
+ bottom: 1.3em;
+}
+.release image{
+  width: 60px;
+  height: 60px;
+}
 
 .userinfo-avatar {
   width: 128rpx;

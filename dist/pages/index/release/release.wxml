@@ -1,0 +1,118 @@
+<!--
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-7
+ *   描述:  发布wxxml
+ * 
+ * */
+-->
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <!-- 合伙创业  start -->
+            <navigator url="/pages/index/release/partnership/partnership" >
+            <view class="weui-cell weui-cells">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/partnership.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">合伙创业</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 合伙创业  end -->
+
+            <!-- 生意转让  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/businessTransfer.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">生意转让</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 生意转让  end -->
+
+            <!-- 加盟分店  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/affiliateStores.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">加盟分店</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 加盟分店   end -->
+
+            <!-- 干股纳才  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/ganguSatisfiedBefore.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">干股纳才</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 干股纳才  end -->
+            
+            <!-- 金融理财  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/financialManagement.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">金融理财</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 金融理财  end -->
+            
+            <!-- 房产投资  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/propertyInvestment.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">房产投资</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 房产投资  end -->
+
+            
+            <!-- 微商代理  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/aerivativeAgent.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">微商代理</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 微商代理  end -->
+            
+            <!-- 其他  start -->
+            <navigator url="/pages/index/release/release" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__hd">
+                    <image src="/images/ico/other.png" 
+                    style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">其他</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            </navigator>
+            <!-- 其他  end -->
+        </view>
+    </view>
+</view>
