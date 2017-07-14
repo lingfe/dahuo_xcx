@@ -1,0 +1,90 @@
+<!--
+/**  作者:  lingfe 
+ *   时间:  2017-7-13
+ *   描述:  查看搭友——页面
+ * 
+ * */
+ -->
+<view class="page">
+    <view class="page__bd">
+        <!-- 个人信息  start -->
+        <view class="">
+          <view class="item" >
+              <view class="item-left">
+                    <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image"/>
+              </view>
+              <view class="item-middle">
+                    <view>
+                        <text class="title">lingfe</text>
+                    </view>
+                    <view>
+                        <text class="message">我就是我，不一样的萤火</text>
+                    </view>
+                    <view>
+                        <text class="title_address">贵阳,已发布3贴</text>
+                    </view>
+              </view>
+          </view>
+          <view  class="line"></view>
+        </view>
+        <!-- 个人信息  end -->
+                            
+        <!-- 内容  end -->
+        <view class="">
+                <view class="weui-tab__content">
+                    <navigator url="/pages/index/info/info" >
+                    <view class="neiro">
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                      <view class="neiro_data">
+                        <text class="title">花果园火锅店亏本转让..</text>
+                        <text class="data_pro">搭伙金额   <text>3</text>万</text>
+                        <view class="data_biaoqian">
+                            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                            <view class="data_biaoqian_view">12分钟前</view>
+                        </view>
+                      </view>
+                      <view class="data_info info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+                    </view>
+                    </navigator>
+                </view>
+
+                <view class="weui-tab__content">
+                    <navigator url="/pages/index/info/info" >
+                    <view class="neiro">
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                      <view class="neiro_data">
+                        <text class="title">花果园火锅店亏本转让..</text>
+                        <text class="data_pro">搭伙金额   <text>3</text>万</text>
+                        <view class="data_biaoqian">
+                            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                            <view class="data_biaoqian_view">12分钟前</view>
+                        </view>
+                      </view>
+                      <view class="data_info info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+                    </view>
+                    </navigator>
+                </view>
+
+                <view class="weui-tab_content">
+                  <navigator url="">
+                    <view class="neiro">
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                          <view class="neiro_data">
+                            <text class="title">花果园火锅店亏本转让..</text>
+                            <text class="data_pro">入伙金额<text>3</text>万</text>
+                            <view class="data_biaoqian">
+                                <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                                <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                                <view class="data_biaoqian_view">12分钟前</view>
+                            </view>
+                          </view>
+                          <view class="data_info info">bbbbbbbbbbbbbbbbbbbbb</view>
+                      </view>
+                  </navigator>
+                </view>
+        </view>
+        <!-- 内容  end-->
+    </view>
+</view>

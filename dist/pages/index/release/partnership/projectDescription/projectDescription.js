@@ -28,7 +28,7 @@ Page({
   savaprojectDescription: function (e) {
     var projectDescription = this.data.projectDescription;
     //判断是否为空
-    if (projectDescription.length === 0) {
+    if (projectDescription == null) {
       //提示
       this.setData({
         projectDescription: projectDescription,
@@ -52,7 +52,7 @@ Page({
   //点击确定
   confirm: function () {
     //判断是否为空
-    if (this.data.projectDescription.length != 0) {
+    if (this.data.projectDescription != null) {
       var projectDescription = this.data.projectDescription;
       console.log('projectDescription:' + projectDescription);
       //得到打开的页面

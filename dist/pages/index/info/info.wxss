@@ -1,0 +1,172 @@
+/**  作者:  lingfe 
+ *   时间:  2017-7-7
+ *   描述:  详细信息页面
+ * 
+ * */
+
+ 
+/**内容**/
+.neiro {
+  width: 750rpx;
+  background-color: #fff;
+  height: auto;
+}
+
+.data_info{
+  width: 750rpx;
+  background-color: #fff;
+  height: auto;
+  margin-top: 10rpx;
+  float: left;
+}
+.data_top{
+  width: 750rpx;
+  background-color: #fff;
+  height: auto;
+  border-bottom: 1px solid #C5C1AA;
+  margin-bottom: 10rpx;
+  float: left;
+}
+.float-btn{
+  float: left;
+}
+.float-btn_neiro{
+  float: left;
+  margin-right: 15rpx;
+  font-family:"微软雅黑";
+  color: #808080;
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.title{
+  color: #000000;
+  font-family:"微软雅黑";
+  font-weight:bold;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  overflow: hidden; /*自动隐藏文字*/
+  text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+
+}
+.info{
+  margin-right: 15rpx;
+  font-family:"微软雅黑";
+  color: #808080;
+  margin-top: 10rpx;
+  font-size: 25rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.select_text{
+  text-align: center;
+  font-family:"微软雅黑";
+  color: blue;
+  margin-top: 15rpx;
+}
+
+.viewMy{
+  margin-top: 10rpx;
+  width: 750rpx;
+  height: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8rpx;
+  margin-left: 8rpx;
+  margin-right: 8rpx;
+  margin-top: 8rpx;
+  background-color: #fff;
+/**  border: 1rpx solid #eaeaea;
+  border-bottom: 1rpx solid #d0d0d0;
+  border-radius: 5rpx;*/
+}
+.item-left{
+    margin-top: 15rpx;
+    display:table-cell;
+    text-align: center; 
+}
+.image{
+    width: 88rpx; 
+    height: 88rpx;
+    border-radius: 44rpx; 
+    background-color: #eeeeee;
+}
+.images_item{
+    width: 100%; 
+    height: 400rpx;
+    border-radius: 0rpx;
+}
+
+.item-middle{
+    flex: 1;
+    margin-left: 10rpx;
+    padding-top: 13rpx;
+    overflow: hidden;
+}
+
+.message{
+  font-family:"微软雅黑";
+  color: #808080;
+  line-height: 10rpx;
+  font-size: 16rpx;
+  padding: 0 16rpx,0,16rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.item_right{
+    padding-top: 13rpx;
+    overflow: hidden; 
+}
+.time{
+    color:#808080;
+    font-size: 18rpx;
+}
+.mark{
+    position: relative;
+    left:15rpx;
+    right: 35rpx;
+    padding-top: 4rpx;
+    background-color:#F74c31; 
+    text-align: center;
+    font-size: 18rpx; 
+    width: 35rpx;
+    height: 35rpx;
+    border-radius:20rpx; 
+    color: #ffffff;
+    display:table-cell;
+}
+
+
+.weui-cell__ft{ width:500rpx;text-align:right;color:#999}
+.weui-cell_access{color:inherit}
+
+.handleBox {
+    width:100%;
+    height: 34px;
+    position: fixed;
+    bottom:0;
+    background: #efefef;
+    border-top:1px solid #ddd;
+    padding: 10px 0;
+}
+.btn_submit{
+float: right; 
+right: 5px;
+}
+.input_submit{
+    max-width:80%;
+    width:80%;
+    display: inline;
+    float: left;
+    background: #fff;
+    margin:2px 5px;
+    border-radius: 5px;
+}

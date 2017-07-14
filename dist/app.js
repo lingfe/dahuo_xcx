@@ -49,6 +49,13 @@ App({
       fundsLayout: null,
       projectDescription:null,
       incomeDescription:null,
-      introduce:null
+      introduce:null,
+      geographicalPosition: null,      //地理位置
+      businessDescription:null, //营业描述
+      transferReason:null,//转让原因
+      productHighlights:null,//产品亮点
+      agentCondition:null,//代理条件
+      agencyRule:null,//代理规则
+      skillsRequired:null,//技能要求
     }
 });

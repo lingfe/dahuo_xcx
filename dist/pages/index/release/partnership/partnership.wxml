@@ -28,7 +28,7 @@
                     <view class="weui-label">入伙门槛</view>
                 </view>
                 <view class="weui-cell__ft">
-                    <input class="weui-input" placeholder="万"/>           
+                    <input class="weui-input" value="{{ruhuoValue}}" bindblur="bindinputValue" placeholder="万"/>           
                 </view>
             </view>
             </navigator>

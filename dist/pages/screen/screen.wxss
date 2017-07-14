@@ -1,0 +1,23 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-14
+ *   描述:  筛选
+ * 
+ * */
+
+page, .page, .page__bd {
+  height: 95%;
+}
+
+.www{
+  width:200rpx;
+  height: 95%;
+  border-right:1px solid darkgray;
+  float: left;
+}
+
+.ccc{
+  float: left;
+  width: 540rpx;
+  height: 95%;
+}

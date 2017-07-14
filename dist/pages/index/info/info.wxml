@@ -1,5 +1,223 @@
+<!--
+/**  作者:  lingfe 
+ *   时间:  2017-7-7
+ *   描述:  详细信息页面
+ * 
+ * */
+ -->
 <!-- 详细信息页面 start   -->
 <view class="page">
-  <view class="">详细信息页面</view>
+  <view class="page__bd">
+    <view class="page_top">
+                    <!-- 项目基本信息  start -->
+                    <view class="neiro">
+                      <view class="data_top">
+                          <view style="float:left;" class="float-btn">
+                            <view class="float-btn title">云岩区5万火锅店盈利挥泪转让XXX</view>
+                            <view style="float:right;">
+                              <view class="float-btn_neiro"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image></view>
+                              <view class="float-btn_neiro"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image></view>
+                            </view>
+                            <view class="float-btn">
+                              <view class="float-btn_neiro">
+                                12小时前来过
+                              </view>
+                              <view class="float-btn_neiro">
+                                32人浏览
+                              </view>
+                              <view class="float-btn_neiro">
+                                <image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让
+                              </view>
+                              <view class="float-btn_neiro">
+                                <image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>餐饮业
+                              </view>
+                            </view>
+                          </view>
+                      </view>
+                      <view class="data_info {{ bl !=true ? 'info': ''}}">
+                        <view class="title">项目描述:</view>微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
+                        最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时
+                      </view>
+                      <view class="select_text" bindtap="bindtapSelectInfo">
+                        查看全文
+                      </view>
+                    </view>
+                    <!-- 项目基本信息  end -->
+                    
+                    <!-- 发布人基本信息  start -->
+                    <view class="viewMy">
+                      <navigator url="/pages/index/info/visitFriends/visitFriends">
+                        <view class="item" >
+                          <view class="item-left">
+                                <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
+                          </view>
+                          <view class="item-middle">
+                                <view>
+                                    <text class="title">lingfe</text>
+                                </view>
+                                <view>
+                                    <text class="message">我就是我，不一样的萤火</text>
+                                </view>
+                          </view>
+                          <view class="item_right">
+                              <view class="info"><text class="text">>></text></view>
+                          </view>
+                        </view>
+                        <view  class="line"></view>
+                      </navigator>
+                    </view>
+                    <!-- 发布人基本信息  end -->
+
+                    <!-- tab切换  start-->
+                    <view class="weui-tab">
+                      <!-- tab菜单  start-->
+                      <view class="weui-navbar">
+                          <block wx:for="{{tabs}}" wx:key="*this">
+                              <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                                  <view class="weui-navbar__title">{{item}}</view>
+                              </view>
+                          </block>
+                          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+                      </view>
+                      <!-- tab菜单  end-->
+
+                      <view class="weui-tab__panel">
+                          <!-- 项目细节  start-->
+                          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                            <!-- 项目详细信息  start-->
+                            <view class="weui-cells weui-cells_after-title">
+                                <view class="weui-cell">
+                                    <view class="weui-cell__bd">入伙门槛</view>
+                                    <view class="weui-cell__ft">5万</view>
+                                </view>
+                            </view>
+                            <view class="weui-cells weui-cells_after-title">
+                                <view class="weui-cell">
+                                    <view class="weui-cell__bd">信息类型</view>
+                                    <view class="weui-cell__ft">生意转让</view>
+                                </view>
+                            </view>
+                            <view class="weui-cells weui-cells_after-title">
+                                <view class="weui-cell">
+                                    <view class="weui-cell__bd">信息行业</view>
+                                    <view class="weui-cell__ft">餐饮业</view>
+                                </view>
+                            </view>
+                            <view class="weui-cells weui-cells_after-title">
+                                <view class="weui-cell">
+                                    <view class="weui-cell__bd">项目描述</view>
+                                    <view class="weui-cell__ft">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
+                                </view>
+                            </view>
+                            <!-- 项目详细信息  end-->
+
+                            <!-- 图片  start-->
+                            <view class="page-section page-section-gap">
+                              <view class="page-section-ctn">
+                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
+                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
+                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
+                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
+                              </view>
+                            </view>
+                            <!-- 图片  end-->
+
+                            <!-- 确定   start-->
+                            <view class="weui-btn-area">
+                                <button class="weui-btn" type="warn" bindtap="bindtapPhone">电话</button>
+                                <button class="weui-btn" type="primary" bindtap="">私信</button>
+                            </view>
+                            <!-- 确定   start-->
+                          </view>
+                          <!-- 项目细节  end-->
+
+                          <!-- 讨论区  start-->
+                          <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                            <navigator url="/pages/message/chat/chat">
+                              <view class="item" >
+                                  <view class="item-left">
+                                        <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
+                                  </view>
+                                  <view class="item-middle">
+                                        <view>
+                                            <text class="title">马云</text>
+                                        </view>
+                                        <view>
+                                            <text class="info">这个给我吧</text>
+                                        </view>
+                                        <view>
+                                            <text class="message">2017/7/12 16:00</text>
+                                        </view>
+                                  </view>
+                                  <view class="item_right">
+                                      <view><text class="time">回复</text></view>
+                                  </view>
+                              </view>
+                              <view  class="line"></view>
+                            </navigator>
+
+                            <navigator url="/pages/message/chat/chat">
+                                <view class="item" >
+                                    <view class="item-left">
+                                          <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
+                                    </view>
+                                    <view class="item-middle">
+                                          <view>
+                                              <text class="title">马云</text>
+                                          </view>
+                                          <view>
+                                              <text class="info">这个给我吧</text>
+                                          </view>
+                                          <view>
+                                              <text class="message">2017/7/12 16:00</text>
+                                          </view>
+                                    </view>
+                                    <view class="item_right">
+                                        <view><text class="time">回复</text></view>
+                                    </view>
+                                </view>
+                                <view  class="line"></view>
+                            </navigator>
+
+
+                            <navigator url="/pages/message/chat/chat">
+                                <view class="item" >
+                                    <view class="item-left">
+                                          <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
+                                    </view>
+                                    <view class="item-middle">
+                                          <view>
+                                              <text class="title">马云</text>
+                                          </view>
+                                          <view>
+                                              <text class="info">这个给我吧</text>
+                                          </view>
+                                          <view>
+                                              <text class="message">2017/7/12 16:00</text>
+                                          </view>
+                                    </view>
+                                    <view class="item_right">
+                                        <view><text class="time">回复</text></view>
+                                    </view>
+                                </view>
+                                <view  class="line"></view>
+                            </navigator>
+
+                            <view class="handleBox">
+                              <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputTemp}}" bindinput="bindKeyInput"/>
+                              <button type="submit" class="btn_submit" size="mini" bindtap="submitTo">发送</button>
+                            </view>
+                        </view>
+                        <!-- 讨论区  end-->
+                      </view>
+                      <!-- tab切换  end-->
+                  </view>
+                  <!-- 发布人基本信息  end -->
+    </view>
+  </view>
 </view>
 <!-- 详细信息页面 end   -->

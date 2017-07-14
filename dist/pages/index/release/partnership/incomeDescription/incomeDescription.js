@@ -27,7 +27,7 @@ Page({
   savaincomeDescription:function(){
     var incomeDescription = this.data.incomeDescription;
     //判断是否为空
-    if (incomeDescription.length === 0) {
+    if (incomeDescription == null) {
       //提示
       this.setData({
         incomeDescription: incomeDescription,
@@ -51,7 +51,7 @@ Page({
   //点击确定
   confirm: function () {
     //判断是否为空
-    if (this.data.incomeDescription.length != 0) {
+    if (this.data.incomeDescription != null) {
       var incomeDescription = this.data.incomeDescription;
       console.log('incomeDescription:' + incomeDescription);
       //得到打开的页面

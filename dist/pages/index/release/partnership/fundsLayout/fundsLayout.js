@@ -28,14 +28,14 @@ Page({
   bindtapFundsLayout: function (e){
     var fundsLayout = this.data.fundsLayout;
     //判断是否为空
-    if (fundsLayout.length === 0) {
+    if (fundsLayout == null) {
       //提示
       this.setData({
         fundsLayout: fundsLayout,
         'dialog.hidden': false,
         'dialog.title': '保存数据失败',
         'dialog.content': '不能为空'
-      })
+      });
     } else {
       //保存资金布局
       console.log(app.globalData.fundsLayout);
@@ -52,7 +52,7 @@ Page({
   //点击确定
   confirm: function () {
     //判断是否为空
-    if (this.data.fundsLayout.length != 0) {
+    if (this.data.fundsLayout != null) {
       var fundsLayout = this.data.fundsLayout;
       console.log('fundsLayout：'+fundsLayout);
       //得到打开的页面

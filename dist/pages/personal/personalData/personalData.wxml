@@ -1,0 +1,47 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-12
+ *   描述:  个人_个人资料
+ * 
+ * */-->
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <!-- 姓名  start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells">
+                <view class="weui-cell__bd">姓名</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">lingfe</view>
+            </view>
+            </navigator>
+            <!-- 姓名  end -->
+
+            <!-- 地域  start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">地域</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">贵阳</view>
+            </view>
+            </navigator>
+            <!-- 地域  end -->
+
+            <!-- 签名  start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells">
+                <view class="weui-cell__bd">签名</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">我就是我,不一样萤火</view>
+            </view>
+            </navigator>
+            <!-- 签名  end -->
+
+            <!-- 手机号  start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">手机号</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">130*******125</view>
+            </view>
+            </navigator>
+            <!-- 手机号  end -->
+        </view>
+    </view>       
+</view>

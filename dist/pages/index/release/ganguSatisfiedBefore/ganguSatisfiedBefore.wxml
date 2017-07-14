@@ -1,0 +1,176 @@
+<!--/**  
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  发布_干股纳才页面
+ * 
+ * */-->
+
+<view class="page">
+    <view class="">
+        <form  bindsubmit="formSubmit" class="form">
+            <!-- 输入标题    start -->
+            <view class="weui-cell weui-cells ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">标题</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入标题"/>
+                </view>
+            </view>
+            <!-- 输入标题    end -->
+
+            <!-- 输入技能/资源要求    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">技能/资源要求</view>
+                </view>
+                <view bindtap="skillsRequiredClick" 
+                    class="weui-cell__ft {{skillsRequired  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    {{skillsRequired  == null ? '请填写' : ''}}
+                    <icon type="{{skillsRequired  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                </view>
+            </view>
+            </navigator>
+            <!-- 输入技能/资源要求    end -->
+            
+            <!-- 输入行业选择    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells  weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">行业选择</view>
+                </view>
+                <picker bindchange="sethangye" value="{{hangyeIndex}}"  range="{{hangye}}">
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                    <input class="weui-input" value="{{hangye[hangyeIndex]}}" placeholder="{{hangye[hangyeIndex]}}"/>       
+                </view>
+                </picker>
+            </view>
+            </navigator>
+            <!-- 输入行业选择    end -->
+            
+            <!-- 输入股份划分 start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">股份划分</view>
+                </view>
+                <picker bindchange="setshareDivision" value="{{shareDivisionIndex}}"  range="{{shareDivision}}">
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                    <input class="weui-input" value="{{shareDivision[shareDivisionIndex]}}" 
+                    placeholder="{{shareDivision[shareDivision]}}"/>       
+                </view>
+                </picker>
+            </view>
+            </navigator>
+            <!-- 输入股份划分    end -->
+
+            
+            <!-- 输入项目描述    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">项目描述</view>
+                </view>
+                <view bindtap="projectDescriptionClick" 
+                    class="weui-cell__ft {{projectDescription  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    {{projectDescription  == null ? '请填写' : ''}}
+                    <icon type="{{projectDescription  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                </view>
+            </view>
+            </navigator>
+            <!-- 输入项目描述   end -->
+            
+            <!-- 输入收益描述    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">收益描述</view>
+                </view>
+                <view bindtap="incomeDescriptionClick" 
+                    class="weui-cell__ft {{incomeDescription  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    {{incomeDescription  == null ? '请填写' : ''}}
+                    <icon type="{{incomeDescription  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                </view>
+            </view>
+            </navigator>
+            <!-- 输入收益描述    end -->
+            
+            <!-- 输入公司/团队介绍    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">公司/团队介绍</view>
+                </view>
+                <view bindtap="introduceClick" 
+                    class="weui-cell__ft {{introduce  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    {{introduce  == null ? '请填写' : ''}}
+                    <icon type="{{introduce  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                </view>
+            </view>
+            </navigator>
+            <!-- 输入公司/团队介绍    end -->
+                        
+            <!-- 输入联系方式    start -->
+            <navigator url="" >
+            <view class="weui-cell weui-cells weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label">联系方式</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                    <input name="phone" class="weui-input" value="{{flag}}" placeholder="13068326391"/>           
+                </view>
+            </view>
+            </navigator>
+            <!-- 输入联系方式    end -->
+
+            <!-- 上传图片  start -->
+            <navigator url="" >
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">图片上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/2</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+          </view>
+          </navigator>
+          <!-- 上传图片  end -->
+
+          <!-- 相关条款  end -->      
+          <checkbox-group bindchange="bindAgreeChange">
+              <label class="weui-agree" for="weuiAgree">
+                  <view class="weui-agree__text">
+                      <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                      <view class="weui-agree__checkbox-icon">
+                          <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                      </view>
+                      阅读并同意<navigator url="" class="weui-agree__link">《相关条款》</navigator>
+                  </view>
+              </label>
+          </checkbox-group>
+          <!-- 相关条款  end -->
+
+          <!-- 提交按钮  start -->
+          <view class="page__bd page__bd_spacing">
+                <button class="weui-btn"  form-type="submit" style="background-color:#00BFFF;" type="primary" >发布</button>
+          </view>
+          <!-- 提交按钮  end -->  
+        </form>
+    </view>
+</view>

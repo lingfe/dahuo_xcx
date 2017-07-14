@@ -23,7 +23,7 @@
             <!-- 合伙创业  end -->
 
             <!-- 生意转让  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/businessTransfer/businessTransfer" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/businessTransfer.png" 
@@ -36,7 +36,7 @@
             <!-- 生意转让  end -->
 
             <!-- 加盟分店  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/affiliateStores/affiliateStores" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/affiliateStores.png" 
@@ -49,7 +49,7 @@
             <!-- 加盟分店   end -->
 
             <!-- 干股纳才  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/ganguSatisfiedBefore/ganguSatisfiedBefore" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/ganguSatisfiedBefore.png" 
@@ -62,7 +62,7 @@
             <!-- 干股纳才  end -->
             
             <!-- 金融理财  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/financialManagement/financialManagement" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/financialManagement.png" 
@@ -75,7 +75,7 @@
             <!-- 金融理财  end -->
             
             <!-- 房产投资  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/propertyInvestment/propertyInvestment" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/propertyInvestment.png" 
@@ -89,7 +89,7 @@
 
             
             <!-- 微商代理  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/derivativeAgent/derivativeAgent" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/aerivativeAgent.png" 
@@ -102,7 +102,7 @@
             <!-- 微商代理  end -->
             
             <!-- 其他  start -->
-            <navigator url="/pages/index/release/release" >
+            <navigator url="/pages/index/release/other/other" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__hd">
                     <image src="/images/ico/other.png" 

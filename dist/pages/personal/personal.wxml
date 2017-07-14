@@ -1,0 +1,126 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  个人
+ * 
+ * */-->
+
+<view class="page">
+    <view class="page__bd">
+        <!-- 个人信息  start -->
+        <view class="">
+          <view class="item" >
+              <view class="item-left">
+                    <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image"/>
+              </view>
+              <view class="item-middle">
+                    <view>
+                        <text class="title">lingfe</text>
+                    </view>
+                    <view>
+                        <text class="message">我就是我，不一样的萤火</text>
+                    </view>
+                    <view>
+                        <text class="title_address">贵阳,已发布3贴</text>
+                    </view>
+              </view>
+              <view class="item_right">
+                <view bindtap="bindtapMy"><text class="title_address">个人资料>></text></view>
+                <view bindtap="bindtapService"><image src="/images/service.png" class="image_service"/></view>
+              </view>
+          </view>
+          <view  class="line"></view>
+        </view>
+        <!-- 个人信息  end -->
+
+        <!-- tab切换  start -->
+        <view class="weui-tab">
+            <!-- 菜单  start -->
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" 
+                style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <!-- 菜单  end -->
+            
+            <!-- 内容  start-->
+            <view class="weui-tab__panel">
+                <!-- 我的发布  start-->
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <view class="neiro">
+                      <view class="data_top">
+                          <view class="float-btn"><button class="weui-btn mini-btn" type="default" size="mini">刷新</button></view>
+                          <view style="float:left;" class="float-btn">60天后自动下架</view>
+                      </view>
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                      <view class="neiro_data">
+                        <text class="data_titile">花果园火锅店亏本转让..</text>
+                        <text class="data_pro">搭伙金额   <text>1.3</text>万</text>
+                        <view class="data_biaoqian">
+                            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                            <view class="data_biaoqian_view">12分钟前</view>
+                        </view>
+                      </view>
+                      <view class="data_info">
+                          <view class="float-btn"><button class="weui-btn mini-btn" type="primary" size="mini">编辑</button></view>
+                          <view class="float-btn"><button class="weui-btn mini-btn" bindtap="bindtapOffTheShelf" type="warn" size="mini">下架</button></view>
+                      </view>
+                    </view>
+                </view>
+                <!-- 我的发布  end-->
+
+                <!-- 收藏夹  start-->                              
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <navigator url="/pages/index/info/info" >
+                    <view class="neiro">
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                      <view class="neiro_data">
+                        <text class="data_titile">花果园火锅店亏本转让..</text>
+                        <text class="data_pro">搭伙金额   <text>3</text>万</text>
+                        <view class="data_biaoqian">
+                            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                            <view class="data_biaoqian_view">12分钟前</view>
+                        </view>
+                      </view>
+                      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+                    </view>
+                    </navigator>
+                </view>
+                <!-- 收藏夹  end-->
+
+                <!-- 回收站  start-->
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                    <view class="neiro">
+                      <view class="data_top">
+                          <view class="float-btn"><button class="weui-btn mini-btn" type="default" size="mini">上架</button></view>
+                          <view style="float:left;" class="float-btn">已下架</view>
+                      </view>
+                      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                      <view class="neiro_data">
+                        <text class="data_titile">花果园火锅店亏本转让..</text>
+                        <text class="data_pro">搭伙金额   <text>5</text>万</text>
+                        <view class="data_biaoqian">
+                            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
+                            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+                            <view class="data_biaoqian_view">12分钟前</view>
+                        </view>
+                      </view>
+                      <view class="data_info">
+                          <view class="float-btn"><button class="weui-btn mini-btn" type="primary" size="mini">编辑</button></view>
+                          <view class="float-btn"><button class="weui-btn mini-btn" bindtap="bindtapDelete" type="warn" size="mini">删除</button></view>
+                      </view>
+                    </view>
+                </view>
+                <!-- 回收站  end-->
+            </view>
+            <!-- 内容  end -->
+        </view>
+        <!-- tab切换  end -->
+    </view>
+</view>

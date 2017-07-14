@@ -27,14 +27,14 @@ Page({
   savaintroduce: function () {
     var introduce = this.data.introduce;
     //判断是否为空
-    if (introduce.length === 0) {
+    if (introduce == null) {
       //提示
       this.setData({
         introduce: introduce,
         'dialog.hidden': false,
         'dialog.title': '保存数据失败',
         'dialog.content': '不能为空'
-      })
+      });
     } else {
       //保存项目描述到app
       console.log(app.globalData.introduce);
@@ -51,7 +51,7 @@ Page({
   //点击确定
   confirm: function () {
     //判断是否为空
-    if (this.data.introduce.length != 0) {
+    if (this.data.introduce != null) {
       var introduce = this.data.introduce;
       console.log('introduce:' + introduce);
       //得到打开的页面

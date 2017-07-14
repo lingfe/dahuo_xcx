@@ -9,11 +9,11 @@
   <!-- 头部 start  -->
   <view class="dahuo_top">
     <picker bindchange="setAddressInfo" value="{{addressIndex}}"  range="{{address}}">
-        <view class="top_left"><text>{{address[addressIndex]}}</text><image style="height:20rpx;width:20rpx;" src="/images/xlcd.png"></image></view>
+        <view class="top_left"><text>{{address[addressIndex]}}</text><image  src="/images/xlcd.png"></image></view>
     </picker>
     <view class="top_zho">
       <picker bindchange="stInfo" value="{{priceIndex}}"  range="{{PriceRange}}">
-        <button style="font-size:25rpx;background-image: url(/images/zho_0.png);"><view>{{PriceRange[priceIndex]}}</view></button>
+        <button><view>{{PriceRange[priceIndex]}}</view></button>
       </picker>
     </view>
     <navigator url="/pages/search/search" >
@@ -24,19 +24,21 @@
 
   <!-- 内容 end  -->
   <view class="dahuo_neiro">
-    <navigator url="/pages/index/info/info" >
-    <view class="neiro">
+    <navigator url="" >
+    <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
       <view class="neiro_img"><image src="/images/zan.png"></image></view>
       <view class="neiro_data">
-         <view class="data_titile">花果园火锅店亏本转让..</view>
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
          <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
          <view class="data_biaoqian">
-            <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
-            <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
+            <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
+            <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
             <view class="data_biaoqian_view">12分钟前</view>
          </view>
       </view>
-      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
     </navigator>
 
@@ -44,7 +46,7 @@
     <view class="neiro">
       <view class="neiro_img"><image src="/images/zan.png"></image></view>
       <view class="neiro_data">
-         <view class="data_titile">花果园火锅店亏本转让..</view>
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
          <view class="data_pro">搭伙金额   <text>2.5</text>万</view>
          <view class="data_biaoqian">
             <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
@@ -52,7 +54,27 @@
             <view class="data_biaoqian_view">12分钟前</view>
          </view>
       </view>
-      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
+    </view>
+    </navigator>
+
+    <navigator url="" >
+    <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
+         <view class="data_biaoqian">
+            <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
+            <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+            <view class="data_biaoqian_view">12分钟前</view>
+         </view>
+      </view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
     </navigator>
 
@@ -60,15 +82,35 @@
     <view class="neiro">
       <view class="neiro_img"><image src="/images/zan.png"></image></view>
       <view class="neiro_data">
-         <text class="data_titile">花果园火锅店亏本转让..</text>
-         <text class="data_pro">搭伙金额   <text>1.3</text>万</text>
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>2.5</text>万</view>
          <view class="data_biaoqian">
             <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
             <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
             <view class="data_biaoqian_view">12分钟前</view>
          </view>
       </view>
-      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
+    </view>
+    </navigator>
+
+    <navigator url="" >
+    <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
+         <view class="data_biaoqian">
+            <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
+            <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+            <view class="data_biaoqian_view">12分钟前</view>
+         </view>
+      </view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
     </navigator>
 
@@ -76,15 +118,35 @@
     <view class="neiro">
       <view class="neiro_img"><image src="/images/zan.png"></image></view>
       <view class="neiro_data">
-         <text class="data_titile">花果园火锅店亏本转让..</text>
-         <text class="data_pro">搭伙金额   <text>3</text>万</text>
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>2.5</text>万</view>
          <view class="data_biaoqian">
             <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
             <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
             <view class="data_biaoqian_view">12分钟前</view>
          </view>
       </view>
-      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
+    </view>
+    </navigator>
+
+    <navigator url="" >
+    <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
+      <view class="neiro_img"><image src="/images/zan.png"></image></view>
+      <view class="neiro_data">
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
+         <view class="data_biaoqian">
+            <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
+            <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+            <view class="data_biaoqian_view">12分钟前</view>
+         </view>
+      </view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
     </navigator>
 
@@ -92,15 +154,17 @@
     <view class="neiro">
       <view class="neiro_img"><image src="/images/zan.png"></image></view>
       <view class="neiro_data">
-         <text class="data_titile">花果园火锅店亏本转让..</text>
-         <text class="data_pro">搭伙金额   <text>5</text>万</text>
+         <view class="data_titile title">花果园火锅店亏本转让..</view>
+         <view class="data_pro">搭伙金额   <text>2.5</text>万</view>
          <view class="data_biaoqian">
             <view class="data_biaoqian_view"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让</view>
             <view class="data_biaoqian_view"><image style="height:26rpx;width:26rpx;" src="/images/type.png"></image>餐饮业</view>
             <view class="data_biaoqian_view">12分钟前</view>
          </view>
       </view>
-      <view class="data_info">aaaaaaaaaaaaaaaaaaaaaaaaa</view>
+      <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
     </navigator>
   </view>

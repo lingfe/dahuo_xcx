@@ -1,13 +1,30 @@
 {
   "pages": [
+    "pages/screen/screen",
     "pages/index/index",
+    "pages/index/info/visitFriends/visitFriends",
+    "pages/index/info/info",
+    "pages/personal/personal",
     "pages/index/release/release",
     "pages/index/release/partnership/partnership",
+    "pages/index/release/businessTransfer/businessTransfer",
+    "pages/index/release/businessTransfer/geographicalPosition/geographicalPosition",
+    "pages/index/release/businessTransfer/businessDescription/businessDescription",
+    "pages/index/release/businessTransfer/transferReason/transferReason",
+    "pages/index/release/affiliateStores/affiliateStores",
+    "pages/index/release/ganguSatisfiedBefore/ganguSatisfiedBefore",
+    "pages/index/release/financialManagement/financialManagement",
+    "pages/index/release/propertyInvestment/propertyInvestment",
+    "pages/index/release/derivativeAgent/derivativeAgent",
+    "pages/index/release/other/other",
+    "pages/index/release/derivativeAgent/productHighlights/productHighlights",
+    "pages/index/release/derivativeAgent/agentCondition/agentCondition",
+    "pages/index/release/derivativeAgent/agencyRule/agencyRule",
+    "pages/index/release/ganguSatisfiedBefore/skillsRequired/skillsRequired",
     "pages/index/release/partnership/fundsLayout/fundsLayout",
     "pages/index/release/partnership/introduce/introduce",
     "pages/index/release/partnership/projectDescription/projectDescription",
     "pages/index/release/partnership/incomeDescription/incomeDescription",
-    "pages/index/info/info",
     "pages/dahuo/dahuo",
     "pages/logs/logs",
     "pages/search/search",
@@ -40,7 +57,8 @@
     "example/toast/toast",
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-    "example/searchbar/searchbar"
+    "example/searchbar/searchbar",
+    "pages/personal/personalData/personalData"
     
   ],
   "window": {
@@ -63,7 +81,7 @@
         "selectedIconPath": "images/dahuo_0.png"
       },
       {
-        "pagePath": "pages/dahuo/dahuo",
+        "pagePath": "pages/personal/personal",
         "text": "个人",
         "iconPath": "images/user_1.png",
         "selectedIconPath": "images/user_0.png"
@@ -76,15 +94,9 @@
       },
       {
         "pagePath": "example/index",
-        "text": "weUL",
-        "iconPath": "images/zan.png",
-        "selectedIconPath": "images/zan.png"
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "text": "日志",
-        "iconPath": "images/zan.png",
-        "selectedIconPath": "images/zan.png"
+        "text": "wxUL",
+        "iconPath": "images/tab_message_normal.png",
+        "selectedIconPath": "images/tab_message_selected.png"
       }
     ]
   },

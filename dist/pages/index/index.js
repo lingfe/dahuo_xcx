@@ -7,7 +7,7 @@
 
 //index.js
 //获取应用实例
-var app = getApp()
+var app = getApp();
 Page({
   //页面的初始数据
   data: {
@@ -15,10 +15,22 @@ Page({
     priceIndex:0,
     address:['北京','上海','深圳','广州','贵阳'],
     addressIndex:0,
+    addressInfo:'',
     isHiddenLoading:false,
     isHiddenToast:true,
     windowHeight:1000
   },
+  getInputValue:function(e){
+    console.log("dataset:" + e.currentTarget.dataset.value);
+    console.log("tagName:" + e.currentTarget.tagName);
+    console.log("id:" + e.currentTarget.id); 
+
+    wx.showModal({
+      title: e.currentTarget.name,
+      content: e.currentTarget.value,
+    });
+  },
+
   //分享
   onShareAppMessage: function (e) {
     return {
@@ -44,7 +56,7 @@ Page({
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
-    })
+    });
   },
   // 下拉刷新
   upper: function (e) {
@@ -61,10 +73,40 @@ Page({
       isHiddenToast: true
     });
   },
+  openLocation: function (e) {
+
+    console.log(e)
+
+    var value = e.detail.value
+
+    console.log(value)
+
+
+
+  },
   //页面加载
   onLoad: function () {
+    var addressInfo ='';
+    //获取位置
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        var speed = res.speed;
+        var accuracy = res.accuracy;
+        var address = res.address;
+        var name=res.name;
+        console.log("address:" + address);
+        console.log("name:" + name);
+      }
+
+      
+    });
+
     this.setData({
-      windowHeight: wx.getStorageSync('windowHeight')
+      windowHeight: wx.getStorageSync('windowHeight'),
+      addressInfo: addressInfo
     });
 
     this.requestData("newlist");

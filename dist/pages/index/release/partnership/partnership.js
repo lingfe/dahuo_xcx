@@ -17,10 +17,18 @@ Page({
     hangyeIndex: 0,
     PriceRange: ['1 - 5 万', '5 - 15 万', '15 - 25 万', '25 - 50 万', '50 - 500 万'],
     priceIndex: 0,
+    ruhuoValue:'',
     fundsLayout:null,
     projectDescription:null,
     incomeDescription:null,
     introduce:null
+  },
+  //入伙门槛
+  bindinputValue:function(e){
+    console.log('入伙门槛  发生选择改变，携带值为', e.detail.value);
+    this.setData({
+      ruhuoValue: e.detail.value+"万"
+    });
   },
   //选择行业
   sethangye: function(e){
