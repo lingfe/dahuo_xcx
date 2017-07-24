@@ -13,32 +13,32 @@
                     <view class="neiro">
                       <view class="data_top">
                           <view style="float:left;" class="float-btn">
-                            <view class="float-btn title">云岩区5万火锅店盈利挥泪转让XXX</view>
+                            <view class="float-btn title"><image src="/images/info/title.png"></image>云岩ASDASDASASD区5万火锅店盈利挥泪转让XXX</view>
                             <view style="float:right;">
-                              <view class="float-btn_neiro"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image></view>
-                              <view class="float-btn_neiro"><image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/images/info/sc.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/images/info/jb.png"></image></view>
                             </view>
                             <view class="float-btn">
-                              <view class="float-btn_neiro">
+                              <view class="float-btn_neiro ">
                                 12小时前来过
                               </view>
-                              <view class="float-btn_neiro">
+                              <view class="float-btn_neiro " >
                                 32人浏览
                               </view>
-                              <view class="float-btn_neiro">
-                                <image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>生意转让
+                              <view class="float-btn_neiro ">
+                                <image src="/images/info/hy.png"></image>生意转让
                               </view>
-                              <view class="float-btn_neiro">
-                                <image style="height:28rpx;width:28rpx;" src="/images/hanye.png"></image>餐饮业
+                              <view class="float-btn_neiro ">
+                                <image src="/images/info/type.png"></image>餐饮业
                               </view>
                             </view>
                           </view>
                       </view>
                       <view class="data_info {{ bl !=true ? 'info': ''}}">
-                        <view class="title">项目描述:</view>微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
+                        <view><span style="font-size:30rpx;" class="title">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
                         最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
-                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时</view>
                       </view>
                       <view class="select_text" bindtap="bindtapSelectInfo">
                         查看全文
@@ -55,14 +55,14 @@
                           </view>
                           <view class="item-middle">
                                 <view>
-                                    <text class="title">lingfe</text>
+                                    <text style="font-size:30rpx;" class="title">lingfe</text>
                                 </view>
                                 <view>
                                     <text class="message">我就是我，不一样的萤火</text>
                                 </view>
                           </view>
                           <view class="item_right">
-                              <view class="info"><text class="text">>></text></view>
+                              <view class="info "><text class="text weui-cell__ft_in-access"></text></view>
                           </view>
                         </view>
                         <view  class="line"></view>
@@ -75,7 +75,7 @@
                       <!-- tab菜单  start-->
                       <view class="weui-navbar">
                           <block wx:for="{{tabs}}" wx:key="*this">
-                              <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                              <view id="{{index}}" class="weui-navbar__item  {{activeIndex == index ? ' select_text' : ''}}" bindtap="tabClick">
                                   <view class="weui-navbar__title">{{item}}</view>
                               </view>
                           </block>
@@ -90,25 +90,25 @@
                             <view class="weui-cells weui-cells_after-title">
                                 <view class="weui-cell">
                                     <view class="weui-cell__bd">入伙门槛</view>
-                                    <view class="weui-cell__ft">5万</view>
+                                    <view class="weui-cell__ft data_info">5万</view>
                                 </view>
                             </view>
                             <view class="weui-cells weui-cells_after-title">
                                 <view class="weui-cell">
                                     <view class="weui-cell__bd">信息类型</view>
-                                    <view class="weui-cell__ft">生意转让</view>
+                                    <view class="weui-cell__ft data_info">生意转让</view>
                                 </view>
                             </view>
                             <view class="weui-cells weui-cells_after-title">
                                 <view class="weui-cell">
                                     <view class="weui-cell__bd">信息行业</view>
-                                    <view class="weui-cell__ft">餐饮业</view>
+                                    <view class="weui-cell__ft data_info">餐饮业</view>
                                 </view>
                             </view>
                             <view class="weui-cells weui-cells_after-title">
                                 <view class="weui-cell">
                                     <view class="weui-cell__bd">项目描述</view>
-                                    <view class="weui-cell__ft">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                                    <view class="weui-cell__ft data_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
                                 </view>
@@ -129,87 +129,40 @@
                             <!-- 确定   start-->
                             <view class="weui-btn-area">
                                 <button class="weui-btn" type="warn" bindtap="bindtapPhone">电话</button>
-                                <button class="weui-btn" type="primary" bindtap="">私信</button>
+                                <button class="weui-btn" type="primary" bindtap="bindtagFasho">私信</button>
                             </view>
                             <!-- 确定   start-->
                           </view>
                           <!-- 项目细节  end-->
 
                           <!-- 讨论区  start-->
-                          <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                            <navigator url="/pages/message/chat/chat">
-                              <view class="item" >
+                          <view class="weui-tab__content"  style="height:auto;margin-bottom:50rpx;" hidden="{{activeIndex != 1}}">
+                            <view  wx:for="{{allContentList}}" wx:key="*this">
+                              <view class="item">
                                   <view class="item-left">
                                         <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
                                   </view>
                                   <view class="item-middle">
                                         <view>
-                                            <text class="title">马云</text>
+                                            <text class="select_text">{{item}}</text>
                                         </view>
                                         <view>
-                                            <text class="info">这个给我吧</text>
+                                            <text style="width:590rpx;" class="data_info">你这个项目很不错啊！未来一定能够在互联网占据一定的地位！</text>
                                         </view>
                                         <view>
                                             <text class="message">2017/7/12 16:00</text>
                                         </view>
                                   </view>
                                   <view class="item_right">
-                                      <view><text class="time">回复</text></view>
+                                    <navigator url="/pages/index/index" open-type="switchTab"><view><text class="time">回复</text></view></navigator>
                                   </view>
                               </view>
                               <view  class="line"></view>
-                            </navigator>
-
-                            <navigator url="/pages/message/chat/chat">
-                                <view class="item" >
-                                    <view class="item-left">
-                                          <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
-                                    </view>
-                                    <view class="item-middle">
-                                          <view>
-                                              <text class="title">马云</text>
-                                          </view>
-                                          <view>
-                                              <text class="info">这个给我吧</text>
-                                          </view>
-                                          <view>
-                                              <text class="message">2017/7/12 16:00</text>
-                                          </view>
-                                    </view>
-                                    <view class="item_right">
-                                        <view><text class="time">回复</text></view>
-                                    </view>
-                                </view>
-                                <view  class="line"></view>
-                            </navigator>
-
-
-                            <navigator url="/pages/message/chat/chat">
-                                <view class="item" >
-                                    <view class="item-left">
-                                          <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
-                                    </view>
-                                    <view class="item-middle">
-                                          <view>
-                                              <text class="title">马云</text>
-                                          </view>
-                                          <view>
-                                              <text class="info">这个给我吧</text>
-                                          </view>
-                                          <view>
-                                              <text class="message">2017/7/12 16:00</text>
-                                          </view>
-                                    </view>
-                                    <view class="item_right">
-                                        <view><text class="time">回复</text></view>
-                                    </view>
-                                </view>
-                                <view  class="line"></view>
-                            </navigator>
+                            </view>
 
                             <view class="handleBox">
-                              <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputTemp}}" bindinput="bindKeyInput"/>
-                              <button type="submit" class="btn_submit" size="mini" bindtap="submitTo">发送</button>
+                              <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputValue}}" bindinput="bindKeyInput"/>
+                              <button type="submit" class="btn_submit" size="mini"  bindtap="submitTo">发送</button>
                             </view>
                         </view>
                         <!-- 讨论区  end-->

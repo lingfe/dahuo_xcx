@@ -16,11 +16,19 @@ Page({
     projectDescription: null,
     incomeDescription: null,
   },
-  //需要金额
+  //需要金额,移出
   bindinputValue: function (e) {
-    console.log('需要金额 发生选择改变，携带值为', e.detail.value);
+    console.log('需要金额 移出，携带值为', e.detail.value);
     this.setData({
       ruhuoValue: e.detail.value + "万"
+    });
+  },
+  //需要金额,移入
+  bindfocusValue: function (e) {
+    console.log("移入", e.detail.value);
+    let that = this;
+    that.setData({
+      ruhuoValue: null,
     });
   },
   //项目描述

@@ -23,10 +23,10 @@
             <navigator url="" >
             <view class="weui-cell weui-cells">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">购入门槛</view>
+                    <view class="weui-label title">购入门槛</view>
                 </view>
-                <view class="weui-cell__ft">
-                    <input class="weui-input" value="{{ruhuoValue}}" bindblur="bindinputValue" placeholder="万"/>           
+                <view class="weui-cell__ft title">
+                    <input class="weui-input" type="digit" value="{{ruhuoValue}}" bindblur="bindinputValue" placeholder="万"/>           
                 </view>
             </view>
             </navigator>
@@ -36,11 +36,11 @@
             <navigator url="" >
             <view class="weui-cell weui-cells  weui-cells_after-title">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">行业选择</view>
+                    <view class="weui-label title">行业选择</view>
                 </view>
                 <picker bindchange="sethangye" value="{{hangyeIndex}}"  range="{{hangye}}">
-                <view class="weui-cell__ft weui-cell__ft_in-access">
-                    <input class="weui-input" value="{{hangye[hangyeIndex]}}" placeholder="{{hangye[hangyeIndex]}}"/>       
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    <input class="weui-input"  disabled="disabled" value="{{hangye[hangyeIndex]}}" placeholder="{{hangye[hangyeIndex]}}"/>       
                 </view>
                 </picker>
             </view>
@@ -51,10 +51,10 @@
             <navigator url="" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">产品种类</view>
+                    <view class="weui-label title">产品种类</view>
                 </view>
                 <picker bindchange="setproductCategory" value="{{productCategoryIndex}}"  range="{{productCategory}}">
-                <view class="weui-cell__ft weui-cell__ft_in-access">
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
                     <input class="weui-input" value="{{productCategory[productCategoryIndex]}}" 
                     placeholder="{{productCategory[productCategoryIndex]}}"/>       
                 </view>
@@ -67,10 +67,10 @@
             <navigator url="" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">收益描述</view>
+                    <view class="weui-label title">收益描述</view>
                 </view>
                 <view bindtap="incomeDescriptionClick" 
-                    class="weui-cell__ft {{incomeDescription  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    class="weui-cell__ft {{incomeDescription  == null ? 'weui-cell__ft_in-access' : ''}} title">
                     {{incomeDescription  == null ? '请填写' : ''}}
                     <icon type="{{incomeDescription  != null ? 'success_no_circle' : ''}}" size="23"></icon>
                 </view>
@@ -82,10 +82,10 @@
             <navigator url="" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">公司/团队介绍</view>
+                    <view class="weui-label title">公司/团队介绍</view>
                 </view>
                 <view bindtap="introduceClick" 
-                    class="weui-cell__ft {{introduce  == null ? 'weui-cell__ft_in-access' : ''}}">
+                    class="weui-cell__ft {{introduce  == null ? 'weui-cell__ft_in-access' : ''}} title">
                     {{introduce  == null ? '请填写' : ''}}
                     <icon type="{{introduce  != null ? 'success_no_circle' : ''}}" size="23"></icon>
                 </view>
@@ -97,10 +97,10 @@
             <navigator url="" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__bd">
-                    <view class="weui-label">联系方式</view>
+                    <view class="weui-label title">联系方式</view>
                 </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">
-                    <input name="phone" class="weui-input" value="{{flag}}" placeholder="13068326391"/>           
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    <input name="phone" type="number" class="weui-input" value="{{flag}}" placeholder="13068326391"/>           
                 </view>
             </view>
             </navigator>
@@ -112,7 +112,7 @@
                 <view class="weui-cell__bd">
                     <view class="weui-uploader">
                         <view class="weui-uploader__hd">
-                            <view class="weui-uploader__title">图片上传</view>
+                            <view class="weui-uploader__title title">图片上传</view>
                             <view class="weui-uploader__info">{{files.length}}/2</view>
                         </view>
                         <view class="weui-uploader__bd">
@@ -136,7 +136,7 @@
           <!-- 相关条款  end -->      
           <checkbox-group bindchange="bindAgreeChange">
               <label class="weui-agree" for="weuiAgree">
-                  <view class="weui-agree__text">
+                  <view class="weui-agree__text title">
                       <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
                       <view class="weui-agree__checkbox-icon">
                           <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>

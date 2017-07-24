@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/screen/screen",
     "pages/index/index",
-    "pages/index/info/visitFriends/visitFriends",
-    "pages/index/info/info",
-    "pages/personal/personal",
     "pages/index/release/release",
+    "pages/index/info/visitFriends/visitFriends",
+    
+    "pages/index/info/info",
+    "pages/dahuo/industryChoice/industryChoice",
+    "pages/screen/screen",
+    "pages/personal/personal",
     "pages/index/release/partnership/partnership",
     "pages/index/release/businessTransfer/businessTransfer",
     "pages/index/release/businessTransfer/geographicalPosition/geographicalPosition",
@@ -59,12 +61,11 @@
     "example/tabbar/tabbar",
     "example/searchbar/searchbar",
     "pages/personal/personalData/personalData"
-    
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "搭伙团队",
-    "navigationBarBackgroundColor": "#00BFFF",
+    "navigationBarBackgroundColor": "#14BAC8",
     "backgroundColor": "#f8f8f8",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "light"
@@ -89,12 +90,6 @@
       {
         "pagePath": "pages/message/message",
         "text": "聊天",
-        "iconPath": "images/tab_message_normal.png",
-        "selectedIconPath": "images/tab_message_selected.png"
-      },
-      {
-        "pagePath": "example/index",
-        "text": "wxUL",
         "iconPath": "images/tab_message_normal.png",
         "selectedIconPath": "images/tab_message_selected.png"
       }

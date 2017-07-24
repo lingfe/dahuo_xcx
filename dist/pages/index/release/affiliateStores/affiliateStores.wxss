@@ -4,3 +4,9 @@
  *   描述:  发布_加盟分店页面
  * 
  * */
+  .title{
+  font-size: 24rpx;
+  font-family:"黑体";
+  color: #333;
+}
+

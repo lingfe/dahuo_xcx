@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">dahuodb</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="accessinformationtime" view="colnames">
+<left>13</left>
+<top>61</top>
+<width>191</width>
+<height>143</height>
+<sql_create_table>CREATE TABLE `accessinformationtime` (
+  `accessInformationTimeId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '访问信息时间id标识',
+  `releaseId` int(11) unsigned NOT NULL COMMENT '发布信息id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料Id',
+  `accesstime` date NOT NULL COMMENT '访问时间',
+  PRIMARY KEY (`accessInformationTimeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="city" view="colnames">
+<left>24</left>
+<top>594</top>
+<width>105</width>
+<height>177</height>
+<sql_create_table>CREATE TABLE `city` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL DEFAULT '' COMMENT '行政代码',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
+  `parent_id` int(11) NOT NULL COMMENT '父id',
+  `first_letter` varchar(10) NOT NULL DEFAULT '' COMMENT '首字母',
+  `level` int(11) NOT NULL COMMENT '城市等级',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3186 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="collectioninfo" view="colnames">
+<left>233</left>
+<top>134</top>
+<width>134</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `collectioninfo` (
+  `collectionInfoId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '收藏信息id标识',
+  `releaseId` int(11) unsigned NOT NULL COMMENT '发布信息id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料Id',
+  `collectionTime` date NOT NULL COMMENT '收藏时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '收藏备注',
+  PRIMARY KEY (`collectionInfoId`),
+  KEY `fk_collectionInfo_releaseId` (`releaseId`),
+  KEY `fk_collectionInfo_personalId` (`personalId`),
+  CONSTRAINT `fk_collectionInfo_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_collectionInfo_releaseId` FOREIGN KEY (`releaseId`) REFERENCES `releaseinfo` (`releaseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="commentinfo" view="colnames">
+<left>685</left>
+<top>620</top>
+<width>144</width>
+<height>177</height>
+<sql_create_table>CREATE TABLE `commentinfo` (
+  `commentInfoId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论信息id标识',
+  `releaseId` int(11) unsigned NOT NULL COMMENT '发布信息id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料Id',
+  `commentTime` date NOT NULL COMMENT '评论时间',
+  `commentContent` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  `remark` varchar(255) DEFAULT NULL COMMENT '评论备注',
+  PRIMARY KEY (`commentInfoId`),
+  KEY `fk_commentInfo_releaseId` (`releaseId`),
+  KEY `fk_commentInfo_personalId` (`personalId`),
+  CONSTRAINT `fk_commentInfo_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_commentInfo_releaseId` FOREIGN KEY (`releaseId`) REFERENCES `releaseinfo` (`releaseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="filtertype" view="colnames">
+<left>409</left>
+<top>24</top>
+<width>133</width>
+<height>126</height>
+<sql_create_table>CREATE TABLE `filtertype` (
+  `filterTypeId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '筛选类型id标识',
+  `filterTypeName` int(11) NOT NULL COMMENT '筛选类型名称',
+  `remark` varchar(255) DEFAULT NULL COMMENT '筛选类型备注',
+  PRIMARY KEY (`filterTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="filtertypeinfo" view="colnames">
+<left>620</left>
+<top>8</top>
+<width>135</width>
+<height>143</height>
+<sql_create_table>CREATE TABLE `filtertypeinfo` (
+  `filterTypeInfoId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '筛选类型信息id标识',
+  `filterTypeId` int(11) unsigned NOT NULL COMMENT '筛选类型id',
+  `content` varchar(255) NOT NULL COMMENT '筛选类型信息内容',
+  `remark` varchar(255) DEFAULT NULL COMMENT '筛选类型信息备注',
+  PRIMARY KEY (`filterTypeInfoId`),
+  KEY `fk_filterTypeInfo_filterTypeId` (`filterTypeId`),
+  CONSTRAINT `fk_filterTypeInfo_filterTypeId` FOREIGN KEY (`filterTypeId`) REFERENCES `filtertype` (`filterTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="personal" view="colnames">
+<left>379</left>
+<top>644</top>
+<width>127</width>
+<height>194</height>
+<sql_create_table>CREATE TABLE `personal` (
+  `personalId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '个人资料Id标识',
+  `headPortrait` varchar(100) NOT NULL COMMENT '头像',
+  `fullName` varchar(100) NOT NULL COMMENT '姓名',
+  `region` varchar(255) DEFAULT NULL COMMENT '地域',
+  `autograph` varchar(255) DEFAULT NULL COMMENT '签名',
+  `phone` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `estherNumber` int(11) DEFAULT NULL COMMENT '帖子数量',
+  PRIMARY KEY (`personalId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="previewinformation" view="colnames">
+<left>832</left>
+<top>21</top>
+<width>170</width>
+<height>126</height>
+<sql_create_table>CREATE TABLE `previewinformation` (
+  `previewInformationId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息预览量Id标识',
+  `releaseId` int(11) unsigned NOT NULL COMMENT '发布信息id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料Id',
+  PRIMARY KEY (`previewInformationId`),
+  KEY `fk_accessInformationTime_releaseId` (`releaseId`),
+  KEY `fk_accessInformationTime_personalId` (`personalId`),
+  CONSTRAINT `fk_accessInformationTime_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_accessInformationTime_releaseId` FOREIGN KEY (`releaseId`) REFERENCES `releaseinfo` (`releaseId`),
+  CONSTRAINT `fk_previewInformation_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_releaseId` FOREIGN KEY (`releaseId`) REFERENCES `releaseinfo` (`releaseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="releaseinfo" view="colnames">
+<left>1206</left>
+<top>191</top>
+<width>175</width>
+<height>308</height>
+<sql_create_table>CREATE TABLE `releaseinfo` (
+  `releaseId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '发布Id标识',
+  `releaseTypeId` int(11) unsigned NOT NULL COMMENT '发布类型id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料id',
+  `title` varchar(100) NOT NULL COMMENT '标题',
+  `threshold` float DEFAULT NULL COMMENT '入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额',
+  `industryChoice` varchar(255) DEFAULT NULL COMMENT '行业选择',
+  `fundDistribution` varchar(255) DEFAULT NULL COMMENT '资金布局',
+  `projectDescription` float DEFAULT NULL COMMENT '项目描述',
+  `incomeDescription` varchar(255) DEFAULT NULL COMMENT '收益描述',
+  `teamIntroduction` varchar(255) DEFAULT NULL COMMENT '公司/团队介绍',
+  `phone` varchar(11) DEFAULT NULL COMMENT '联系方式',
+  `imageArray` varchar(255) DEFAULT NULL COMMENT '图片数组',
+  `publisherIdentity` varchar(255) DEFAULT NULL COMMENT '发布人身份',
+  `geographicalPosition` varchar(255) DEFAULT NULL COMMENT '地理位置',
+  `operatingArea` varchar(255) DEFAULT NULL COMMENT '经营面积',
+  `monthlyRent` varchar(255) DEFAULT NULL COMMENT '每月租金',
+  `businessDescription` varchar(255) DEFAULT NULL COMMENT '经营描述',
+  `transferReason` varchar(255) DEFAULT NULL COMMENT '转让原因',
+  `throwInTheCity` varchar(255) DEFAULT NULL COMMENT '投放城市',
+  `headquartersLocation` varchar(255) DEFAULT NULL COMMENT '总部位置',
+  `resourceRequirements` varchar(255) DEFAULT NULL COMMENT '技能/资源要求',
+  `shareDivision` varchar(255) DEFAULT NULL COMMENT '股份划分',
+  `productType` varchar(255) DEFAULT NULL COMMENT '产品种类',
+  `houseType` varchar(255) DEFAULT NULL COMMENT '房产类型',
+  `projectAdvantage` varchar(255) DEFAULT NULL COMMENT '项目优势',
+  `productCategory` varchar(255) DEFAULT NULL COMMENT '产品类目',
+  `productHighlights` varchar(255) DEFAULT NULL COMMENT '产品亮点',
+  `agentCondition` varchar(255) DEFAULT NULL COMMENT '代理条件',
+  `agencyRule` varchar(255) DEFAULT NULL COMMENT '代理规则',
+  PRIMARY KEY (`releaseId`),
+  KEY `fk_personalId` (`personalId`),
+  KEY `fk_releaseTypeId` (`releaseTypeId`),
+  CONSTRAINT `fk_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_releaseTypeId` FOREIGN KEY (`releaseTypeId`) REFERENCES `releasetype` (`releaseTypeid`),
+  CONSTRAINT `fk_releasetTypeId` FOREIGN KEY (`releaseTypeId`) REFERENCES `releasetype` (`releaseTypeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="releasetype" view="colnames">
+<left>914</left>
+<top>634</top>
+<width>161</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `releasetype` (
+  `releaseTypeid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '发布类型Id标识',
+  `releaseTypeName` varchar(100) NOT NULL COMMENT '发布类型名称',
+  `releaseTypeIco` varchar(255) DEFAULT NULL COMMENT '图标名称',
+  `releaseTypeUrl` varchar(255) DEFAULT NULL COMMENT '访问url',
+  `releaseTypeRemark` varchar(255) DEFAULT NULL COMMENT '城市等级',
+  PRIMARY KEY (`releaseTypeid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="reportinfo" view="colnames">
+<left>26</left>
+<top>297</top>
+<width>121</width>
+<height>177</height>
+<sql_create_table>CREATE TABLE `reportinfo` (
+  `reportInfoId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '举报信息id标识',
+  `releaseId` int(11) unsigned NOT NULL COMMENT '发布信息id',
+  `personalId` int(11) unsigned NOT NULL COMMENT '个人资料Id',
+  `reportTypeId` int(11) unsigned NOT NULL COMMENT '举报类型id',
+  `reportTime` date NOT NULL COMMENT '举报时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '举报备注',
+  PRIMARY KEY (`reportInfoId`),
+  KEY `fk_reportInfo_releaseId` (`releaseId`),
+  KEY `fk_reportInfo_personalId` (`personalId`),
+  KEY `fk_reportInfo_reportTypeId` (`reportTypeId`),
+  CONSTRAINT `fk_reportInfo_personalId` FOREIGN KEY (`personalId`) REFERENCES `personal` (`personalId`),
+  CONSTRAINT `fk_reportInfo_releaseId` FOREIGN KEY (`releaseId`) REFERENCES `releaseinfo` (`releaseId`),
+  CONSTRAINT `fk_reportInfo_reportTypeId` FOREIGN KEY (`reportTypeId`) REFERENCES `reporttype` (`reportTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="reporttype" view="colnames">
+<left>171</left>
+<top>656</top>
+<width>121</width>
+<height>109</height>
+<sql_create_table>CREATE TABLE `reporttype` (
+  `reportTypeId` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '举报类型id标识',
+  `reportTitle` int(11) NOT NULL COMMENT '举报标题',
+  PRIMARY KEY (`reportTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

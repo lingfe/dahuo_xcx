@@ -18,6 +18,9 @@
   height: auto;
   margin-top: 10rpx;
   float: left;
+  color: #898989;
+  font-family:"微软雅黑";
+  font-size: 28rpx;
 }
 .data_top{
   width: 750rpx;
@@ -36,36 +39,51 @@
   font-family:"微软雅黑";
   color: #808080;
   margin-top: 10rpx;
-  font-size: 20rpx;
+  font-size: 24rpx;
+  margin-left: 13rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
   white-space: nowrap;/**强制不换行*/
+}
+
+.float-btn_neiro image{
+  margin-right: 12rpx;
+  height: 19rpx;
+  width: 22rpx;
+
 }
 .title{
   color: #000000;
   font-family:"微软雅黑";
   font-weight:bold;
   line-height: 50rpx;
-  font-size: 30rpx;
-  overflow: hidden; /*自动隐藏文字*/
-  text-overflow: ellipsis;/*文字隐藏后添加省略号*/
-
+  font-size: 35rpx;
+  width:600rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
 }
+.title image{
+  width: 38rpx;
+  height: 31rpx;
+  margin-top: 10rpx;
+  margin-left: 8rpx;
+  margin-right: 8rpx;
+}
+
 .info{
   margin-right: 15rpx;
   font-family:"微软雅黑";
   color: #808080;
   margin-top: 10rpx;
-  font-size: 25rpx;
+  font-size: 28rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
   white-space: nowrap;/**强制不换行*/
 }
 .select_text{
   text-align: center;
-  font-family:"微软雅黑";
-  color: blue;
-  margin-top: 15rpx;
+  color: #14BAC8;
 }
 
 .viewMy{
@@ -166,7 +184,26 @@ right: 5px;
     width:80%;
     display: inline;
     float: left;
-    background: #fff;
-    margin:2px 5px;
+    font-family:"微软雅黑";
+    color: #000;
+    font-size: 24rpx;
+    background-color: #fff;
+    margin: 2px 5px;
     border-radius: 5px;
+}
+.data_biaoqian_view{
+  margin-right: 20rpx;
+  font-size: 19rpx;
+  float: left;
+  font-family:"微软雅黑";
+  color: #333;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.data_biaoqian_view image{
+  margin-right: 12rpx;
+  height: 19rpx;
+  width: 22rpx;
+
 }

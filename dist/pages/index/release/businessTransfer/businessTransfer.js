@@ -23,28 +23,49 @@ Page({
     businessDescription:null,
     transferReason:null,
   },
-  //转让门槛
+  //转让门槛，移出
   bindinputValue: function (e) {
-    console.log('转让门槛  发生选择改变，携带值为', e.detail.value);
+    console.log('转让门槛，移出', e.detail.value);
     this.setData({
       ruhuoValue: e.detail.value + "万"
     });
   },
-  //每月租金
-  bindinputYue: function (e) {
-    console.log('每月租金  发生选择改变，携带值为', e.detail.value);
+  //转让门槛,移入
+  bindfocusValue: function (e) {
+    console.log("转让门槛，移入", e.detail.value);
+    let that = this;
+    that.setData({
+      ruhuoValue: null,
+    });
+  },
+  //每月租金，移出
+  bindblurYueValue: function (e) {
+    console.log('每月租金 移出', e.detail.value);
     this.setData({
       yue: e.detail.value + "元"
     });
   },
-  //店铺面积
+  //每月租金，移入
+  bindfocusYueValue:function(e){
+    console.log('每月租金 移入', e.detail.value);
+    this.setData({
+      yue: null,
+    });
+  },
+  //店铺面积，移出
   bindinputPingfang: function (e) {
-    console.log('店铺面积  发生选择改变，携带值为', e.detail.value);
+    console.log('店铺面积，移出', e.detail.value);
     this.setData({
       pingfang: e.detail.value + "平方"
     });
   },
-
+  //店铺面积,移入
+  bindfocusPingfangValue: function (e) {
+    console.log('店铺面积，移入', e.detail.value);
+    this.setData({
+      pingfang: null,
+    });
+  },
   //选择行业
   sethangye: function (e) {
     console.log('行业选择  发生选择改变，携带值为', e.detail.value);

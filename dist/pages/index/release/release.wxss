@@ -4,3 +4,12 @@
  *   描述:  发布wxss
  * 
  * */
+.title{
+  font-size: 24rpx;
+  font-family:"黑体";
+}
+
+.ico_image{
+  margin-right: 10px;vertical-align: middle;
+  width:20px; height: 20px;
+}

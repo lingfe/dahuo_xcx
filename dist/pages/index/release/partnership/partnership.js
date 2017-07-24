@@ -23,11 +23,19 @@ Page({
     incomeDescription:null,
     introduce:null
   },
-  //入伙门槛
+  //入伙门槛,移出
   bindinputValue:function(e){
-    console.log('入伙门槛  发生选择改变，携带值为', e.detail.value);
+    console.log('入伙门槛 移出', e.detail.value);
     this.setData({
       ruhuoValue: e.detail.value+"万"
+    });
+  },
+  //入伙门槛,移入
+  bindfocusValue: function (e) {
+    console.log("移入", e.detail.value);
+    let that = this;
+    that.setData({
+      ruhuoValue: null,
     });
   },
   //选择行业

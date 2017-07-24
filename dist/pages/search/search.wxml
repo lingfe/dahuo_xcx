@@ -5,7 +5,7 @@
             <view class="weui-search-bar__form">
                 <view class="weui-search-bar__box">
                     <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
@@ -21,7 +21,7 @@
         <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
             <view class="weui-cells__title">定位城市</view>
             <view class="weui-cell weui-cell_active weui-cell_bd">
-              <navigator url=""><button class="weui-btn mini-btn" type="primary" size="mini">北京</button></navigator>
+              <navigator url=""><button class="weui-btn mini-btn" type="primary" size="mini">{{addressInfo}}</button></navigator>
             </view>
             <view class="weui-cells__title">B</view>
             <navigator url="" class="weui-cell" hover-class="weui-cell_active">

@@ -14,11 +14,13 @@ Page({
     num: 0,
     inputTemp: ''
   },
+  //输入内容事件
   bindKeyInput: function (e) {
     this.setData({
       inputValue: e.detail.value
     })
   },
+  //点击发送
   submitTo: function (e) {
 
     let that = this;
@@ -57,6 +59,7 @@ Page({
     //////
 
   },
+  //加载页面
   onLoad: function () {
     // 设置标题
     wx.setNavigationBarTitle({

@@ -4,3 +4,7 @@
  *   描述:  发布_金融理财页面
  * 
  * */
+  .title{
+  font-size: 24rpx;
+  font-family:"黑体";
+}

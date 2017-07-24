@@ -17,12 +17,34 @@
   align-items: center;
 }
 
+.pricesList{
+  background-color: #14BAC8;
+  color: #fff;
+  width: 262rpx;
+  font-size:24rpx;
+}
+.prices{
+  color: #fff;
+  width: 262rpx;
+  background-color: #14BAC8;
+}
+
+.prices:hover{
+  color: green;
+  background-color: red;
+}
+.prices:active{
+  color: blue;
+  background-color: #fff; 
+}
+
+
 /**头**/
 .dahuo_top {
   width: 750rpx;
   height: 80rpx;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top:0%;
 }
 .top_left {
@@ -39,7 +61,8 @@
 .top_zho {
   width: 6em;
   float: left;
-  margin-left: 20%;
+  margin-left: 240rpx;
+  position: absolute;
   text-align: center;
 }
 .top_zho button {

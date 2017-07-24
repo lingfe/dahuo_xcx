@@ -12,11 +12,14 @@
         <view class="top_left"><text>{{address[addressIndex]}}</text><image  src="/images/xlcd.png"></image></view>
     </picker>
     <view class="top_zho">
-      <picker bindchange="stInfo" value="{{priceIndex}}"  range="{{PriceRange}}">
-        <button><view>{{PriceRange[priceIndex]}}</view></button>
-      </picker>
+      <button bindtap="bindtapButton"><view>{{PriceRange[priceIndex]}}</view></button>
+      <view class="pricesList" wx:if="{{isPrices == true}}">
+        <view wx:for="{{PriceRange}}">
+          <view class="prices" bindtap="bindtapPrices" data-index="{{index}}">{{PriceRange[index]}}</view>
+        </view>
+      </view>
     </view>
-    <navigator url="/pages/search/search" >
+    <navigator url="/pages/screen/screen" >
         <view class="top_right"><image class="kind-list__img" src="/images/fandaj.png"></image></view>
     </navigator>
   </view>
@@ -40,7 +43,7 @@
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
     </view>
-    </navigator>
+    </navigator>  
 
     <navigator url="/pages/index/info/info" >
     <view class="neiro">
@@ -171,6 +174,7 @@
   <!-- 内容 end  -->
   
   <!--item底部 start-->
+  
   <!--item底部 end-->
   </scroll-view>
 </view>

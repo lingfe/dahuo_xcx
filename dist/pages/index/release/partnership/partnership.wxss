@@ -4,3 +4,9 @@
  *   描述:  合作创业页面
  * 
  * */
+ .title{
+  font-size: 24rpx;
+  font-family:"黑体";
+}
+ 
+ 

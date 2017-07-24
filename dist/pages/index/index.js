@@ -8,6 +8,8 @@
 //index.js
 //获取应用实例
 var app = getApp();
+var server = require('../../utils/server');
+
 Page({
   //页面的初始数据
   data: {
@@ -15,9 +17,10 @@ Page({
     priceIndex:0,
     address:['北京','上海','深圳','广州','贵阳'],
     addressIndex:0,
-    addressInfo:'',
-    isHiddenLoading:false,
+    addressInfo:'定位中..',
+    isHiddenLoading:true,
     isHiddenToast:true,
+    isPrices:false,
     windowHeight:1000
   },
   getInputValue:function(e){
@@ -38,11 +41,20 @@ Page({
       path: '/page/user?id=123'
     }
   },
-  //选择价格
-  stInfo:function(e){
-    console.log('价格  发生选择改变，携带值为', e.detail.value);
+  //是否显示选择价格
+  bindtapButton:function(e){
+    console.log('是否显示选择价格  发生选择改变，携带值为', this.data.isPrices);
     this.setData({
-      priceIndex: e.detail.value
+      isPrices: this.data.isPrices == false ? true : false
+    });
+  },
+  //选择价格
+  bindtapPrices:function(e){
+    console.log('选择价格  发生选择改变，携带值为', e.currentTarget.dataset.index);
+    var index=e.currentTarget.dataset.index;
+    this.setData({
+      priceIndex: index,
+      isPrices: this.data.isPrices == false ? true : false
     });
   },
   //选择地址
@@ -86,27 +98,32 @@ Page({
   },
   //页面加载
   onLoad: function () {
-    var addressInfo ='';
-    //获取位置
+    var self = this;
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: function (res) {
         var latitude = res.latitude;
         var longitude = res.longitude;
-        var speed = res.speed;
-        var accuracy = res.accuracy;
-        var address = res.address;
-        var name=res.name;
-        console.log("address:" + address);
-        console.log("name:" + name);
+        server.getJSON('/waimai/api/location.php', {
+          latitude: latitude,
+          longitude: longitude
+        }, function (res) {
+          console.log(res)
+          if (res.data.status != -1) {
+            self.setData({
+              addressInfo: res.data.result.address_reference.landmark_l2.title
+            });
+          } else {
+            self.setData({
+              addressInfo: '定位失败'
+            });
+          }
+        });
       }
-
-      
     });
 
     this.setData({
-      windowHeight: wx.getStorageSync('windowHeight'),
-      addressInfo: addressInfo
+      windowHeight: wx.getStorageSync('windowHeight')
     });
 
     this.requestData("newlist");
