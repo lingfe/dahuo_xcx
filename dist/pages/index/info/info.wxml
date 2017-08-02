@@ -7,18 +7,18 @@
  -->
 <!-- 详细信息页面 start   -->
 <view class="page">
-  <view class="page__bd">
+  <view class="">
     <view class="page_top">
                     <!-- 项目基本信息  start -->
                     <view class="neiro">
                       <view class="data_top">
                           <view style="float:left;" class="float-btn">
-                            <view class="float-btn title"><image src="/images/info/title.png"></image>云岩ASDASDASASD区5万火锅店盈利挥泪转让XXX</view>
+                            <view class="float-btn title title_top"><image src="/images/info/title.png"></image>云岩区5万火锅店盈利挥泪转让XXX</view>
                             <view style="float:right;">
                               <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/images/info/sc.png"></image></view>
                               <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/images/info/jb.png"></image></view>
                             </view>
-                            <view class="float-btn">
+                            <view class="float-btn left_0">
                               <view class="float-btn_neiro ">
                                 12小时前来过
                               </view>
@@ -34,14 +34,14 @@
                             </view>
                           </view>
                       </view>
-                      <view class="data_info {{ bl !=true ? 'info': ''}}">
-                        <view><span style="font-size:30rpx;" class="title">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
+                      <view class="info" style="height:{{ bl !=true ? '': 'auto'}};">
+                        <view class="title_prics" selection="true" ><span style="color: #000000;font-weight:bold;font-size: 21rpx;">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
                         最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时</view>
                       </view>
                       <view class="select_text" bindtap="bindtapSelectInfo">
-                        查看全文
+                        查看全文<image src="/images/info.png"></image>
                       </view>
                     </view>
                     <!-- 项目基本信息  end -->
@@ -55,14 +55,15 @@
                           </view>
                           <view class="item-middle">
                                 <view>
-                                    <text style="font-size:30rpx;" class="title">lingfe</text>
+                                    <text style="font-size:28rpx;" class="title">lingfe</text>
+                                    <text class="lingfe_tie">已发布3帖</text>
                                 </view>
                                 <view>
                                     <text class="message">我就是我，不一样的萤火</text>
                                 </view>
                           </view>
                           <view class="item_right">
-                              <view class="info "><text class="text weui-cell__ft_in-access"></text></view>
+                              <view class="info_lingfe "><text class="text weui-cell__ft_in-access"></text></view>
                           </view>
                         </view>
                         <view  class="line"></view>
@@ -73,7 +74,7 @@
                     <!-- tab切换  start-->
                     <view class="weui-tab">
                       <!-- tab菜单  start-->
-                      <view class="weui-navbar">
+                      <view class="weui-navbar" style="border:none;">
                           <block wx:for="{{tabs}}" wx:key="*this">
                               <view id="{{index}}" class="weui-navbar__item  {{activeIndex == index ? ' select_text' : ''}}" bindtap="tabClick">
                                   <view class="weui-navbar__title">{{item}}</view>
@@ -87,31 +88,32 @@
                           <!-- 项目细节  start-->
                           <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
                             <!-- 项目详细信息  start-->
-                            <view class="weui-cells weui-cells_after-title">
-                                <view class="weui-cell">
-                                    <view class="weui-cell__bd">入伙门槛</view>
-                                    <view class="weui-cell__ft data_info">5万</view>
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">入伙门槛:</view>
+                                    <view class="data_info">5万</view>
                                 </view>
                             </view>
-                            <view class="weui-cells weui-cells_after-title">
-                                <view class="weui-cell">
-                                    <view class="weui-cell__bd">信息类型</view>
-                                    <view class="weui-cell__ft data_info">生意转让</view>
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">类型选择:</view>
+                                    <view class="data_info">生意转让</view>
                                 </view>
                             </view>
-                            <view class="weui-cells weui-cells_after-title">
-                                <view class="weui-cell">
-                                    <view class="weui-cell__bd">信息行业</view>
-                                    <view class="weui-cell__ft data_info">餐饮业</view>
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">行业选择:</view>
+                                    <view class="data_info">餐饮业</view>
                                 </view>
                             </view>
-                            <view class="weui-cells weui-cells_after-title">
-                                <view class="weui-cell">
-                                    <view class="weui-cell__bd">项目描述</view>
-                                    <view class="weui-cell__ft data_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">项目描述:</view>
+                                    <view class="data_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
-                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
-                                </view>
+                        加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同
+                                    </view>
+                            </view>
                             </view>
                             <!-- 项目详细信息  end-->
 
@@ -128,8 +130,9 @@
 
                             <!-- 确定   start-->
                             <view class="weui-btn-area">
-                                <button class="weui-btn" type="warn" bindtap="bindtapPhone">电话</button>
-                                <button class="weui-btn" type="primary" bindtap="bindtagFasho">私信</button>
+                                <view class="view_phon" bindtap="bindtapPhone">电话</view>
+                                <view class="view_1">|</view>
+                                <view class="view_info" bindtap="bindtagFasho">私信</view>
                             </view>
                             <!-- 确定   start-->
                           </view>

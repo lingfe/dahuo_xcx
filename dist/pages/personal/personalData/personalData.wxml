@@ -8,16 +8,16 @@
     <view class="page__bd">
         <view class="weui-cells weui-cells_after-title">
             <!-- 姓名  start -->
-            <navigator url="" >
+            <navigator url="/pages/personal/personalData/updateName/updateName">
             <view class="weui-cell weui-cells">
                 <view class="weui-cell__bd">姓名</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">lingfe</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{updateName  == null ? '请填写' : updateName}}</view>
             </view>
             </navigator>
             <!-- 姓名  end -->
 
             <!-- 地域  start -->
-            <navigator url="" >
+            <navigator url="/pages/search/search" >
             <view class="weui-cell weui-cells weui-cells_after-title">
                 <view class="weui-cell__bd">地域</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">贵阳</view>
@@ -26,10 +26,10 @@
             <!-- 地域  end -->
 
             <!-- 签名  start -->
-            <navigator url="" >
+            <navigator url="/pages/personal/personalData/autograph/autograph" >
             <view class="weui-cell weui-cells">
                 <view class="weui-cell__bd">签名</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">我就是我,不一样萤火</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{autograph  == null ? '请填写' : autograph}}我就是我,不一样萤火</view>
             </view>
             </navigator>
             <!-- 签名  end -->

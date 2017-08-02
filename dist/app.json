@@ -1,13 +1,25 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/index/release/release",
+    "pages/wxUserinfoLogin/wxUserinfoLogin",
+    "pages/index/index",
+    
+    "pages/personal/personal",
+    "pages/index/info/info",
+    "pages/search/search",
+        
+    
+
+        "pages/personal/personalData/personalData",
+        "pages/personal/personalData/updateName/updateName",
+        "pages/personal/personalData/autograph/autograph",
+        
+    
+    
     "pages/index/info/visitFriends/visitFriends",
     
-    "pages/index/info/info",
     "pages/dahuo/industryChoice/industryChoice",
     "pages/screen/screen",
-    "pages/personal/personal",
     "pages/index/release/partnership/partnership",
     "pages/index/release/businessTransfer/businessTransfer",
     "pages/index/release/businessTransfer/geographicalPosition/geographicalPosition",
@@ -29,7 +41,6 @@
     "pages/index/release/partnership/incomeDescription/incomeDescription",
     "pages/dahuo/dahuo",
     "pages/logs/logs",
-    "pages/search/search",
     "pages/message/message",
     "pages/message/chat/chat",
     "pages/message/search/search",
@@ -59,8 +70,8 @@
     "example/toast/toast",
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-    "example/searchbar/searchbar",
-    "pages/personal/personalData/personalData"
+    "example/searchbar/searchbar"
+
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -73,7 +84,7 @@
   "tabBar": {
     "color": "#000",
     "backgroundColor": "#fff",
-    "selectedColor": "red",
+    "selectedColor": "#5E7E88",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -86,12 +97,6 @@
         "text": "个人",
         "iconPath": "images/user_1.png",
         "selectedIconPath": "images/user_0.png"
-      },
-      {
-        "pagePath": "pages/message/message",
-        "text": "聊天",
-        "iconPath": "images/tab_message_normal.png",
-        "selectedIconPath": "images/tab_message_selected.png"
       }
     ]
   },

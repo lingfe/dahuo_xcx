@@ -11,7 +11,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    url:"pages/personal/personalData/personalData"
+    url:"pages/personal/personalData/personalData",
+    updateName:null,//名称
+    region:null, //地域
+    autograph:null,//签名
+    phone:null,//电话
   },
 
   /**

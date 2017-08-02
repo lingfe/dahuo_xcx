@@ -4,12 +4,55 @@
  *   描述:  发布wxss
  * 
  * */
+ .page{
+   background-color: #FFF;
+   height: 100%;
+ }
 .title{
   font-size: 24rpx;
   font-family:"黑体";
+  color: #666;
 }
-
+.weui-cell__ft{
+ margin-right:-30rpx;
+}
 .ico_image{
   margin-right: 10px;vertical-align: middle;
   width:20px; height: 20px;
+}
+.weui-cell__hd{
+  margin-left: -29rpx;
+}
+.weui-cells {
+position:relative;
+margin-top:0px;
+width: 92%;
+margin-left: 12rpx;
+background-color:#fff;
+line-height:1.41176471;
+font-size:17px;
+
+}
+
+
+.weui-cells_to {
+position:relative;
+margin-top:0px;
+width: 92%;
+margin-left: 12rpx;
+background-color:#fff;
+line-height:1.41176471;
+font-size:17px;
+
+}
+.weui-cell::before {
+content:" ";
+position:absolute;
+left:0;
+top:0;
+right:0;
+height:1px;
+border-top:1rpx solid #fff;
+color:#d9d9d9;
+left:15px;
 }

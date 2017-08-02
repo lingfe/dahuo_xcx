@@ -1,0 +1,16 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-26
+ *   描述:  微信登录
+ * 
+ * */-->
+ <view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text class="userinfo-motto">{{text}}</text>
+  </view>
+  <view class="usermotto">
+    <button type="primary" bindtap="bindtapLogin">确定登录</button>
+  </view>
+</view>

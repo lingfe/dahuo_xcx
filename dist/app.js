@@ -1,4 +1,7 @@
+import components from './helpers/components'
+
 App({
+  components,
     //生命周期函数--监听小程序显示	。当小程序启动，或从后台进入前台显示，会触发 onShow
     onShow: function () {
         console.log('App Show')
@@ -46,10 +49,10 @@ App({
     //用户数据
     globalData: {
       userInfo: null,
-      fundsLayout: null,
-      projectDescription:null,
-      incomeDescription:null,
-      introduce:null,
+      fundsLayout: null, //入伙门槛，需要金额，转让门槛..
+      projectDescription:null,//项目描述
+      incomeDescription:null,//收益描述
+      introduce:null, //公司/团队介绍
       geographicalPosition: null,      //地理位置
       businessDescription:null, //营业描述
       transferReason:null,//转让原因
@@ -57,5 +60,14 @@ App({
       agentCondition:null,//代理条件
       agencyRule:null,//代理规则
       skillsRequired:null,//技能要求
+      updateName:null,//用户名称
+      autograph:null ,//签名
+
+      appid: 'wxdb07051dc3fc031e',   //小程序id
+      secret: '783ffd9d359cb66c053d95647176aeea', //小程序的 app secret
+
+      hasLogin: false,
+      openid: null,   //微信用户id
+
     }
 });

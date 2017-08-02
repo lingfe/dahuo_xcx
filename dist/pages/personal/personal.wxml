@@ -15,17 +15,14 @@
               </view>
               <view class="item-middle">
                     <view>
-                        <text class="title">lingfe</text>
+                        <text class="title_lingfe">lingfe<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">贵阳,已发布3贴</text></text>
                     </view>
                     <view>
                         <text class="message">我就是我，不一样的萤火</text>
                     </view>
-                    <view>
-                        <text class="title_address">贵阳,已发布3贴</text>
-                    </view>
               </view>
               <view class="item_right">
-                <view bindtap="bindtapMy"><text class="title_address">个人资料>></text></view>
+                <view bindtap="bindtapMy"><text class="title_address">个人资料 ></text></view>
                 <view bindtap="bindtapService" session-from="weapp"><image src="/images/service.png" class="image_service"/></view>
               </view>
           </view>
@@ -36,14 +33,14 @@
         <!-- tab切换  start -->
         <view class="weui-tab">
             <!-- 菜单  start -->
-            <view class="weui-navbar">
+            <view class="weui-navbar" style="border-bottom:none;">
                 <block wx:for="{{tabs}}" wx:key="*this">
                     <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'select_text' : ''}}" bindtap="tabClick">
                         <view class="weui-navbar__title">{{item}}</view>
                     </view>
                 </block>
                 <view class="weui-navbar__slider" 
-                style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+                style="background-color:#14BAC8;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
             </view>
             <!-- 菜单  end -->
             
@@ -54,22 +51,22 @@
                   <view class="dahuo_neiro">
                       <view class="neiro">
                         <view class="data_top">
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" type="default" size="mini">刷新</button></view>
-                            <view style="float:left;font-size:23rpx;margin-left:30rpx;" class="float-btn">60天后自动下架</view>
+                            <view class="float-btn"><button style="" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">60天后自动下架</view>
                         </view>
                         <view class="neiro_img"><image src="/images/zan.png"></image></view>
                         <view class="neiro_data">
-                          <view class="data_titile title">花果园火锅店亏本转让sdfadfasdfasdfasdfadfasd..</view>
+                          <view class="data_titile title">花果园火锅店亏本转让</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" type="primary" size="mini">编辑</button></view>
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" bindtap="bindtapOffTheShelf" type="warn" size="mini">下架</button></view>
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" type="default" size="mini">下架</button></view>
                         </view>
                       </view>
                   </view>
@@ -80,18 +77,18 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <view class="dahuo_neiro">
                     <navigator url="/pages/index/info/info" >
-                    <view class="neiro">
+                    <view class="neiro_286">
                         <view class="neiro_img"><image src="/images/zan.png"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">花果园火锅店亏本转让..</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
-                        <view class="data_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        <view class="info_data_info info_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                                           微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                                           加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同
                         </view>
@@ -106,22 +103,22 @@
                   <view class="dahuo_neiro">
                     <view class="neiro">
                         <view class="data_top">
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" type="default" size="mini">上架</button></view>
-                            <view style="float:left;font-size:23rpx;margin-left:30rpx;" class="float-btn">已下架</view>
+                            <view class="float-btn"><button class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
                         </view>
                         <view class="neiro_img"><image src="/images/zan.png"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">花果园火锅店亏本转让sdfsdf..</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" type="primary" size="mini">编辑</button></view>
-                            <view class="float-btn"><button style="width:200rpx;" class="weui-btn mini-btn" bindtap="bindtapDelete" type="warn" size="mini">删除</button></view>
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapDelete" type="default" size="mini">删除</button></view>
                         </view>
                     </view>
                   </view>

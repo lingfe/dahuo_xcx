@@ -1,32 +1,30 @@
-<view class="page">
+<view class="page bg">
     <!--  搜索栏  start   -->
     <view class="page__bd">
-        <view class="weui-search-bar">
-            <view class="weui-search-bar__form">
-                <view class="weui-search-bar__box">
+        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;">
+            <view class="bg_search">
+                <view class="weui-search-bar__box ">
                     <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="请输入城市名称或字母" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
                 </view>
-                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                    <icon class="weui-icon-search" type="search" size="14"></icon>
-                    <view class="weui-search-bar__text">搜索</view>
-                </label>
             </view>
-            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
         <!-- 关键字  start -->
-        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+        <view class="weui-cells searchbar-result bg " wx:if="{{inputVal.length >= 0}}">
             <view class="weui-cells__title">定位城市</view>
-            <view class="weui-cell weui-cell_active weui-cell_bd">
-              <navigator url=""><button class="weui-btn mini-btn" type="primary" size="mini">{{addressInfo}}</button></navigator>
+            <view class="weui-cell weui-cell_active weui-cell_bd bg stop_1">
+              <navigator url="/pages/index/index" open-type="switchTab"><view class="weui-btn mini-btn bg_b" size="mini">
+              <view class="bg_b_img"><image src="/images/address.png"></image></view>
+              <view class="bg_b_text">点击定位</view>
+              </view></navigator>
             </view>
-            <view class="weui-cells__title">B</view>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>北京</view>
+            <view class="weui-cells__title ">B</view>
+            <navigator url="" class="weui-cell border_top_none" hover-class="weui-cell_active">
+                <view class="weui-cell__bd" style="border:none;">
+                    <view>北京</view>     
                 </view>
             </navigator>
             <navigator url="" class="weui-cell" hover-class="weui-cell_active">

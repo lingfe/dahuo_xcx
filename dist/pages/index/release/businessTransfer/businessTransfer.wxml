@@ -10,20 +10,22 @@
 <view class="page">
     <view class="">
         <form  bindsubmit="formSubmit" class="form">
+            <view class="margin_left">
             <!-- 输入标题    start -->
-            <view class="weui-cell weui-cells ">
-                <view class="weui-cell__hd">
+            <view class="weui-cell_to weui-cells_to " style="border:none;">
+                <view class="weui-cell__bd">
                     <view class="weui-label title">标题</view>
                 </view>
-                <view class="weui-cell__bd title">
-                    <input class="weui-input" placeholder="请输入标题"/>
+                <view class="weui-cell__bd title"  style="margin-left:-347rpx;">
+                    <input class="weui-input" name="title" value="{{title}}" placeholder="请输入标题"/>
                 </view>
             </view>
             <!-- 输入标题    end -->
+            </view>
 
+            <view class="margin_left">
             <!-- 输入转让门槛    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells">
+            <view class="weui-cell_to weui-cells_to"  style="margin-top:27rpx;">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">转让门槛</view>
                 </view>
@@ -31,12 +33,10 @@
                     <input class="weui-input" type="digit" value="{{ruhuoValue}}"  bindfocus="bindfocusValue" bindblur="bindinputValue" placeholder="万"/>           
                 </view>
             </view>
-            </navigator>
             <!-- 输入转让门槛    end -->
 
             <!-- 输入每月租金    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells  weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to  weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">每月租金</view>
                 </view>
@@ -44,12 +44,10 @@
                     <input class="weui-input" type="digit" value="{{yue}}" bindfocus="bindfocusYueValue" bindblur="bindblurYueValue"  placeholder="元"/>           
                 </view>
             </view>
-            </navigator>
             <!-- 输入每月租金    end -->
 
             <!-- 输入店铺面积    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells  weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to  weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">店铺面积</view>
                 </view>
@@ -57,28 +55,24 @@
                     <input class="weui-input" type="digit" value="{{pingfang}}" bindfocus="bindfocusPingfangValue" bindblur="bindinputPingfang" placeholder="平方"/>           
                 </view>
             </view>
-            </navigator>
             <!-- 输入店铺面积    end -->
 
             <!-- 选择发布人身份    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells  weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to  weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">选择发布人身份</view>
                 </view>
                 <view class="weui-cell__ft title">
                   <radio-group class="group" bindchange="radioChange">
-                      <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}">个人</radio>
+                      <radio style="margin-right:10rpx;" id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}">个人</radio>
                       <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}">经纪人</radio>
                   </radio-group>         
                 </view>
             </view>
-            </navigator>
             <!-- 选择发布人身份    end -->
             
             <!-- 输入行业选择    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells  weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to  weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">行业选择</view>
                 </view>
@@ -88,57 +82,58 @@
                 </view>
                 </picker>
             </view>
-            </navigator>
             <!-- 输入行业选择    end -->
             
             <!-- 输入地理位置  start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">地理位置</view>
                 </view>
                 <view bindtap="geographicalPositionClick" 
                     class="weui-cell__ft {{geographicalPosition  == null ? 'weui-cell__ft_in-access' : ''}} title">
                     {{geographicalPosition  == null ? '请填写' : ''}}
-                    <icon type="{{geographicalPosition  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                    <input type="text" hidden="true" name="geographicalPosition" value="{{geographicalPosition}}"/>
+                    <view wx:if="{{geographicalPosition  != null}}">
+                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                    </view>
                 </view>
             </view>
-            </navigator>
             <!-- 输入地理位置    end -->
             
             <!-- 输入营业描述    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">营业描述 </view>
                 </view>
                 <view bindtap="businessDescriptionclick" 
                     class="weui-cell__ft {{businessDescription  == null ? 'weui-cell__ft_in-access' : ''}} title">
                     {{businessDescription  == null ? '请填写' : ''}}
-                    <icon type="{{businessDescription  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                    <input type="text" hidden="true" name="businessDescription" value="{{businessDescription}}"/>
+                    <view wx:if="{{businessDescription  != null}}">
+                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                    </view>
                 </view>
             </view>
-            </navigator>
             <!-- 输入营业描述    end -->
             
             <!-- 输入转让原因    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">转让原因</view>
                 </view>
                 <view bindtap="transferReasonClick" 
                     class="weui-cell__ft {{transferReason  == null ? 'weui-cell__ft_in-access' : ''}} title">
                     {{transferReason  == null ? '请填写' : ''}}
-                    <icon type="{{transferReason  != null ? 'success_no_circle' : ''}}" size="23"></icon>
+                    <input type="text" hidden="true" name="transferReason" value="{{transferReason}}"/>
+                    <view wx:if="{{transferReason  != null}}">
+                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                    </view>
                 </view>
             </view>
-            </navigator>
             <!-- 输入转让原因    end -->
                         
             <!-- 输入联系方式    start -->
-            <navigator url="" >
-            <view class="weui-cell weui-cells weui-cells_after-title">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title" style="border:none;">
                 <view class="weui-cell__bd">
                     <view class="weui-label title">联系方式</view>
                 </view>
@@ -146,13 +141,12 @@
                     <input name="phone" type="number" class="weui-input" value="{{flag}}" placeholder="13068326391"/>           
                 </view>
             </view>
-            </navigator>
             <!-- 输入联系方式    end -->
+            </view>
 
             <!-- 上传图片  start -->
-            <navigator url="" >
-            <view class="weui-cell">
-                <view class="weui-cell__bd">
+            <view class="">
+                <view class="weui-cell__hd">
                     <view class="weui-uploader">
                         <view class="weui-uploader__hd">
                             <view class="weui-uploader__title title">图片上传</view>
@@ -161,8 +155,9 @@
                         <view class="weui-uploader__bd">
                             <view class="weui-uploader__files" id="uploaderFiles">
                                 <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    <view wx:if="{{item !=null}}" class="weui-uploader__file" bindlongtap="previewImage" id="{{item}}">
+                                      <image class="img_tt" src="/images/delete.png" bindtouchend="bindtapImageDelete" data-img="{{item}}"/>
+                                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                                     </view>
                                 </block>
                             </view>
@@ -173,11 +168,10 @@
                     </view>
                 </view>
           </view>
-          </navigator>
           <!-- 上传图片  end -->
 
           <!-- 相关条款  end -->      
-          <checkbox-group bindchange="bindAgreeChange">
+          <checkbox-group bindchange="bindAgreeChange" name="isAgree">
               <label class="weui-agree" for="weuiAgree">
                   <view class="weui-agree__text title">
                       <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
@@ -192,7 +186,7 @@
 
           <!-- 提交按钮  start -->
           <view class="page__bd page__bd_spacing">
-                <button class="weui-btn"  form-type="submit" style="background-color:#00BFFF;" type="primary" >发布</button>
+                <button class="weui-btn"  form-type="submit" style="background-color:#14BAC8;border:none;"  type="primary" >发布</button>
           </view>
           <!-- 提交按钮  end -->  
         </form>

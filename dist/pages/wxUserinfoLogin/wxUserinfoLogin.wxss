@@ -1,0 +1,30 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-26
+ *   描述:  微信登录
+ * 
+ * */
+ .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+.userinfo-motto{
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 100px;
+}
+

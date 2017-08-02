@@ -5,19 +5,44 @@
  * 
  * */
 
-page, .page, .page__bd {
-  height: 95%;
+.pageScreen{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0rpx;
+  background-color:rgba(0, 0, 0, 0.1);
+}
+
+
+.page__bdScreen {
+  height: 85%;
+  width: 680rpx;
+  background-color: #fff;
+  margin-left: 100rpx;
+  z-index: 11;
+  float: left;
 }
 
 .www{
   width:200rpx;
   height: 95%;
+  background-color: #fff;
   border-right:1px solid darkgray;
   float: left;
 }
 
 .ccc{
   float: left;
-  width: 540rpx;
+  width: 440rpx;
+  background-color: #fff;
   height: 95%;
 }
+.botton_view{
+  height: auto;
+  margin-top: 100%;
+  margin-bottom: 10%;
+  width:650rpx; 
+  float: left;
+}
+
+

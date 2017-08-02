@@ -5,8 +5,8 @@
  *   描述:  筛选
  * 
  * */-->
-<view class="page">
-    <view class="page__bd">
+<view class="page pageScreen">
+    <view class="page_bd page__bdScreen">
         <view class="weui-tab">
             <!-- tab菜单  start -->
             <view class="www">
@@ -63,23 +63,24 @@
                 </view>
                 <!-- 行业  end -->
             </view>
-        </view>
+            <view class="botton_view">
+              <!-- 标签  start -->
+              <view class="">
+                <label  wx:for="{{str}}">
+                  <button wx:if="{{item != ''}}" bindtap="clearBtn" data-value="{{item}}" class="weui-btn mini-btn" type="primary" plain="true" size="mini">{{item}}<icon type="cancel" size="23"></icon></button>
+                </label>
+              </view>
+              <!-- 标签  end -->
 
-        <!-- 标签  start -->
-        <view class="">
-          <label  wx:for="{{str}}">
-            <button wx:if="{{item != ''}}" bindtap="clearBtn" data-value="{{item}}" class="weui-btn mini-btn" type="primary" plain="true" size="mini">{{item}}<icon type="cancel" size="23"></icon></button>
-          </label>
+              <!-- 操作  start -->
+              <view class="">
+                <button class="weui-btn" type="warn" plain="true" bindtap="bindtapReset">重置</button>
+                <navigator url="/pages/index/index" open-type="switchTab">
+                  <button class="weui-btn" type="primary" plain="true">确定</button>
+                </navigator>
+              </view>
+              <!-- 操作  end -->
+            </view>
         </view>
-        <!-- 标签  end -->
-
-        <!-- 操作  start -->
-        <view class="">
-          <button class="weui-btn" type="warn" plain="true" bindtap="bindtapReset">重置</button>
-          <navigator url="/pages/index/index" open-type="switchTab">
-            <button class="weui-btn" type="primary" plain="true">确定</button>
-          </navigator>
-        </view>
-        <!-- 操作  end -->
     </view>
 </view>

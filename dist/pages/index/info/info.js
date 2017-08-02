@@ -89,8 +89,29 @@ Page({
   },
   //发送信息
   bindtagFasho: function () {
-    wx.reLaunch({
-      url: '/pages/index/index',
+    //复制电话号码
+    wx.showModal({
+      title: '复制电话号码',
+      content: '复制电话号码？13068326391',
+      confirmText: "复制",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          //剪贴板
+          wx.setClipboardData({
+            data:"13068326391",
+            success: function (res) {
+              console.log("复制成功:"+res.data)
+            },
+            fail:function(res){
+              console.log("复制失败:" + res.data)
+            }
+          });
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
     });
   },
   //输入评论内容事件

@@ -64,7 +64,7 @@ Page({
   //加载完成
   onLoad: function () {
     var that = this;
-    var sliderWidth=100;
+    var sliderWidth=50;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
