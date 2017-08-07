@@ -4,6 +4,9 @@
  *   描述:  个人
  * 
  * */
+ page{
+  background-color: #E8EFEF;
+ }
  .page__bd {
    background-color: #E8EFEF;
  }

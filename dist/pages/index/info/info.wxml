@@ -14,8 +14,8 @@
                       <view class="data_top">
                           <view style="float:left;" class="float-btn">
                             <view class="float-btn title title_top"><image src="/images/info/title.png"></image>云岩区5万火锅店盈利挥泪转让XXX</view>
-                            <view style="float:right;">
-                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/images/info/sc.png"></image></view>
+                            <view class="SC_JB" >
+                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/images/sc{{sc}}.png"></image></view>
                               <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/images/info/jb.png"></image></view>
                             </view>
                             <view class="float-btn left_0">
@@ -23,7 +23,7 @@
                                 12小时前来过
                               </view>
                               <view class="float-btn_neiro " >
-                                32人浏览
+                                <span style="color: #14bac8;">32</span>人浏览
                               </view>
                               <view class="float-btn_neiro ">
                                 <image src="/images/info/hy.png"></image>生意转让
@@ -34,14 +34,14 @@
                             </view>
                           </view>
                       </view>
-                      <view class="info" style="height:{{ bl !=true ? '': 'auto'}};">
-                        <view class="title_prics" selection="true" ><span style="color: #000000;font-weight:bold;font-size: 21rpx;">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
+                      <view class="info" >
+                        <view class="title_prics" style="height:{{ bl !=true ? '': 'auto'}};" selection="true" ><span style="color: #000000;font-weight:bold;font-size: 24rpx;">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
                         最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时</view>
                       </view>
                       <view class="select_text" bindtap="bindtapSelectInfo">
-                        查看全文<image src="/images/info.png"></image>
+                          查看全文<image src="/images/info.png"></image>
                       </view>
                     </view>
                     <!-- 项目基本信息  end -->
@@ -80,7 +80,7 @@
                                   <view class="weui-navbar__title">{{item}}</view>
                               </view>
                           </block>
-                          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+                          <view class="weui-navbar__slider" style="background-color:#14BAC8;width:150rpx;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
                       </view>
                       <!-- tab菜单  end-->
 
@@ -139,7 +139,7 @@
                           <!-- 项目细节  end-->
 
                           <!-- 讨论区  start-->
-                          <view class="weui-tab__content"  style="height:auto;margin-bottom:50rpx;" hidden="{{activeIndex != 1}}">
+                          <view class="weui-tab__content"  style="height:auto;margin-bottom:70px;" hidden="{{activeIndex != 1}}">
                             <view  wx:for="{{allContentList}}" wx:key="*this">
                               <view class="item">
                                   <view class="item-left">
@@ -147,10 +147,10 @@
                                   </view>
                                   <view class="item-middle">
                                         <view>
-                                            <text class="select_text">{{item}}</text>
+                                            <text class="select_text" style="float:none;">{{item}}</text>
                                         </view>
                                         <view>
-                                            <text style="width:590rpx;" class="data_info">你这个项目很不错啊！未来一定能够在互联网占据一定的地位！</text>
+                                            <text style="width:575rpx;" class="data_info">你这个项目很不错啊！未来一定能够在互联网占据一定的地位！</text>
                                         </view>
                                         <view>
                                             <text class="message">2017/7/12 16:00</text>
@@ -164,8 +164,8 @@
                             </view>
 
                             <view class="handleBox">
-                              <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputValue}}" bindinput="bindKeyInput"/>
-                              <button type="submit" class="btn_submit" size="mini"  bindtap="submitTo">发送</button>
+                              <input  class="input_submit"  value="{{inputValue}}" bindinput="bindKeyInput"/>
+                              <image class="faso" src="/images/faso.png"  bindtap="submitTo" />
                             </view>
                         </view>
                         <!-- 讨论区  end-->
@@ -177,3 +177,17 @@
   </view>
 </view>
 <!-- 详细信息页面 end   -->
+
+<!-- 举报 start -->
+<view class="jubao_bg" wx:if="{{jb == true}}">
+  <view class="jubao" >
+    <view class="jubao_title">举报事项</view>
+    <view class="jubao_info" bindtap="JB">垃圾或者广告信息</view>
+    <view class="jubao_info" bindtap="JB">内容与主题不符</view>
+    <view class="jubao_info" bindtap="JB">涉黄违法</view>
+    <view class="jubao_info" bindtap="JB">诈骗内容</view>
+    <view class="jubao_info" bindtap="JB">虚假（电话、描述虚假)</view>
+    <view class="jubao_info" bindtap="JB">中介冒充个人</view>
+    <view class="jubao_info" bindtap="JB">其他</view>
+  </view>
+</view>

@@ -4,6 +4,9 @@
  *   描述:  合作创业页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
 .page{
     background-color: #E5F0EC;
     width: 750rpx;

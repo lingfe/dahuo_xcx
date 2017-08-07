@@ -1,1 +1,4 @@
 /* fundsLayout.wxss */
+ page{
+  background-color: #E8EFEF;
+ }

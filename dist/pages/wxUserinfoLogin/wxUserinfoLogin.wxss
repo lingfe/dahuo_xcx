@@ -4,6 +4,9 @@
  *   描述:  微信登录
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
  .userinfo {
   display: flex;
   flex-direction: column;

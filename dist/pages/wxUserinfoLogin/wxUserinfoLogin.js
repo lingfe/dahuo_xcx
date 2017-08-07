@@ -14,8 +14,6 @@ Page({
   data: {
     hasUserInfo: false,
     text:'..',
-    appid: 'wxdb07051dc3fc031e',//appid需自己提供，此处的appid我随机编写  
-    secret: '783ffd9d359cb66c053d95647176aeea',//secret需自己提供，此处的secret我随机编写  
   }, 
   /**
    * 确定登录
@@ -24,8 +22,56 @@ Page({
     //发起登录请求
     wx.login({
       success: function (res) {
+        console.log(res);
+        //获取登录信息
+        wx.getUserInfo({//getUserInfo流程
+          //成功
+          success: function (res2) {//获取userinfo成功
+            console.log(res2);
+            console.log(JSON.stringify(res2.userInfo));
+            //请求服务器,该用户是否登录
+            wx.request({
+              method: 'POST',
+              data: { reqJson: JSON.stringify(res2.userInfo) },
+              header: { "Content-Type": "application/x-www-form-urlencoded"},
+              url: 'http://cms.echsoft.com/lg/wxLg/04C63783B2894CA0976349D76F128EEC/' + res.code,
+              success: function (res) {
+                if (res.data.status === 1) {
+                  //提示
+                  wx.showToast({
+                    title: res.data.message,
+                    icon: 'loading',
+                    duration: 3000,
+                  });
+
+                  //保存在本地缓存中
+                  wx.setStorage({
+                    key: 'cookie',
+                    data: res.header["Set-Cookie"].split(";")[0]
+                  });
+               
+                  console.log(wx.getStorageSync("cookie"));
+                  //跳转到首页
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  });
+                  return;
+                }
+                if (res.header == null || res.header.length == 0 || res.header == 'undefined') {
+                  //提示
+                  wx.showToast({
+                    title: res.data.message,
+                    icon: 'loading',
+                    duration: 3000,
+                  });
+                } else {}
+              }
+            });
+          }
+        });
+
         //登录成功
-        requestUrlLogin(res);
+        //requestUrlLogin(res);
       },
       fail:function(){
         //登录失败
@@ -125,8 +171,7 @@ Page({
           });
         }
       });
-      //请求服务器,该用户是否登录
-      
+
     }
 
   },

@@ -9,14 +9,13 @@
 //获取应用实例
 var app = getApp();
 var server = require('../../utils/server');
+var utilMd5 = require('../../utils/md5.js');
 
 Page({
   //页面的初始数据
   data: {
     PriceRange: ['1 - 5 万', '5 - 15 万','15 - 25 万','25 - 50 万','50 - 500 万'],
     priceIndex:0,
-    address:['北京','上海','深圳','广州','贵阳'],
-    addressIndex:0,
     addressInfo:'定位中..',
     isHiddenLoading:true,
     isHiddenToast:true,
@@ -34,6 +33,7 @@ Page({
       { name: '10004', value: '3' }
     ],
     str: [],
+    num:0,
   },
   //复选
   checkboxChange: function (e) {
@@ -70,11 +70,12 @@ Page({
       str: values
     });
   },
-  //重置
+  //重置并关闭筛选
   bindtapReset: function (e) {
     console.log("重置了");
     this.setData({
       str: [],
+      screen:this.data.screen==true?false:true,
     });
   },
   //tab切换
@@ -88,7 +89,7 @@ Page({
   bindtapScreen:function(){
     console.log("screen:" + this.data.screen);
     this.setData({
-      screen:this.data.screen==true?false:true,
+      screen: this.data.screen == true ? false : true,
     });
     console.log("screen:" + this.data.screen);
   },
@@ -113,6 +114,7 @@ Page({
     var index=e.currentTarget.dataset.index;
     this.setData({
       priceIndex: index,
+      num:index,
       isPrices: this.data.isPrices == false ? true : false
     });
   },
@@ -157,6 +159,9 @@ Page({
   },
   //页面加载
   onLoad: function () {
+    console.log("cookie:"+wx.getStorageSync("cookie"));
+    console.log("md5:" + utilMd5.hexMD5('123456'));
+    console.log('str:'+new Date().getDate());
     var self = this;
     wx.getLocation({
       type: 'gcj02',
@@ -167,10 +172,9 @@ Page({
           latitude: latitude,
           longitude: longitude
         }, function (res) {
-          console.log(res)
           if (res.data.status != -1) {
             self.setData({
-              addressInfo: res.data.result.address_reference.landmark_l2.title
+              addressInfo: res.data.result.ad_info.city
             });
           } else {
             self.setData({
@@ -211,6 +215,7 @@ Page({
         maxtime: that.data.maxtime,
         type: 29
       },
+      header:{},
       method: "GET",
       success: function (res) {
         console.log(res);

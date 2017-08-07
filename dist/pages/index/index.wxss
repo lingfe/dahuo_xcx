@@ -4,6 +4,9 @@
  *   描述:  信息页面，首页
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
 .container{
   width: 750rpx;
   height: auto;
@@ -309,14 +312,17 @@
 }
 .botton_view{
   height: 400rpx;
-  width:600rpx;
+  width: auto;
   position:fixed;
   bottom: 0rpx;
   float: left;
 }
 .biaoqian{
-   margin-top: 0rpx;
-   top: 0px;
+  margin-top: 0rpx;
+  top: 0px;
+  height: 400rpx;
+  width: 550rpx;
+  float: left;
 }
 
 /*操作*/

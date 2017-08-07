@@ -8,16 +8,14 @@
   <scroll-view scroll-x="false" style="height: {{ windowHeight+'px'}}" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower">
   <!-- 头部 start  -->
   <view class="dahuo_top">
-    <picker bindchange="setAddressInfo" value="{{addressIndex}}"  range="{{address}}">
-        <view class="top_left"><text>{{address[addressIndex]}}</text><image  src="/images/xlcd.png"></image></view>
-    </picker>
+    <navigator url="/pages/search/search"><view class="top_left"><text>{{addressInfo}}</text><image  src="/images/xlcd.png"></image></view></navigator>
     <view class="top_zho">
       <view class="top_zho_button" bindtap="bindtapButton"><view>{{PriceRange[priceIndex]}}</view></view>
       <view class="pricesList" wx:if="{{isPrices == true}}">
         <image  class="img" src="/images/u218.png"></image>
         <view class="bor">
         <view class="border_bottom" wx:for="{{PriceRange}}">
-          <view class="prices {{index == 0 ? 'color': ''}}"  bindtap="bindtapPrices" data-index="{{index}}">{{PriceRange[index]}}</view>
+          <view class="prices {{index == num ? 'color': ''}}"  bindtap="bindtapPrices" data-index="{{index}}">{{PriceRange[index]}}</view>
         </view>
         </view>
       </view>
@@ -25,7 +23,7 @@
     <view class="top_right" bindtap="bindtapScreen"><image class="kind-list__img" src="/images/fandaj.png"></image></view>
   </view>
   <!-- 头部 end  -->
-
+  
   <!-- 内容 end  -->
   <view class="dahuo_neiro">
     <navigator url="" >
@@ -211,14 +209,15 @@
                 <!-- 金额  end -->
 
                 <!-- 行业  start -->
-                <view class="weui-cells weui-cells_after-title stop_1" hidden="{{activeIndex != 1}}">                
+                <view class="" hidden="{{activeIndex != 1}}">                
                   <checkbox-group bindchange="checkboxChange">
-                  <label class="weui-cell stop_1 weui-check__label " wx:for="{{checkboxItems}}" wx:key="value">
+                  <label wx:for="{{checkboxItems}}" wx:key="value">
+                    <view class="weui-navbar__item stop">
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-
-                    <view class="weui-cell__bd">{{item.name}}bbb</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <view class="weui-navbar__title stop_1 flaot_left">啊啊啊{{item.name}}bbbb</view>
+                    <view class="flaot_right"  wx:if="{{item.checked}}">
                         <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
                     </view>
                   </label>
                   </checkbox-group>
@@ -226,14 +225,15 @@
                 <!-- 类型  end -->
 
                 <!-- 行业  start -->
-                <view class="weui-cells weui-cells_after-title stop_1" hidden="{{activeIndex != 2}}">                
+                <view class="" hidden="{{activeIndex != 2}}">                
                   <checkbox-group bindchange="checkboxChange">
-                  <label class=" stop_1 weui-cell weui-check__label " wx:for="{{checkboxItems}}" wx:key="value">
+                  <label wx:for="{{checkboxItems}}" wx:key="value">
+                    <view class="weui-navbar__item stop">
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-
-                    <view class="weui-cell__bd">{{item.name}}ccc</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <view class="weui-navbar__title stop_1 flaot_left">啊啊啊{{item.name}}ccc</view>
+                    <view class="flaot_right"  wx:if="{{item.checked}}">
                         <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
                     </view>
                   </label>
                   </checkbox-group>
@@ -243,18 +243,18 @@
             <view class="botton_view">
               <!-- 标签  start -->
               <view class="biaoqian">
-                <label  wx:for="{{str}}">
+                <view  wx:for="{{str}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
                     <view class="delete_text">{{item}}</view>
                     <image class="delete_image"  bindtap="clearBtn" data-value="{{item}}" src="/images/delete.png"></image>
                   </view>
-                </label>
+                </view>
               </view>
               <!-- 标签  end -->
 
               <!-- 操作  start -->
               <view class="operation">
-                <view class="operation_close"  bindtap="bindtapScreen">重置</view>
+                <view class="operation_close"  bindtap="bindtapReset">重置</view>
                 <view class="operation_ok">确定</view>
               </view>
               <!-- 操作  end -->

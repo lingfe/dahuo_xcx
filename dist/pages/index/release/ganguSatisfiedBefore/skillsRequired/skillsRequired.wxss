@@ -4,3 +4,6 @@
  *   描述:  发布_干股纳才_技能要求页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }

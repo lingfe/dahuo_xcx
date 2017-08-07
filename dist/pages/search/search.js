@@ -6,7 +6,26 @@ Page({
   data: {
     inputShowed: false,
     inputVal: "",
-    addressInfo:'定位中..'
+    address: [
+       { letter: 'A', info: ['安顺', '安阳']},
+       { letter: 'B', info: ['北京', '毕节','宝鸡'] },
+       { letter: 'C', info: ['长沙', '长春', '重庆', '朝阳'] },
+       { letter: 'G', info: ['贵阳'] }
+    ],
+    addressInfo: '定位中..',
+  },
+  bindtapGetAddres:function(e){
+    //得到打开的页面
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];  //当前页面
+    var prevPage = pages[pages.length - 2]; //上一个页面
+
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      addressInfo: e.currentTarget.dataset.info
+    });
+    //返回上一页
+    wx.navigateBack();
   },
   //显示 input
   showInput: function () {
@@ -53,7 +72,7 @@ Page({
           console.log(res)
           if (res.data.status != -1) {
             self.setData({
-              addressInfo: res.data.result.address_reference.landmark_l2.title
+              addressInfo: res.data.result.ad_info.city
             });
           } else {
             self.setData({

@@ -4,7 +4,9 @@
  *   描述:  筛选
  * 
  * */
-
+ page{
+  background-color: #E8EFEF;
+ }
 .pageScreen{
   width: 100%;
   height: auto;

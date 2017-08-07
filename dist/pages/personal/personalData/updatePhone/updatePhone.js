@@ -1,46 +1,13 @@
-/**  
- *   作者:  lingfe 
- *   时间:  2017-7-12
- *   描述:  个人_个人资料
- * 
- * */
-
+// updatePhone.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    url:"pages/personal/personalData/personalData",
-    updateName:null,//名称
-    region:null, //地域
-    autograph:null,//签名
-    phone:null,//电话
+  
   },
-  //修改姓名
-  bindtapUpdateName:function(){
-    wx.navigateTo({
-      url: '/pages/personal/personalData/updateName/updateName',
-    });
-  },
-  //修改地域
-  bindtapSearch:function(){
-    wx.navigateTo({
-      url: '/pages/search/search',
-    });
-  },
-  //修改签名
-  bindtapAutograph:function(){
-    wx.navigateTo({
-      url: '/pages/personal/personalData/autograph/autograph',
-    });
-  },
-  //修改手机号
-  bindtapPhone:function(){
-    wx.navigateTo({
-      url: '/pages/personal/personalData/updatePhone/updatePhone',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

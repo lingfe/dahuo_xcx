@@ -31,7 +31,7 @@
         </view>
         <!-- 确定   start-->
         <view class="weui-btn-area">
-          <button class="weui-btn" type="primary" bindtap="">确定</button>
+          <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="">确定</button>
         </view>
         <!-- 确定   start-->
     </view>

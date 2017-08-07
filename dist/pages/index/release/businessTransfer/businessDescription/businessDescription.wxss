@@ -4,3 +4,6 @@
  *   描述:  发布_生意转让_营业描述页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }

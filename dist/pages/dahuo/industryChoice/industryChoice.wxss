@@ -3,6 +3,9 @@
  *   描述:  行业选择页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
  .placeholder{
     margin: 5px;
     padding: 0 10px;

@@ -4,6 +4,9 @@
  *   描述:  发布_金融理财页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
 .page{
     background-color: #E5F0EC;
     width: 750rpx;

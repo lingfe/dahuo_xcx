@@ -1,23 +1,16 @@
 {
   "pages": [
-    "pages/index/release/release",
-    "pages/wxUserinfoLogin/wxUserinfoLogin",
     "pages/index/index",
-    
+    "pages/wxUserinfoLogin/wxUserinfoLogin",
+    "example/index",
+    "pages/personal/personalData/personalData",
+    "pages/index/release/release",
     "pages/personal/personal",
     "pages/index/info/info",
     "pages/search/search",
-        
-    
-
-        "pages/personal/personalData/personalData",
-        "pages/personal/personalData/updateName/updateName",
-        "pages/personal/personalData/autograph/autograph",
-        
-    
-    
+    "pages/personal/personalData/updateName/updateName",
+    "pages/personal/personalData/autograph/autograph",
     "pages/index/info/visitFriends/visitFriends",
-    
     "pages/dahuo/industryChoice/industryChoice",
     "pages/screen/screen",
     "pages/index/release/partnership/partnership",
@@ -44,7 +37,6 @@
     "pages/message/message",
     "pages/message/chat/chat",
     "pages/message/search/search",
-    "example/index",
     "example/button/button",
     "example/list/list",
     "example/input/input",
@@ -70,8 +62,8 @@
     "example/toast/toast",
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-    "example/searchbar/searchbar"
-
+    "example/searchbar/searchbar",
+    "pages/personal/personalData/updatePhone/updatePhone"
   ],
   "window": {
     "navigationBarTextStyle": "white",

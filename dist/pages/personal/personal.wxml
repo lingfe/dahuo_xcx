@@ -23,7 +23,10 @@
               </view>
               <view class="item_right">
                 <view bindtap="bindtapMy"><text class="title_address">个人资料 ></text></view>
-                <view bindtap="bindtapService" session-from="weapp"><image src="/images/service.png" class="image_service"/></view>
+                <view bindtap="bindtapService" session-from="weapp">
+                   <image src="/images/service.png" class="image_service"/> 
+                  <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
+                </view>
               </view>
           </view>
           <view  class="line"></view>

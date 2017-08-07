@@ -4,3 +4,6 @@
  *   描述:  发布_微商代理_代理规则页面
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }

@@ -11,6 +11,6 @@
     <text class="userinfo-motto">{{text}}</text>
   </view>
   <view class="usermotto">
-    <button type="primary" bindtap="bindtapLogin">确定登录</button>
+    <button style="background-color:#14BAC8;border:none;"  type="primary" bindtap="bindtapLogin">确定登录</button>
   </view>
 </view>

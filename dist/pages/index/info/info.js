@@ -13,39 +13,38 @@ Page({
     sliderLeft: 0,
     inputValue: '',
     allContentList: ['马云','马化腾'],
+    jb:false,
+    sc:1,
   },
   //收藏
   bindtapSC:function(){
-    wx.showModal({
-      title: '收藏',
-      content: '您是否需要收藏？',
-      confirmText: "是",
-      cancelText: "否",
-      success: function (res) {
-        console.log(res);
-        if (res.confirm) {
-          console.log('收藏成功!');
-        } else {
-          console.log('收藏失败!');
-        }
-      }
+    this.setData({
+      sc: this.data.sc == 1 ? 2 : 1,
+    });
+    //提示
+    wx.showToast({
+      title: '已收藏!',
+      icon: 'toast',
+      duration: 1000,
     });
   },
+  //点击举报
+  bindtapJB: function () {
+    this.setData({
+      jb: this.data.jb == true ? false : true
+    });
+
+  },
   //举报
-  bindtapJB:function(){
-    wx.showModal({
-      title: '举报',
-      content: '您是否举报该发布人？',
-      confirmText: "是",
-      cancelText: "否",
-      success: function (res) {
-        console.log(res);
-        if (res.confirm) {
-          console.log('举报成功!');
-        } else {
-          console.log('举报失败!');
-        }
-      }
+  JB:function(){
+    this.setData({
+      jb: this.data.jb == true ? false : true
+    });
+    //提示
+    wx.showToast({
+      title: '举报成功!',
+      icon: 'loading',
+      duration: 3000,
     });
   },
   //查看全文
@@ -136,7 +135,7 @@ Page({
   //加载页面
   onLoad: function () {
     var that = this;
-    var sliderWidth=100;
+    var sliderWidth=80;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({

@@ -4,3 +4,6 @@
  *   描述:  合伙创业_输入团队/公司介绍.js
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }

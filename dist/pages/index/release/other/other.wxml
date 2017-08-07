@@ -28,7 +28,7 @@
                     <view class="weui-label title">需要金额</view>
                 </view>
                 <view class="weui-cell__ft title">
-                    <input class="weui-input" type="digit" value="{{ruhuoValue}}" bindfocus="bindfocusValue" bindblur="bindinputValue" placeholder="万"/>           
+                    <input class="weui-input" name="threshold" type="digit" value="{{ruhuoValue}}" bindfocus="bindfocusValue" bindblur="bindinputValue" placeholder="万"/>           
                 </view>
             </view>
             <!-- 输入需要金额    end -->

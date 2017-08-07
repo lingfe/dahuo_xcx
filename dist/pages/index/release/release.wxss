@@ -4,6 +4,9 @@
  *   描述:  发布wxss
  * 
  * */
+page{
+  background-color: #E8EFEF;
+ }
  .page{
    background-color: #FFF;
    height: 100%;

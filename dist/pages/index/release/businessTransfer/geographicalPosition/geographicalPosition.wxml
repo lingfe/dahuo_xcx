@@ -21,7 +21,7 @@
 
         <!-- 确定   start-->
         <view class="weui-btn-area" bindtap="bindtapgeographicalPosition">
-            <button class="weui-btn" type="primary" bindtap="showTopTips">确定保存</button>
+            <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="showTopTips">确定保存</button>
         </view>
         <!-- 确定   start-->
         

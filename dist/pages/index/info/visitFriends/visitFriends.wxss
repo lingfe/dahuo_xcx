@@ -1,29 +1,67 @@
-/**  作者:  lingfe 
- *   时间:  2017-7-13
- *   描述:  查看搭友——页面
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  个人
  * 
  * */
+  page{
+  background-color: #E8EFEF;
+ }
+ .page{
+   background-color: #E8EFEF;
+   height: auto;
+   width: 100%;
+ }
+.serach{
+    margin-top: 18rpx;
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+    padding-left: 25rpx;
+    background-color: #F3F3F3;
+    border-radius: 12rpx;
+
+}
+.select_text{
+  text-align: center;
+  color: #14BAC8;
+}
+
+.serach_view_show{
+    display: block;
+    color: #808080;
+    padding-left: 285rpx;
+    padding-top: 15rpx;
+    padding-bottom: 15rpx;
+    font-size: 18rpx;
+    background-color: #F3F3F3;
+    border-radius: 12rpx;
+}
+.message_list{
+  background-color: #f2f2f2;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+}
 .item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 8rpx;
-  margin-left: 8rpx;
-  margin-right: 8rpx;
-  margin-top: 8rpx;
-  margin-bottom: 8rpx;
-  background-color: #fff;
+  background-color: #14BAC8;
+/**  border: 1rpx solid #eaeaea;
+  border-bottom: 1rpx solid #d0d0d0;
+  border-radius: 5rpx;*/
 }
 .item-left{
-    margin-top: 15rpx;
+    margin-top: 42rpx;
     display:table-cell;
     text-align: center; 
+      margin-left: 46rpx;
 }
 
 .image{
-    width: 200rpx; 
-    height: 200rpx;
-    border-radius: 50rpx; 
+    width: 110rpx; 
+    height: 110rpx;
+    border-radius: 50px; 
     background-color: #eeeeee;
 }
 
@@ -38,26 +76,49 @@
 .item-middle{
     flex: 1;
     margin-left: 10rpx;
-    padding-top: 13rpx;
+    padding-top: 51rpx;
     overflow: hidden;
 }
-
-.title_address{
-  color: #000000;
-  font-family:"微软雅黑";
-  font-weight:bold;
+.title_lingfe{
+  color: #fff;
   line-height: 20rpx;
   padding: 32rpx 16rpx,0,16rpx;
-  font-size: 20rpx;
+  font-size: 30rpx;
   margin-top: 60rpx;
   overflow: hidden; /*自动隐藏文字*/
   text-overflow: ellipsis;/*文字隐藏后添加省略号*/
 
 }
 
+.title_address{
+  color: #fff;
+  font-weight:bold;
+  line-height: 20rpx;
+  padding: 32rpx 16rpx,0,16rpx;
+  font-size: 20rpx;
+  position: relative;
+  top: 36rpx;
+  margin-top: 60rpx;
+  overflow: hidden; /*自动隐藏文字*/
+  text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+
+}
+
+.weui-navbar__title {
+display:inline-block;
+font-size:26rpx;
+max-width:8em;
+width:auto;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+
+}
+
+
 .message{
-  font-family:"微软雅黑";
-  color: #808080;
+  color: #fff;
   line-height: 10rpx;
   font-size: 20rpx;
   padding: 0 16rpx,0,16rpx;
@@ -68,6 +129,7 @@
 .item_right{
     padding-top: 13rpx;
     overflow: hidden; 
+    margin-right: 26rpx;
 }
 .time{
     color:#808080;
@@ -93,18 +155,25 @@
     width:100%;
     background-color: #E0E1E2;
 }
+.weui-tab {
+position:relative;
+height:100%;
+top: 17rpx;
+background-color: #fff;
+}
+
 
 
 /**内容**/
 .dahuo_neiro{
-  margin-left: 18rpx;
+  margin-left: 16rpx;
+  padding-bottom: 16rpx;
 }
 .neiro {
   width: 716rpx;
   background-color: #fff;
-  height: auto;
+  height: 286rpx;
   margin-top: 16rpx;
-  float: left;
 }
 .neiro_img{
   width: 210rpx;
@@ -126,26 +195,26 @@
 }
 .data_titile {
   margin-left: 15rpx;
-  margin-top: 16rpx;
+  margin-top: 23rpx;
   color: green;
   font-size: 26rpx;
 }
 .data_pro {
   margin-left: 15rpx;
-  margin-top: 10rpx;
+  margin-top: 2rpx;
   height: 50rpx;
-  font-family:"微软雅黑";
   line-height: 50rpx;
   float: left;
   font-size: 21rpx;
   color: #333;
 }
 .data_pro text {
-  color: red;
+  color: #14BAC8;
+  margin-left: 4px;
 }
 .data_biaoqian {
   margin-left: 15rpx;
-  margin-top: 10rpx;
+  margin-top: -2rpx;
   margin-bottom: 26rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -162,19 +231,15 @@
 }
 .info{
   margin-right: 15rpx;
-  font-family:"微软雅黑";
   color: #808080;
-  margin-top: 10rpx;
   font-size: 25rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
-  white-space: nowrap;/**强制不换行*/
 }
 .data_biaoqian_view{
   margin-right: 20rpx;
   font-size: 19rpx;
   float: left;
-  font-family:"微软雅黑";
   color: #333;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
@@ -188,26 +253,138 @@
 }
 
 .data_info{
-  padding-top: 10rpx;
+  padding-top: 17rpx;
   padding-bottom: 28rpx;
   margin-left: 30rpx;
   width: 645rpx;
   background-color: #fff;
-  color: #333;
+  color: #666;
   font-size: 22rpx;
-  border-top: 1px solid #C4C4C4;
+  border-top: 1rpx solid #D7D7D7;
   float: left;
+  height: 22px;
 }
+/** 发布样式 **/
+.release{
+ position: fixed;
+ right: 1.3em;
+ bottom: 1.3em;
+}
+.release image{
+  width: 60px;
+  height: 60px;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
 .data_top{
-  width: 680rpx;
+  margin-left: 30rpx;
+  width: 645rpx;
   background-color: #fff;
-  height: 3em;
-  border-bottom: 1px solid #C5C1AA;
+  height:85rpx;
+  border-bottom:1rpx solid #D7D7D7;
   margin-bottom: 10rpx;
   float: left;
 }
 .float-btn{
   float: right;
-  margin-right: 30rpx;
+  margin-right: 0rpx;
   margin-top: 20rpx;
+  margin-left: 36rpx;
+}
+
+.weui-navbar {
+display:-webkit-box;
+display:-webkit-flex;
+display:flex;
+position:absolute;
+z-index:500;
+background-color: #fff;
+top:0;
+width:100%;
+
+}
+.button_css{
+  width:160rpx;height:55rpx;font-size:24rpx;background-color:#fff;border: 1px solid #999;
+  position: relative;
+  top: -4rpx;
+}
+button[type="default"] {
+color:#000000;
+background-color:#fff;
+
+}
+button::after {
+content:" ";
+width:200%;
+height:200%;
+position:absolute;
+top:0;
+left:0;
+border:0px solid rgba(0, 0, 0, 0.2);
+-webkit-transform:scale(0.5);
+transform:scale(0.5);
+-webkit-transform-origin:0 0;
+transform-origin:0 0;
+box-sizing:border-box;
+border-radius:10px;
+}
+
+.weui-tab__panel {
+  box-sizing:border-box;
+  height:49%;
+  padding-top:50px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  background-color: #E8EFEF;
+}
+
+.weui-navbar__slider {
+position:absolute;
+content:" ";
+left:0;
+bottom:0;
+width:3em;
+height:8rpx;
+background-color:#1aad19;
+-webkit-transition:-webkit-transform .3s;
+transition:-webkit-transform .3s;
+transition:transform .3s;
+transition:transform .3s,-webkit-transform .3s;
+
+}
+
+.info_data_info {
+padding-top:17rpx;
+padding-bottom:28rpx;
+margin-left:30rpx;
+width:645rpx;
+background-color:#fff;
+color:#666;
+font-size:22rpx;
+border-top:1rpx solid #D7D7D7;
+float:left;
+height:22px;
+
+}
+.info_info {
+margin-right:15rpx;
+color:#808080;
+font-size:22rpx;
+overflow:hidden;
+text-overflow:ellipsis;
+-overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
 }

@@ -4,3 +4,6 @@
  *   描述:  合伙创业_输入收益描述.wxss
  * 
  * */
+ page{
+  background-color: #E8EFEF;
+ }

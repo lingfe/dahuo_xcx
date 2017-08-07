@@ -105,7 +105,7 @@ Page({
       return;
     }
 
-    //入伙门槛
+    //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
     var threshold = e.detail.value.threshold;
     if(threshold==""||threshold==null){
       this.showModal("入伙门槛不能为空!");
@@ -206,22 +206,55 @@ Page({
       }
     });
     return;
+    //发送请求,图片上传
+    wx.uploadFile({
+      url: 'http://example.weixin.qq.com/upload', //开发者服务器 url（仅为示例，非真实的接口地址）
+      filePath: imageArray,                       //要上传文件资源的路径
+      name: 'imageArray',                         //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+      header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
+        cookie:'',
+      },
+      formData: {                                 //参数(HTTP 请求中其他额外的 form data)
+      
+      },
+      success: function (res) {                   //接口调用成功的回调函数
+        var data = res.data
+        //do something
+      },
+      fail: function () {                         //接口调用失败的回调函数
+        
+      },
+      complete: function () {                     //接口调用结束的回调函数（调用成功、失败都会执行）
 
-    //发送请求
+      }
+
+    });
+
+    //发送请求,发布信息,
     wx.request({
       url: "http://api.budejie.com/api/api_open.php",
-      data: {
-        title: title, threshold: threshold,
-        industryChoice: industryChoice, fundDistribution: fundDistribution,
-        projectDescription: projectDescription, incomeDescription: incomeDescription,
-        teamIntroduction: teamIntroduction, imageArray: imageArray
-      },
       method: "GET",
+      header:{
+        cookie:'',
+      },
+      data: {
+        title: title,                             //标题
+        threshold: threshold,                     //入伙门槛
+        industryChoice: industryChoice,           //行业选择
+        fundDistribution: fundDistribution,       //资金布局
+        projectDescription: projectDescription,   //项目描述
+        incomeDescription: incomeDescription,     //收益描述
+        teamIntroduction: teamIntroduction,       //公司、团队介绍
+        phone: phone,                             //电话号码
+      },
       success: function (res) {
         console.log("成功了");
       },
       fail: function () {
         console.log("失败了");
+      },
+      complete:function(){
+        
       }
     });
   },
@@ -240,6 +273,7 @@ Page({
     });
     return false;
   },
+
   //获取 图片
   chooseImage: function (e) {
     var that = this;
