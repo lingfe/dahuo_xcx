@@ -2,11 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/wxUserinfoLogin/wxUserinfoLogin",
+    "pages/index/info/report/report",
+    "pages/personal/personalData/updatePhone/updatePhone",
+    "pages/dahuo/dahuo",
+    "pages/index/info/info",
     "example/index",
     "pages/personal/personalData/personalData",
     "pages/index/release/release",
     "pages/personal/personal",
-    "pages/index/info/info",
     "pages/search/search",
     "pages/personal/personalData/updateName/updateName",
     "pages/personal/personalData/autograph/autograph",
@@ -32,7 +35,6 @@
     "pages/index/release/partnership/introduce/introduce",
     "pages/index/release/partnership/projectDescription/projectDescription",
     "pages/index/release/partnership/incomeDescription/incomeDescription",
-    "pages/dahuo/dahuo",
     "pages/logs/logs",
     "pages/message/message",
     "pages/message/chat/chat",
@@ -63,7 +65,7 @@
     "example/navbar/navbar",
     "example/tabbar/tabbar",
     "example/searchbar/searchbar",
-    "pages/personal/personalData/updatePhone/updatePhone"
+    "pages/index/indexTo/indexTo"
   ],
   "window": {
     "navigationBarTextStyle": "white",

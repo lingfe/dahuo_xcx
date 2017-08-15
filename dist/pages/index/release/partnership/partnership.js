@@ -4,6 +4,8 @@
  *   描述:  合作创业页面
  * 
  * */
+var app = getApp();
+var utilMd5 = require('../../../../utils/md5.js');
 
 Page({
 
@@ -205,6 +207,66 @@ Page({
         }
       }
     });
+
+    //必要参数
+    console.log("cookie:" + wx.getStorageSync("cookie"));
+    var cookie = wx.getStorageSync("cookie");
+    console.log(cookie);
+    var time = new Date().getTime();
+    console.log(time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log(token);
+
+    //发送请求,发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/save",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      dataType: '',
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          cudScriptName: 'Update',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                releaseType: '合伙创业',                   //发布类型
+                personalId: wx.getStorageSync("id"),      //个人资料id
+                title: title,                             //标题
+                threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
+                industryChoice: industryChoice,           //行业选择
+                fundDistribution: fundDistribution,       //资金布局
+                projectDescription: projectDescription,   //项目描述
+                incomeDescription: incomeDescription,     //收益描述
+                teamIntroduction: teamIntroduction,       //公司、团队介绍
+                phone: phone,                             //电话号码
+              }]
+            }
+          }
+        })
+      },
+      success: function (res) {
+        //提示
+        wx.showToast({
+          title: res.data.message,
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("成功了");
+      },
+      fail: function () {
+        console.log("失败了");
+      },
+      complete: function () {
+
+      }
+    });
     return;
     //发送请求,图片上传
     wx.uploadFile({
@@ -230,33 +292,6 @@ Page({
 
     });
 
-    //发送请求,发布信息,
-    wx.request({
-      url: "http://api.budejie.com/api/api_open.php",
-      method: "GET",
-      header:{
-        cookie:'',
-      },
-      data: {
-        title: title,                             //标题
-        threshold: threshold,                     //入伙门槛
-        industryChoice: industryChoice,           //行业选择
-        fundDistribution: fundDistribution,       //资金布局
-        projectDescription: projectDescription,   //项目描述
-        incomeDescription: incomeDescription,     //收益描述
-        teamIntroduction: teamIntroduction,       //公司、团队介绍
-        phone: phone,                             //电话号码
-      },
-      success: function (res) {
-        console.log("成功了");
-      },
-      fail: function () {
-        console.log("失败了");
-      },
-      complete:function(){
-        
-      }
-    });
   },
   //删除图片
   bindtapImageDelete:function(e){

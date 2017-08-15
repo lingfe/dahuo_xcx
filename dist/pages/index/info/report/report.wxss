@@ -1,0 +1,88 @@
+/**  作者:  lingfe 
+ *   时间:  2017-8-9
+ *   描述:  举报
+ * 
+ * */
+page{
+  background-color: #E8EFEF;
+}
+.page{
+  width: 100%;
+  height: auto;
+}
+.report_other{
+  width: 100%;
+  height: auto;
+}
+.report{
+  width:650rpx;
+  height:300rpx;
+  margin-top:25rpx;
+  margin-left:25rpx;
+  border-radius: 25rpx;
+  background-color: #fff;
+  padding: 26rpx;
+}
+.text{
+height:200rpx;
+width:620rpx;
+
+}
+.btn{
+
+}
+
+
+.title {
+  color: #000;
+  font-weight: bold;
+  line-height: 50rpx;
+  font-size: 25rpx;
+  margin-left: 14rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
+}
+
+.info {
+color:#808080;
+font-size:25rpx;
+background-color:#fff;
+height:200rpx;
+width:620rpx;
+padding:14rpx;
+overflow:hidden;
+text-overflow:ellipsis;
+
+
+}
+.weui-cell__bd{
+  margin-left: -29rpx;
+}
+.weui-cell__ft{
+ margin-right:-30rpx;
+}
+.weui-uploader__title{
+  margin-left: 25rpx;
+    margin-top: 16rpx
+}
+.weui-uploader__info{
+  margin-right: 25rpx;
+    margin-top: 16rpx
+}
+.weui-uploader__input-box{
+  margin-left: 25rpx;
+}
+.weui-uploader__file{
+  margin-top: 0rpx;
+  margin-left: 25rpx;
+}
+.img_tt{
+  z-index: 3;
+  position:absolute;
+  width: 45rpx;
+  height: 45rpx;
+  margin-left:128rpx;
+  margin-top:-25rpx;
+
+}

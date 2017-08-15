@@ -19,10 +19,11 @@
   width: 700rpx;
   background-color: #fff;
   height:109rpx;
-  border-bottom: 1px solid #c5c1aa;
+  border-bottom: 1px solid #F0F0F0;
   margin-bottom: 10rpx;
   margin-left: 29rpx;
   float: left;
+ 
 }
 
 .float-btn {
@@ -62,7 +63,7 @@
 .title_prics {
   margin-top: 0rpx;
   margin-left: 29rpx;
-  height: 198rpx;
+  height: 99px;
 }
 
 .title {
@@ -114,6 +115,16 @@
   margin-left: 30rpx;
 }
 
+.select_textONE {
+  text-align: center;
+  color: #14bac8;
+  width: 726rpx;
+  height: 40rpx;
+  float: left;
+  font-size: 24rpx;
+  position: relative;
+  padding: 13rpx;
+}
 .select_text {
   text-align: center;
   color: #14bac8;
@@ -124,7 +135,7 @@
   position: relative;
 }
 
-.select_text image {
+.select_textONE image {
   width: 22rpx;
   height: 22rpx;
   position: relative;
@@ -144,11 +155,9 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 8rpx;
-  margin-top: 8rpx;
   background-color: #fff;
-  /**  border: 1rpx solid #eaeaea;
-  border-bottom: 1rpx solid #d0d0d0;
-  border-radius: 5rpx;*/
+  border-bottom: 1rpx solid #F0F0F0;
+  
 }
 
 .item-left {
@@ -229,7 +238,7 @@
 
 .handleBox {
   width: 100%;
-  height: 28px;
+  height: 40px;
   position: fixed;
   bottom: 0;
   background-color: rgba(250, 250, 250, 1);
@@ -240,9 +249,17 @@
   float: right;
   right: 5px;
 }
-
+.inputValue{
+  padding:10rpx;
+  margin-left:14rpx;
+  margin-top:0rpx;
+  width:639rpx;
+  height:50rpx;
+  float:left;
+  background-color:#fff;
+}
 .input_submit {
-  width: 84%;
+  width: 86%;
   display: inline;
   float: left;
   font-family: "微软雅黑";
@@ -250,15 +267,12 @@
   height: 53rpx;
   font-size: 24rpx;
   background-color: #fff;
-  margin: 2px 5px;
   border-radius: 5px;
 }
 .faso{
-width:70rpx;
-height:70rpx;
-margin-left:0rpx;
-margin-top:-6rpx;
-
+  width:70rpx;
+  height:70rpx;
+  margin-left:0rpx;
 }
 
 .data_biaoqian_view {
@@ -361,13 +375,13 @@ weui-tab__panel {
 }
 .view_phon{
   float: left;
-  margin-left: 100rpx;
+  margin-left: 124rpx;
   font-size: 26rpx;
   color: #14bac8;
 }
 .view_1{
   float: left;
-  margin-left: 173rpx;
+  margin-left: 157rpx;
   margin-right: 0rpx;
   color: #ddd;
 }
@@ -375,7 +389,7 @@ weui-tab__panel {
   float: right;
   font-size: 26rpx;
   color: #14bac8;
-  margin-right:100rpx ;
+  margin-right:126rpx ;
 }
 
 /* 举报 */

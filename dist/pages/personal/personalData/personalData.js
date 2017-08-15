@@ -12,16 +12,35 @@ Page({
    */
   data: {
     url:"pages/personal/personalData/personalData",
-    updateName:null,//名称
+    updateName:"",//名称
     region:null, //地域
     autograph:null,//签名
     phone:null,//电话
+    jb:false,
+    inputValue:'',
   },
-  //修改姓名
-  bindtapUpdateName:function(){
-    wx.navigateTo({
-      url: '/pages/personal/personalData/updateName/updateName',
+  //文本框内容改变
+  inputGetValue:function(e){
+    console.log("文本框内容改变：" + e.detail.value);
+    this.setData({
+      inputValue: e.detail.value
     });
+  },
+  //取消
+  bindtapClear:function(){
+    console.log("取消");
+    this.setData({
+      jb: this.data.jb == true ? false : true
+    });
+  },
+  //确定修改姓名
+  bindtapUpdateName:function(){
+    console.log("确定修改姓名");
+    this.setData({
+      updateName: this.data.inputValue,
+      jb: this.data.jb == true ? false : true
+    });
+
   },
   //修改地域
   bindtapSearch:function(){
@@ -40,6 +59,13 @@ Page({
     wx.navigateTo({
       url: '/pages/personal/personalData/updatePhone/updatePhone',
     })
+  },
+
+  //举报
+  JB: function () {
+    this.setData({
+      jb: this.data.jb == true ? false : true
+    });
   },
   /**
    * 生命周期函数--监听页面加载

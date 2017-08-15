@@ -58,7 +58,7 @@ background-color:#fff;
 line-height:1.41176471;
 font-size:17px;
 bottom:0;
-border-bottom:1rpx solid #d9d9d9;
+border-bottom:1rpx solid #F0F0F0;
 height: 54rpx;
 }
 
@@ -78,4 +78,7 @@ height: 54rpx;
   margin-top:-25rpx;
 
 }
-
+.img_wh{
+  width:20px;
+  height:20px;
+}

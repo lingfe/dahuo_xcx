@@ -1,0 +1,51 @@
+<!--
+/**  作者:  lingfe 
+ *   时间:  2017-8-9
+ *   描述:  举报
+ * 
+ * */-->
+<view class="page">
+  <view class="report_other">
+    <form  bindsubmit="submitForm">
+      <view class="report">
+        <view class="title"><text style="color:red;">*</text>请描述举报的具体原因</view>
+        <view class="info"><textarea auto-focus="true" maxlength="501" bindinput="bindconfirmValue"  placeholder="请描述您的问题和意见" class="text"/></view>
+        <view class="title"><text style="color:#14BAC8;float:right;">{{num}}/500</text></view>
+      </view>
+      <view class="report" style="height:auto;">
+            <!-- 上传图片  start -->
+            <view class="">
+                <view class="weui-cell__hd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title title">提供证据图片</view>
+                            <view class="weui-uploader__info">{{files.length}}/6</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view wx:if="{{item !=null}}" class="weui-uploader__file" bindlongtap="previewImage" id="{{item}}">
+                                      <image class="img_tt" src="/images/delete.png" bindtouchend="bindtapImageDelete" data-img="{{item}}"/>
+                                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+          </view>
+          <!-- 上传图片  end -->
+      </view>
+      <view class="btn">
+        <!-- 确定   start-->
+        <view class="weui-btn-area">
+          <button class="weui-btn" form-type="submit"  style="background-color:#14BAC8;border:none;"  type="primary" >确定</button>
+        </view>
+        <!-- 确定   start-->
+      </view>
+    </form>
+  </view>
+</view>

@@ -40,7 +40,7 @@
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时</view>
                       </view>
-                      <view class="select_text" bindtap="bindtapSelectInfo">
+                      <view class="select_textONE" bindtap="bindtapSelectInfo">
                           查看全文<image src="/images/info.png"></image>
                       </view>
                     </view>
@@ -157,15 +157,20 @@
                                         </view>
                                   </view>
                                   <view class="item_right">
-                                    <navigator url="/pages/index/index" open-type="switchTab"><view><text class="time">回复</text></view></navigator>
+                                    <view bindtap="commentHuiFu" data-name="{{item}}"><text  class="time">回复</text></view>
                                   </view>
                               </view>
                               <view  class="line"></view>
                             </view>
 
                             <view class="handleBox">
-                              <input  class="input_submit"  value="{{inputValue}}" bindinput="bindKeyInput"/>
+                              <view class="inputValue">
+                              <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
+                              <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+                              </view>
+                              <view style="float:left;">
                               <image class="faso" src="/images/faso.png"  bindtap="submitTo" />
+                              </view>
                             </view>
                         </view>
                         <!-- 讨论区  end-->
@@ -188,6 +193,7 @@
     <view class="jubao_info" bindtap="JB">诈骗内容</view>
     <view class="jubao_info" bindtap="JB">虚假（电话、描述虚假)</view>
     <view class="jubao_info" bindtap="JB">中介冒充个人</view>
-    <view class="jubao_info" bindtap="JB">其他</view>
+    <view class="jubao_info" bindtap="otherReport">其他</view>
   </view>
 </view>
+<!-- 举报 end -->

@@ -68,6 +68,6 @@ App({
 
       hasLogin: false,
       openid: null,   //微信用户id
-
+      token:'31963CBD8CA24DEFB48B9799766F0583',//请求唯一标识
     }
 });

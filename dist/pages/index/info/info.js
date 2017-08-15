@@ -15,6 +15,8 @@ Page({
     allContentList: ['马云','马化腾'],
     jb:false,
     sc:1,
+    inputHF:false,  //回复文本框是否显示
+    inputHfName:'', //回复名称
   },
   //收藏
   bindtapSC:function(){
@@ -123,14 +125,39 @@ Page({
   submitTo: function (e) {
     console.log("inputValue:" + this.data.inputValue);
     console.log("inputTemp:"+this.data.inputTemp);
-
+    
     let that = this;
+    if (that.data.inputHf){
+      //提示
+      wx.showToast({
+        title: '已回复!',
+        icon: 'toast',
+        duration: 1000,
+      });
+    }
+
     that.data.allContentList.push(that.data.inputValue);
     that.setData({
-      allContentList: that.data.allContentList
+      allContentList: that.data.allContentList,
+      inputHf: false,
+      inputValue:'',
     });
     console.log(this.data.allContentList);
 
+  },
+  //回复
+  commentHuiFu:function(e){
+    console.log("e.currentTarget.dataset.name:" + e.currentTarget.dataset.name);
+    this.setData({
+      inputHf: true,
+      inputHfName: e.currentTarget.dataset.name
+    });
+  },
+  //其他举报
+  otherReport:function(){
+    wx.navigateTo({
+      url: "/pages/index/info/report/report",
+    });
   },
   //加载页面
   onLoad: function () {

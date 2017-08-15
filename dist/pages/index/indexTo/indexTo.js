@@ -8,8 +8,8 @@
 //index.js
 //获取应用实例
 var app = getApp();
-var server = require('../../utils/server');
-var utilMd5 = require('../../utils/md5.js');
+var server = require('../../../utils/server');
+var utilMd5 = require('../../../utils/md5.js');
 
 Page({
   //页面的初始数据
@@ -20,8 +20,8 @@ Page({
     isHiddenLoading:true,
     isHiddenToast:true,
     isPrices:false,
-    windowHeight:1000,
-    screen:false,
+    windowHeight:'100%',
+    screen:true,
     tabs: [{
       name:"金额",
       content: [{
@@ -49,7 +49,8 @@ Page({
           value:'5',
           checked: false,
       }],
-    }, {
+    }, 
+    {
       name: "类型",
       content: [{
           name: '全部',
@@ -77,14 +78,15 @@ Page({
           checked: false,
       },{
           name: '房产投资',
-          vakye: '1006',
+          value: '1006',
           checked: false,
       },{
           name: '其他',
           value: '1007',
           checked: false,
       }],
-    }, {
+    }, 
+    {
       name:"行业",
       content: [{
           name: '全部',
@@ -120,18 +122,15 @@ Page({
           checked: false,
       }],
     }],
-
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    tabsName: ['金额','类型','行业'],
-    str: {
-      threshold:'0-1万',
-      releaseType:'全部',
-      industryChoice:'全部',
+    str:{
+      AmountOfMoney: ['0-1万'],  //金额
+      Type: ['全部'],                //类型
+      industry: ['全部'],            //行业
     },
     num:0,
-    list:null,//  数据
   },
   //复选
   checkboxChange: function (e) {
@@ -155,21 +154,23 @@ Page({
           if (tabs[index].content[i].value == values[j]) {
             if(tabs[index].name == '金额'){
               tabs[index].content[i].checked = tabs[index].content[i].checked == true?false:true;
-              str.threshold = tabs[index].content[i].name;
+              str.AmountOfMoney[0] = tabs[index].content[i].name;
               console.log("tabs[index].name:" + tabs[index].name);
               break;
             }
             
             if(tabs[index].name == '类型'){
-              tabs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
-              str.releaseType = tabs[index].content[i].name;
+              //abs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
+              tabs[index].content[i].checked = true;
+              str.Type[j] = tabs[index].content[i].name;
               console.log("tabs[index].name:" + tabs[index].name);
               break;
             }
             
             if (tabs[index].name == '行业'){
-              tabs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
-              str.industryChoice = tabs[index].content[i].name;
+              //tabs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
+              tabs[index].content[i].checked = true;
+              str.industry[j] = tabs[index].content[i].name;
               console.log("tabs[index].name:" + tabs[index].name);
               break;
             }
@@ -188,16 +189,20 @@ Page({
   clearBtn: function (e) {
     console.log("删除了" + e.currentTarget.dataset.value);
     var values = this.data.str;
-    if (values.threshold == e.currentTarget.dataset.value){
-      values.threshold="";
+    //得到name 
+    var name = e.currentTarget.dataset.name;
+    //得到index 
+    var index = e.currentTarget.dataset.index;
+
+    //判断
+    if (name == "AmountOfMoney"){
+      values.AmountOfMoney.splice(index, 1);
+    } else if (name == 'Type'){
+      values.Type.splice(index, 1);
+    } else if (name == "industry"){
+      values.industry.splice(index, 1);
     }
-    else if (values.releaseType == e.currentTarget.dataset.value) {
-      values.releaseType = "";
-    }
-    else if (values.industryChoice == e.currentTarget.dataset.value) {
-      values.industryChoice = "";
-      
-    }
+
     this.setData({
       str: values
     });
@@ -207,9 +212,9 @@ Page({
     console.log("重置了");
     this.setData({
       str: {
-        threshold: '0-1万',
-        releaseType: '全部',
-        industryChoice: '全部',
+        AmountOfMoney: ['0-1万'],
+        Type: ['全部'],
+        industry: ['全部'],
       },
       screen:this.data.screen==true?false:true,
     });
@@ -295,7 +300,9 @@ Page({
   },
   //页面加载
   onLoad: function () {
-
+    console.log("cookie:"+wx.getStorageSync("cookie"));
+    console.log("md5:" + utilMd5.hexMD5('123456'));
+    console.log('str:'+new Date().getDate());
     var self = this;
     wx.getLocation({
       type: 'gcj02',
@@ -317,113 +324,6 @@ Page({
           }
         });
       }
-    });
-
-    //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
-    var cookie = wx.getStorageSync("cookie");
-    console.log(cookie);
-    var time = new Date().getTime();
-    console.log(time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log(token);
-
-    //请求获取发布信息,
-    wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
-      method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      dataType: '',
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'releaseinfo',
-          scriptName: 'Query',
-          nameSpaceMap: {
-            releaseinfo: {
-              Query: []
-            }
-          }
-        })
-      },
-      success: function (res) {
-        //得到数据
-        var list = res.data.rows;
-        for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = getDate(list[i].cdate);
-          list[i].cdate=strTime;
-        }
-
-        //设置数据
-        self.setData({
-          list: list
-        });
-        //提示
-        wx.showToast({
-          title: res.data.message,
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("成功了");
-      },
-      fail: function () {
-        console.log("失败了");
-      },
-      complete: function () {
-
-      }
-    });
-
-    //获取时间差
-    function getDate(date) {
-      var date1 = new Date(date);    //开始时间
-      var date2 = new Date();    //结束时间
-      var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
-
-      //计算出相差年
-      //还有一个小bug，当事件差为负数时，值为负数，将上面leftsecond代码改一下
-      //var leftsecond = parseInt(Math.abs((date2.getTime() - date1.getTime())) / 1000);
-
-      //计算出相差月
-      var months = (date2.getFullYear() - date1.getFullYear()) * 12;
-      if(months != 0){
-        return months+"月";
-      }
-
-      //计算出相差天数
-      var days = Math.floor(date3 / (24 * 3600 * 1000));
-      if (days != 0) {
-        return days+"天";
-      }
-
-      //计算出小时数
-      var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
-      var hours = Math.floor(leave1 / (3600 * 1000));
-      if (hours != 0) {
-        return hours+"小时";
-      }
-
-      //计算相差分钟数
-      var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
-      var minutes = Math.floor(leave2 / (60 * 1000));
-      if (minutes != 0) {
-        return minutes+"分钟";
-      }
-
-      //计算相差秒数
-      var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
-      var seconds = Math.round(leave3 / 1000);
-      if (seconds != 0) {
-        return seconds+"秒";
-      }
-    }
-
-    this.setData({
-      windowHeight: wx.getStorageSync('windowHeight')
     });
 
     this.requestData("newlist");
@@ -470,4 +370,3 @@ Page({
     });
   }
 });
-

@@ -16,17 +16,36 @@
   margin-top: 0rpx;
 }
 .bg_search{
-  background-color: #F2F2F2;
+  background-color: #fff;
   border-radius: 5px;
   width: 626rpx;
+  height: 83rpx;
   border:1rpx solid #e6e6ea;
   margin-left: 40rpx;
+}
+.VerificationCode {
+  height:71rpx;
+  width:120rpx;
+  font-size:16rpx;
+  color:#14BAC8;
+  background-color:#fff;
+  border:1rpx solid #14BAC8;
+  border-radius:50px;
+  position:relative;
+  text-align:center;
+  line-height:80rpx;
+  top:-61rpx;
+  left:495rpx;
+  z-index:100;
+
 }
 .weui-search-bar__input {
 height:28px;
 line-height:28px;
 font-size: 20rpx;
 font-family:"黑体";
+margin-top: 10rpx;
+margin-left: 0rpx;
 }
 
 .text_center{

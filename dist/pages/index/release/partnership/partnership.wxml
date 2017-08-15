@@ -58,7 +58,7 @@
                     {{fundsLayout  == null ? '请填写' : ''}}
                     <input type="text" hidden="true" name="fundDistribution" value="{{fundsLayout}}" />
                     <view wx:if="{{fundsLayout  != null}}">
-                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                      <image class="img_wh" src="/images/uii.png" />
                     </view>
                 </view>
             </view>
@@ -73,7 +73,7 @@
                     {{projectDescription  == null ? '请填写' : ''}}
                     <input type="text" hidden="true" name="projectDescription" value="{{projectDescription}}" />
                     <view wx:if="{{projectDescription  != null}}">
-                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                      <image class="img_wh" src="/images/uii.png" />
                     </view>
                 </view>
             </view>
@@ -88,7 +88,7 @@
                     {{incomeDescription  == null ? '请填写' : ''}}
                     <input type="text" hidden="true" name="incomeDescription" value="{{incomeDescription}}" />
                     <view wx:if="{{incomeDescription  != null}}">
-                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                      <image class="img_wh" src="/images/uii.png" />
                     </view>
                 </view>
             </view>
@@ -103,7 +103,7 @@
                     {{introduce  == null ? '请填写' : ''}}
                     <input type="text" hidden="true" name="teamIntroduction" value="{{introduce}}"/>
                     <view wx:if="{{introduce  != null}}">
-                      <image style="width:50rpx;height:50rpx;" src="/images/uii.png" />
+                      <image class="img_wh" src="/images/uii.png" />
                     </view>
                 </view>
             </view>

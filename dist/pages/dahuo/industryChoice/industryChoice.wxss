@@ -16,3 +16,9 @@
     color: #cfcfcf;
 
 }
+.placeholder::after{
+  background-color:#14BAC8; 
+}
+.placeholder:hover{
+  background-color: #14BAC8;
+}

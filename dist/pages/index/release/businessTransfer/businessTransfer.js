@@ -4,8 +4,8 @@
  *   描述:  发布_生意转让页面
  * 
  * */
-
-
+var app=getApp();
+var utilMd5 = require('../../../../utils/md5.js');
 Page({
 
   /**
@@ -100,8 +100,87 @@ Page({
       isAgree: !!e.detail.value.length
     });
   },
+  //提示框
+  showModal: function (msg) {
+    wx.showModal({
+      title: msg,
+      showCancel: false,
+    });
+  },
   //表单提交
-  formSubmit: function (e) {
+  submitForm: function (e) {
+    //标题
+    var title = e.detail.value.title;
+    if (title == "" || title == null || title.length == 0) {
+      this.showModal("标题不能为空!");
+      return;
+    }
+    if (title.length > 16) {
+      this.showModal("标题的长度不能大于16位!");
+      return;
+    }
+
+    //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
+    var threshold = e.detail.value.threshold;
+    if (threshold == "" || threshold == null) {
+      this.showModal("转让门槛不能为空!");
+      return;
+    }
+
+
+    //每月租金
+    var monthlyRent = e.detail.value.monthlyRent;
+    if (monthlyRent == "" || monthlyRent == null) {
+      this.showModal("每月租金不能为空!");
+      return;
+    }
+    //店铺面积 
+    var operatingArea = e.detail.value.operatingArea;
+    if (operatingArea == "" || operatingArea == null) {
+      this.showModal("店铺面积不能为空!");
+      return;
+    }
+    //发布人身份
+    var publisherIdentity = e.detail.value.publisherIdentity;
+    if (publisherIdentity == "" || publisherIdentity == null) {
+      this.showModal("请选择发布人身份!");
+      return;
+    }
+    //行业选择
+    var industryChoice = e.detail.value.industryChoice;
+    if (industryChoice == "" || industryChoice == null) {
+      this.showModal("行业选择不能为空!");
+      return;
+    }
+    //地理位置
+    var geographicalPosition = e.detail.value.geographicalPosition;
+    if (geographicalPosition == "" || geographicalPosition == null) {
+      this.showModal("地理位置不能为空!");
+      return;
+    }
+    //营业描述
+    var businessDescription = e.detail.value.businessDescription;
+    if (businessDescription == "" || businessDescription == null) {
+      this.showModal("营业描述不能为空!");
+      return;
+    }
+    //转让原因
+    var transferReason = e.detail.value.transferReason;
+    if (transferReason == "" || transferReason == null) {
+      this.showModal("转让原因不能为空!");
+      return;
+    }
+
+    //电话号码
+    var phone = e.detail.value.phone;
+    if (phone.length == 0) {
+      this.showModal("电话号码不能为空!");
+      return;
+    }
+    if (phone.length < 11 || phone.length > 11) {
+      this.showModal("电话号码必须是11位数！");
+      return;
+    }
     //正则表达式验证电话号码
     var pattern = /[^\d]/g;
     //获取电话号码
@@ -117,11 +196,156 @@ Page({
           }
         }
       });
+      return;
     }
+
+    //图片
+    var imageArray = this.data.files;
+    if (imageArray == null || imageArray.length == 0) {
+      this.showModal("请上传图片!");
+      return;
+    }
+    if (imageArray.length > 6) {
+      this.showModal("图片最多只能上传六张!");
+      return;
+    }
+
+    //同意条款
+    var isAgree = e.detail.value.isAgree;
+    if (isAgree != 'agree') {
+      this.showModal("请同意相关条款!");
+      return;
+    }
+    //弹出提示
+    wx.showModal({
+      content: '内容:',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+        }
+      }
+    });
+
+    //必要参数
+    console.log("cookie:" + wx.getStorageSync("cookie"));
+    var cookie = wx.getStorageSync("cookie");
+    console.log(cookie);
+    var time = new Date().getTime();
+    console.log(time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log(token);
+
+    //发送请求,发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/save",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      dataType: '',
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          cudScriptName: 'Update',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                releaseType: '生意转让',                   //发布类型
+                personalId: wx.getStorageSync("id"),      //个人资料id
+                title: title,                             //标题
+                threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
+                monthlyRent: monthlyRent,                 //每月租金
+                operatingArea: operatingArea,             //店铺面积
+                publisherIdentity: publisherIdentity,     //发布人身份
+                industryChoice: industryChoice,           //行业选择
+                geographicalPosition: geographicalPosition,//地理位置
+                businessDescription: businessDescription, //营业描述
+                transferReason: transferReason,           //转让原因
+                phone: phone,                             //电话号码
+              }]
+            }
+          }
+        })
+      },
+      success: function (res) {
+        //提示
+        wx.showToast({
+          title: res.data.message,
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("成功了");
+      },
+      fail: function () {
+        console.log("失败了");
+      },
+      complete: function () {
+
+      }
+    });
+    return;
+    //发送请求,图片上传
+    wx.uploadFile({
+      url: 'http://example.weixin.qq.com/upload', //开发者服务器 url（仅为示例，非真实的接口地址）
+      filePath: imageArray,                       //要上传文件资源的路径
+      name: 'imageArray',                         //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+      header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
+        cookie: '',
+      },
+      formData: {                                 //参数(HTTP 请求中其他额外的 form data)
+
+      },
+      success: function (res) {                   //接口调用成功的回调函数
+        var data = res.data
+        //do something
+      },
+      fail: function () {                         //接口调用失败的回调函数
+
+      },
+      complete: function () {                     //接口调用结束的回调函数（调用成功、失败都会执行）
+
+      }
+
+    });
+
+
+  },
+  //删除图片
+  bindtapImageDelete: function (e) {
+    var img = e.currentTarget.dataset.img;
+    var files = this.data.files;
+    for (var j = 0; j < files.length; j++) {
+      if (files[j] == img) {
+        //files[j]='';
+        files.splice(j, 1);
+      }
+    }
+    this.setData({
+      files: files
+    });
+    return false;
   },
   //获取 图片
   chooseImage: function (e) {
     var that = this;
+    if (that.data.files.length >= 6) {
+      //弹出提示
+      wx.showModal({
+        content: '最多只能上传6张图片！',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+          }
+        }
+      });
+      return;
+    }
     wx.chooseImage({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有

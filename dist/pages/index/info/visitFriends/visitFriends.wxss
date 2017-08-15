@@ -260,7 +260,7 @@ background-color: #fff;
   background-color: #fff;
   color: #666;
   font-size: 22rpx;
-  border-top: 1rpx solid #D7D7D7;
+  border-top: 1rpx solid #F0F0F0;
   float: left;
   height: 22px;
 }

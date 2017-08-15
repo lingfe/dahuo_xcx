@@ -266,7 +266,7 @@ background-color: #fff;
   background-color: #fff;
   color: #666;
   font-size: 22rpx;
-  border-top: 1rpx solid #D7D7D7;
+  border-top: 1rpx solid #F0F0F0;
   float: left;
 }
 
@@ -301,7 +301,7 @@ background-color: #fff;
   width: 645rpx;
   background-color: #fff;
   height:85rpx;
-  border-bottom:1rpx solid #D7D7D7;
+  border-bottom:1rpx solid #F0F0F0;
   margin-bottom: 10rpx;
   float: left;
 }
@@ -381,7 +381,7 @@ width:645rpx;
 background-color:#fff;
 color:#666;
 font-size:22rpx;
-border-top:1rpx solid #D7D7D7;
+border-top:1rpx solid #F0F0F0;
 float:left;
 height:22px;
 

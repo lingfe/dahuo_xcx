@@ -19,7 +19,8 @@
   <template is="staffName" data="{{...staffB}}"></template>
   <template is="staffName" data="{{...staffC}}"></template>
 
-
+<view class="{{selected?'phone_huo':'hidden'}}" bindtap="countdown">{{second}}s后重新获取</view>
+<view class="{{selected1?'phone_huo':'hidden'}}"bindtap="getphone">点击获取验证码</view>
   <!-- 事件 -->
   <view bindtap="add" style="width:50px;height:50px;color:red;"> {{count}} </view>
 

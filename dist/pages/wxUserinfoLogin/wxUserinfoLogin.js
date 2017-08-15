@@ -27,15 +27,16 @@ Page({
         wx.getUserInfo({//getUserInfo流程
           //成功
           success: function (res2) {//获取userinfo成功
-            console.log(res2);
-            console.log(JSON.stringify(res2.userInfo));
+            //console.log(res2);
+            //console.log(JSON.stringify(res2.userInfo));
             //请求服务器,该用户是否登录
             wx.request({
               method: 'POST',
               data: { reqJson: JSON.stringify(res2.userInfo) },
               header: { "Content-Type": "application/x-www-form-urlencoded"},
-              url: 'http://cms.echsoft.com/lg/wxLg/04C63783B2894CA0976349D76F128EEC/' + res.code,
+              url: 'http://sys.dahuo.cloud/lg/wxLg/3DF7469FD3A1485B95ED16ED794780A8/' + res.code,
               success: function (res) {
+                console.log(res);
                 if (res.data.status === 1) {
                   //提示
                   wx.showToast({
@@ -44,13 +45,20 @@ Page({
                     duration: 3000,
                   });
 
+                  //得到cookie
+                  var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0];
+                  cookie += ";" + res.header["Set-Cookie"].split(",")[1].split(";")[0];
+                  console.log(cookie);
                   //保存在本地缓存中
                   wx.setStorage({
                     key: 'cookie',
-                    data: res.header["Set-Cookie"].split(";")[0]
+                    data: cookie
                   });
+                  //得到id
+                  var id = res.data.rows.id;
+                  wx.setStorageSync("id", id);
+                  
                
-                  console.log(wx.getStorageSync("cookie"));
                   //跳转到首页
                   wx.switchTab({
                     url: '/pages/index/index',
@@ -69,11 +77,8 @@ Page({
             });
           }
         });
-
-        //登录成功
-        //requestUrlLogin(res);
       },
-      fail:function(){
+      fail:function(res){
         //登录失败
       }
     });
