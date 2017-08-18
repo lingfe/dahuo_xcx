@@ -11,31 +11,27 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    hasUserInfo: false,
-    text:'..',
+  data: {   
+    text:'..',              //文本
   }, 
   /**
    * 确定登录
    */
   bindtapLogin: function () {
-    //发起登录请求
+    //发起登录请求，得到code
     wx.login({
       success: function (res) {
         console.log(res);
         //获取登录信息
-        wx.getUserInfo({//getUserInfo流程
-          //成功
+        wx.getUserInfo({
           success: function (res2) {//获取userinfo成功
-            //console.log(res2);
-            //console.log(JSON.stringify(res2.userInfo));
-            //请求服务器,该用户是否登录
+            //请求服务器,该用户是否登录服务器
             wx.request({
               method: 'POST',
               data: { reqJson: JSON.stringify(res2.userInfo) },
               header: { "Content-Type": "application/x-www-form-urlencoded"},
               url: 'http://sys.dahuo.cloud/lg/wxLg/3DF7469FD3A1485B95ED16ED794780A8/' + res.code,
-              success: function (res) {
+              success: function (res) { //请求成功！
                 console.log(res);
                 if (res.data.status === 1) {
                   //提示
@@ -46,84 +42,51 @@ Page({
                   });
 
                   //得到cookie
-                  var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0];
-                  cookie += ";" + res.header["Set-Cookie"].split(",")[1].split(";")[0];
+                  var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0] + ";" + res.header["Set-Cookie"].split(",")[1].split(";")[0];
                   console.log(cookie);
                   //保存在本地缓存中
                   wx.setStorage({
                     key: 'cookie',
                     data: cookie
                   });
-                  //得到id
-                  var id = res.data.rows.id;
-                  wx.setStorageSync("id", id);
+                  //得到个人id，保存在本地缓存中
+                  var personalId = res.data.rows.id;
+                  wx.setStorageSync("personalId", personalId);
                   
-               
-                  //跳转到首页
-                  wx.switchTab({
+                  //登录成功！跳转到首页
+                  wx.redirectTo({
                     url: '/pages/index/index',
                   });
                   return;
                 }
-                if (res.header == null || res.header.length == 0 || res.header == 'undefined') {
-                  //提示
-                  wx.showToast({
-                    title: res.data.message,
-                    icon: 'loading',
-                    duration: 3000,
-                  });
-                } else {}
+              },
+              fail:function(res){   //请求失败
+                //提示
+                wx.showToast({
+                  title: "请求失败!",
+                  icon: 'loading',
+                  duration: 3000,
+                });
               }
+            });
+          },
+          fail:function(res){
+            wx.showToast({
+              title: '获取失败!你授权了吗？',
+              icon: 'loading',
+              duration: 3000,
             });
           }
         });
       },
       fail:function(res){
-        //登录失败
+        wx.showToast({
+          title: '登录失败！',
+          icon: 'loading',
+          duration: 3000,
+        });
       }
     });
-
-    //登录请求获取openid
-    function requestUrlLogin(res) {
-      //请求拼接
-      var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + app.globalData.appid + '&secret=' + app.globalData.secret + '&js_code=' + res.code + '&grant_type=authorization_code';
-      console.log(l);
-      wx.request({
-        url: l,
-        data: {},
-        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT    
-        // header: {}, // 设置请求的 header    
-        success: function (res) {
-          console.log(res);
-          app.globalData.openid = res.data.openid;//存储openid 到app 
-          //创建一个dialog
-          wx.showToast({
-            title: '登录中...',
-            icon: 'loading',
-            duration: 3000,
-            success: function () {
-              wx.switchTab({
-                url: '/pages/index/index',
-              });
-            }
-          });
-        },
-        fail: function () {
-          //请求失败
-          //创建一个dialog
-          wx.showToast({
-            title: '登录失败!。。',
-            icon: 'loading',
-            duration: 3000,
-            success: function () {
-              wx.switchTab({
-                url: '/pages/index/index',
-              });
-            }
-          });
-        }
-      });
-    }
   },
 
   /**
@@ -132,34 +95,36 @@ Page({
   onLoad: function (options) {
     var that=this;
     //发起登录请求
-    wx.login({//login流程
+    wx.login({
       success: function (res) {//登录成功
-        if (res.code) {
-          var code = res.code;
           //获取登录信息
-          wx.getUserInfo({//getUserInfo流程
-            //成功
+          wx.getUserInfo({
             success: function (res2) {//获取userinfo成功
               var encryptedData = encodeURIComponent(res2.encryptedData);//一定要把加密串转成URI编码
               var iv = res2.iv;
               //设置数据
               that.setData({
-                hasUserInfo: true,
                 userInfo: res2.userInfo
               });
-              that.update();
               //请求自己的服务器
               Login(res, encryptedData, iv,that);
               that.update();
             },//失败
             fail:function(res2){
-              console.log(res2);
+              wx.showToast({
+                title: '获取失败!你授权了吗？',
+                icon: 'loading',
+                duration: 3000,
+              });
             }
           });
-
-        } else {
-          console.log('获取用户登录态失败！' + res.errMsg);
-        }
+      },
+      fail:function(res){
+        wx.showToast({
+          title: '获取失败,请检查您的网络！',
+          icon: 'loading',
+          duration: 3000,
+        });
       }
     });
 

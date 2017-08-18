@@ -1,20 +1,20 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/dahuo/industryChoice/industryChoice",
     "pages/wxUserinfoLogin/wxUserinfoLogin",
+    "pages/personal/personal",
+    "pages/index/info/info",
+    "pages/index/index",
     "pages/index/info/report/report",
     "pages/personal/personalData/updatePhone/updatePhone",
     "pages/dahuo/dahuo",
-    "pages/index/info/info",
     "example/index",
     "pages/personal/personalData/personalData",
     "pages/index/release/release",
-    "pages/personal/personal",
     "pages/search/search",
     "pages/personal/personalData/updateName/updateName",
     "pages/personal/personalData/autograph/autograph",
     "pages/index/info/visitFriends/visitFriends",
-    "pages/dahuo/industryChoice/industryChoice",
     "pages/screen/screen",
     "pages/index/release/partnership/partnership",
     "pages/index/release/businessTransfer/businessTransfer",
@@ -74,25 +74,6 @@
     "backgroundColor": "#f8f8f8",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "light"
-  },
-  "tabBar": {
-    "color": "#000",
-    "backgroundColor": "#fff",
-    "selectedColor": "#5E7E88",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "搭伙",
-        "iconPath": "images/dahuo_1.png",
-        "selectedIconPath": "images/dahuo_0.png"
-      },
-      {
-        "pagePath": "pages/personal/personal",
-        "text": "个人",
-        "iconPath": "images/user_1.png",
-        "selectedIconPath": "images/user_0.png"
-      }
-    ]
   },
   "networkTimeout": {
     "request": 10000,

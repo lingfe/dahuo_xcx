@@ -29,13 +29,13 @@
         <view class="dahuo_neiro">
           <navigator url="" >
           <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
-            <view class="neiro_img"><image src="/images/zan.png"></image></view>
+            <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
             <view class="neiro_data">
               <view class="data_titile title">花果园火锅店亏本转让..</view>
               <view class="data_pro">搭伙金额   <text>   0.8万</text></view>
               <view class="data_biaoqian">
-                  <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
-                  <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
+                  <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
+                  <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
                   <view class="data_biaoqian_view">12分钟前</view>
               </view>
             </view>
@@ -47,13 +47,13 @@
 
           <navigator url="/pages/index/info/info" >
           <view class="neiro">
-            <view class="neiro_img"><image src="/images/zan.png"></image></view>
+            <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
             <view class="neiro_data">
               <view class="data_titile title">花果园火锅店亏本转让..</view>
               <view class="data_pro">搭伙金额   <text>2.5</text>万</view>
               <view class="data_biaoqian">
-                  <view class="data_biaoqian_view"><image  src="/images/type.png"></image>生意转让</view>
-                  <view class="data_biaoqian_view"><image  src="/images/hanye.png"></image>餐饮业</view>
+                  <view class="data_biaoqian_view"><image  src="/assets/images/type.png"></image>生意转让</view>
+                  <view class="data_biaoqian_view"><image  src="/assets/images/hanye.png"></image>餐饮业</view>
                   <view class="data_biaoqian_view">12分钟前</view>
               </view>
             </view>

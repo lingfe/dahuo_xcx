@@ -354,6 +354,7 @@ border-radius:10px;
   height:49%;
   padding-top:50px;
   overflow:auto;
+  padding-bottom:57rpx; 
   -webkit-overflow-scrolling:touch;
   background-color: #E8EFEF;
 }
@@ -393,4 +394,47 @@ font-size:22rpx;
 overflow:hidden;
 text-overflow:ellipsis;
 -overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
+}
+
+/*底部菜单*/
+.bottomMenu{
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0rpx;
+  background-color: #fff;
+  border-top: 1px #808080 solid;
+  color:#000;
+}
+
+.bottomMenu_dahuo_img{
+width:59rpx;
+height:100rpx;
+left:182rpx;
+top:4rpx;
+position: relative;
+font-size:25rpx;
+overflow:hidden;
+text-overflow:ellipsis;
+float:left;
+}
+
+.bottomMenu_user_img{
+width:59rpx;
+height:100rpx;
+position: relative;
+right:176rpx;
+top:4rpx;
+font-size:25rpx;
+overflow:hidden;
+text-overflow:ellipsis;
+float:right;
+}
+.bottomMenu_img{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.selectedColor{
+  color: #5E7E88;
 }

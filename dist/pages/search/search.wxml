@@ -17,7 +17,7 @@
             <view class="weui-cells__title">当前城市:</view>
             <view class="weui-cell weui-cell_active weui-cell_bd bg stop_1" >
               <view class="weui-btn mini-btn bg_b"  bindtap="bindtapGetAddres" data-info="{{addressInfo}}"  size="mini">
-                <view class="bg_b_img"><image src="/images/address.png"></image></view>
+                <view class="bg_b_img"><image src="/assets/images/address.png"></image></view>
                 <view class="bg_b_text">{{addressInfo}}</view>
               </view>
             </view>

@@ -4,6 +4,7 @@
  *   描述:  个人
  * 
  * */-->
+ 
 
 <view class="page">
     <view class="page__bd">
@@ -24,7 +25,7 @@
               <view class="item_right">
                 <view bindtap="bindtapMy"><text class="title_address">个人资料 ></text></view>
                 <view bindtap="bindtapService" session-from="weapp">
-                   <image src="/images/service.png" class="image_service"/> 
+                   <image src="/assets/images/service.png" class="image_service"/> 
                   <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
                 </view>
               </view>
@@ -52,24 +53,45 @@
                 <!-- 我的发布  start-->
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
                   <view class="dahuo_neiro">
+                      <view class="neiro" wx:for="{{list}}" wx:key="*this">
+                        <view class="data_top">
+                            <view class="float-btn"><button bindtap="bindtapRefresh" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">60天后自动下架</view>
+                        </view>
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                        <view class="neiro_data">
+                          <view class="data_titile title">{{item.title}}</view>
+                          <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
+                          <view class="data_biaoqian">
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                              <view class="data_biaoqian_view">{{item.codate}}前</view>
+                          </view>
+                        </view>
+                        <view class="data_info info">
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapEdit" id="{{item.id}}" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" id="{{item.id}}" type="default" size="mini">下架</button></view>
+                        </view>
+                      </view>
+
                       <view class="neiro">
                         <view class="data_top">
                             <view class="float-btn"><button style="" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">60天后自动下架</view>
                         </view>
-                        <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">花果园火锅店亏本转让</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" type="default" size="mini">下架</button></view>
+                            <view class="float-btn"><button  bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业"  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button  bindtap="bindtapOffTheShelf" class="weui-btn mini-btn button_css"  type="default" size="mini">下架</button></view>
                         </view>
                       </view>
                   </view>
@@ -81,13 +103,13 @@
                   <view class="dahuo_neiro">
                     <navigator url="/pages/index/info/info" >
                     <view class="neiro_286">
-                        <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">花果园火锅店亏本转让..</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
@@ -106,22 +128,22 @@
                   <view class="dahuo_neiro">
                     <view class="neiro">
                         <view class="data_top">
-                            <view class="float-btn"><button class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
+                            <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
                         </view>
-                        <view class="neiro_img"><image src="/images/zan.png"></image></view>
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">花果园火锅店亏本转让sdfsdf..</view>
                           <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/images/hanye.png"></image>餐饮业</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
                               <view class="data_biaoqian_view">12分钟前</view>
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapDelete" type="default" size="mini">删除</button></view>
+                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>
                         </view>
                     </view>
                   </view>
@@ -133,3 +155,14 @@
         <!-- tab切换  end -->
     </view>
 </view>
+
+<!--item底部 start-->
+<view class="bottomMenu">
+  <view bindtap="bindtapDahuo" class="bottomMenu_dahuo_img">
+      <image class="bottomMenu_img" src="/assets/images/dahuo_1.png"></image>搭伙
+  </view>
+    <view bindtap="bindtapUser" class="bottomMenu_user_img selectedColor">
+      <image class="bottomMenu_img" src="/assets/images/user_0.png"></image>个人
+  </view>
+</view>
+<!--item底部 end-->

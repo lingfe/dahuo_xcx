@@ -54,3 +54,26 @@
     <navigator url="../logs/logs" hover-class="changestyle" redirect>页面跳转，无法返回</navigator>
 </view>
 </view>
+
+
+<!--
+  "tabBar": {
+    "color": "#000",
+    "backgroundColor": "#fff",
+    "selectedColor": "#5E7E88",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "搭伙",
+        "iconPath": "images/dahuo_1.png",
+        "selectedIconPath": "images/dahuo_0.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人",
+        "iconPath": "images/user_1.png",
+        "selectedIconPath": "images/user_0.png"
+      }
+    ]
+  },
+-->

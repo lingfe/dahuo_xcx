@@ -12,7 +12,7 @@
             <!-- 合伙创业  start -->
             <view class="weui-cell weui-cells" bindtap="bindtapPartnership">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/partnership2.png" 
+                    <image src="/assets/images/ico/partnership2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">合伙创业</view>
@@ -23,7 +23,7 @@
             <!-- 生意转让  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapBusinessTransfer">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/businessTransfer2.png" 
+                    <image src="/assets/images/ico/businessTransfer2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">生意转让</view>
@@ -34,7 +34,7 @@
             <!-- 加盟分店  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapAffiliateStores">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/affiliateStores2.png" 
+                    <image src="/assets/images/ico/affiliateStores2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">加盟分店</view>
@@ -45,7 +45,7 @@
             <!-- 干股纳才  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapGanguSatisfiedBefore">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/ganguSatisfiedBefore2.png" 
+                    <image src="/assets/images/ico/ganguSatisfiedBefore2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">干股纳才</view>
@@ -56,7 +56,7 @@
             <!-- 金融理财  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapFinancialManagement">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/financialManagement2.png" 
+                    <image src="/assets/images/ico/financialManagement2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">金融理财</view>
@@ -67,7 +67,7 @@
             <!-- 房产投资  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapPropertyInvestment">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/propertyInvestment2.png" 
+                    <image src="/assets/images/ico/propertyInvestment2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">房产投资</view>
@@ -78,7 +78,7 @@
             <!-- 微商代理  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapDerivativeAgent">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/aerivativeAgent2.png" 
+                    <image src="/assets/images/ico/aerivativeAgent2.png" 
                    class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">微商代理</view>
@@ -89,7 +89,7 @@
             <!-- 其他  start -->
             <view class="weui-cell weui-cells_to weui-cells_after-title" bindtap="bindtapOther">
                 <view class="weui-cell__hd">
-                    <image src="/images/ico/other2.png" 
+                    <image src="/assets/images/ico/other2.png" 
                     class="ico_image"></image>
                 </view>
                 <view class="weui-cell__bd title">其他</view>

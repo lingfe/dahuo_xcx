@@ -4,16 +4,23 @@
  *   描述:  个人
  * 
  * */
+//获取应用实例
+var app = getApp();
+var server = require('../../utils/server');
+var utilMd5 = require('../../utils/md5.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabs: ["我发布的", "收藏夹", "回收站"],
-    activeIndex: 0,
-    sliderOffset: 0,
-    sliderLeft:0 ,
+    tabs: ["我发布的", "收藏夹", "回收站"],   //tab菜单列
+    activeIndex: 0,         //tab切换下标
+    sliderOffset: 0,        //坐标x
+    sliderLeft: 0,          //坐标y
+    list: [],                //发布信息数据
+    pagenum: 0,              //分页，第几业
   },
   //个人资料
   bindtapMy:function(){
@@ -21,11 +28,9 @@ Page({
       url: '/pages/personal/personalData/personalData',
     });
   },
-  //客服
-  bindtapService: function(){
-    wx.navigateTo({
-      url: '',
-    });
+  //刷新
+  bindtapRefresh:function(){
+
   },
   //下架
   bindtapOffTheShelf: function () {
@@ -44,6 +49,52 @@ Page({
       }
     });
   },
+  //编辑
+  bindtapEdit:function(e){
+    console.log(e);
+    var id=e.currentTarget.id;
+    var name = e.currentTarget.dataset.name;
+    var url="";
+    if(name == "合伙创业"){
+      url = '/pages/personal/release/partnership/partnership';
+    } else if (name == "生意转让"){
+      url = '/pages/personal/release/businessTransfer/businessTransfer';
+    } else if (name == "加盟分店"){
+      url = '/pages/personal/release/affiliateStores/affiliateStores';
+    } else if (name == "干股纳才"){
+      url = '/pages/personal/release/ganguSatisfiedBefore/ganguSatisfiedBefore';
+    } else if (name == "金融理财"){
+      url = '/pages/personal/release/financialManagement/financialManagement';
+    }else if (name =="房产投资"){
+      url = '/pages/personal/release/propertyInvestment/propertyInvestment';
+    } else if (name == "微商代理"){
+      url = '/pages/index/release/derivativeAgent/derivativeAgent';
+    }else if(name == "其他"){
+      url = '/pages/personal/release/other/other';
+    }
+
+    wx.redirectTo({
+      url: url,
+    });
+  },
+  //上架
+  bindtapTheShelves:function(){
+    wx.showModal({
+      title: '上架提醒',
+      content: '是否确定上架？',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('上架成功!')
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
+
+  },
   //删除
   bindtapDelete: function () {
     wx.showModal({
@@ -54,9 +105,9 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('删除成功!')
+          console.log('删除成功!');
         } else {
-          console.log('用户点击辅助操作')
+          console.log('用户点击辅助操作');
         }
       }
     });
@@ -64,6 +115,10 @@ Page({
   //加载完成
   onLoad: function () {
     var that = this;
+
+    //获取数据,默认0第一页
+    this.requestDataRelease(that.data.pagenum);
+
     var sliderWidth=50;
     wx.getSystemInfo({
       success: function (res) {
@@ -72,6 +127,291 @@ Page({
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
+    });
+  },
+  //请求获取数据,个人信息
+  requestDataPersonal : function (pagenum) {
+    var self = this;
+
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    console.log("cookie:" + cookie);
+    var time = new Date().getTime();
+    console.log("time:" + time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log("token:" + token);
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+
+    //请求获取发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'userinfo',       //个人信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            userinfo: {
+              Query: [{
+                personalId: personalId    //个人资料id
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {
+        console.log("成功了");
+      },
+      fail: function (res) {
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
+    });
+  },
+  //请求获取数据,我发布的
+  requestDataRelease: function (pagenum) {
+    var self = this;
+
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    console.log("cookie:" + cookie);
+    var time = new Date().getTime();
+    console.log("time:"+time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log("token:"+token);
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+
+    //请求获取发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',       //发布表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{ 
+                personalId: personalId    //个人资料id
+              }],
+            },
+            pagenum: pagenum,   //当前业
+            pagesize: 3,        //数据大小长度
+            pageable: 1         //是否分页
+          }
+        })
+      },
+      success: function (res) {
+        var pageList = self.data.list;
+        //得到数据
+        var list = res.data.rows;
+        for (var i = 0, lenI = list.length; i < lenI; ++i) {
+          var strTime = getDate(list[i].cdate);
+          list[i].cdate = strTime;
+          //添加到当前数组
+          pageList.push(list[i]);
+        }
+
+        //设置数据
+        self.setData({
+          isHiddenLoading: true,
+          isHiddenToast: false,
+          pagenum: pagenum,
+          list: pageList
+        });
+        self.update();
+        console.log("成功了");
+      },
+      fail: function (res) {
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
+    });
+
+    //获取时间差
+    function getDate(date) {
+      var date1 = new Date(date);    //开始时间
+      var date2 = new Date();    //结束时间
+      var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
+
+      //计算出相差年
+      //还有一个小bug，当事件差为负数时，值为负数，将上面leftsecond代码改一下
+      //var leftsecond = parseInt(Math.abs((date2.getTime() - date1.getTime())) / 1000);
+
+      //计算出相差月
+      var months = (date2.getFullYear() - date1.getFullYear()) * 12;
+      if (months != 0) {
+        return months + "月";
+      }
+
+      //计算出相差天数
+      var days = Math.floor(date3 / (24 * 3600 * 1000));
+      if (days != 0) {
+        return days + "天";
+      }
+
+      //计算出小时数
+      var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
+      var hours = Math.floor(leave1 / (3600 * 1000));
+      if (hours != 0) {
+        return hours + "小时";
+      }
+
+      //计算相差分钟数
+      var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
+      var minutes = Math.floor(leave2 / (60 * 1000));
+      if (minutes != 0) {
+        return minutes + "分钟";
+      }
+
+      //计算相差秒数
+      var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
+      var seconds = Math.round(leave3 / 1000);
+      if (seconds != 0) {
+        return seconds + "秒";
+      }
+    }
+  },
+  //请求获取数据,收藏夹
+  requestDataFavorites: function (pagenum) {
+    var self = this;
+
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    console.log("cookie:" + cookie);
+    var time = new Date().getTime();
+    console.log("time:" + time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log("token:" + token);
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+
+    //请求获取发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'userinfo',       //个人信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            userinfo: {
+              Query: [{
+                personalId: personalId    //个人资料id
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {
+        console.log("成功了");
+      },
+      fail: function (res) {
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
+    });
+  },
+  //请求获取数据,回收站
+  requestDataRecovery: function (pagenum) {
+    var self = this;
+
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    console.log("cookie:" + cookie);
+    var time = new Date().getTime();
+    console.log("time:" + time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log("token:" + token);
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+
+    //请求获取发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'userinfo',       //个人信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            userinfo: {
+              Query: [{
+                personalId: personalId    //个人资料id
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {
+        console.log("成功了");
+      },
+      fail: function (res) {
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
     });
   },
   //tab点击切换
@@ -129,5 +469,17 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  //搭伙
+  bindtapDahuo: function () {
+    wx.redirectTo({
+      url: '/pages/index/index',
+    });
+  },
+  //个人
+  bindtapUser: function () {
+    wx.redirectTo({
+      url: '/pages/personal/personal',
+    })
   }
 })

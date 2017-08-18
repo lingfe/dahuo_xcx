@@ -7,13 +7,17 @@
   background-color: #E8EFEF;
  }
  .placeholder{
-    margin: 5px;
-    padding: 0 10px;
-    text-align: center;
-    background-color: #EBEBEB;
-    height: 2.3em;
-    line-height: 2.3em;
-    color: #cfcfcf;
+  width:auto;
+  height:68rpx;
+  margin:5px;
+  padding:0 4rpx;
+  padding-left: 0rpx;
+  padding-right: 0rpx;
+  text-align:center;
+  background-color:#2A8FBD;
+  line-height:68rpx;
+  color:#fff;
+  float:left;
 
 }
 .placeholder::after{
@@ -21,4 +25,11 @@
 }
 .placeholder:hover{
   background-color: #14BAC8;
+}
+.page_view{
+  width: 100%;
+  height: auto;
+  float: left;
+  text-align: center;
+  text-align-last: center;
 }

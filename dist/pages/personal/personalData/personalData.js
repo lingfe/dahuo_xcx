@@ -16,7 +16,7 @@ Page({
     region:null, //地域
     autograph:null,//签名
     phone:null,//电话
-    jb:false,
+    isUpdateName:false,   //是否显示弹窗修改名称
     inputValue:'',
   },
   //文本框内容改变
@@ -30,7 +30,7 @@ Page({
   bindtapClear:function(){
     console.log("取消");
     this.setData({
-      jb: this.data.jb == true ? false : true
+      isUpdateName: this.data.isUpdateName == true ? false : true
     });
   },
   //确定修改姓名
@@ -38,7 +38,7 @@ Page({
     console.log("确定修改姓名");
     this.setData({
       updateName: this.data.inputValue,
-      jb: this.data.jb == true ? false : true
+      isUpdateName: this.data.isUpdateName == true ? false : true
     });
 
   },
@@ -62,9 +62,64 @@ Page({
   },
 
   //举报
-  JB: function () {
+  updateName: function () {
     this.setData({
-      jb: this.data.jb == true ? false : true
+      isUpdateName: this.data.isUpdateName == true ? false : true
+    });
+  },
+  //请求获取数据,个人信息
+  requestDataPersonal: function (pagenum) {
+    var self = this;
+
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    console.log("cookie:" + cookie);
+    var time = new Date().getTime();
+    console.log("time:" + time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log("token:" + token);
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+
+    //请求获取发布信息,
+    wx.request({
+      url: "http://web.dahuo.cloud/api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'userinfo',       //个人信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            userinfo: {
+              Query: [{
+                personalId: personalId    //个人资料id
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {
+        console.log("成功了");
+      },
+      fail: function (res) {
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
     });
   },
   /**

@@ -49,7 +49,7 @@
     </view>       
 </view>
 <!-- 弹窗 start -->
-<view class="jubao_bg" wx:if="{{jb == true}}">
+<view class="jubao_bg" wx:if="{{isUpdateName == true}}">
   <view class="jubao" >
     <view class="jubao_info">修改名称</view>
     <view class="jubao_info">

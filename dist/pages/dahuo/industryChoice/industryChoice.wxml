@@ -1,38 +1,36 @@
-<!--/**  作者:  lingfe 
+<!--/**  
+ *   作者:  lingfe 
  *   时间:  2017-7-17
  *   描述:  行业选择页面
  * 
  * */-->
 <view class="page">
-    <view class="page__bd page__bd_spacing">
-        <view class="weui-flex">
-            <view class="weui-flex__item">
-            <navigator url="/pages/index/index" open-type="switchTab">
-            <view class="placeholder">首页</view></navigator></view>
-        </view>
-        <view class="weui-flex">
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-        </view>
-        <view class="weui-flex">
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-        </view>
-        <view class="weui-flex">
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-        </view>
-        <view class="weui-flex">
-            <view><view class="placeholder">weui</view></view>
-            <view class="weui-flex__item"><view class="placeholder">weui</view></view>
-        </view>
+    <view class="page_view">
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="金融理财">金融理财</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="农林牧渔">农林牧渔</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="餐饮业">餐饮业</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="信息产业">信息产业</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="金融理财">人才招聘</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="休闲娱乐">休闲娱乐</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="旅游／酒店业">旅游／酒店业</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="医药卫生">医药卫生</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="房地产">房地产</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="其他">其他</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="生活服务">生活服务</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="服装与百货">服装与百货</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="机构组织">机构组织</view>
+    </view>
+    <view class="page_view">
         <!-- 确定   start-->
         <view class="weui-btn-area">
-          <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="">确定</button>
+          <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="bindtapOk">确定</button>
         </view>
         <!-- 确定   start-->
+        
+        <!-- 自定义提示框   start-->
+        <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
+        <!-- 自定义提示框   end-->
     </view>
 </view>
+
+

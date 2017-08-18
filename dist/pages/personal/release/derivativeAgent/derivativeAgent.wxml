@@ -1,0 +1,180 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  发布_微商代理页面
+ * 
+ * */-->
+
+<view class="page">
+    <view class="">
+        <form  bindsubmit="submitForm" class="form">
+            <view class="margin_left">
+            <!-- 输入标题    start -->
+            <view class="weui-cell_to weui-cells_to "  style="border:none;">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">标题</view>
+                </view>
+                <view class="weui-cell__bd title"  style="margin-left:-347rpx;">
+                    <input class="weui-input" name="title" value="{{title}}" placeholder="请输入标题"/>
+                </view>
+            </view>
+            <!-- 输入标题    end -->
+            </view>
+
+            <view class="margin_left">
+            <!-- 输入代理金额    start -->
+            <view class="weui-cell_to weui-cells_to"  style="margin-top:27rpx;">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">代理金额</view>
+                </view>
+                <view class="weui-cell__ft title">
+                    <input class="weui-input" name="threshold" type="digit" value="{{ruhuoValue}}" bindblur="bindinputValue" placeholder="万"/>           
+                </view>
+            </view>
+            <!-- 输入代理金额    end -->
+            
+            <!-- 输入行业选择    start -->
+            <view class="weui-cell_to weui-cells_to  weui-cells_after-title" bindtap="industryChoiceClick">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">行业选择</view>
+                </view>
+                <view  class="weui-cell__ft weui-cell__ft_in-access title">
+                    {{industryChoice  == null ? '请选择' : industryChoice}}
+                    <input type="text"  hidden="true" name="industryChoice" value="{{industryChoice}}"/>
+                </view>
+            </view>
+            <!-- 输入行业选择    end -->
+            
+            <!-- 输入产品类目 start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">产品类目</view>
+                </view>
+                <picker bindchange="setdailiType" value="{{dailiTypeIndex}}"  range="{{dailiType}} title">
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    <input class="weui-input" name="productCategory" disabled="disabled" value="{{dailiType[dailiTypeIndex]}}" placeholder="{{dailiType[dailiTypeIndex]}}"/>      
+                </view>
+                </picker>
+            </view>
+            <!-- 输入产品类目    end -->
+
+            <!-- 输入产品亮点  start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title"  bindtap="productHighlightsClick">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">产品亮点</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    {{productHighlights  == null ? '请填写' : ''}}
+                    <input type="text" hidden="true" name="productHighlights" value="{{productHighlights}}" />
+                    <view wx:if="{{productHighlights  != null}}">
+                      <image class="img_wh" src="/images/uii.png" />
+                    </view>
+                </view>
+            </view>
+            <!-- 输入产品亮点    end -->
+            
+            <!-- 输入代理条件    start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title"  bindtap="agentConditionClick" >
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">代理条件</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    {{agentCondition  == null ? '请填写' : ''}}
+                    <input type="text" hidden="true" name="agentCondition" value="{{agentCondition}}" />
+                    <view wx:if="{{agentCondition  != null}}">
+                      <image class="img_wh" src="/images/uii.png" />
+                    </view>
+                </view>
+            </view>
+            <!-- 输入代理条件   end -->
+
+            <!-- 输入代理规则    start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title"  bindtap="agencyRuleClick" >
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">代理规则</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    {{agencyRule  == null ? '请填写' : ''}}
+                    <input type="text" hidden="true" name="agencyRule" value="{{agencyRule}}" />
+                    <view wx:if="{{agencyRule  != null}}">
+                      <image class="img_wh" src="/images/uii.png" />
+                    </view>
+                </view>
+            </view>
+            <!-- 输入代理规则   end -->
+            
+            <!-- 输入收益描述    start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="incomeDescriptionClick" >
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">收益描述</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    {{incomeDescription  == null ? '请填写' : ''}}
+                    <input type="text" hidden="true" name="incomeDescription" value="{{incomeDescription}}" />
+                    <view wx:if="{{incomeDescription  != null}}">
+                      <image class="img_wh" src="/images/uii.png" />
+                    </view>
+                </view>
+            </view>
+            <!-- 输入收益描述    end --> 
+                        
+            <!-- 输入联系方式    start -->
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title"  style="border:none;">
+                <view class="weui-cell__bd">
+                    <view class="weui-label title">联系方式</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access title">
+                    <input name="phone" type="number" class="weui-input" value="{{flag}}" placeholder="13068326391"/>           
+                </view>
+            </view>
+            <!-- 输入联系方式    end -->
+            </view>
+
+            <!-- 上传图片  start -->
+            <view class="">
+                <view class="weui-cell__hd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title title">图片上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/6</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view wx:if="{{item !=null}}" class="weui-uploader__file" bindlongtap="previewImage" id="{{item}}">
+                                      <image class="img_tt" src="/images/delete.png" bindtouchend="bindtapImageDelete" data-img="{{item}}"/>
+                                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+          </view>
+          <!-- 上传图片  end -->
+
+          <!-- 相关条款  end -->      
+          <checkbox-group bindchange="bindAgreeChange" name="isAgree">
+              <label class="weui-agree" for="weuiAgree">
+                  <view class="weui-agree__text title">
+                      <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                      <view class="weui-agree__checkbox-icon">
+                          <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                      </view>
+                      阅读并同意<navigator url="" class="weui-agree__link">《搭伙平台信息发布规则》</navigator>
+                  </view>
+              </label>
+          </checkbox-group>
+          <!-- 相关条款  end -->
+
+          <!-- 提交按钮  start -->
+          <view class="page__bd page__bd_spacing">
+                <button class="weui-btn"  form-type="submit"  style="background-color:#14BAC8;border:none;" type="primary" >发布</button>
+          </view>
+          <!-- 提交按钮  end -->  
+        </form>
+    </view>
+</view>

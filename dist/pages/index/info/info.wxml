@@ -13,10 +13,10 @@
                     <view class="neiro">
                       <view class="data_top">
                           <view style="float:left;" class="float-btn">
-                            <view class="float-btn title title_top"><image src="/images/info/title.png"></image>云岩区5万火锅店盈利挥泪转让XXX</view>
+                            <view class="float-btn title title_top"><image src="/assets/images/info/title.png"></image>云岩区5万火锅店盈利挥泪转让XXX</view>
                             <view class="SC_JB" >
-                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/images/sc{{sc}}.png"></image></view>
-                              <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/images/info/jb.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/assets/images/sc{{sc}}.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/assets/images/info/jb.png"></image></view>
                             </view>
                             <view class="float-btn left_0">
                               <view class="float-btn_neiro ">
@@ -26,10 +26,10 @@
                                 <span style="color: #14bac8;">32</span>人浏览
                               </view>
                               <view class="float-btn_neiro ">
-                                <image src="/images/info/hy.png"></image>生意转让
+                                <image src="/assets/images/info/hy.png"></image>生意转让
                               </view>
                               <view class="float-btn_neiro ">
-                                <image src="/images/info/type.png"></image>餐饮业
+                                <image src="/assets/images/info/type.png"></image>餐饮业
                               </view>
                             </view>
                           </view>
@@ -38,10 +38,13 @@
                         <view class="title_prics" style="height:{{ bl !=true ? '': 'auto'}};" selection="true" ><span style="color: #000000;font-weight:bold;font-size: 24rpx;">项目描述:</span>  微信公众平台，简称公众号。曾命名为“官号平台”、“媒体平台”、微信公众号，
                         最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
                         微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
+                        最终定位为“公众平台”，无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
+                        微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
                         加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同，微信此时</view>
+                      <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl !=true ? '': 'none'}};"></view>
                       </view>
                       <view class="select_textONE" bindtap="bindtapSelectInfo">
-                          查看全文<image src="/images/info.png"></image>
+                          查看全文<image src="/assets/images/info.png"></image>
                       </view>
                     </view>
                     <!-- 项目基本信息  end -->
@@ -169,7 +172,7 @@
                               <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
                               </view>
                               <view style="float:left;">
-                              <image class="faso" src="/images/faso.png"  bindtap="submitTo" />
+                              <image class="faso" src="/assets/images/faso.png"  bindtap="submitTo" />
                               </view>
                             </view>
                         </view>

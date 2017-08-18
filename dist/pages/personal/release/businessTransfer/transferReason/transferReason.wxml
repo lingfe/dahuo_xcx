@@ -1,0 +1,32 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  发布_生意转让_转让原因页面
+ * 
+ * */-->
+
+<view class="page">
+        <!-- 标题与内容   start-->
+        <view class="weui-cells__title">转让原因</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input class="weui-textarea" name="transferReason" 
+                    value="{{transferReason}}" bindinput="dataChange"  placeholder="请输入.." style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+        <!-- 标题与内容   end-->
+
+        <!-- 确定   start-->
+        <view class="weui-btn-area" bindtap="savatransferReason">
+            <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="showTopTips">确定保存</button>
+        </view>
+        <!-- 确定   start-->
+        
+        <!-- 自定义提示框   start-->
+        <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
+        <!-- 自定义提示框   end-->
+</view>
+
