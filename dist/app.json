@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/dahuo/industryChoice/industryChoice",
     "pages/wxUserinfoLogin/wxUserinfoLogin",
     "pages/personal/personal",
     "pages/index/info/info",
-    "pages/index/index",
     "pages/index/info/report/report",
     "pages/personal/personalData/updatePhone/updatePhone",
     "pages/dahuo/dahuo",

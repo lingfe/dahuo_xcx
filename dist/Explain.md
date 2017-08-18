@@ -13,22 +13,30 @@
 ```
 m-mall/
   |-assets/                     # 静态文件
-     |- images/                   # 公共图片图片
-     |- plugins/                  # 插件
-     |- style/                    # 公共样式
-     |- ...
+      |- images/                   # 公共图片图片
+      |- plugins/                  # 插件
+      |- style/                    # 公共样式
+      |- ...
   |-config/                     # 配置文件
-     |- config.js                 # 常用配置
-     |- ...
+      |- config.js                 # 常用配置
+      |- ...
   |-helpers/                    # 帮助文件
-     |- components.js             # 默认资源
-     |- ...
+      |- components.js             # 默认资源
+      |- ...
+  |-utils/                      # 工具包
+      |- md5.js                    # md5加密
+      |- service.js                # 定位工具
+      |- util.js                   # 初始工具
+      |- WxValidate.js             # 表单验证工具 
+      |- ..
   |-pages/                      # 小程序页面相关文件
       |- login                    # 登录页面
+      |- logs                     # 小程序日志信息
       |- index                    # 首页
         |- info                     # 发布信息详细页面
           |- report                   # 举报页面
           |- visitFriends             # 查看搭友页面
+          |- ..
         |- release                  # 发布类型页面
           |- affilliateStores         # 加盟分店
           |- businessTransfer         # 生意转让
@@ -38,11 +46,15 @@ m-mall/
           |- propertyInvestment       # 房产投资
           |- partnership              # 合伙创业
           |- other                    # 其他
+          |- ..
+        |- ..
       |- personal                 # 个人页面
         |- personalData             # 个人资料页面
         |- release                  # 发布编辑页面
+        |- ..
       |- dahuo                    # 搭伙小程序公共页面
         |- industryChoice           # 行业选择页面
+        |- ..
       |- ...
   |-app.js                      # 小程序逻辑
   |-app.json                    # 小程序公共设置

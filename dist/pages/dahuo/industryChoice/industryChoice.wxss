@@ -11,8 +11,8 @@
   height:68rpx;
   margin:5px;
   padding:0 4rpx;
-  padding-left: 0rpx;
-  padding-right: 0rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
   text-align:center;
   background-color:#2A8FBD;
   line-height:68rpx;
