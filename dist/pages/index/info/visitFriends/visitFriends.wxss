@@ -207,6 +207,7 @@ background-color: #fff;
   float: left;
   font-size: 21rpx;
   color: #333;
+  width: 300rpx;
 }
 .data_pro text {
   color: #14BAC8;

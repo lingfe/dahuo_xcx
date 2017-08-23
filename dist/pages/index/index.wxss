@@ -28,7 +28,7 @@
     background-color:#fff; 
     border-radius:8px;
     margin-left: 17rpx;
-    height: 158px;
+    height: 200px;
     z-index: 0;
     /*
       -webkit-box-shadow:inset 0 0 10px #0CC;  
@@ -62,12 +62,12 @@
   padding:32rpx;
   width:119px;
   font-size:25rpx;
-  height:118px;
+  height:160px;
 
 }
 .border_bottom{
   width: 262rpx;
-  height: 29px;
+  height: 31px;
   text-align: center;
   border-bottom: solid #F0F0F0 1rpx;
 }
@@ -79,7 +79,7 @@
    height: 28px;
   text-align: center;
   width: 262rpx;
-  margin-top: 2rpx;
+  margin-top: 3rpx;
   line-height: 28px;
   margin-left: 0rpx;
   border-radius: 6px;
@@ -329,7 +329,7 @@
 /*操作*/
 .operation{
   width:600rpx;
-  height: 130rpx;
+  height: 100rpx;
   background-color: red;
   text-align: center;
   bottom: 0rpx;
@@ -337,16 +337,16 @@
   margin-top: 0px;
 }
 .operation_close{
- height: 130rpx; 
+ height: 100rpx; 
  width: 200rpx;
  background-color: #F2F2F2;
- line-height: 130rpx;
+ line-height: 100rpx;
  float: left;
 }
 .operation_ok{
-  height: 130rpx;
+  height: 100rpx;
   width: 400rpx;
-  line-height: 130rpx;
+  line-height: 100rpx;
   text-align: center;
   background-color:#14BAC8; 
   float: left;
@@ -361,9 +361,14 @@
    margin-top: 10rpx;
 }
 
+.stop_title{
+  border-left: 8px #fff solid;
+  margin-top: 10rpx;
+  height: 17px;
+  font-size:26rpx; 
+}
 .stop{
   margin-top: 10rpx;
-  border-left: 8px #fff solid;
   height: 17px;
   font-size:26rpx; 
 }

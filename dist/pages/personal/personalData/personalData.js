@@ -4,6 +4,9 @@
  *   描述:  个人_个人资料
  * 
  * */
+var app = getApp();
+var utilMd5 = require('../../../utils/md5.js');
+import __config from '../../../config/config'
 
 Page({
 
@@ -36,10 +39,16 @@ Page({
   //确定修改姓名
   bindtapUpdateName:function(){
     console.log("确定修改姓名");
-    this.setData({
+    var that=this;
+    that.setData({
       updateName: this.data.inputValue,
       isUpdateName: this.data.isUpdateName == true ? false : true
     });
+
+
+    //调用函数修改名称
+    that.personalUpdate(that);
+
 
   },
   //修改地域
@@ -67,49 +76,113 @@ Page({
       isUpdateName: this.data.isUpdateName == true ? false : true
     });
   },
-  //请求获取数据,个人信息
-  requestDataPersonal: function (pagenum) {
-    var self = this;
+  //修改个人信息
+  personalUpdate:function(that){
+    //必要参数
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    //设置请求参数获取数据
+    var data = {
+      timeStamp: time,
+      token: token,
+      reqJson: JSON.stringify({
+        nameSpace: 'sys_userinfo',       //个人信息表
+        scriptName: 'Query',
+        cudScriptName: 'Update',
+        nameSpaceMap: {
+          sys_userinfo: {
+            Query: [{
+              id: that.data.personalId,           //个人资料id
+              realname: that.data.updateName      //名称
+            }],
+          }
+        }
+      })
+    };
 
+    //发送请求
     //必要参数
     var cookie = wx.getStorageSync("cookie");
-    console.log("cookie:" + cookie);
-    var time = new Date().getTime();
-    console.log("time:" + time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log("token:" + token);
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
-
-    //请求获取发布信息,
     wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
+      url: __config.basePath_sys + "api/exe/save",
       method: "POST",
       header: {
         cookie: cookie,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'userinfo',       //个人信息表
-          scriptName: 'Query',
-          nameSpaceMap: {
-            userinfo: {
-              Query: [{
-                personalId: personalId    //个人资料id
-              }],
-            }
+      data: data,
+      success: function (res) {   //请求成功
+        console.log("userinfo:");
+        console.log(res);
+        //获取个人信息
+        that.personalGetData(that);
+      },
+      fail: function (res) {      //请求失败
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
+    });
+  },
+
+  //获取个人信息
+  personalGetData: function (that) {
+    //必要参数
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+    //设置请求参数获取数据,默认0第一页
+    var data = {
+      timeStamp: time,
+      token: token,
+      reqJson: JSON.stringify({
+        nameSpace: 'sys_userinfo',       //个人信息表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          sys_userinfo: {
+            Query: [{
+              id: personalId    //个人资料id
+            }],
           }
-        })
+        }
+      })
+    };
+    that.setData({
+      data: data,
+    });
+
+    //发送请求
+    this.requestDataPersonal(that);
+  },
+
+  //请求获取数据,个人信息
+  requestDataPersonal: function (that) {
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    wx.request({
+      url: __config.basePath_sys + "api/exe/get",
+      method: "POST",
+      header: {
+        cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
-        console.log("成功了");
+      data: that.data.data,
+      success: function (res) {   //请求成功
+        console.log("userinfo:");
+        console.log(res);
+        that.setData({
+          userinfo: res.data.rows[0]
+        });
       },
-      fail: function (res) {
+      fail: function (res) {      //请求失败
         //提示
         wx.showToast({
           title: "请求失败！",
@@ -126,7 +199,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options);
+    var that = this;
+    that.setData({
+      personalId: options.personalId
+    });
+
+    //获取个人信息
+    that.personalGetData(that);
   },
 
   /**

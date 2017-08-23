@@ -177,101 +177,107 @@ Page({
       return;
     }
 
-    //弹出提示
-    wx.showModal({
-      content: '内容:',
-      showCancel: false,
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定');
-        }
-      }
-    });
-
     //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
     var cookie = wx.getStorageSync("cookie");
-    console.log(cookie);
     var time = new Date().getTime();
-    console.log(time);
     var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log(token);
 
-    //发送请求,发布信息,
-    wx.request({
-      url: "http://web.dahuo.cloud/api/exe/save",
-      method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      dataType: '',
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'releaseinfo',
-          scriptName: 'Query',
-          cudScriptName: 'Update',
-          nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                releaseType: '干股纳才',                   //发布类型
-                personalId: wx.getStorageSync("id"),      //个人资料id
-                title: title,                             //标题
-                resourceRequirements: resourceRequirements,//技能/资源要求
-                industryChoice: industryChoice,           //行业选择
-                shareDivision: shareDivision,             //股份划分
-                projectDescription: projectDescription,   //项目描述
-                incomeDescription: incomeDescription,     //收益描述
-                teamIntroduction: teamIntroduction,       //公司、团队介绍
-                phone: phone,                             //电话号码
-              }]
-            }
+    //上传图片数组
+    uploadimg(imageArray.splice(0, 1), [], imageArray);
+    //多张图片上传
+    function uploadimg(path, pathArr, dataArr) {
+      wx.uploadFile({
+        url: __config.domain,                       //开发者服务器 url
+        filePath: path[0],                          //要上传文件资源的路径
+        name: 'file',                                //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+        header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+
+        formData: null,                             //参数(HTTP 请求中其他额外的 form data)
+        success: (resp) => {                         //接口调用成功的回调函数
+          var json = JSON.parse(resp.data);
+          pathArr.push(json[0])
+          if (dataArr.length > 0) {
+            //递归
+            uploadimg(dataArr.splice(0, 1), pathArr, dataArr);
+          } else {
+            //调用请求发布
+            reqSetData(pathArr.join(","));
           }
-        })
-      },
-      success: function (res) {
-        //提示
-        wx.showToast({
-          title: res.data.message,
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("成功了");
-      },
-      fail: function () {
-        console.log("失败了");
-      },
-      complete: function () {
+        },
+        fail: function (res) {                         //接口调用失败的回调函数
+          //提示
+          wx.showToast({
+            title: '上传文件失败',
+            icon: 'loading',
+            duration: 3000,
+          });
 
-      }
-    });
-    return;
-    //发送请求,图片上传
-    wx.uploadFile({
-      url: 'http://example.weixin.qq.com/upload', //开发者服务器 url（仅为示例，非真实的接口地址）
-      filePath: imageArray,                       //要上传文件资源的路径
-      name: 'imageArray',                         //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
-      header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
-        cookie: '',
-      },
-      formData: {                                 //参数(HTTP 请求中其他额外的 form data)
+          return;
+        },
+        complete: function () {                     //接口调用结束的回调函数（调用成功、失败都会执行）
 
-      },
-      success: function (res) {                   //接口调用成功的回调函数
-        var data = res.data
-        //do something
-      },
-      fail: function () {                         //接口调用失败的回调函数
+        }
+      });
+    }
 
-      },
-      complete: function () {                     //接口调用结束的回调函数（调用成功、失败都会执行）
+    //请求更新
+    function reqSetData(pathArr) {
+      //发送请求,发布信息,
+      wx.request({
+        url: "http://web.dahuo.cloud/api/exe/save",
+        method: "POST",
+        header: {
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        dataType: '',
+        data: {
+          timeStamp: time,
+          token: token,
+          reqJson: JSON.stringify({
+            nameSpace: 'releaseinfo',
+            scriptName: 'Query',
+            cudScriptName: 'Update',
+            nameSpaceMap: {
+              releaseinfo: {
+                Query: [{
+                  releaseType: '干股纳才',                   //发布类型
+                  personalId: wx.getStorageSync("personalId"),      //个人资料id
+                  title: title,                             //标题
+                  resourceRequirements: resourceRequirements,//技能/资源要求
+                  industryChoice: industryChoice,           //行业选择
+                  shareDivision: shareDivision,             //股份划分
+                  projectDescription: projectDescription,   //项目描述
+                  incomeDescription: incomeDescription,     //收益描述
+                  teamIntroduction: teamIntroduction,       //公司、团队介绍
+                  phone: phone,                             //电话号码
+                  currentCity: wx.getStorageSync("currentCity"), //当前城市
+                  imageArray: pathArr                            //图片url
+                }]
+              }
+            }
+          })
+        },
+        success: function (res) {
+          //提示
+          wx.showToast({
+            title: res.data.message,
+            icon: 'loading',
+            duration: 3000,
+          });
+          console.log("成功了");
+        },
+        fail: function () {
+          console.log("失败了");
+        },
+        complete: function () {
 
-      }
-
-    });
-
+        }
+      });
+    }
   },
   //删除图片
   bindtapImageDelete: function (e) {

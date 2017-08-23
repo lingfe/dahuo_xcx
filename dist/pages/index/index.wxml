@@ -26,7 +26,7 @@
   
   <!-- 内容 end  -->
   <view class="dahuo_neiro">
-    <navigator url="{{item.id}}" wx:for="{{list}}" wx:key="*this" >
+    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="*this" >
     <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
       <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
       <view class="neiro_data">
@@ -214,7 +214,7 @@
             <!-- tab菜单  start -->
             <view class="www">
                 <block wx:for="{{tabs}}" wx:key="{{*this}}">
-                    <view id="{{index}}"  class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop'}}" bindtap="tabClick">
+                    <view id="{{index}}"  class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
                         <view class="weui-navbar__title stop_1">{{item.name}}</view>
                     </view>
                 </block>
@@ -227,9 +227,9 @@
                   <label  wx:for="{{tabs[activeIndex].content}}"  wx:key="{{*this}}">
                     <view class="weui-navbar__item stop">
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-                    <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
+                    <view class="weui-navbar__title stop_1 flaot_left">{{item.minThreshold}} - {{item.maxThreshold}} 万</view>
                     <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                        <icon class="weui-icon-radio" type="success_no_circle" color="#14BAC8" size="16"></icon>
                     </view>
                     </view>
                   </label>
@@ -245,7 +245,7 @@
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
                     <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                     <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                        <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon>
                     </view>
                     </view>
                   </label>
@@ -261,7 +261,7 @@
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
                     <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                     <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                        <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon>
                     </view>
                     </view>
                   </label>
@@ -275,26 +275,26 @@
                 <!-- 金额  start -->
                 <view  wx:for="{{str.AmountOfMoney}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text">{{item}}</view>
+                    <view class="delete_text">{{item.minThreshold}} - {{item.maxThreshold}} 万</view>
                     <image class="delete_image"  bindtap="clearBtn" data-name="AmountOfMoney" data-index="{{index}}"  data-value="{{item}}" src="/assets/images/delete.png"></image>
                   </view>
                 </view>
                 <!-- 金额  end -->
                 
                 <!-- 类型  start -->
-                <view  wx:for="{{str.Type}}" wx:key="{{*this}}">
+                <view  wx:for="{{str.releaseTypeList}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text">{{item}}</view>
-                    <image class="delete_image"  bindtap="clearBtn"  data-name="Type" data-index="{{index}}" data-value="{{item}}" src="/assets/images/delete.png"></image>
+                    <view class="delete_text">{{item.releaseType}}</view>
+                    <image class="delete_image"  bindtap="clearBtn"  data-name="releaseTypeList" data-index="{{index}}" data-value="{{item.releaseType}}" src="/assets/images/delete.png"></image>
                   </view>
                 </view>
                 <!-- 类型  end -->
 
                 <!-- 行业  start -->
-                <view  wx:for="{{str.industry}}" wx:key="{{*this}}">
+                <view  wx:for="{{str.industryChoiceList}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text">{{item}}</view>
-                    <image class="delete_image"  bindtap="clearBtn" data-name="industry" data-index="{{index}}" data-value="{{item}}" src="/assets/images/delete.png"></image>
+                    <view class="delete_text">{{item.industryChoice}}</view>
+                    <image class="delete_image"  bindtap="clearBtn" data-name="industryChoiceList" data-index="{{index}}" data-value="{{item.industryChoice}}" src="/assets/images/delete.png"></image>
                   </view>
                 </view>
                 <!-- 行业  end -->
@@ -304,7 +304,7 @@
               <!-- 操作  start -->
               <view class="operation">
                 <view class="operation_close"  bindtap="bindtapReset">重置</view>
-                <view class="operation_ok">确定</view>
+                <view class="operation_ok" bindtap="bindtapOk">确定</view>
               </view>
               <!-- 操作  end -->
             </view>
@@ -314,9 +314,9 @@
 <!-- 筛选   end-->
 
 <!-- 发布按钮  start-->
-<navigator url="/pages/index/release/release" >
-    <view style="display: {{screen == false ? 'block' : 'none' }};" class="release"><image src="/assets/images/fabu_2.png"></image></view>
-</navigator>
+<view style="display: {{screen == false ? 'block' : 'none' }};" bindtap="bindtapfabu" class="release">
+  <image src="/assets/images/fabu_2.png"></image>
+</view>
 <!-- 发布按钮  end-->
 
 <!--item底部 start-->

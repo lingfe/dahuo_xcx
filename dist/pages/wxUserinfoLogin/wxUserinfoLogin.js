@@ -5,6 +5,7 @@
  * 
  * */
 var app=getApp();
+import __config from '../../config/config'
 
 Page({
 
@@ -30,7 +31,7 @@ Page({
               method: 'POST',
               data: { reqJson: JSON.stringify(res2.userInfo) },
               header: { "Content-Type": "application/x-www-form-urlencoded"},
-              url: 'http://sys.dahuo.cloud/lg/wxLg/3DF7469FD3A1485B95ED16ED794780A8/' + res.code,
+              url: __config.basePath_sys+'lg/wxLg/3DF7469FD3A1485B95ED16ED794780A8/' + res.code,
               success: function (res) { //请求成功！
                 console.log(res);
                 if (res.data.status === 1) {

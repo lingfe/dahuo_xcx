@@ -12,18 +12,19 @@
         <view class="">
           <view class="item" >
               <view class="item-left">
-                    <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image"/>
+                    <image src="{{userinfo.avatarUrl}}" class="image"/>
               </view>
               <view class="item-middle">
                     <view>
-                        <text class="title_lingfe">lingfe<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">贵阳,已发布3贴</text></text>
+                        <text class="title_lingfe">{{userinfo.realname}}<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">{{userinfo.provinceName}},已发布3贴</text>
+                        </text>
                     </view>
                     <view>
-                        <text class="message">我就是我，不一样的萤火</text>
+                        <text class="message">{{userinfo.memo}}</text>
                     </view>
               </view>
               <view class="item_right">
-                <view bindtap="bindtapMy"><text class="title_address">个人资料 ></text></view>
+                <view bindtap="bindtapMy" id="{{userinfo.id}}"><text class="title_address">个人资料 ></text></view>
                 <view bindtap="bindtapService" session-from="weapp">
                    <image src="/assets/images/service.png" class="image_service"/> 
                   <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
@@ -39,7 +40,7 @@
             <!-- 菜单  start -->
             <view class="weui-navbar" style="border-bottom:none;">
                 <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'select_text' : ''}}" bindtap="tabClick">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'select_text' : ''}}" data-name="{{item}}" bindtap="tabClick">
                         <view class="weui-navbar__title">{{item}}</view>
                     </view>
                 </block>
@@ -102,6 +103,29 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <view class="dahuo_neiro">
                     <navigator url="/pages/index/info/info" >
+                    <view class="neiro_286" wx:for="{{list}}" wx:key="*this">
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                        <view class="neiro_data">
+                          <view class="data_titile title">{{item.title}}</view>
+                          <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
+                          <view class="data_biaoqian">
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                              <view class="data_biaoqian_view">{{item.codate}}前</view>
+                          </view>
+                        </view>
+                        <view class="info_data_info info_info">
+                          <!-- 项目描述 -->
+                          {{item.projectDescription == null ?'':item.projectDescription}}
+                          <!-- 收益描述 -->
+                          {{item.incomeDescription == null ?'' : item.incomeDescription}}
+                          <!-- 营业描述 -->
+                          {{item.businessDescription == null ?'':item.businessDescription}}
+                        </view>
+                    </view>
+                    </navigator>
+
+                    <navigator url="/pages/index/info/info" >
                     <view class="neiro_286">
                         <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
                         <view class="neiro_data">
@@ -126,6 +150,27 @@
                 <!-- 回收站  start-->
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                   <view class="dahuo_neiro">
+                    <view class="neiro"  wx:for="{{list}}" wx:key="*this">
+                        <view class="data_top">
+                            <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
+                        </view>
+                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                        <view class="neiro_data">
+                          <view class="data_titile title">{{item.title}}</view>
+                          <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
+                          <view class="data_biaoqian">
+                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                              <view class="data_biaoqian_view">{{item.codate}}前</view>
+                          </view>
+                        </view>
+                        <view class="data_info info">
+                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>
+                        </view>
+                    </view>
+
                     <view class="neiro">
                         <view class="data_top">
                             <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>

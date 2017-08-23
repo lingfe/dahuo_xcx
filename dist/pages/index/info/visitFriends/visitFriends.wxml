@@ -10,14 +10,14 @@
         <view class="">
           <view class="item" >
               <view class="item-left">
-                    <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image"/>
+                    <image src="{{userinfo.avatarUrl}}" class="image"/>
               </view>
               <view class="item-middle">
                     <view>
-                        <text class="title_lingfe">lingfe<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">贵阳,已发布3贴</text></text>
+                        <text class="title_lingfe">{{userinfo.realname}}<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">{{userinfo.provinceName}},已发布3贴</text></text>
                     </view>
                     <view>
-                        <text class="message">我就是我，不一样的萤火</text>
+                        <text class="message">{{userinfo.memo}}</text>
                     </view>
               </view>
           </view>
@@ -27,21 +27,26 @@
                             
         <!-- 内容 end  -->
         <view class="dahuo_neiro">
-          <navigator url="" >
+          <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="*this"  >
           <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456" >
             <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
             <view class="neiro_data">
-              <view class="data_titile title">花果园火锅店亏本转让..</view>
-              <view class="data_pro">搭伙金额   <text>   0.8万</text></view>
+              <view class="data_titile title">{{item.title}}</view>
+              <view class="data_pro">搭伙金额   <text>   {{item.threshold}}万</text></view>
               <view class="data_biaoqian">
-                  <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
-                  <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
-                  <view class="data_biaoqian_view">12分钟前</view>
+                  <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                  <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                  <view class="data_biaoqian_view">{{item.cdate}}前</view>
               </view>
             </view>
-            <view class="data_info info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
-                              微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
-                              加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同</view>
+            <view class="data_info info">
+              <!-- 项目描述 -->
+              {{item.projectDescription == null ?'':item.projectDescription}}
+              <!-- 收益描述 -->
+              {{item.incomeDescription == null ?'' : item.incomeDescription}}
+              <!-- 营业描述 -->
+              {{item.businessDescription == null ?'':item.businessDescription}}
+            </view>
           </view>
           </navigator>  
 

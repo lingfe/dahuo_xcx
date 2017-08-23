@@ -8,6 +8,7 @@
 var app = getApp();
 var server = require('../../utils/server');
 var utilMd5 = require('../../utils/md5.js');
+import __config from '../../config/config'
 
 Page({
 
@@ -21,13 +22,38 @@ Page({
     sliderLeft: 0,          //坐标y
     list: [],                //发布信息数据
     pagenum: 0,              //分页，第几业
+    data: null,              //请求参数
+    userinfo:null,           //个人信息
   },
   //个人资料
-  bindtapMy:function(){
+  bindtapMy:function(e){
     wx.navigateTo({
-      url: '/pages/personal/personalData/personalData',
+      url: '/pages/personal/personalData/personalData?personalId=' + e.currentTarget.id,
     });
   },
+
+  //tab点击切换
+  tabClick: function (e) {
+    //当前
+    var that = this;
+    var name = e.currentTarget.dataset.name;
+    if(name == "我发布的"){
+      //我发布的
+      that.requestDataRelease(that);
+    }else if(name == "收藏夹"){
+      //收藏夹
+      that.requestDataFavorites(that);
+    }else if(name == "回收站"){
+      //回收站
+      that.requestDataRecovery(that);
+    }
+
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
+
   //刷新
   bindtapRefresh:function(){
 
@@ -77,6 +103,7 @@ Page({
       url: url,
     });
   },
+  
   //上架
   bindtapTheShelves:function(){
     wx.showModal({
@@ -95,6 +122,7 @@ Page({
     });
 
   },
+
   //删除
   bindtapDelete: function () {
     wx.showModal({
@@ -112,13 +140,53 @@ Page({
       }
     });
   },
+
+  //获取个人信息
+  personalGetData:function(that){
+    //必要参数
+    console.log("cookie:" + wx.getStorageSync("cookie"));
+    var time = new Date().getTime();
+    console.log(time);
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    console.log(token);
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    console.log('personalId:' + personalId);
+    //设置请求参数获取数据,默认0第一页
+    var data = {
+      timeStamp: time,
+      token: token,
+      reqJson: JSON.stringify({
+        nameSpace: 'sys_userinfo',       //个人信息表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          sys_userinfo: {
+            Query: [{
+              id: personalId    //个人资料id
+            }],
+          }
+        }
+      })
+    };
+    that.setData({
+      data: data,
+    });
+    
+    //发送请求
+    this.requestDataPersonal(that);
+  },
+
   //加载完成
   onLoad: function () {
+    //当前
     var that = this;
+    //个人
+    that.personalGetData(that);
+    //我发布的
+    that.requestDataRelease(that);
 
-    //获取数据,默认0第一页
-    this.requestDataRelease(that.data.pagenum);
 
+    //设置tab
     var sliderWidth=50;
     wx.getSystemInfo({
       success: function (res) {
@@ -129,142 +197,12 @@ Page({
       }
     });
   },
-  //请求获取数据,个人信息
-  requestDataPersonal : function (pagenum) {
-    var self = this;
 
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    console.log("cookie:" + cookie);
-    var time = new Date().getTime();
-    console.log("time:" + time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log("token:" + token);
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
-
-    //请求获取发布信息,
-    wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
-      method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'userinfo',       //个人信息表
-          scriptName: 'Query',
-          nameSpaceMap: {
-            userinfo: {
-              Query: [{
-                personalId: personalId    //个人资料id
-              }],
-            }
-          }
-        })
-      },
-      success: function (res) {
-        console.log("成功了");
-      },
-      fail: function (res) {
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
-    });
-  },
-  //请求获取数据,我发布的
-  requestDataRelease: function (pagenum) {
-    var self = this;
-
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    console.log("cookie:" + cookie);
-    var time = new Date().getTime();
-    console.log("time:"+time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log("token:"+token);
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
-
-    //请求获取发布信息,
-    wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
-      method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'releaseinfo',       //发布表
-          scriptName: 'Query',
-          nameSpaceMap: {
-            releaseinfo: {
-              Query: [{ 
-                personalId: personalId    //个人资料id
-              }],
-            },
-            pagenum: pagenum,   //当前业
-            pagesize: 3,        //数据大小长度
-            pageable: 1         //是否分页
-          }
-        })
-      },
-      success: function (res) {
-        var pageList = self.data.list;
-        //得到数据
-        var list = res.data.rows;
-        for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = getDate(list[i].cdate);
-          list[i].cdate = strTime;
-          //添加到当前数组
-          pageList.push(list[i]);
-        }
-
-        //设置数据
-        self.setData({
-          isHiddenLoading: true,
-          isHiddenToast: false,
-          pagenum: pagenum,
-          list: pageList
-        });
-        self.update();
-        console.log("成功了");
-      },
-      fail: function (res) {
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
-    });
-
-    //获取时间差
-    function getDate(date) {
-      var date1 = new Date(date);    //开始时间
-      var date2 = new Date();    //结束时间
-      var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
+  //获取时间差
+  getDate:function(date) {
+    var date1 = new Date(date);    //开始时间
+    var date2 = new Date();    //结束时间
+    var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
 
       //计算出相差年
       //还有一个小bug，当事件差为负数时，值为负数，将上面leftsecond代码改一下
@@ -272,78 +210,71 @@ Page({
 
       //计算出相差月
       var months = (date2.getFullYear() - date1.getFullYear()) * 12;
-      if (months != 0) {
-        return months + "月";
-      }
+    if(months != 0) {
+      return months + "月";
+    }
 
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000));
-      if (days != 0) {
-        return days + "天";
-      }
+    if(days != 0) {
+      return days + "天";
+    }
 
       //计算出小时数
       var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
-      var hours = Math.floor(leave1 / (3600 * 1000));
-      if (hours != 0) {
-        return hours + "小时";
-      }
+    var hours = Math.floor(leave1 / (3600 * 1000));
+    if(hours != 0) {
+      return hours + "小时";
+    }
 
       //计算相差分钟数
       var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
-      var minutes = Math.floor(leave2 / (60 * 1000));
-      if (minutes != 0) {
-        return minutes + "分钟";
-      }
+    var minutes = Math.floor(leave2 / (60 * 1000));
+    if(minutes != 0) {
+      return minutes + "分钟";
+    }
 
       //计算相差秒数
       var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
-      var seconds = Math.round(leave3 / 1000);
-      if (seconds != 0) {
-        return seconds + "秒";
-      }
+    var seconds = Math.round(leave3 / 1000);
+    if(seconds != 0) {
+      return seconds + "秒";
     }
   },
-  //请求获取数据,收藏夹
-  requestDataFavorites: function (pagenum) {
-    var self = this;
 
+  //请求获取数据
+  requestData: function (that) {
     //必要参数
+    console.log("cookie:" + wx.getStorageSync("cookie"));
     var cookie = wx.getStorageSync("cookie");
-    console.log("cookie:" + cookie);
-    var time = new Date().getTime();
-    console.log("time:" + time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log("token:" + token);
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
 
     //请求获取发布信息,
     wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
+      url: __config.basePath_web+"api/exe/get",
       method: "POST",
       header: {
         cookie: cookie,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'userinfo',       //个人信息表
-          scriptName: 'Query',
-          nameSpaceMap: {
-            userinfo: {
-              Query: [{
-                personalId: personalId    //个人资料id
-              }],
-            }
-          }
-        })
-      },
+      data: that.data.data,
       success: function (res) {
+        var pageList = [];
+        //得到数据
+        var list = res.data.rows;
+        for (var i = 0, lenI = list.length; i < lenI; ++i) {
+          var strTime = that.getDate(list[i].cdate);
+          list[i].cdate = strTime;
+          //添加到当前数组
+          pageList.push(list[i]);
+        }
+
+        //设置数据，提示框
+        that.setData({
+          isHiddenLoading: true,
+          isHiddenToast: false,
+          list: pageList
+        });
+        that.update();
         console.log("成功了");
       },
       fail: function (res) {
@@ -359,49 +290,28 @@ Page({
       complete: function () { }
     });
   },
-  //请求获取数据,回收站
-  requestDataRecovery: function (pagenum) {
-    var self = this;
 
+  //请求获取数据,个人信息
+  requestDataPersonal : function (that) {
     //必要参数
     var cookie = wx.getStorageSync("cookie");
-    console.log("cookie:" + cookie);
-    var time = new Date().getTime();
-    console.log("time:" + time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log("token:" + token);
 
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
-
-    //请求获取发布信息,
     wx.request({
-      url: "http://web.dahuo.cloud/api/exe/get",
+      url: __config.basePath_sys+"api/exe/get",
       method: "POST",
       header: {
         cookie: cookie,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      data: {
-        timeStamp: time,
-        token: token,
-        reqJson: JSON.stringify({
-          nameSpace: 'userinfo',       //个人信息表
-          scriptName: 'Query',
-          nameSpaceMap: {
-            userinfo: {
-              Query: [{
-                personalId: personalId    //个人资料id
-              }],
-            }
-          }
-        })
+      data: that.data.data,
+      success: function (res) {   //请求成功
+      console.log("userinfo:");
+      console.log(res);
+        that.setData({
+          userinfo:res.data.rows[0]
+        });
       },
-      success: function (res) {
-        console.log("成功了");
-      },
-      fail: function (res) {
+      fail: function (res) {      //请求失败
         //提示
         wx.showToast({
           title: "请求失败！",
@@ -414,12 +324,102 @@ Page({
       complete: function () { }
     });
   },
-  //tab点击切换
-  tabClick: function (e) {
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
+
+  //我发布的
+  requestDataRelease: function (that) {
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId");
+    var data = {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',       //发布表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                personalId: personalId    //个人资料id
+              }],
+            },
+            pagenum: that.data.pagenum,   //当前业
+            pagesize: 3,        //数据大小长度
+            pageable: 1         //是否分页
+          }
+        })
+      };
+    that.setData({
+      data: data,
     });
+
+    //请求获取数据,我发布的
+    that.requestData(that);
+  },
+
+  //收藏夹
+  requestDataFavorites: function (that) {
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    var data = {
+      timeStamp: time,
+      token: token,
+      reqJson: JSON.stringify({
+        nameSpace: 'collectioninfo',       //收藏夹表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          collectioninfo: {
+            Query: [{
+              personalId: personalId    //个人资料id
+            }],
+          }
+        }
+      })
+    };
+    that.setData({
+      data:data
+    });
+    //请求获取数据,收藏夹
+    that.requestData(that);
+  },
+
+  //回收站
+  requestDataRecovery: function (that) {
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId")
+    var data = {
+      timeStamp: time,
+      token: token,
+      reqJson: JSON.stringify({
+        nameSpace: 'recyclebin',       //回收站表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          recyclebin: {
+            Query: [{
+              personalId: personalId    //个人资料id
+            }],
+          }
+        }
+      })
+    };
+    that.setData({
+      data: data
+    });
+    //请求获取数据,回收站
+    that.requestData(that);
   },
 
   /**

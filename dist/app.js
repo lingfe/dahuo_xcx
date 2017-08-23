@@ -49,13 +49,13 @@ App({
     //用户数据
     globalData: {
       userInfo: null,
-      fundsLayout: null, //入伙门槛，需要金额，转让门槛..
-      projectDescription:null,//项目描述
-      incomeDescription:null,//收益描述
-      introduce:null, //公司/团队介绍
+      fundsLayout: null,        //入伙门槛，需要金额，转让门槛..
+      projectDescription:null,  //项目描述
+      incomeDescription:null,   //收益描述
+      introduce:null,           //公司/团队介绍
       geographicalPosition: null,      //地理位置
-      businessDescription:null, //营业描述
-      transferReason:null,//转让原因
+      businessDescription:null,       //营业描述
+      transferReason:null,            //转让原因
       productHighlights:null,//产品亮点
       agentCondition:null,//代理条件
       agencyRule:null,//代理规则
