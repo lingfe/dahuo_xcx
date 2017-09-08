@@ -20,12 +20,13 @@ Page({
     activeIndex: 0,         //tab切换下标
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
-    list: [],                //发布信息数据
-    pagenum: 0,              //分页，第几业
-    data: null,              //请求参数
-    userinfo:null,           //个人信息
+    list: [],               //发布信息数据
+    pagenum: 0,             //分页，第几业
+    data: null,             //请求参数
+    userinfo:null,          //个人信息
+    numBer:1,               //帖子数量
   },
-  //个人资料
+  //个人资料,跳转
   bindtapMy:function(e){
     wx.navigateTo({
       url: '/pages/personal/personalData/personalData?personalId=' + e.currentTarget.id,
@@ -55,11 +56,57 @@ Page({
   },
 
   //刷新
-  bindtapRefresh:function(){
+  bindtapRefresh:function(e){
+    var that=this;
+    //发布信息id
+    var releaseId = e.currentTarget.id;
+    //必要参数
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    var cookie = wx.getStorageSync("cookie");
 
+    wx.request({
+      url: __config.basePath_web + "api/exe/save",
+      method: "POST",
+      header: {cookie: cookie, "Content-Type": "application/x-www-form-urlencoded"},
+      data: {
+        timeStamp: time,
+        token: token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',       //发布信息信息表
+          scriptName: 'Query',
+          cudScriptName: 'Update',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                id: releaseId,             //发布信息id
+                version:11,
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {   //请求成功
+        //调用我的发布
+        that.requestDataRelease(that);
+      },
+      fail: function (res) {      //请求失败
+        //提示
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'loading',
+          duration: 3000,
+        });
+        console.log("失败了");
+      },
+      //不管成功失败都执行
+      complete: function () { }
+    });
   },
+
   //下架
-  bindtapOffTheShelf: function () {
+  bindtapOffTheShelf: function (e) {
+    var that = this;
     wx.showModal({
       title: '消息下架',
       content: '是否确定下架？',
@@ -68,44 +115,107 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('下架成功!')
+          //必要参数
+          var time = new Date().getTime();
+          var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+          //发布信息id
+          var releaseId = e.currentTarget.id;
+          //设置请求参数获取数据,默认0第一页
+          var data = {
+            timeStamp: time,
+            token: token,
+            reqJson: JSON.stringify({
+              nameSpace: 'releaseinfo',       //发布信息信息表
+              scriptName: 'Query',
+              cudScriptName: 'UpdateDf',
+              nameSpaceMap: {
+                releaseinfo: {
+                  Query: [{
+                    id: releaseId,             //发布信息id
+                    df:1                       //0，正常;1,删除，下架
+                  }],
+                }
+              }
+            })
+          };
+
+          that.setData({
+            data: data,
+          });
+
+          //下架请求
+          offTheShelf(that);
         } else {
           console.log('用户点击辅助操作')
         }
       }
     });
+
+    //下架请求
+    function offTheShelf(that) {
+      //必要参数
+      var cookie = wx.getStorageSync("cookie");
+      wx.request({
+        url: __config.basePath_web + "api/exe/save",
+        method: "POST",
+        header: {
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data: that.data.data,
+        success: function (res) {   //请求成功
+          //调用我的发布
+          that.requestDataRelease(that);
+        },
+        fail: function (res) {      //请求失败
+          //提示
+          wx.showToast({
+            title: "请求失败！",
+            icon: 'loading',
+            duration: 3000,
+          });
+          console.log("失败了");
+        },
+        //不管成功失败都执行
+        complete: function () { }
+      });
+    }
   },
+
   //编辑
   bindtapEdit:function(e){
     console.log(e);
     var id=e.currentTarget.id;
     var name = e.currentTarget.dataset.name;
+    var df = e.currentTarget.dataset.df;
+
     var url="";
     if(name == "合伙创业"){
-      url = '/pages/personal/release/partnership/partnership';
+      url = '/pages/index/release/partnership/partnership';
     } else if (name == "生意转让"){
-      url = '/pages/personal/release/businessTransfer/businessTransfer';
+      url = '/pages/index/release/businessTransfer/businessTransfer';
     } else if (name == "加盟分店"){
-      url = '/pages/personal/release/affiliateStores/affiliateStores';
+      url = '/pages/index/release/affiliateStores/affiliateStores';
     } else if (name == "干股纳才"){
-      url = '/pages/personal/release/ganguSatisfiedBefore/ganguSatisfiedBefore';
+      url = '/pages/index/release/ganguSatisfiedBefore/ganguSatisfiedBefore';
     } else if (name == "金融理财"){
-      url = '/pages/personal/release/financialManagement/financialManagement';
+      url = '/pages/index/release/financialManagement/financialManagement';
     }else if (name =="房产投资"){
-      url = '/pages/personal/release/propertyInvestment/propertyInvestment';
+      url = '/pages/index/release/propertyInvestment/propertyInvestment';
     } else if (name == "微商代理"){
       url = '/pages/index/release/derivativeAgent/derivativeAgent';
     }else if(name == "其他"){
-      url = '/pages/personal/release/other/other';
+      url = '/pages/index/release/other/other';
     }
 
-    wx.redirectTo({
-      url: url,
+    wx.navigateTo({
+      url: url +"?releaseId="+id+"&df="+df,
     });
   },
   
   //上架
-  bindtapTheShelves:function(){
+  bindtapTheShelves:function(e){
+    var that = this;
     wx.showModal({
       title: '上架提醒',
       content: '是否确定上架？',
@@ -114,17 +224,72 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('上架成功!')
-        } else {
-          console.log('用户点击辅助操作')
+          //发布信息id
+          var releaseId = e.currentTarget.id;
+          //设置参数
+          var data = {
+            timeStamp: that.data.time,
+            token: that.data.token,
+            reqJson: JSON.stringify({
+              nameSpace: 'releaseinfo',       //发布信息信息表
+              scriptName: 'Query',
+              cudScriptName: 'UpdateDf',
+              nameSpaceMap: {
+                releaseinfo: {
+                  Query: [{
+                    id: releaseId,             //发布信息id
+                    df: 0                      //0，正常;1,删除，下架
+                  }],
+                }
+              }
+            })
+          };
+
+          that.setData({
+            data: data,
+          });
+
+          //上架请求
+          theShelves(that);
         }
       }
     });
+
+    //上架请求
+    function theShelves(that) {
+      //必要参数
+      var cookie = wx.getStorageSync("cookie");
+      wx.request({
+        url: __config.basePath_web + "api/exe/save",
+        method: "POST",
+        header: {
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data: that.data.data,
+        success: function (res) {   //请求成功
+          //回收站
+          that.requestDataRecovery(that);
+        },
+        fail: function (res) {      //请求失败
+          //提示
+          wx.showToast({
+            title: "请求失败！",
+            icon: 'loading',
+            duration: 3000,
+          });
+          console.log("失败了");
+        },
+        //不管成功失败都执行
+        complete: function () { }
+      });
+    }
 
   },
 
   //删除
   bindtapDelete: function () {
+    var that = this;
     wx.showModal({
       title: '消息删除',
       content: '是否确定删除？',
@@ -133,36 +298,60 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('删除成功!');
-        } else {
-          console.log('用户点击辅助操作');
-        }
+          //设置参数
+          var data = {
+            timeStamp: that.data.time,
+            token: that.data.token,
+            reqJson: JSON.stringify({
+              nameSpace: 'releaseinfo',       //发布信息信息表
+              scriptName: 'Query',
+              cudScriptName: 'Delete',
+              nameSpaceMap: {
+                releaseinfo: {
+                  Query: [{
+                    id: that.data.releaseId,             //发布信息id
+                  }],
+                }
+              }
+            })
+          };
+
+          that.setData({
+            data: data,
+          });
+
+          //删除请求
+          releaseDelete(that);
+        } 
       }
     });
+
+    //删除请求
+    function releaseDelete(that) {
+      wx.request({
+        url: __config.basePath_web + "api/exe/save",
+        method: "POST",
+        header: {cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded"},
+        data: that.data.data,
+        success: function (res) {},
+        fail: function (res) {},
+        complete: function () {}
+      });
+    }
   },
 
   //获取个人信息
   personalGetData:function(that){
-    //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
-    var time = new Date().getTime();
-    console.log(time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log(token);
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
-    console.log('personalId:' + personalId);
-    //设置请求参数获取数据,默认0第一页
     var data = {
-      timeStamp: time,
-      token: token,
+      timeStamp: that.data.time,
+      token: that.data.token,
       reqJson: JSON.stringify({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
         nameSpaceMap: {
           sys_userinfo: {
             Query: [{
-              id: personalId    //个人资料id
+              id: that.data.personalId    //个人资料id
             }],
           }
         }
@@ -176,15 +365,35 @@ Page({
     this.requestDataPersonal(that);
   },
 
+  //客服,消息
+  bindtapService:function(){
+    wx.navigateTo({
+      url: '/pages/message/message',
+    })
+  },
+
   //加载完成
   onLoad: function () {
     //当前
     var that = this;
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    //个人资料id
+    var personalId = wx.getStorageSync("personalId");
+    //设置值
+    that.setData({
+      personalId: personalId,
+      cookie: cookie,
+      time: time,
+      token:token,
+    });
+
     //个人
     that.personalGetData(that);
     //我发布的
     that.requestDataRelease(that);
-
 
     //设置tab
     var sliderWidth=50;
@@ -217,45 +426,38 @@ Page({
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000));
     if(days != 0) {
-      return days + "天";
+      return { date: days + "天", timeNuber: days };
     }
 
       //计算出小时数
       var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
     var hours = Math.floor(leave1 / (3600 * 1000));
     if(hours != 0) {
-      return hours + "小时";
+      return { date: hours + "小时", timeNuber: days };
     }
 
       //计算相差分钟数
       var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
     var minutes = Math.floor(leave2 / (60 * 1000));
     if(minutes != 0) {
-      return minutes + "分钟";
+      return { date: minutes + "分钟", timeNuber:days};
     }
 
       //计算相差秒数
       var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
     var seconds = Math.round(leave3 / 1000);
     if(seconds != 0) {
-      return seconds + "秒";
+      return { date: seconds + "秒", timeNuber: days };
     }
   },
 
   //请求获取数据
   requestData: function (that) {
-    //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
-    var cookie = wx.getStorageSync("cookie");
-
     //请求获取发布信息,
     wx.request({
       url: __config.basePath_web+"api/exe/get",
       method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
       data: that.data.data,
       success: function (res) {
         var pageList = [];
@@ -263,97 +465,83 @@ Page({
         var list = res.data.rows;
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = that.getDate(list[i].cdate);
-          list[i].cdate = strTime;
+          if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
+          list[i].cdate = strTime.date;
+          list[i].timeNuber = (60-strTime.timeNuber);
           //添加到当前数组
           pageList.push(list[i]);
         }
 
         //设置数据，提示框
         that.setData({
-          isHiddenLoading: true,
-          isHiddenToast: false,
           list: pageList
         });
-        that.update();
-        console.log("成功了");
+        
+        if(that.data.tizhi == "tizhi" ){
+          //设置数据，提示框
+          that.setData({
+            numBer: pageList.length
+          });
+        }
       },
-      fail: function (res) {
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
+      fail: function (res) {},
+      complete: function () {}
     });
   },
 
   //请求获取数据,个人信息
   requestDataPersonal : function (that) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-
     wx.request({
       url: __config.basePath_sys+"api/exe/get",
       method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded" },
       data: that.data.data,
       success: function (res) {   //请求成功
-      console.log("userinfo:");
-      console.log(res);
+        console.log("userinfo:");
+        console.log(res);
+        if(res.statusCode == 408){
+          wx.showToast({
+            title: "会话已过期，请重新登录！",
+            icon: 'loading',
+            duration: 2000,
+          });
+
+          wx.redirectTo({
+            url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+          });
+          return;
+        }
+
         that.setData({
           userinfo:res.data.rows[0]
         });
       },
-      fail: function (res) {      //请求失败
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
+      fail: function (res) {},
+      complete: function () {}
     });
   },
 
   //我发布的
   requestDataRelease: function (that) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId");
     var data = {
-        timeStamp: time,
-        token: token,
+        timeStamp: that.data.time,
+        token: that.data.token,
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',       //发布表
           scriptName: 'Query',
           nameSpaceMap: {
             releaseinfo: {
               Query: [{
-                personalId: personalId    //个人资料id
+                personalId: that.data.personalId    //个人资料id
               }],
-            },
-            pagenum: that.data.pagenum,   //当前业
-            pagesize: 3,        //数据大小长度
-            pageable: 1         //是否分页
+            }
           }
         })
       };
     that.setData({
       data: data,
+      tizhi:'tizhi',
+      list:[]
     });
 
     //请求获取数据,我发布的
@@ -362,61 +550,95 @@ Page({
 
   //收藏夹
   requestDataFavorites: function (that) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
     var data = {
-      timeStamp: time,
-      token: token,
+      timeStamp: that.data.time,
+      token: that.data.token,
       reqJson: JSON.stringify({
         nameSpace: 'collectioninfo',       //收藏夹表
         scriptName: 'Query',
         nameSpaceMap: {
           collectioninfo: {
             Query: [{
-              personalId: personalId    //个人资料id
+              personalId: that.data.personalId    //个人资料id
             }],
           }
         }
       })
     };
+
     that.setData({
-      data:data
+      data: data,
+      tizhi: '',
+      list:[]
     });
+
     //请求获取数据,收藏夹
-    that.requestData(that);
+    wx.request({
+      url: __config.basePath_web + "api/exe/get",
+      method: "POST",
+      header: { cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded" },
+      data: that.data.data,
+      success: function (res) {
+        //得到数据
+        var list = res.data.rows;
+        for (var i = 0, lenI = list.length; i < lenI; ++i) {
+          getSC(list[i].releaseId);
+        }
+      },
+      fail: function (res) {},
+      //不管成功失败都执行
+      complete: function () { }
+    });
+
+    //根据发布id获取
+    function getSC(releaseId){
+      data = {
+        timeStamp: that.data.time,
+        token: that.data.token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',       //发布信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                id: releaseId    //发布id
+              }],
+            }
+          }
+        })
+      };
+
+      that.setData({
+        data: data,
+        list:[]
+      });
+      //请求获取数据
+      that.requestData(that);
+    }
   },
 
   //回收站
   requestDataRecovery: function (that) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
-    //个人资料id
-    var personalId = wx.getStorageSync("personalId")
     var data = {
-      timeStamp: time,
-      token: token,
+      timeStamp: that.data.time,
+      token: that.data.token,
       reqJson: JSON.stringify({
-        nameSpace: 'recyclebin',       //回收站表
+        nameSpace: 'releaseinfo',       //回收站表
         scriptName: 'Query',
         nameSpaceMap: {
-          recyclebin: {
+          releaseinfo: {
             Query: [{
-              personalId: personalId    //个人资料id
+              personalId: that.data.personalId,    //个人资料id
+              df: 1                       //0，正常;1,删除，下架
             }],
           }
         }
       })
     };
     that.setData({
-      data: data
+      data: data,
+      tizhi: '',
+      list:[]
     });
     //请求获取数据,回收站
     that.requestData(that);
@@ -454,7 +676,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that= this;
+
+    //个人
+    that.personalGetData(that);
+    //下拉完成后执行回退
+    wx.stopPullDownRefresh();
   },
 
   /**

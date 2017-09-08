@@ -12,16 +12,10 @@ Page({
    */
   data: {
     industryChoice:null,    //行业选择
-    dialog: {               //自定义提示框
-      title: '',
-      content: '',
-      hidden: true
-    }
   },
   //选择行业
   bindtapGetIndustryChoice:function(e){
     var industryChoice = e.currentTarget.dataset.name;
-    console.log("选择了:"+industryChoice);
     //设置值
     this.setData({
       industryChoice:industryChoice,
@@ -32,26 +26,11 @@ Page({
     var industryChoice = this.data.industryChoice;
     //判断是否为空
     if (industryChoice == null) {
-      //提示
-      this.setData({
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
+      wx.showModal({
+        title: '请选择行业!',
+        showCancel: false,
       });
     } else {
-      //提示
-      this.setData({
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      });
-    }
-  },
-  //点击确定
-  confirm: function () {
-    var industryChoice = this.data.industryChoice;
-    //判断是否为空
-    if (industryChoice != null) {
-      console.log('industryChoice：' + industryChoice);
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -64,13 +43,8 @@ Page({
       //返回上一页
       wx.navigateBack();
     }
-    //关闭提示
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */

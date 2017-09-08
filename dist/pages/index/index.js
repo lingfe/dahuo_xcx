@@ -11,17 +11,16 @@ var utilMd5 = require('../../utils/md5.js');
 import __config from '../../config/config'
 
 Page({
-  //页面的初始数据
   data: {
-    PriceRange: ['0 - 1万','1 - 5 万', '5 - 15 万','15 - 25 万','25 - 50 万','50 - 500 万'],
-    priceIndex:0,
-    addressInfo:'定位中..',
-    isHiddenLoading: true,   //加载中提示控制
+    PriceRange: ['0 - 1万','1 - 5 万', '5 - 30 万','30 - 100 万','100万+'],
+    priceIndex:1,           //选择价格索引 
+    addressInfo:'贵阳',     //城市定位
+    isHiddenLoading: true,  //加载中提示控制
     isHiddenToast:true,     //加载完成提示控制
     isPrices:false,         //是否显示价格控制
     windowHeight:1000,      //默认高度
     screen:false,           //是否显示筛选控制
-    tabs: [{
+    tabs: [{                //删选数据
       name: "金额",
       content: [{
         minThreshold: 0,
@@ -32,36 +31,27 @@ Page({
           minThreshold: 1,
           maxThreshold: 5,
         value: '1',
-        checked: false,
+        checked: true,
       }, {
           minThreshold: 5,
-          maxThreshold: 15,
+          maxThreshold: 30,
         value: '2',
         checked: false,
       }, {
-          minThreshold: 15,
-          maxThreshold: 25,
+          minThreshold: 30,
+          maxThreshold: 100,
         value: '3',
         checked: false,
       }, {
-          minThreshold: 25,
-          maxThreshold: 50,
+          minThreshold: 100,
+        maxThreshold: null,
         value: '4',
-        checked: false,
-      }, {
-          minThreshold:50,
-          maxThreshold:500,
-        value: '5',
         checked: false,
       }],
     },
     {
       name: "类型",
-      content: [{
-        name: '全部',
-        value: '1000',
-        checked: false,
-      }, {
+      content: [ {
         name: '合伙创业',
         value: '1001',
         checked: false,
@@ -74,7 +64,7 @@ Page({
         value: '1003',
         checked: false,
       }, {
-        name: '入股干才(技术,资源)',
+        name: '干股纳才',
         value: '1004',
         checked: false,
       }, {
@@ -86,18 +76,18 @@ Page({
         value: '1006',
         checked: false,
       }, {
-        name: '其他',
+        name: '微商代理',
         value: '1007',
+        checked: false,
+      }, {
+        name: '其他',
+        value: '1008',
         checked: false,
       }],
     },
     {
       name: "行业",
-      content: [{
-        name: '全部',
-        value: '1007',
-        checked: false,
-      }, {
+      content: [ {
         name: '餐饮业',
         value: '1',
         checked: false,
@@ -113,208 +103,216 @@ Page({
         name: '旅游／酒店业',
         value: '3',
         checked: false,
-      }, {
+      },{
+        name:"美容/美发/化妆品",
+        value:'30001',
+        checked:false,
+      },{
         name: '服装与百货',
         value: '4',
         checked: false,
       }, {
+        name: "汽车行业",
+        value:'40001',
+        checked:false,
+      }, {
+        name: "建筑工程",
+        value: '40002',
+        checked: false,
+      },{
         name: '生活服务',
         value: '5',
         checked: false,
       }, {
+        name: "地产",
+        value: '50001',
+        checked: false,
+      },{
         name: '其他',
         value: '6',
         checked: false,
       }],
     }],
-
     activeIndex: 0,         //tab切换下标
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
     tabsName: ['金额','类型','行业'],   //筛选类型
     str: {
-      AmountOfMoney: [{ minThreshold: 0, maxThreshold:1}],     //金额
-      releaseTypeList: [{ releaseType:'全部'}],                //类型
-      industryChoiceList: [{ industryChoice:'全部'}],            //行业
+      AmountOfMoney: [{
+        minThreshold:1,
+        maxThreshold:5,i:1
+      }],                           //金额
+      releaseTypeList: [],          //类型
+      industryChoiceList: [],       //行业
     },
-    num:0,                  //获取选中的价格索引，控制样式
+    num:1,                  //获取选中的价格索引，控制样式
     list:[],                //发布信息数据
     pagenum:0,              //分页，第几业
+    pagesize:20,            //返回数据量
     isCaidan:true,          //底部菜单是否显示
-
-    dahuo:1,                 //搭伙菜单
-    personal:1,              //个人菜单
-
-    data:null                 //请求参数
+    dahuo:1,                //搭伙菜单
+    personal:1,             //个人菜单
+    data:null               //请求参数
   },
-  //复选
+
+  //筛选复选
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     //得到activeIndex
     var index = e.currentTarget.dataset.index;
     //得到str
     var str = this.data.str;
     //得到tabs
-    var tabs = this.data.tabs, values = e.detail.value;
-    this.setData({
-      tabs: tabs,
-      str: str
-    });
-    console.log("index:" + index); console.log("str:" + str); console.log(tabs[index]); console.log("values:" + values);
-    //遍历tabs
-    for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
-      //遍历tabs.content
-      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-        //判断
-        if (tabs[index].content[i].value == values[j]) {
-          if (tabs[index].name == '金额') {
+    var tabs = this.data.tabs;
+    var values = e.detail.value;
+
+    if (tabs[index].name == '金额') {
+      for (var j = 0; j < values.length; ++j) {
+        for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
+          if (tabs[index].content[i].value == values[j]) {
             tabs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
-            str.AmountOfMoney[0] = { 
-                minThreshold: tabs[index].content[i].minThreshold, 
-                maxThreshold: tabs[index].content[i].maxThreshold
-              };
+            str.AmountOfMoney[0] = {
+              minThreshold: tabs[index].content[i].minThreshold,
+              maxThreshold: tabs[index].content[i].maxThreshold, i: i
+            };
             console.log("tabs[index].name:" + tabs[index].name);
             break;
+          }else{
+            tabs[index].content[i].checked =false;
           }
-
-          if (tabs[index].name == '类型') {
+        }
+      }
+    } else if (tabs[index].name == '类型') {
+      for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
+        for (var j = 0; j < values.length; ++j) {
+          if (tabs[index].content[i].value == values[j]) {
+            if (tabs[index].content[i].checked == true) continue;
             tabs[index].content[i].checked = true;
-            str.releaseTypeList[j]={releaseType:tabs[index].content[i].name};
+            str.releaseTypeList.push({ releaseType: tabs[index].content[i].name, i: i });
             console.log("tabs[index].name:" + tabs[index].name);
             break;
+          } else {
+            //tabs[index].content[i].checked = false;
           }
-
-          if (tabs[index].name == '行业') {
+        }
+      }
+    } else if (tabs[index].name == '行业') {
+      for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
+        for (var j = 0; j < values.length; ++j) {
+          if (tabs[index].content[i].value == values[j]) {
+            if (tabs[index].content[i].checked == true) continue;
             tabs[index].content[i].checked = true;
-            str.industryChoiceList[j]={industryChoice:tabs[index].content[i].name};
+            str.industryChoiceList.push({ industryChoice: tabs[index].content[i].name, i: i });
             console.log("tabs[index].name:" + tabs[index].name);
             break;
+          } else {
+            //tabs[index].content[i].checked = false;
           }
-        } else {
-          tabs[index].content[i].checked = false;
         }
       }
     }
-
-    this.setData({
-      tabs: tabs,
-      str: str
-    });
+    this.setData({ tabs: tabs,  str: str  });
   },
-  //删除
+
+  //删除筛选条件
   clearBtn: function (e) {
-    console.log("删除了" + e.currentTarget.dataset.value);
-    var values = this.data.str;
+    var that=this;
+    var values = that.data.str;
     //得到name 
     var name = e.currentTarget.dataset.name;
     //得到index 
     var index = e.currentTarget.dataset.index;
-
+    var i = e.currentTarget.dataset.i;
+    //得到tabs
+    var tabs = that.data.tabs;
     //判断
     if (name == "AmountOfMoney") {
       values.AmountOfMoney.splice(index, 1);
+      tabs[0].content[i].checked=false;
     } else if (name == 'releaseTypeList') {
-      values.releaseTypeList.splice(index, 1);9
+      values.releaseTypeList.splice(index, 1);
+      tabs[1].content[i].checked = false;
     } else if (name == "industryChoiceList") {
       values.industryChoiceList.splice(index, 1);
+      tabs[2].content[i].checked = false;
+    }
+    that.setData({ tabs: tabs, str: values });
+  },
+
+  //重置筛选
+  bindtapReset: function (e) {
+    //得到str
+    var str = this.data.str;
+    //得到tabs
+    var tabs = this.data.tabs;
+    //遍历tabs
+    for (var i = 0, lenI = tabs.length; i < lenI; ++i) {
+      //遍历tabs.content
+      for (var j = 0, lenJ = tabs[i].content.length; j < lenJ; ++j) {
+        tabs[i].content[j].checked = false;
+      }
     }
 
+    //设置值
     this.setData({
-      str: values
+      tabs:tabs,
+      str: { AmountOfMoney: [{ minThreshold: 1, maxThreshold:5,i:1}],releaseTypeList: [],industryChoiceList: [] },
     });
   },
-  //重置并关闭筛选
-  bindtapReset: function (e) {
-    console.log("重置了");
-    this.setData({
-      str: {
-        AmountOfMoney: ['0-1万'],
-        releaseTypeList: [{ releaseType:'全部'}],
-        industryChoiceList: [{ industryChoice:'全部'}],
-      },
-      screen: this.data.screen == true ? false : true,
-    });
-  },
+
   //tab切换
   tabClick: function (e) {
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
+    this.setData({ sliderOffset: e.currentTarget.offsetLeft, activeIndex: e.currentTarget.id });
   },
+
   //筛选是否显示
   bindtapScreen:function(){
-    console.log("screen:" + this.data.screen);
-    this.setData({
-      screen: this.data.screen == true ? false : true,
-      isCaidan:false,
-    });
-    console.log("screen:" + this.data.screen);
+    this.setData({ screen: this.data.screen == true ? false : true, isCaidan: this.data.screen == true ?true:false });
   },
+
   //分享
   onShareAppMessage: function (e) {
-    return {
-      title: '分享',
-      path: '/page/user?id=123'
-    }
+    return { title: '分享', path: '/page/user?id=123' }
   },
+
   //是否显示选择价格
   bindtapButton:function(e){
-    console.log('是否显示选择价格  发生选择改变，携带值为', this.data.isPrices);
     this.setData({
       isPrices: this.data.isPrices == false ? true : false
     });
   },
+
   //选择价格
   bindtapPrices:function(e){
-    console.log('选择价格  发生选择改变，携带值为', e.currentTarget.dataset.index);
+    var that=this;
+    var max = e.currentTarget.dataset.max;
+    var min = e.currentTarget.dataset.min;
     var index=e.currentTarget.dataset.index;
-    this.setData({
-      priceIndex: index,
-      num:index,
-      isPrices: this.data.isPrices == false ? true : false
-    });
-  },
-  // 下拉刷新
-  upper: function (e) {
-    console.log("下拉刷新了");
-    var that =this;
-    that.data.pagenum=0;
+    var str= that.data.str;
+    str.AmountOfMoney=[{ minThreshold: min, maxThreshold: max ,i:index}];     //金额
     that.setData({
-      pagenum:0,
-      isCaidan:true,
-      list:[]
+      str:str,                 //筛选参数
+      pagenum: 0,
+      priceIndex: index,       //选择价格索引
+      list: [],                //发布信息数据
+      num: index,              //获取选中的价格索引，控制样式
+      isPrices: false          //关闭显示的价格
     });
-    that.requestData(that);
+
+    //调用删选
+    this.requestData(that);
   },
-  // 加载更多
-  lower: function (e) {
-    console.log("加载更多了");
-    var that = this;
-    var num = that.data.pagenum;
-    num++;
-    that.setData({
-      pagenum:num,
-      isCaidan: false
-    });
-    that.requestData(that);
-  },
-  //加载完成
-  closeToast: function (e) {
-    this.setData({
-      isHiddenToast: true
-    });
-  },
+
   //发布
   bindtapfabu:function(){
+    this.data.isPrices=false;
     wx.setStorageSync("currentCity", this.data.addressInfo);
     wx.navigateTo({
       url: '/pages/index/release/release',
     });
   },
+
   //获取定位地址
   getAddress:function(that){
-
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {
@@ -326,8 +324,12 @@ Page({
         }, function (res) {
           //判断状态
           if (res.data.status != -1) {
+
+            var city=res.data.result.ad_info.city;
+            if (city.lastIndexOf("市") != -1) city = city.substring(0,city.lastIndexOf("市"));
+            else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
             that.setData({
-              addressInfo: res.data.result.ad_info.city
+              addressInfo: city
             });
           } else {
             that.setData({
@@ -338,44 +340,40 @@ Page({
       }
     });
   },
+
   //页面加载
   onLoad: function () {
-    console.log(__config.basePath_web);
     //当前
-    var self = this;
+    var that = this;
     //定位
-    self.getAddress(self);
-
+    that.getAddress(that);
     //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
-    var cookie =  console.log(cookie);
-    var time = new Date().getTime();
-    console.log(time);
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    console.log(token);
+    var cookie = wx.getStorageSync("cookie");
+    if(cookie == "" ||cookie == null){
+      wx.redirectTo({
+        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+      });
+      return;
+    }
+    var user = wx.getStorageSync("user");
+    if (user == "" || user == null) {
+      wx.redirectTo({
+        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+      });
+      return;
+    }
 
-    //设置请求参数获取数据,默认0第一页
-    var data = {
-      timeStamp: time,
-      token: token,
-      reqJson: JSON.stringify({
-        nameSpace: 'releaseinfo',
-        scriptName: 'Query',
-        nameSpaceMap: {
-          releaseinfo: {
-            Query: [],
-          },
-          pagenum: self.pagenum,   //当前业
-          pagesize: 3,        //数据大小长度
-          pageable: 1         //是否分页
-        }
-      })
-    };
-    self.setData({
-      data: data,
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    //设置参数
+    that.setData({
+      cookie: cookie,          //请求cookie
+      time: time,              //请求时间
+      token: token,            //请求token
     });
 
-    this.requestData(self);
+    //调用默认请求
+    this.requestData(that);
 
     //设置页面高度
     this.setData({
@@ -386,112 +384,97 @@ Page({
     var sliderWidth = 100;//滑动条初始宽度
     wx.getSystemInfo({
       success: function (res) {
-        self.setData({
-          sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
     });
-
   },
+
   //筛选请求
-  bindtapOk:function(){
-    var self = this;
-
-    //必要参数
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
-    //定义查询参数
-    var query={};
-
-    //类型
-    var releaseTypeList = self.data.str.releaseTypeList;
-    if (releaseTypeList.length !=0)    query.releaseTypeList=releaseTypeList;
-    //行业
-    var industryChoiceList = self.data.str.industryChoiceList;
-    if (industryChoiceList.length !=0) query.industryChoiceList = industryChoiceList;
-    //金额
-    var AmountOfMoney = self.data.str.AmountOfMoney[0];
-    if (AmountOfMoney !=null){
-      query.minThreshold = AmountOfMoney.minThreshold; 
-      query.maxThreshold = AmountOfMoney.maxThreshold;
-    }
-
-    //设置请参数
-    var data = {
-      timeStamp: time,
-      token: token,
-      reqJson: JSON.stringify({
-        nameSpace: 'releaseinfo',
-        scriptName: 'Query',
-        nameSpace: "releaseinfo", scriptName: "Query", nameSpaceMap: {
-          releaseinfo: {
-            Query: [query]
-          }
-        },
-        pagenum: self.data.pagenum,   //当前业
-        pagesize: 3,                  //数据大小长度
-        pageable: 1                   //是否分页
-      }
-      )
-    };
-    self.setData({
-      data:data,
+  bindtapOk: function (e){
+    var that=this;
+    that.data.isPrices=false;
+    //设置参数值
+    that.setData({
+      list:[],                 //初始化list
+      pagenum:0,               //初始化
+      isCaidan:true,           //显示底部菜单
+      isPrices:false,          //隐藏价格
+      screen: false,           //隐藏删选      
     });
-
     //调用请求
-    this.requestData(self);
+    this.requestData(that);
   },
 
   //请求获取数据
-  requestData: function (self) {
-    //必要参数
-    console.log("cookie:" + wx.getStorageSync("cookie"));
-    var cookie = wx.getStorageSync("cookie");
+  requestData: function (that) { 
+    //定义查询参数
+    var query = {
+      pagenum: that.data.pagenum,          //当前业
+      pagesize: that.data.pagesize,        //数据大小长度
+      pageable: 1                          //是否分页
+    };
+    //地址 
+    var currentCity = that.data.addressInfo;
+    if (currentCity.length != 0) query.currentCity = currentCity;
 
-    //请求获取发布信息,
+    //类型
+    var releaseTypeList = that.data.str.releaseTypeList;
+    if (releaseTypeList.length != 0) query.releaseTypeList = releaseTypeList;
+    //行业
+    var industryChoiceList = that.data.str.industryChoiceList;
+    if (industryChoiceList.length != 0) query.industryChoiceList = industryChoiceList;
+    //金额
+    var AmountOfMoney = that.data.str.AmountOfMoney;
+    if (AmountOfMoney.length != 0) {
+      query.minThreshold = AmountOfMoney[0].minThreshold;
+      if (AmountOfMoney[0].maxThreshold!=null)query.maxThreshold = AmountOfMoney[0].maxThreshold;
+    }
+
+    //发送请求  
     wx.request({
       url: __config.basePath_web+"api/exe/get",
       method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
+      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
+      data: {
+        timeStamp: that.data.time,
+        token: that.data.token,
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [query],
+            },
+          }
+        })
       },
-      data: self.data.data,
       success: function (res) {
-        var pageList=self.data.list;
+        var pageList = that.data.list;
         //得到数据
         var list = res.data.rows;
+        if(list == null || list.length == 0) return;
+
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = self.getDate(list[i].cdate);
+          var strTime = that.getDate(list[i].cdate);
+          if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
         }
-
+        pageList.reverse();
         //设置数据，提示框
-        self.setData({
-          isHiddenLoading: true,
-          isHiddenToast: false,
+        that.setData({
           list: pageList
         });
-        self.update();
-        console.log("成功了");
       },
-      fail: function (res) {
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
+      fail: function (res) {},
+      complete: function () {}
     });
   },
+
   //获取时间差
   getDate:function(date) {
     var date1 = new Date(date);    //开始时间
@@ -521,8 +504,8 @@ Page({
       return hours + "小时";
     }
 
-      //计算相差分钟数
-      var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
+    //计算相差分钟数
+    var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
     var minutes = Math.floor(leave2 / (60 * 1000));
     if(minutes != 0) {
       return minutes + "分钟";
@@ -535,17 +518,60 @@ Page({
       return seconds + "秒";
     }
   },
+
   //搭伙
   bindtapDahuo: function () {
     wx.redirectTo({
       url: '/pages/index/index',
     });
   },
+
   //个人
   bindtapUser: function () {
     wx.redirectTo({
       url: '/pages/personal/personal',
     })
+  },
+
+  /**
+  * 生命周期函数--监听页面显示
+  */
+  onShow: function () {
+    
+  },
+
+  onHide:function(){
+    this.data.isPrices = false;
+  },
+
+  /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+  onPullDownRefresh: function () {
+    var that = this;
+    that.setData({
+      pagenum: 0,         //第几页
+      isPrices:false,
+      isCaidan: true,    //显示底部菜单
+      list: []           //发布信息数据    
+    });
+    that.requestData(that);
+    //下拉完成后执行回退
+    wx.stopPullDownRefresh();
+  },
+
+  /**
+ * 页面上拉触底事件的处理函数
+ */
+  onReachBottom: function () {
+    var that = this;
+    var num = that.data.pagenum;
+    num++;
+    that.setData({
+      pagenum: num,
+      isPrices:false,
+    });
+    that.requestData(that);
   }
 });
 

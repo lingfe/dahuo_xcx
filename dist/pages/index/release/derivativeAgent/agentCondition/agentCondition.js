@@ -13,15 +13,21 @@ Page({
    */
   data: {
     agentCondition: null,
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    num:0
   },
   //获取值
   dataChange: function (e) {
-    this.data.agentCondition = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      agentCondition: e.detail.value
+    });
   },
 
   //保存产品亮点
@@ -29,36 +35,17 @@ Page({
     var agentCondition = this.data.agentCondition;
     //判断是否为空
     if (agentCondition == null) {
-      //提示
-      this.setData({
-        agentCondition: agentCondition,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
+      wx.showModal({
+        title: '内容不能为空!',
+        showCancel: false,
       });
     } else {
       //保存产品亮点
-      console.log(app.globalData.agentCondition);
       app.globalData.agentCondition = agentCondition;
-      console.log(app.globalData.agentCondition);
-      //提示
-      this.setData({
-        agentCondition: agentCondition,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      });
-    }
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.agentCondition != null) {
-      var agentCondition = this.data.agentCondition;
-      console.log('agentCondition：' + agentCondition);
       //得到打开的页面
       var pages = getCurrentPages();
-      var currPage = pages[pages.length - 1];  //当前页面
-      var prevPage = pages[pages.length - 2]; //上一个页面
+      var currPage = pages[pages.length - 1];   //当前页面
+      var prevPage = pages[pages.length - 2];   //上一个页面
 
       //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
       prevPage.setData({
@@ -67,12 +54,8 @@ Page({
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    });
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

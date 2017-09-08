@@ -13,48 +13,36 @@ Page({
    */
   data: {
     agencyRule: null,
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    num:0
   },
+  
   //获取值
   dataChange: function (e) {
-    this.data.agencyRule = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      agencyRule:e.detail.value
+    });
   },
 
-  //保存产品亮点
+  //保存代理规则
   savaagencyRule: function (e) {
     var agencyRule = this.data.agencyRule;
     //判断是否为空
     if (agencyRule == null) {
-      //提示
-      this.setData({
-        agencyRule: agencyRule,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
+      wx.showModal({
+        title: '代理规则不能为空!',
+        showCancel: false,
       });
     } else {
       //保存产品亮点
-      console.log(app.globalData.agencyRule);
       app.globalData.agencyRule = agencyRule;
-      console.log(app.globalData.agencyRule);
-      //提示
-      this.setData({
-        agencyRule: agencyRule,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      });
-    }
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.agencyRule != null) {
-      var agencyRule = this.data.agencyRule;
-      console.log('agencyRule：' + agencyRule);
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -67,12 +55,8 @@ Page({
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    });
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

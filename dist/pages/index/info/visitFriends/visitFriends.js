@@ -14,17 +14,15 @@ Page({
    */
   data: {
     list:[],      //数据集合
+    numBer:1      //帖子数量
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     var that = this;
-
     that.setData({
-      releaseId: options.releaseId,
       personalId: options.personalId
     }); 
 
@@ -148,7 +146,8 @@ Page({
     var cookie = wx.getStorageSync("cookie");
     var time = new Date().getTime();
     var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
+    //个人资料id
+    var personalId = self.data.personalId;
     //设置请求参数获取数据,默认0第一页
     var data = {
       timeStamp: time,
@@ -159,7 +158,7 @@ Page({
         nameSpaceMap: {
           releaseinfo: {
             Query: [{
-              id: self.data.releaseId    //发布信息id
+              personalId: personalId    //发布信息id
             }],
           }
         }
@@ -181,6 +180,7 @@ Page({
         var list = res.data.rows;
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = self.getDate(list[i].cdate);
+          if (list[i].imageArray != null) list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
@@ -188,8 +188,8 @@ Page({
         //设置值
         self.setData({
           list: pageList,
+          numBer:pageList.length
         });
-        console.log("成功了");
       },
       fail: function (res) {
         //提示
@@ -237,7 +237,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that = this;
+
+    //获取发布相关信息
+    that.requestData(that);
+    //获取个人信息
+    that.personalGetData(that);
+
+    //下拉完成后执行回退
+    wx.stopPullDownRefresh();
   },
 
   /**

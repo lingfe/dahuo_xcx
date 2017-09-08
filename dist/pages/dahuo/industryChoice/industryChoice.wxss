@@ -6,6 +6,7 @@
   page{
   background-color: #E8EFEF;
  }
+ /*
  .placeholder{
   width:auto;
   height:68rpx;
@@ -18,7 +19,17 @@
   line-height:68rpx;
   color:#fff;
   float:left;
+  
 
+}*/
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #2A8FBD;
+    height: 2.3em;
+    line-height: 2.3em;
+    color: #fff;
 }
 .placeholder::after{
   background-color:#14BAC8; 

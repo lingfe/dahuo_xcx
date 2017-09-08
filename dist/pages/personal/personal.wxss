@@ -73,7 +73,7 @@
 }
 .item-middle{
     flex: 1;
-    margin-left: 10rpx;
+    margin-left: 30rpx;
     padding-top: 51rpx;
     overflow: hidden;
 }
@@ -179,8 +179,10 @@ background-color: #fff;
   width: 716rpx;
   background-color: #fff;
   margin-top: 16rpx;
-  height: 286rpx;
+  height: auto;
+  max-height: 286rpx;
   float: left;
+  padding-bottom: 12rpx;
 }
 .neiro_img{
   width: 210rpx;
@@ -235,6 +237,7 @@ background-color: #fff;
   font-size: 30rpx;
   overflow: hidden; /*自动隐藏文字*/
   text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
 
 }
 .info{
@@ -361,40 +364,40 @@ border-radius:10px;
 }
 
 .weui-navbar__slider {
-position:absolute;
-content:" ";
-left:0;
-bottom:0;
-width:3em;
-height:8rpx;
-background-color:#1aad19;
--webkit-transition:-webkit-transform .3s;
-transition:-webkit-transform .3s;
-transition:transform .3s;
-transition:transform .3s,-webkit-transform .3s;
+  position:absolute;
+  content:" ";
+  left:0;
+  bottom:0;
+  width:3em;
+  height:8rpx;
+  background-color:#1aad19;
+  -webkit-transition:-webkit-transform .3s;
+  transition:-webkit-transform .3s;
+  transition:transform .3s;
+  transition:transform .3s,-webkit-transform .3s;
 
 }
 
 .info_data_info {
-padding-top:17rpx;
-padding-bottom:28rpx;
-margin-left:30rpx;
-width:645rpx;
-background-color:#fff;
-color:#666;
-font-size:22rpx;
-border-top:1rpx solid #F0F0F0;
-float:left;
-height:22px;
+  padding-top:17rpx;
+  margin-left:30rpx;
+  width:645rpx;
+  background-color:#fff;
+  color:#666;
+  font-size:22rpx;
+  border-top:1rpx solid #F0F0F0;
+  float:left;
+  height: auto;
+  max-height: 40px;
 
 }
 .info_info {
-margin-right:15rpx;
-color:#808080;
-font-size:22rpx;
-overflow:hidden;
-text-overflow:ellipsis;
--overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
+  margin-right:15rpx;
+  color:#808080;
+  font-size:22rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
 }
 
 /*底部菜单*/
@@ -402,38 +405,40 @@ text-overflow:ellipsis;
   width: 100%;
   height: 100rpx;
   position: fixed;
-  bottom: 0rpx;
+  bottom: -1rpx;
   background-color: #fff;
-  border-top: 1px #808080 solid;
   color:#000;
 }
 
 .bottomMenu_dahuo_img{
-width:59rpx;
-height:100rpx;
-left:182rpx;
-top:4rpx;
-position: relative;
-font-size:25rpx;
-overflow:hidden;
-text-overflow:ellipsis;
-float:left;
+  width:59rpx;
+  height:100rpx;
+  left:182rpx;
+  top:4rpx;
+  position: relative;
+  font-size:20rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  float:left;
+  color: gray;
 }
 
 .bottomMenu_user_img{
-width:59rpx;
-height:100rpx;
-position: relative;
-right:176rpx;
-top:4rpx;
-font-size:25rpx;
-overflow:hidden;
-text-overflow:ellipsis;
-float:right;
+  width:59rpx;
+  height:100rpx;
+  position: relative;
+  right:176rpx;
+  top:4rpx;
+  font-size:20rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  float:right;
+  color: gray;
 }
+
 .bottomMenu_img{
-  width: 50rpx;
-  height: 50rpx;
+  width: 22px;
+  height: 26px;
 }
 
 .selectedColor{

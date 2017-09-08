@@ -7,7 +7,6 @@
   background-color: #E8EFEF;
  }
 /**内容**/
-
 .neiro {
   width: 750rpx;
   background-color: #fff;
@@ -68,7 +67,6 @@
 
 .title {
   color: #000;
-  font-weight: bold;
   line-height: 50rpx;
   font-size: 32rpx;
   overflow: hidden; /**自动隐藏文字*/
@@ -90,6 +88,7 @@
   font-family: "微软雅黑";
   color: #808080;
   font-size: 24rpx;
+  padding-bottom: 15rpx;
   background-color: #fff;
   float: left;
   height: auto;
@@ -98,12 +97,31 @@
   text-overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
 }
 
+.weui-cell__ft_in-access::after {
+  content:" ";
+  display:inline-block;
+  height:8px;
+  width:8px;
+  border-width:1px 1px 0 0;
+  border-color:#14BAC8;
+  border-style:solid;
+  -webkit-transform:matrix(.71,.71,-.71,.71,0,0);
+  transform:matrix(.71,.71,-.71,.71,0,0);
+  position:relative;
+  top:-2px;
+  position:absolute;
+  top:50%;
+  margin-top:-4px;
+  right:2px;
+}
+
+
 .info_lingfe {
   margin-right: 15rpx;
   font-family: "微软雅黑";
   color: #808080;
   font-size: 24rpx;
-  margin-top: 25rpx;
+  margin-top: 28rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis; /**文字隐藏后添加省略号*/
   white-space: nowrap; /**强制不换行*/
@@ -135,7 +153,6 @@
 .select_text {
   text-align: center;
   color: #14bac8;
-  width: 726rpx;
   height: 40rpx;
   float: left;
   font-size: 24rpx;
@@ -176,7 +193,7 @@
 .image {
   width: 110rpx;
   height: 110rpx;
-  border-radius: 44rpx;
+  border-radius: 50px;
   background-color: #eee;
   margin-left: 10rpx;
 }
@@ -190,7 +207,6 @@
 
 .item-middle {
   flex: 1;
-  margin-left: 10rpx;
   padding-top: 13rpx;
   overflow: hidden;
 }
@@ -214,7 +230,7 @@
 
 .time {
   color: #808080;
-  font-size: 18rpx;
+  font-size: 22rpx;
   margin-right: 0rpx;
 }
 
@@ -241,6 +257,11 @@
 
 .weui-cell_access {
   color: inherit;
+}
+
+.weui-tab__panel_to {
+  height:100%;
+  float: left;
 }
 
 .handleBox {
@@ -270,7 +291,7 @@
   display: inline;
   float: left;
   font-family: "微软雅黑";
-  color: #000;
+  color: #808080;
   height: 53rpx;
   font-size: 24rpx;
   background-color: #fff;
@@ -305,21 +326,20 @@
   background-color: #fff;
   margin-top: 17rpx;
   float: left;
+  padding-bottom: 3em;
 }
 
-.weui-navbar {
-  display: -webkit-box;
-  display: -webkit-flex;
+.weui-navbar_to {
   display: flex;
-  position: absolute;
   z-index: 500;
-  top: 0;
+  float: left;
+  position: relative;
   width: 100%;
 }
 
 .weui-navbar__title {
   position: relative;
-  font-size:25rpx;
+  font-size:28rpx;
   font-family:"微软雅黑";
 }
 
@@ -331,8 +351,10 @@ weui-tab__panel {
   -webkit-overflow-scrolling: touch;
 }
 
-.weui-tab__content {
+.weui-tab__content_to{
   margin-top: 35rpx;
+  width: 100%;
+  height: auto;
 }
 
 .prices {
@@ -355,17 +377,17 @@ weui-tab__panel {
   font-family:"微软雅黑";
   margin-top: 0rpx;
   margin-left: 32rpx;
-  margin-right: 20rpx;
 }
 
 .data_info {
   margin-top: 0rpx;
   color: #808080;
-  width: 550rpx;
   font-family:"微软雅黑";
   height: auto;
   float: left;
   font-size: 24rpx;
+  width: 580rpx;
+  margin-left:20rpx;
 }
 .weui-btn-area{
   width:88%;
@@ -404,7 +426,7 @@ weui-tab__panel {
   background-color:rgba(0, 0, 0, 0.5);
   width: 100%;
   position: fixed;
-  z-index: 550;
+  z-index: 5500;
   height: 100%;
 }
 .jubao{
@@ -450,4 +472,5 @@ weui-tab__panel {
   top: 10rpx;
   right: 10rpx;
 }
+
 

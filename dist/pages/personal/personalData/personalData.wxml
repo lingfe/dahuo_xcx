@@ -8,10 +8,10 @@
     <view class="">
         <view class="margin_left">
             <!-- 头像  start -->
-            <view class="weui-cell_to weui-cells_to title" bindtap="bindtapUpdateName">
+            <view class="weui-cell_to weui-cells_to title" bindtap="chooseImage">
                 <view class="weui-cell__bd">头像</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">
-                  <view >
+                  <view>
                     <image class="img_title" src="{{userinfo.avatarUrl}}"/>
                   </view>
                 </view>
@@ -26,14 +26,14 @@
             <!-- 姓名  end -->
 
             <!-- 地域  start -->
-            <view class="weui-cell_to weui-cells_to weui-cells_after-title title" bindtap="bindtapSearch">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title title"  bindtap="bindtapSearch">
                 <view class="weui-cell__bd">地域</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.provinceName}}</view>
             </view>
             <!-- 地域  end -->
 
             <!-- 签名  start -->
-            <view class="weui-cell_to weui-cells_to title"  bindtap="bindtapAutograph">
+            <view class="weui-cell_to weui-cells_to title" id="{{userinfo.id}}" data-autograph="{{userinfo.memo}}"  bindtap="bindtapAutograph">
                 <view class="weui-cell__bd">签名</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.memo  == null ? '请填写' : userinfo.memo}}</view>
             </view>

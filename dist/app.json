@@ -1,21 +1,20 @@
 {
   "pages": [
-    "pages/wxUserinfoLogin/wxUserinfoLogin",
     "pages/index/index",
+    "pages/wxUserinfoLogin/wxUserinfoLogin",
+    "pages/index/info/report/report",
     "pages/dahuo/industryChoice/industryChoice",
+    "pages/index/info/visitFriends/visitFriends",
+    "example/index",
     "pages/personal/personal",
     "pages/index/info/info",
-    "pages/index/info/report/report",
     "pages/personal/personalData/updatePhone/updatePhone",
     "pages/dahuo/dahuo",
-    "example/index",
     "pages/personal/personalData/personalData",
     "pages/index/release/release",
     "pages/search/search",
     "pages/personal/personalData/updateName/updateName",
     "pages/personal/personalData/autograph/autograph",
-    "pages/index/info/visitFriends/visitFriends",
-    "pages/screen/screen",
     "pages/index/release/partnership/partnership",
     "pages/index/release/businessTransfer/businessTransfer",
     "pages/index/release/businessTransfer/geographicalPosition/geographicalPosition",
@@ -64,8 +63,7 @@
     "example/toast/toast",
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-    "example/searchbar/searchbar",
-    "pages/index/indexTo/indexTo"
+    "example/searchbar/searchbar"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -73,7 +71,7 @@
     "navigationBarBackgroundColor": "#14BAC8",
     "backgroundColor": "#f8f8f8",
     "enablePullDownRefresh": true,
-    "backgroundTextStyle": "light"
+    "backgroundTextStyle": "dark"
   },
   "networkTimeout": {
     "request": 100000,

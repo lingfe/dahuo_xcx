@@ -5,7 +5,7 @@
  * 
  * */
   page{
-  background-color: #E8EFEF;
+  background-color: #E8EFEF;  
  }
 .container{
   width: 750rpx;
@@ -28,7 +28,7 @@
     background-color:#fff; 
     border-radius:8px;
     margin-left: 17rpx;
-    height: 200px;
+    height: 164px;
     z-index: 0;
     /*
       -webkit-box-shadow:inset 0 0 10px #0CC;  
@@ -62,12 +62,12 @@
   padding:32rpx;
   width:119px;
   font-size:25rpx;
-  height:160px;
+  height:130px;
 
 }
 .border_bottom{
   width: 262rpx;
-  height: 31px;
+  height: 30px;
   text-align: center;
   border-bottom: solid #F0F0F0 1rpx;
 }
@@ -104,7 +104,7 @@
   margin-left: 3%;
   height: 80rpx;
   text-align: center;
-  font-size: 22rpx;
+  font-size: 24rpx;
   float: left;
   position: absolute;
 }
@@ -157,8 +157,10 @@
 .neiro {
   width: 716rpx;
   background-color: #fff;
-  height: 286rpx;
+  height: auto;
+  max-height: 286rpx;
   margin-top: 16rpx;
+  padding-bottom: 12rpx;
   float: left;
 }
 .neiro_img{
@@ -212,8 +214,9 @@
   color: #14BAC8;
   line-height: 50rpx;
   font-size: 30rpx;
-  overflow: hidden; /*自动隐藏文字*/
-  text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
 
 }
 .info{
@@ -241,7 +244,6 @@
 
 .data_info{
   padding-top: 17rpx;
-  padding-bottom: 28rpx;
   margin-left: 30rpx;
   width: 645rpx;
   background-color: #fff;
@@ -249,7 +251,8 @@
   font-size: 22rpx;
   border-top: 1rpx solid #F0F0F0;
   float: left;
-  height: 22px;
+  height: auto;
+  max-height: 36px;
 }
 
 /** 发布样式 **/
@@ -287,7 +290,14 @@
   top: -1rpx;
   background-color:rgba(0, 0, 0, 0.5);
 }
-
+.scressClose{
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  width: 218rpx;
+  height: 100%;
+  background-color:rgba(0, 0, 0, 0.5);
+}
 .page__bdScreen {
   height: 100%;
   width: 600rpx;
@@ -299,7 +309,7 @@
 
 .www{
   width:150rpx;
-  height: 700rpx;
+  height: 1000rpx;
   background-color: #fff;
   border-right:1px solid #E4E4E4;
   float: left;
@@ -314,6 +324,7 @@
 .botton_view{
   height: 400rpx;
   width: auto;
+  background-color: #fff;
   position:fixed;
   bottom: 0rpx;
   float: left;
@@ -323,6 +334,7 @@
   top: 0px;
   height: 400rpx;
   width: 550rpx;
+  overflow:scroll;
   float: left;
 }
 
@@ -405,7 +417,7 @@
 }
 .delete_text{
   float: left;
-  margin-left: 10rpx;
+  margin-left: 28rpx;
   font-size: 24rpx;
 }
 .delete_image{
@@ -423,40 +435,53 @@
   width: 100%;
   height: 100rpx;
   position: fixed;
-  bottom: 0rpx;
+  bottom: -1rpx;
   background-color: #fff;
-  border-top: 1px #808080 solid;
-  color:#000;
 }
 
 .bottomMenu_dahuo_img{
-width:59rpx;
-height:100rpx;
-left:182rpx;
-top:4rpx;
-position: relative;
-font-size:25rpx;
-overflow:hidden;
-text-overflow:ellipsis;
-float:left;
+  width:59rpx;
+  height:100rpx;
+  left:182rpx;
+  top:4rpx;
+  position: relative;
+  font-size:20rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  float:left;
+  color: Grey;
 }
 
 .bottomMenu_user_img{
-width:59rpx;
-height:100rpx;
-position: relative;
-right:176rpx;
-top:4rpx;
-font-size:25rpx;
-overflow:hidden;
-text-overflow:ellipsis;
-float:right;
+  width:59rpx;
+  height:100rpx;
+  position: relative;
+  right:176rpx;
+  top:4rpx;
+  font-size:20rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  float:right;
+  color: Grey;
 }
 .bottomMenu_img{
-  width: 50rpx;
-  height: 50rpx;
+  width: 22px;
+  height: 26px;
 }
 
 .selectedColor{
   color: #5E7E88;
+}
+
+/* 沟沟 */
+.img_wh{
+  width:16px;
+  height:11px;
+}
+
+/* 变行 */
+.line{
+  width:100%;
+  height:58px;
+  float: left;
 }

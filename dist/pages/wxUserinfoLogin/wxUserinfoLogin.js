@@ -15,6 +15,7 @@ Page({
   data: {   
     text:'..',              //文本
   }, 
+  
   /**
    * 确定登录
    */
@@ -22,7 +23,6 @@ Page({
     //发起登录请求，得到code
     wx.login({
       success: function (res) {
-        console.log(res);
         //获取登录信息
         wx.getUserInfo({
           success: function (res2) {//获取userinfo成功
@@ -33,7 +33,6 @@ Page({
               header: { "Content-Type": "application/x-www-form-urlencoded"},
               url: __config.basePath_sys+'lg/wxLg/3DF7469FD3A1485B95ED16ED794780A8/' + res.code,
               success: function (res) { //请求成功！
-                console.log(res);
                 if (res.data.status === 1) {
                   //提示
                   wx.showToast({
@@ -44,16 +43,18 @@ Page({
 
                   //得到cookie
                   var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0] + ";" + res.header["Set-Cookie"].split(",")[1].split(";")[0];
-                  console.log(cookie);
                   //保存在本地缓存中
                   wx.setStorage({
                     key: 'cookie',
                     data: cookie
                   });
+
                   //得到个人id，保存在本地缓存中
                   var personalId = res.data.rows.id;
+                  var user = res.data.rows;
                   wx.setStorageSync("personalId", personalId);
-                  
+                  wx.setStorageSync("user",user );
+
                   //登录成功！跳转到首页
                   wx.redirectTo({
                     url: '/pages/index/index',

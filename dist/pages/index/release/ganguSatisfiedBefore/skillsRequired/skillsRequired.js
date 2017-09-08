@@ -12,48 +12,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    skillsRequired: '',
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    resourceRequirements: '',
+    num:0
   },
+
   //获取值
   dataChange: function (e) {
-    this.data.skillsRequired = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      resourceRequirements:e.detail.value
+    });
   },
+
   //保存收益描述
   savaskillsRequired: function () {
-    var skillsRequired = this.data.skillsRequired;
+    var resourceRequirements = this.data.resourceRequirements;
     //判断是否为空
-    if (skillsRequired == null) {
-      //提示
-      this.setData({
-        skillsRequired: skillsRequired,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
-      })
+    if (resourceRequirements == null) {
+      wx.showModal({
+        title: '内容不能为空!',
+        showCancel: false,
+      });
     } else {
       //保存项目描述到app
-      console.log(app.globalData.skillsRequired);
-      app.globalData.skillsRequired = skillsRequired;
-      console.log(app.globalData.skillsRequired);
-      //提示
-      this.setData({
-        skillsRequired: skillsRequired,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      });
-    }
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.skillsRequired != null) {
-      var skillsRequired = this.data.skillsRequired;
-      console.log('skillsRequired:' + skillsRequired);
+      app.globalData.resourceRequirements = resourceRequirements;
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -61,24 +50,20 @@ Page({
 
       //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
       prevPage.setData({
-        skillsRequired: skillsRequired
+        resourceRequirements: resourceRequirements
       })
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     //重新赋值
     this.setData({
-      skillsRequired: app.globalData.skillsRequired
+      resourceRequirements: app.globalData.resourceRequirements
     });
   },
 

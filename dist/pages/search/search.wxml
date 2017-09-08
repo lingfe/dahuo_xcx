@@ -1,18 +1,32 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  地址
+ * 
+ * */-->
 <view class="page bg">
     <!--  搜索栏  start   -->
     <view class="page__bd">
+        <!-- 关键字  start -->
         <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border-bottom:1rpx solid #FFF;">
             <view class="bg_search">
                 <view class="weui-search-bar__box ">
-                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="请输入城市名称或字母" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <icon bindtap="bindtapSearch" class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" 
+                    class="weui-search-bar__input" 
+                    bindinput="bindinputValue" 
+                    placeholder="请输入城市名称或字母" 
+                    value="{{inputVal}}" 
+                    focus="{{inputShowed}}" />
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
                 </view>
             </view>
         </view>
-        <!-- 关键字  start -->
+        <!-- 关键字  end -->
+
+        <!-- 地址数据  start -->
         <view class="searchbar-result bg " wx:if="{{inputVal.length >= 0}}">
             <view class="weui-cells__title">当前城市</view>
             <view class="weui-cells__title weui-cell_bd bg stop_1" >
@@ -21,14 +35,21 @@
                 <view class="bg_b_text">{{addressInfo}}</view>
               </view>
             </view>
-            <view wx:for="{{address}}" wx:key="{{*this}}">
-              <view class="weui-cells__title ">{{item.letter}}</view>
-                  <view class="weui-cells__title border_bottom" hover-class="weui-cell_active" bindtap="bindtapGetAddres"  wx:for="{{item.info}}" wx:key="{{*this}}" data-info="{{item}}">
-                      <view class="font_left">{{item}}</view>     
+            <view wx:for="{{Letter26}}"  wx:key="{{*this}}">
+              <view class="weui-cells__title ">{{item}}</view>
+                  <view class="weui-cells__title border_bottom" 
+                  hover-class="weui-cell_active" 
+                  bindtap="bindtapGetAddres"  
+                  wx:for="{{address}}" 
+                  wx:for-item="lettt" 
+                  wx:if="{{item == lettt.grup}}"  
+                  wx:key="{{*this}}" 
+                  data-info="{{lettt.domainName}}">
+                      <view class="font_left">{{lettt.domainName}}</view>     
                   </view>
             </view>
         </view>
-        <!--  关键字  end   -->
+        <!--  地址数据  end   -->
     </view>
     <!--  搜索栏  end   -->
 </view>

@@ -24,9 +24,5 @@
             <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="showTopTips">确定保存</button>
         </view>
         <!-- 确定   start-->
-        
-        <!-- 自定义提示框   start-->
-        <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
-        <!-- 自定义提示框   end-->
 </view>
 

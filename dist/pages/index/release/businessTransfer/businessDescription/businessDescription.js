@@ -13,15 +13,22 @@ Page({
    */
   data: {
     businessDescription:null,
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    num:0
   },
+  
   //获取值
   dataChange: function (e) {
-    this.data.businessDescription = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      businessDescription: e.detail.value
+    });
   },
 
   //保存营业描述
@@ -29,32 +36,13 @@ Page({
     var businessDescription = this.data.businessDescription;
     //判断是否为空
     if (businessDescription == null) {
-      //提示
-      this.setData({
-        businessDescription: businessDescription,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
-      })
+      wx.showModal({
+        title: '营业描述不能为空！',
+        showCancel: false,
+      });
     } else {
       //保存地理位置
-      console.log(app.globalData.businessDescription);
       app.globalData.businessDescription = businessDescription;
-      console.log(app.globalData.businessDescription);
-      //提示
-      this.setData({
-        businessDescription: businessDescription,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      })
-    }
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.businessDescription != null) {
-      var businessDescription = this.data.businessDescription;
-      console.log('geographicalPosition：' + businessDescription);
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -67,12 +55,8 @@ Page({
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

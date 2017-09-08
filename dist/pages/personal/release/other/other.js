@@ -34,6 +34,7 @@ Page({
       ruhuoValue: null,
     });
   },
+
   //选择行业
   industryChoiceClick: function (e) {
     console.log('行业选择  发生选择改变，携带值为', e.detail.value);
@@ -41,6 +42,7 @@ Page({
       url: "/pages/dahuo/industryChoice/industryChoice"
     });
   },
+
   //项目描述
   projectDescriptionClick: function (e) {
     console.log("项目描述");
@@ -48,6 +50,7 @@ Page({
       url: "/pages/index/release/partnership/projectDescription/projectDescription"
     });
   },
+  
   //收益描述
   incomeDescriptionClick: function (e) {
     console.log("收益描述");
@@ -55,12 +58,14 @@ Page({
       url: "/pages/index/release/partnership/incomeDescription/incomeDescription"
     });
   },
+
   //阅读并同意,相关条约
   bindAgreeChange: function (e) {
     this.setData({
       isAgree: !!e.detail.value.length
     });
   },
+
   //提示框
   showModal: function (msg) {
     wx.showModal({
@@ -68,6 +73,7 @@ Page({
       showCancel: false,
     });
   },
+
   //表单提交
   formSubmit: function (e) {
     //标题
@@ -247,6 +253,7 @@ Page({
 
 
   },
+
   //删除图片
   bindtapImageDelete: function (e) {
     var img = e.currentTarget.dataset.img;
@@ -262,6 +269,7 @@ Page({
     });
     return false;
   },
+
   //获取 图片
   chooseImage: function (e) {
     var that = this;
@@ -276,12 +284,17 @@ Page({
       }
     })
   },
+
+  /**
+   * 图片预览
+   */
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

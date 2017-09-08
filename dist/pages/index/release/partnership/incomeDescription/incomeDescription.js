@@ -13,47 +13,36 @@ Page({
    */
   data: {
     incomeDescription:'',
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    num:0
   },
+  
   //获取值
   dataChange: function (e) {
-    this.data.incomeDescription = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      incomeDescription: e.detail.value
+    });
   },
+
   //保存收益描述
   savaincomeDescription:function(){
     var incomeDescription = this.data.incomeDescription;
     //判断是否为空
     if (incomeDescription == null) {
-      //提示
-      this.setData({
-        incomeDescription: incomeDescription,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
-      })
+      wx.showModal({
+        title: '收益描述不能为空!',
+        showCancel: false,
+      });
     } else {
       //保存项目描述到app
-      console.log(app.globalData.incomeDescription);
       app.globalData.incomeDescription = incomeDescription;
-      console.log(app.globalData.incomeDescription);
-      //提示
-      this.setData({
-        incomeDescription: incomeDescription,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      });
-    }
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.incomeDescription != null) {
-      var incomeDescription = this.data.incomeDescription;
-      console.log('incomeDescription:' + incomeDescription);
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -66,12 +55,8 @@ Page({
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -16,11 +16,14 @@
               </view>
               <view class="item-middle">
                     <view>
-                        <text class="title_lingfe">{{userinfo.realname}}<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;">{{userinfo.provinceName}},已发布3贴</text>
+                        <text class="title_lingfe">{{userinfo.realname}}<text style="margin-left:15rpx;font-size: 20rpx;color:#fff;"><text wx:if="{{userinfo.provinceName !=null}}">{{userinfo.provinceName}}</text><text wx:elif="{{userinfo.provinceName==null}}">火星</text>  已发布{{numBer}}贴</text>
                         </text>
                     </view>
                     <view>
-                        <text class="message">{{userinfo.memo}}</text>
+                        <text class="message" >
+                          <text wx:if="{{userinfo.memo !=null}}">{{userinfo.memo}}</text>
+                          <text wx:elif="{{userinfo.memo ==null}}">来自星星的我..还没有设置签名</text>
+                        </text>
                     </view>
               </view>
               <view class="item_right">
@@ -57,44 +60,26 @@
                       <view class="neiro" wx:for="{{list}}" wx:key="*this">
                         <view class="data_top">
                             <view class="float-btn"><button bindtap="bindtapRefresh" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
-                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">60天后自动下架</view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">{{item.timeNuber}}天后自动下架</view>
                         </view>
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                        <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
                           <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
                           <view class="data_biaoqian">
                               <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
                               <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-                              <view class="data_biaoqian_view">{{item.codate}}前</view>
+                              <view class="data_biaoqian_view">{{item.cdate}}前</view>
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapEdit" id="{{item.id}}" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" id="{{item.id}}" type="default" size="mini">下架</button></view>
+                            <view class="float-btn">
+                            <button  class="weui-btn mini-btn button_css" bindtap="bindtapEdit" id="{{item.id}}"  data-df="{{item.df}}" data-name="{{item.releaseType}}"  type="default" size="mini">编辑</button></view>
+                            <view class="float-btn">
+                            <button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" id="{{item.id}}" type="default" size="mini">下架</button></view>
                         </view>
                       </view>
 
-                      <view class="neiro">
-                        <view class="data_top">
-                            <view class="float-btn"><button style="" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
-                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">60天后自动下架</view>
-                        </view>
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
-                        <view class="neiro_data">
-                          <view class="data_titile title">花果园火锅店亏本转让</view>
-                          <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
-                          <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
-                              <view class="data_biaoqian_view">12分钟前</view>
-                          </view>
-                        </view>
-                        <view class="data_info info">
-                            <view class="float-btn"><button  bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业"  class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button  bindtap="bindtapOffTheShelf" class="weui-btn mini-btn button_css"  type="default" size="mini">下架</button></view>
-                        </view>
-                      </view>
                   </view>
                 </view>
                 <!-- 我的发布  end-->
@@ -102,47 +87,35 @@
                 <!-- 收藏夹  start-->                              
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <view class="dahuo_neiro">
-                    <navigator url="/pages/index/info/info" >
-                    <view class="neiro_286" wx:for="{{list}}" wx:key="*this">
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="*this">
+                    <view class="neiro_286">
+                        <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
                           <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
                           <view class="data_biaoqian">
                               <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
                               <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-                              <view class="data_biaoqian_view">{{item.codate}}前</view>
+                              <view class="data_biaoqian_view">{{item.cdate}}前</view>
                           </view>
                         </view>
                         <view class="info_data_info info_info">
-                          <!-- 项目描述 -->
-                          {{item.projectDescription == null ?'':item.projectDescription}}
-                          <!-- 收益描述 -->
-                          {{item.incomeDescription == null ?'' : item.incomeDescription}}
-                          <!-- 营业描述 -->
-                          {{item.businessDescription == null ?'':item.businessDescription}}
+                          <view wx:if="{{item.projectDescription != null }}">
+                            <!-- 项目描述 -->
+                            {{item.projectDescription}}
+                          </view>
+                          <view wx:elif="{{item.incomeDescription != null }}">
+                            <!-- 收益描述 -->
+                            {{item.incomeDescription == null ?'' : item.incomeDescription}}
+                          </view>
+                          <view wx:if="{{item.businessDescription != null }}">
+                            <!-- 营业描述 -->
+                            {{item.businessDescription == null ?'':item.businessDescription}}
+                          </view>
                         </view>
                     </view>
                     </navigator>
 
-                    <navigator url="/pages/index/info/info" >
-                    <view class="neiro_286">
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
-                        <view class="neiro_data">
-                          <view class="data_titile title">花果园火锅店亏本转让..</view>
-                          <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
-                          <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
-                              <view class="data_biaoqian_view">12分钟前</view>
-                          </view>
-                        </view>
-                        <view class="info_data_info info_info">无疑让我们看到一个微信对后续更大的期望。和新浪微博早期从明星战略着手不同，
-                                          微信此时已经有亿级的用户，挖掘自己用户的价值，为这个新的平台增加更优质的内容为，这个新的平台增
-                                          加更优质的内容为这个新的平台和新浪微博早期从明星战略着手不同
-                        </view>
-                    </view>
-                    </navigator>
                   </view>
                 </view>
                 <!-- 收藏夹  end-->
@@ -155,7 +128,7 @@
                             <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
                         </view>
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
+                        <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
                           <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
@@ -166,28 +139,7 @@
                           </view>
                         </view>
                         <view class="data_info info">
-                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>
-                        </view>
-                    </view>
-
-                    <view class="neiro">
-                        <view class="data_top">
-                            <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
-                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
-                        </view>
-                        <view class="neiro_img"><image src="/assets/images/zan.png"></image></view>
-                        <view class="neiro_data">
-                          <view class="data_titile title">花果园火锅店亏本转让sdfsdf..</view>
-                          <view class="data_pro">搭伙金额   <text>0.8</text>万</view>
-                          <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>生意转让</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>餐饮业</view>
-                              <view class="data_biaoqian_view">12分钟前</view>
-                          </view>
-                        </view>
-                        <view class="data_info info">
-                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-name="合伙创业" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
+                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-df="{{item.df}}" data-name="{{item.releaseType}}" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
                             <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>
                         </view>
                     </view>
@@ -204,10 +156,12 @@
 <!--item底部 start-->
 <view class="bottomMenu">
   <view bindtap="bindtapDahuo" class="bottomMenu_dahuo_img">
-      <image class="bottomMenu_img" src="/assets/images/dahuo_1.png"></image>搭伙
+      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_1.png"></image></view>
+      <view style="float:left;">搭伙</view>
   </view>
     <view bindtap="bindtapUser" class="bottomMenu_user_img selectedColor">
-      <image class="bottomMenu_img" src="/assets/images/user_0.png"></image>个人
+      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/user_0.png"></image></view>
+      <view style="float:left;">个人</view>
   </view>
 </view>
 <!--item底部 end-->

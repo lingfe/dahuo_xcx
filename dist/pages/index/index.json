@@ -1,5 +1,3 @@
 {
-  "tabBar":{
-    "list":[]
-  }  
+  "navigationBarTitleText": "首页"
 }

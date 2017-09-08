@@ -3,7 +3,9 @@
  *   描述:  举报
  * 
  * */
-
+var app = getApp();
+var utilMd5 = require('../../../../utils/md5.js');
+import __config from '../../../../config/config'
 Page({
 
   /**
@@ -13,12 +15,117 @@ Page({
     files:[],         //图片数据
     num:0,            //计数
   },
+  //举报
+  JB: function () {
+    var that = this;
+    var imageArray = that.data.files;
+    //必要参数
+    var cookie = wx.getStorageSync("cookie");
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    
+    //提示
+    wx.showToast({
+      title: '正在上传图片',
+      icon: 'loading',
+      duration: 3000,
+    });
+    //上传图片数组
+    uploadimg(imageArray.splice(0, 1), [], imageArray);
+    //多张图片上传
+    function uploadimg(path, pathArr, dataArr) {
+      wx.uploadFile({
+        url: __config.domain,                       //开发者服务器 url
+        filePath: path[0],                          //要上传文件资源的路径
+        name: 'file',                                //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+        header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+
+        formData: null,                             //参数(HTTP 请求中其他额外的 form data)
+        success: (resp) => {                         //接口调用成功的回调函数
+          var json = JSON.parse(resp.data);
+          pathArr.push(json[0])
+          if (dataArr.length > 0) {
+            //递归
+            uploadimg(dataArr.splice(0, 1), pathArr, dataArr);
+          } else {
+            //调用请求举报
+            reqSetData(pathArr.join(","));
+          }
+        },
+        fail: function (res) {                         //接口调用失败的回调函数
+          //提示
+          wx.showToast({
+            title: '上传文件失败',
+            icon: 'loading',
+            duration: 3000,
+          });
+
+          return;
+        },
+        complete: function () {                     //接口调用结束的回调函数（调用成功、失败都会执行）
+
+        }
+      });
+    }
+    
+    //请求更新
+    function reqSetData(pathArr) {
+      wx.request({
+        url: __config.basePath_web + "api/exe/save",
+        method: "POST",
+        header: {
+          cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data: {
+          timeStamp: time,
+          token: token,
+          reqJson: JSON.stringify({
+            nameSpace: 'reportinfo',
+            scriptName: 'Query',
+            cudScriptName: 'Update',
+            nameSpaceMap: {
+              reportinfo: {
+                Query: [{
+                  releaseId: that.data.releaseId,                                    //发布信息id
+                  personalId: that.data.personalId,
+                  reportTypeId: that.data.reportTypeId,
+                  remark: that.data.remark,
+                  imageArray: pathArr
+                }]
+              }
+            }
+          })
+        },
+        success: function (res) {
+          that.setData({
+            jb: that.data.jb == true ? false : true
+          });
+          //提示
+          wx.showToast({
+            title: '举报成功!',
+            icon: 'loading',
+            duration: 3000,
+          });
+        },
+        fail: function (res) { },
+        complete: function () { }
+      });
+
+    }
+  },
   //表单提交
   submitForm:function(e){
+    this.JB();
+
     wx.switchTab({
       url: '/pages/index/index',
     });
   },
+
   //内容计数
   bindconfirmValue:function(e){
     console.log(e.detail.value.length);
@@ -31,6 +138,7 @@ Page({
     }
     this.setData({
       num: e.detail.value.length,
+      remark:e.detail.value,
     });
   },
   //删除图片
@@ -86,7 +194,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      releaseId: options.releaseId,
+      personalId: options.personalId,
+      reportTypeId: options.reportTypeId
+    });
   },
 
   /**

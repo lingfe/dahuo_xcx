@@ -12,49 +12,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fundsLayout: '',
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    fundDistribution: '',
+    num:0
   },
   //获取值
   dataChange:function(e){
-    this.data.fundsLayout = e.detail.value;
+    if (e.detail.value.length > 500) {
+      wx.showModal({
+        title: '内容的长度不能打大于500',
+        showCancel: false,
+      });
+      return;
+    }
+    this.setData({
+      num: e.detail.value.length,
+      fundDistribution: e.detail.value
+    });
   },
 
   //保存资金布局
   bindtapFundsLayout: function (e){
-    var fundsLayout = this.data.fundsLayout;
+    var fundDistribution = this.data.fundDistribution;
     //判断是否为空
-    if (fundsLayout == null) {
+    if (fundDistribution == null) {
       //提示
-      this.setData({
-        fundsLayout: fundsLayout,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': '不能为空'
+      wx.showModal({
+        title: '资金布局不能为空!',
+        showCancel: false,
       });
     } else {
-      //保存资金布局
-      console.log(app.globalData.fundsLayout);
-      app.globalData.fundsLayout = fundsLayout;
-      console.log(app.globalData.fundsLayout);
-      //提示
-      this.setData({
-        fundsLayout: fundsLayout,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
-      })
-    } 
-  },
-  //点击确定
-  confirm: function () {
-    //判断是否为空
-    if (this.data.fundsLayout != null) {
-      var fundsLayout = this.data.fundsLayout;
-      console.log('fundsLayout：'+fundsLayout);
+      //保存资金布局到app
+      app.globalData.fundDistribution = fundDistribution;
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
@@ -62,24 +50,20 @@ Page({
 
       //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
       prevPage.setData({
-        fundsLayout: fundsLayout
+        fundDistribution: fundDistribution
       })
       //返回上一页
       wx.navigateBack();
     }
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     //重新赋值
     this.setData({
-      fundsLayout:app.globalData.fundsLayout
+      fundDistribution: app.globalData.fundDistribution
     });
   },
 

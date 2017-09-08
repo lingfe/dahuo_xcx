@@ -1,3 +1,10 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-7-11
+ *   描述:  地址
+ * 
+ * */
+ 
  page{
   background-color: #E8EFEF;
  }
@@ -35,8 +42,6 @@
 
 
 
-
-
 .bg{
   background-color: #E8EFEF;
 }
@@ -63,7 +68,7 @@
 .bg_b_img{
   margin-top: 11rpx;
   float: left;
-  margin-left: 20rpx;
+  margin-left: 52rpx;
 }
 .bg_b_img image{
   width: 40rpx;
@@ -71,7 +76,7 @@
 }
 .bg_b_text{
   margin-left: 14rpx;
-  margin-top: 0rpx;
+  margin-top: 8rpx;
   float: left;
 }
 
@@ -86,7 +91,7 @@
 
 .border_bottom{
   border-bottom:solid #DCDCDC 1rpx;
-  width: 88%;
+  width: 86%;
   margin-left: 24rpx;
 }
 .font_left{

@@ -15,15 +15,15 @@
                           <view style="float:left;" class="float-btn">
                             <view class="float-btn title title_top"><image src="/assets/images/info/title.png"></image>{{releaseInfo.title}}</view>
                             <view class="SC_JB" >
-                              <view class="float-btn_neiro" bindtap="bindtapSC"><image style="height:28rpx;width:28rpx;" src="/assets/images/sc{{sc}}.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapSC" data-rId="{{releaseInfo.id}}"><image style="height:28rpx;width:28rpx;" src="/assets/images/sc{{sc}}.png"></image></view>
                               <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/assets/images/info/jb.png"></image></view>
                             </view>
                             <view class="float-btn left_0">
                               <view class="float-btn_neiro ">
-                                {{releaseInfo.cdate}}前来过
+                                {{strTime}}
                               </view>
                               <view class="float-btn_neiro " >
-                                <span style="color: #14bac8;">32</span>人浏览
+                                <span style="color: #14bac8;">{{previewinCount}}</span>人浏览
                               </view>
                               <view class="float-btn_neiro ">
                                 <image src="/assets/images/info/type.png"></image>{{releaseInfo.releaseType}}
@@ -36,36 +36,51 @@
                       </view>
                       <view class="info" >
                         <view class="title_prics" style="height:{{ bl == true ? '': 'auto'}};" selection="true" >
-                        <span style="color: #000000;font-weight:bold;font-size: 24rpx;">项目描述:</span> 
-                          <!-- 项目描述 -->
-                          {{releaseInfo.projectDescription == null ?'':releaseInfo.projectDescription}}
-                          <!-- 收益描述 -->
-                          {{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}
-                          <!-- 营业描述 -->
-                          {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
+                          <view wx:if="{{releaseInfo.projectDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">项目描述:</span> 
+                            <!-- 项目描述 -->
+                            {{releaseInfo.projectDescription}}
+                          </view>
+                          <view wx:elif="{{releaseInfo.incomeDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">收益描述:</span> 
+                            <!-- 收益描述 -->
+                            {{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}
+                          </view>
+                          <view wx:if="{{releaseInfo.businessDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">营业描述:</span> 
+                            <!-- 营业描述 -->
+                            {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
+                          </view>
                         </view>
-                      <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl !=true ? '': 'none'}};"></view>
-                      </view>
-                      <view class="select_textONE" bindtap="bindtapSelectInfo">
-                          查看全文<image src="/assets/images/info.png"></image>
-                      </view>
+                        <!-- 查看全文 start -->
+                        <view wx:if="{{length == true}}">
+                          <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl !=true ? '': 'none'}};"></view>
+                          <view class="select_textONE" bindtap="bindtapSelectInfo">
+                              查看全文<image src="/assets/images/info.png"></image>
+                          </view>
+                        </view>
+                        <!-- 查看全文 end -->
+                        </view>
                     </view>
                     <!-- 项目基本信息  end -->
                     
                     <!-- 发布人基本信息  start -->
                     <view class="viewMy">
-                      <navigator url="/pages/index/info/visitFriends/visitFriends?releaseId={{releaseInfo.id}}&personalId={{userinfo.id}}">
+                      <navigator url="/pages/index/info/visitFriends/visitFriends?personalId={{userinfo.id}}">
                         <view class="item" >
                           <view class="item-left">
                                 <image src="{{userinfo.avatarUrl}}" class="image"/>
                           </view>
-                          <view class="item-middle">
+                          <view class="item-middle" style="margin-left: 30rpx;">
                                 <view>
                                     <text style="font-size:28rpx;" class="title">{{userinfo.realname}}</text>
-                                    <text class="lingfe_tie">{{userinfo.provinceName}},已发布3帖</text>
+                                    <text class="lingfe_tie"><text wx:if="{{userinfo.provinceName !=null}}">{{userinfo.provinceName}}</text><text wx:elif="{{userinfo.provinceName ==null}}">火星</text>   已发布{{numBer}}帖</text>
                                 </view>
                                 <view>
-                                    <text class="message">{{userinfo.memo}}</text>
+                                    <text class="message">
+                                      <text wx:if="{{userinfo.memo!=null}}">{{userinfo.memo}}</text>
+                                      <text wx:elif="{{userinfo.memo ==null}}">来自星星的我..还没有设置签名</text>
+                                    </text>
                                 </view>
                           </view>
                           <view class="item_right">
@@ -80,7 +95,7 @@
                     <!-- tab切换  start-->
                     <view class="weui-tab">
                       <!-- tab菜单  start-->
-                      <view class="weui-navbar" style="border:none;">
+                      <view class="weui-navbar_to" style="border:none;">
                           <block wx:for="{{tabs}}" wx:key="*this">
                               <view id="{{index}}" class="weui-navbar__item  {{activeIndex == index ? ' select_text' : ''}}" bindtap="tabClick">
                                   <view class="weui-navbar__title">{{item}}</view>
@@ -90,9 +105,9 @@
                       </view>
                       <!-- tab菜单  end-->
 
-                      <view class="weui-tab__panel">
+                      <view class="weui-tab__panel_to">
                           <!-- 项目细节  start-->
-                          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                          <view class="weui-tab__content_to" hidden="{{activeIndex != 0}}">
                             <!-- 项目详细信息  start-->
                             <!-- 入伙门槛 -->
                             <view class="prices">
@@ -140,7 +155,7 @@
                             <view class="prices" wx:if="{{releaseInfo.publisherIdentity !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">发布人身份:</view>
-                                    <view class="data_info">{{releaseInfo.publisherIdentity}} </view>
+                                    <view class="data_info" style="width: auto;">{{releaseInfo.publisherIdentity}} </view>
                                 </view>
                             </view>
                             <!-- 地理位置 -->
@@ -154,14 +169,14 @@
                             <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">经营面积:</view>
-                                    <view class="data_info">{{releaseInfo.operatingArea}} </view>
+                                    <view class="data_info">{{releaseInfo.operatingArea}} /平方</view>
                                 </view>
                             </view>
                             <!-- 每月租金 -->
                             <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">每月租金:</view>
-                                    <view class="data_info">{{releaseInfo.monthlyRent}} </view>
+                                    <view class="data_info">{{releaseInfo.monthlyRent}} /月</view>
                                 </view>
                             </view>
                             <!-- 经营描述 -->
@@ -196,7 +211,7 @@
                             <view class="prices" wx:if="{{releaseInfo.resourceRequirements !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">技能/资源要求:</view>
-                                    <view class="data_info">{{releaseInfo.resourceRequirements}} </view>
+                                    <view class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </view>
                                 </view>
                             </view>
                             <!-- 股份划分 -->
@@ -259,18 +274,15 @@
                             <view class="prices" wx:if="{{releaseInfo.teamIntroduction !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">公司/团队介绍:</view>
-                                    <view class="data_info">{{releaseInfo.teamIntroduction}} </view>
+                                    <view class="data_info"  style="width: auto;">{{releaseInfo.teamIntroduction}} </view>
                                 </view>
                             </view>
                             <!-- 项目详细信息  end-->
 
                             <!-- 图片  start-->
                             <view class="page-section page-section-gap">
-                              <view class="page-section-ctn">
-                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
-                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
-                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
-                                <image class="images_item" src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg"/>
+                              <view class="page-section-ctn" wx:for="{{imageArray}}" wx:key="*this">
+                                <image class="images_item" src="{{imgPass}}{{item}}"/>
                               </view>
                             </view>
                             <!-- 图片  end-->
@@ -286,39 +298,30 @@
                           <!-- 项目细节  end-->
 
                           <!-- 讨论区  start-->
-                          <view class="weui-tab__content"  style="height:auto;margin-bottom:70px;" hidden="{{activeIndex != 1}}">
+                          <view class="weui-tab__content_to"  style="margin-bottom:70px;" hidden="{{activeIndex != 1}}">
                             <view  wx:for="{{allContentList}}" wx:key="*this">
                               <view class="item">
                                   <view class="item-left">
-                                        <image src="http://img1.3lian.com/gif/more/11/201212/c011f2b2ab1a10d79fe931a786503d03.jpg" class="image"/>
+                                        <image src="{{item.avatarUrl}}" class="image"/>
                                   </view>
                                   <view class="item-middle">
                                         <view>
-                                            <text class="select_text" style="float:none;">{{item}}</text>
+                                            <text class="select_text" style="float:none;">{{item.remark}}</text>
                                         </view>
                                         <view>
-                                            <text style="width:575rpx;" class="data_info">你这个项目很不错啊！未来一定能够在互联网占据一定的地位！</text>
+                                            <text style="width:575rpx;" class="data_info">{{item.commentContent}}</text>
                                         </view>
                                         <view>
-                                            <text class="message">2017/7/12 16:00</text>
+                                            <text class="message">{{item.cdate}}</text>
                                         </view>
                                   </view>
                                   <view class="item_right">
-                                    <view bindtap="commentHuiFu" data-name="{{item}}"><text  class="time">回复</text></view>
+                                    <view bindtap="commentHuiFu" data-name="{{item.remark}}"><text  class="time">回复</text></view>
                                   </view>
                               </view>
                               <view  class="line"></view>
                             </view>
-
-                            <view class="handleBox">
-                              <view class="inputValue">
-                              <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
-                              <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
-                              </view>
-                              <view style="float:left;">
-                              <image class="faso" src="/assets/images/faso.png"  bindtap="submitTo" />
-                              </view>
-                            </view>
+                            <view  style="width:640rpx;"></view>
                         </view>
                         <!-- 讨论区  end-->
                       </view>
@@ -331,16 +334,28 @@
 <!-- 详细信息页面 end   -->
 
 <!-- 举报 start -->
-<view class="jubao_bg" wx:if="{{jb == true}}">
+<view class="jubao_bg" bindtap="bindtapJBclose" wx:if="{{jb == true}}">
   <view class="jubao" >
     <view class="jubao_title">举报事项</view>
-    <view class="jubao_info" bindtap="JB">垃圾或者广告信息</view>
-    <view class="jubao_info" bindtap="JB">内容与主题不符</view>
-    <view class="jubao_info" bindtap="JB">涉黄违法</view>
-    <view class="jubao_info" bindtap="JB">诈骗内容</view>
-    <view class="jubao_info" bindtap="JB">虚假（电话、描述虚假)</view>
-    <view class="jubao_info" bindtap="JB">中介冒充个人</view>
-    <view class="jubao_info" bindtap="otherReport">其他</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}"  data-jbName="垃圾或者广告信息">垃圾或者广告信息</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="内容与主题不符">内容与主题不符</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="涉黄违法">涉黄违法</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="诈骗内容">诈骗内容</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="虚假（电话、描述虚假)">虚假（电话、描述虚假)</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="中介冒充个人">中介冒充个人</view>
+    <view class="jubao_info" bindtap="otherReport" data-rid="{{releaseInfo.id}}" data-jbName="其他">其他</view>
   </view>
 </view>
 <!-- 举报 end -->
+
+<!-- 评论文本框  start-->
+<view class="handleBox" hidden="{{activeIndex != 1}}">
+  <view class="inputValue">
+    <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
+    <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+  </view>
+  <view style="float:left;">
+    <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="submitTo" />
+  </view>
+</view>
+<!-- 评论文本框  end-->
