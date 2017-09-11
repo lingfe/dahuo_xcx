@@ -182,7 +182,7 @@
 
           <!-- 提交按钮  start -->
           <view class="page__bd page__bd_spacing">
-                <button class="weui-btn"  form-type="submit" style="background-color:#14BAC8;border:none;"  type="primary" >发布</button>
+                <button class="weui-btn"  form-type="submit" style="background-color:#14BAC8;border:none;"  type="primary" >{{text}}</button>
           </view>
           <!-- 提交按钮  end -->  
         </form>

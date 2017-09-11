@@ -26,10 +26,11 @@ Page({
     productHighlights: null,            //产品亮点
     agentCondition: null,               //代理条件
     agencyRule: null,                   //代理规则
-    incomeDescription: null,            //收益描述
+    incomeDescription: '',            //收益描述
     phone: null,                        //电话号码
     currentCity: null,                  //当前城市
     imageArray: [],                   //图片
+    text: "发布",                     //默认
   },
   //代理金额
   bindinputValue: function (e) {
@@ -319,6 +320,11 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("projectDescription","");    //项目描述
+          wx.setStorageSync("incomeDescription","");     //收益描述
+
         },
         fail: function () {},
         complete: function () {}
@@ -405,6 +411,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId,options.df);
     }
@@ -490,7 +501,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+    });
   },
 
   /**

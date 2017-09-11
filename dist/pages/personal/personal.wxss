@@ -407,40 +407,45 @@ border-radius:10px;
   position: fixed;
   bottom: -1rpx;
   background-color: #fff;
-  color:#000;
 }
 
 .bottomMenu_dahuo_img{
-  width:59rpx;
+  width:42rpx;
   height:100rpx;
   left:182rpx;
-  top:4rpx;
   position: relative;
   font-size:20rpx;
   overflow:hidden;
   text-overflow:ellipsis;
   float:left;
-  color: gray;
+  color: Grey;
 }
 
 .bottomMenu_user_img{
-  width:59rpx;
+  width:42rpx;
   height:100rpx;
   position: relative;
   right:176rpx;
-  top:4rpx;
   font-size:20rpx;
   overflow:hidden;
   text-overflow:ellipsis;
   float:right;
-  color: gray;
+  color: Grey;
 }
-
 .bottomMenu_img{
-  width: 22px;
-  height: 26px;
+  width: 42rpx;
+  height: 27px;
 }
 
 .selectedColor{
   color: #5E7E88;
+}
+
+/* 发布信息状态显示 */
+.img_fabu{
+  position: absolute;
+  margin-top: -30rpx;
+  margin-left: 45rpx;
+  width: 156rpx;
+  height: 105rpx;
 }

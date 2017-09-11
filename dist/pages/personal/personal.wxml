@@ -29,7 +29,7 @@
               <view class="item_right">
                 <view bindtap="bindtapMy" id="{{userinfo.id}}"><text class="title_address">个人资料 ></text></view>
                 <view bindtap="bindtapService" session-from="weapp">
-                   <image src="/assets/images/service.png" class="image_service"/> 
+                   <image src="/assets/images/tzhi.png" class="image_service"/> 
                   <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
                 </view>
               </view>
@@ -62,7 +62,9 @@
                             <view class="float-btn"><button bindtap="bindtapRefresh" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">{{item.timeNuber}}天后自动下架</view>
                         </view>
-                        <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
+                        <view class="neiro_img">
+                          <image src="{{item.imageArray}}"></image>
+                        </view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
                           <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
@@ -73,6 +75,7 @@
                           </view>
                         </view>
                         <view class="data_info info">
+                            <image src='/assets/images/{{item.df}}.jpg' class='img_fabu'></image>
                             <view class="float-btn">
                             <button  class="weui-btn mini-btn button_css" bindtap="bindtapEdit" id="{{item.id}}"  data-df="{{item.df}}" data-name="{{item.releaseType}}"  type="default" size="mini">编辑</button></view>
                             <view class="float-btn">

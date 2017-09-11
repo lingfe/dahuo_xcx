@@ -116,7 +116,7 @@
 
                 <!-- 类型  start -->
                 <view class="" hidden="{{activeIndex != 1}}">                
-                  <checkbox-group style="overflow:scroll;height:700rpx;"  bindchange="checkboxChange" data-index="{{activeIndex}}">
+                  <checkbox-group style="overflow:scroll;height:350px;"  bindchange="checkboxChange" data-index="{{activeIndex}}">
                   <label  wx:for="{{tabs[activeIndex].content}}"  wx:key="{{*this}}">
                     <view class="weui-navbar__item stop">
                     <checkbox class="weui-check"  value="{{item.value}}" checked="{{item.checked}}"/>
@@ -134,7 +134,7 @@
 
                 <!-- 行业  start -->
                 <view class="" hidden="{{activeIndex != 2}}">                
-                  <checkbox-group style="overflow:scroll;height:700rpx;" bindchange="checkboxChange" data-index="{{activeIndex}}">
+                  <checkbox-group style="overflow:scroll;height:350px;" bindchange="checkboxChange" data-index="{{activeIndex}}">
                   <label wx:for="{{tabs[activeIndex].content}}" wx:key="{{*this}}">
                     <view class="weui-navbar__item stop">
                     <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>

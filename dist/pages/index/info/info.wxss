@@ -62,7 +62,8 @@
 .title_prics {
   margin-top: 0rpx;
   margin-left: 29rpx;
-  height: 99px;
+  height: 80px;
+  word-wrap: break-word;
 }
 
 .title {
@@ -94,7 +95,7 @@
   height: auto;
   width: 100%;
   overflow: hidden; /**自动隐藏文字*/
-  text-overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
 }
 
 .weui-cell__ft_in-access::after {
@@ -145,10 +146,14 @@
   color: #14bac8;
   width: 726rpx;
   height: 40rpx;
+  line-height: 40rpx;
   float: left;
   font-size: 24rpx;
   position: relative;
   padding: 13rpx;
+  margin-top: 0rpx;
+  margin-bottom: -15rpx;
+  background-color: #fff;
 }
 .select_text {
   text-align: center;
@@ -388,6 +393,7 @@ weui-tab__panel {
   font-size: 24rpx;
   width: 580rpx;
   margin-left:20rpx;
+   word-wrap: break-word;   /* 强制换行*/
 }
 .weui-btn-area{
   width:88%;

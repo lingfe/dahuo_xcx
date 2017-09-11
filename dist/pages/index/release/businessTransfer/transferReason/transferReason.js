@@ -4,7 +4,6 @@
  *   描述:  发布_生意转让_转让原因页面
  * 
  * */
-var app = getApp();
 
 Page({
 
@@ -41,17 +40,13 @@ Page({
         showCancel: false,
       });
     } else {
-      //保存转让原因
-      app.globalData.transferReason = transferReason;
       //得到打开的页面
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];  //当前页面
       var prevPage = pages[pages.length - 2];  //上一个页面
 
-      //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-      prevPage.setData({
-        transferReason: transferReason
-      });
+      //储存到缓存中
+      wx.setStorageSync("transferReason", transferReason);
       //返回上一页
       wx.navigateBack();
     }
@@ -63,7 +58,7 @@ Page({
   onLoad: function (options) {
     //重新赋值
     this.setData({
-      transferReason: app.globalData.transferReason
+      transferReason: wx.getStorageSync("transferReason")
     });
   },
 

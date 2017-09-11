@@ -50,8 +50,6 @@ App({
     globalData: {
       userInfo: null,
       fundDistribution: null,        //入伙门槛，需要金额，转让门槛..
-      projectDescription:null,  //项目描述
-      incomeDescription:null,   //收益描述
       teamIntroduction:null,           //公司/团队介绍
       geographicalPosition: null,      //地理位置
       businessDescription:null,       //营业描述

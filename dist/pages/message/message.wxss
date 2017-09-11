@@ -1,3 +1,12 @@
+  /**  
+ *   作者:  lingfe 
+ *   时间:  2017-9-8
+ *   描述:  通知页面
+ * 
+ * */
+  page{
+  background-color: #E8EFEF;  
+ }
 .container{
 display: block;
 }
@@ -8,8 +17,8 @@ display: block;
     padding-left: 25rpx;
     background-color: #F3F3F3;
     border-radius: 12rpx;
-
 }
+
 .serach_view_show{
     display: block;
     color: #808080;
@@ -32,12 +41,12 @@ display: block;
   padding: 8rpx;
   margin-left: 8rpx;
   margin-right: 8rpx;
-  margin-top: 8rpx;
   background-color: #fff;
 /**  border: 1rpx solid #eaeaea;
   border-bottom: 1rpx solid #d0d0d0;
   border-radius: 5rpx;*/
 }
+
 .item-left{
     margin-top: 15rpx;
     display:table-cell;
@@ -45,27 +54,30 @@ display: block;
 }
 
 .image{
-
-    width: 88rpx; 
-    height: 88rpx;
-    border-radius: 44rpx; 
+    margin-top: 10rpx;
+    width: 100rpx; 
+    height: 100rpx;
+    border-radius: 50rpx; 
     background-color: #eeeeee;
+}
+
+.image_right{
+    margin-top: 26rpx;
+    width: 100rpx; 
+    height: 100rpx;
+    border-radius: 20rpx;
 }
 
 .item-middle{
     flex: 1;
     margin-left: 10rpx;
-    padding-top: 13rpx;
     overflow: hidden;
 }
 .title{
   color: #000000;
   font-family:"微软雅黑";
-  font-weight:bold;
   line-height: 20rpx;
-  padding: 32rpx 16rpx,0,16rpx;
-  font-size: 22rpx;
-  margin-top: 60rpx;
+  font-size: 26rpx;
   overflow: hidden; /*自动隐藏文字*/
   text-overflow: ellipsis;/*文字隐藏后添加省略号*/
 
@@ -74,25 +86,22 @@ display: block;
   font-family:"微软雅黑";
   color: #808080;
   line-height: 10rpx;
-  font-size: 16rpx;
-  padding: 0 16rpx,0,16rpx;
+  font-size: 22rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
   white-space: nowrap;/**强制不换行*/
 }
 .item_right{
-    padding-top: 13rpx;
     overflow: hidden; 
 }
 .time{
     color:#808080;
     font-size: 18rpx;
 }
-.mark{
 
-    position: relative;
-    left:15rpx;
-    right: 35rpx;
+.mark{
+    position:absolute;
+    margin-left: 59rpx;
     padding-top: 4rpx;
     background-color:#F74c31; 
     text-align: center;
@@ -107,6 +116,4 @@ display: block;
     height: 1px;
     width:100%;
     background-color: #E0E1E2;
-}
-.text{
 }

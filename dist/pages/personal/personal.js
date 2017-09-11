@@ -209,7 +209,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: url +"?releaseId="+id+"&df="+df,
+      url: url +"?releaseId="+id+"&df="+df+"&text=保存",
     });
   },
   
@@ -288,7 +288,7 @@ Page({
   },
 
   //删除
-  bindtapDelete: function () {
+  bindtapDelete: function (e) {
     var that = this;
     wx.showModal({
       title: '消息删除',
@@ -298,6 +298,8 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
+          //发布信息id
+          var releaseId = e.currentTarget.id;
           //设置参数
           var data = {
             timeStamp: that.data.time,
@@ -309,7 +311,7 @@ Page({
               nameSpaceMap: {
                 releaseinfo: {
                   Query: [{
-                    id: that.data.releaseId,             //发布信息id
+                    id: releaseId,             //发布信息id
                   }],
                 }
               }
@@ -333,7 +335,10 @@ Page({
         method: "POST",
         header: {cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded"},
         data: that.data.data,
-        success: function (res) {},
+        success: function (res) {
+          //调用回收站
+          that.requestDataRecovery(that);
+        },
         fail: function (res) {},
         complete: function () {}
       });
@@ -466,6 +471,10 @@ Page({
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = that.getDate(list[i].cdate);
           if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
+          if (list[i].projectDescription!=null)list[i].projectDescription = list[i].projectDescription.substring(0,60);
+          if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0,60);
+          if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0,60);
+
           list[i].cdate = strTime.date;
           list[i].timeNuber = (60-strTime.timeNuber);
           //添加到当前数组
@@ -532,7 +541,7 @@ Page({
           nameSpaceMap: {
             releaseinfo: {
               Query: [{
-                personalId: that.data.personalId    //个人资料id
+                personalId: that.data.personalId,    //个人资料id
               }],
             }
           }
@@ -559,7 +568,7 @@ Page({
         nameSpaceMap: {
           collectioninfo: {
             Query: [{
-              personalId: that.data.personalId    //个人资料id
+              creator: that.data.personalId    //个人资料id
             }],
           }
         }

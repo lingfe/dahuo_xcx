@@ -23,11 +23,12 @@ Page({
     threshold: null,                    //入伙门槛
     industryChoice: null,               //行业选择
     productType: null,                  //产品种类
-    incomeDescription: null,            //收益描述
-    teamIntroduction: null,             //公司、团队介绍
+    incomeDescription: '',            //收益描述
+    teamIntroduction: '',             //公司、团队介绍
     phone: null,                        //电话号码
     currentCity: null,                  //当前城市
-    imageArray: []                    //图片数组
+    imageArray: [],                    //图片数组
+    text: "发布",                     //默认
   },
   //购入门槛
   bindinputValue: function (e) {
@@ -265,8 +266,8 @@ Page({
                   threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
                   industryChoice: industryChoice,           //行业选择
                   productType: productType,                 //产品种类
-                  incomeDescription: incomeDescription,     //收益描述
-                  teamIntroduction: teamIntroduction,       //公司、团队介绍
+                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+                  teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
                   imageArray:pathArr                              //图片数组
@@ -288,6 +289,10 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("incomeDescription", "");     //收益描述
+          wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
         },
         fail: function () {},
         complete: function () {}
@@ -375,6 +380,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId,options.df);
     }
@@ -458,7 +468,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+      teamIntroduction:wx.getStorageSync("teamIntroduction"),          //公司、团队介绍
+    });
   },
 
   /**

@@ -38,9 +38,8 @@ Page({
     else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
 
     prevPage.setData({
-      strObj: city,
-      addressInfo: city,                                        //首页地址
-      "userinfo.provinceName": city                             //个人地址
+      city: city,
+      "userinfo.provinceName": city,                             //个人地址
     });
     
     //返回上一页

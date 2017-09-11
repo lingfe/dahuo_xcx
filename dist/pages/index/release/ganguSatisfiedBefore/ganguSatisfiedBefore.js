@@ -22,12 +22,13 @@ Page({
     resourceRequirements: null,       //技能/资源要求
     industryChoice: null,             //行业选择
     shareDivision: ['出让10%的股权', '出让15%的股权', '出让20%的股权', '出让25%的股权'],//股份划分        
-    projectDescription: null,         //项目描述
-    incomeDescription: null,          //收益描述
-    teamIntroduction: null,           //公司、团队介绍
+    projectDescription: '',         //项目描述
+    incomeDescription: '',          //收益描述
+    teamIntroduction: '',           //公司、团队介绍
     phone: null,                      //电话号码
     currentCity: null,                //当前城市
-    imageArray: []                  //图片url
+    imageArray: [],                  //图片url
+    text: "发布",                     //默认
     
   },
   //技能/资源要求
@@ -280,9 +281,9 @@ Page({
                   resourceRequirements: resourceRequirements,//技能/资源要求
                   industryChoice: industryChoice,           //行业选择
                   shareDivision: shareDivision,             //股份划分
-                  projectDescription: projectDescription,   //项目描述
-                  incomeDescription: incomeDescription,     //收益描述
-                  teamIntroduction: teamIntroduction,       //公司、团队介绍
+                  projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+                  teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
                   imageArray: pathArr                            //图片url
@@ -304,6 +305,11 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("projectDescription", "");    //项目描述
+          wx.setStorageSync("incomeDescription", "");     //收益描述
+          wx.setStorageSync("teamIntroduction","");          //公司、团队介绍
         },
         fail: function () {},
         complete: function () {}
@@ -391,6 +397,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId,options.df);
     }
@@ -475,7 +486,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+      teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+    });
   },
 
   /**

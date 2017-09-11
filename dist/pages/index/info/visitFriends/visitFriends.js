@@ -181,6 +181,10 @@ Page({
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = self.getDate(list[i].cdate);
           if (list[i].imageArray != null) list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
+          if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 60);
+          if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 60);
+          if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 60);
+          
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);

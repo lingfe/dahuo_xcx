@@ -26,11 +26,12 @@ Page({
     publisherIdentity: null,          //发布人身份
     industryChoice: null,             //行业选择
     geographicalPosition: null,       //地理位置
-    businessDescription: null,        //营业描述
-    transferReason: null,             //转让原因
+    businessDescription: '',        //营业描述
+    transferReason: '',             //转让原因
     phone: null,                      //电话号码
     currentCity: null,                //当前城市
-    imageArray: []                  //图片
+    imageArray: [],                  //图片
+    text: "发布",                     //默认
   },
   //转让门槛，移出
   bindinputValue: function (e) {
@@ -84,10 +85,15 @@ Page({
   },
   //地理位置
   geographicalPositionClick:function(e){
-    console.log("地理位置");
-    wx.navigateTo({
-      url: "/pages/index/release/businessTransfer/geographicalPosition/geographicalPosition"
-    });
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          geographicalPosition: res.address
+        })
+      }
+    })
   },
   //营业描述
   businessDescriptionclick:function(){
@@ -336,8 +342,8 @@ Page({
                   publisherIdentity: publisherIdentity,     //发布人身份
                   industryChoice: industryChoice,           //行业选择
                   geographicalPosition: geographicalPosition,//地理位置
-                  businessDescription: businessDescription, //营业描述
-                  transferReason: transferReason,           //转让原因
+                  businessDescription: wx.getStorageSync("businessDescription"), //营业描述
+                  transferReason: wx.getStorageSync("transferReason"),           //转让原因
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
                   imageArray:pathArr                         //图片
@@ -359,6 +365,11 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清空缓存
+          wx.setStorageSync("businessDescription", "");     //营业描述
+          wx.setStorageSync("transferReason", "");          //转让原因
+
         },
         fail: function () {},
         complete: function () {}
@@ -446,6 +457,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId,options.df);
     }
@@ -532,7 +548,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      businessDescription: wx.getStorageSync("businessDescription"),    //营业描述
+      transferReason: wx.getStorageSync("transferReason"),              //转让原因
+    });
   },
 
   /**

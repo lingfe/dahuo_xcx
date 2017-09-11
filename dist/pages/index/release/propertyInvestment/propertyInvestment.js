@@ -23,12 +23,13 @@ Page({
     industryChoice: null,           //行业选择
     houseType:['商业房','楼房','农场房'], //房产类型
     geographicalPosition: null,     //地理位置
-    projectDescription: null,       //项目描述
-    incomeDescription: null,        //收益描述
-    teamIntroduction: null,         //公司、团队介绍
+    projectDescription: '',       //项目描述
+    incomeDescription: '',        //收益描述
+    teamIntroduction: '',         //公司、团队介绍
     phone: null,                    //电话号码
     currentCity: null,              //当前城市
-    imageArray: []                //图片数组
+    imageArray: [],                //图片数组
+    text: "发布",                     //默认
   },
   //投资金额
   bindinputValue: function (e) {
@@ -54,9 +55,15 @@ Page({
   //地理位置
   geographicalPositionClick: function (e) {
     console.log("地理位置");
-    wx.navigateTo({
-      url: "/pages/index/release/businessTransfer/geographicalPosition/geographicalPosition"
-    });
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          geographicalPosition: res.address
+        })
+      }
+    })
   },
   //资金布局
   fundsLayoutClick: function (e) {
@@ -301,9 +308,9 @@ Page({
                   industryChoice: industryChoice,           //行业选择
                   houseType: houseType,                     //房产类型
                   geographicalPosition: geographicalPosition,//地理位置
-                  projectDescription: projectDescription,   //项目描述
-                  incomeDescription: incomeDescription,     //收益描述
-                  teamIntroduction: teamIntroduction,       //公司、团队介绍
+                  projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+                  teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
                   imageArray: pathArr                          //图片数组
@@ -325,6 +332,11 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("projectDescription", "");    //项目描述
+          wx.setStorageSync("incomeDescription", "");     //收益描述
+          wx.setStorageSync("teamIntroduction", "");     //公司、团队介绍
         },
         fail: function () {},
         complete: function () {}
@@ -411,6 +423,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId,options.df);
     }
@@ -496,7 +513,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+      teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+    });
   },
 
   /**

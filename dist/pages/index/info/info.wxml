@@ -35,7 +35,7 @@
                           </view>
                       </view>
                       <view class="info" >
-                        <view class="title_prics" style="height:{{ bl == true ? '': 'auto'}};" selection="true" >
+                        <view class="title_prics" style="height:{{ bl != true ? '80px': 'auto'}};" selection="true" >
                           <view wx:if="{{releaseInfo.projectDescription != null }}">
                             <span style="color: #000000;font-size: 24rpx;">项目描述:</span> 
                             <!-- 项目描述 -->
@@ -54,7 +54,7 @@
                         </view>
                         <!-- 查看全文 start -->
                         <view wx:if="{{length == true}}">
-                          <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl !=true ? '': 'none'}};"></view>
+                          <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl!=true ? 'block': 'none'}};"></view>
                           <view class="select_textONE" bindtap="bindtapSelectInfo">
                               查看全文<image src="/assets/images/info.png"></image>
                           </view>
@@ -66,7 +66,7 @@
                     
                     <!-- 发布人基本信息  start -->
                     <view class="viewMy">
-                      <navigator url="/pages/index/info/visitFriends/visitFriends?personalId={{userinfo.id}}">
+                      <navigator open-type="reLaunch" url="/pages/index/info/visitFriends/visitFriends?personalId={{userinfo.id}}">
                         <view class="item" >
                           <view class="item-left">
                                 <image src="{{userinfo.avatarUrl}}" class="image"/>

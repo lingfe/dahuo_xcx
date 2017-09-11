@@ -652,7 +652,7 @@ Page({
 
         //设置值
         that.setData({
-          length: length>500?true:false,
+          length: length>100?true:false,
           releaseInfo: info,
           imageArray: info.imageArray!=null?info.imageArray.split(","):null,
           imgPass: __config.domainImage,

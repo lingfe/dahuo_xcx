@@ -26,14 +26,15 @@ Page({
     threshold: 0,                           //入伙门槛s
     industryChoice: null,                   //行业选择
     headquartersLocation: null,             //总部位置
-    fundDistribution: null,                 //资金布局
-    projectDescription: null,               //项目描述
-    incomeDescription: null,                //收益描述
+    fundDistribution: "",                 //资金布局
+    projectDescription: '',               //项目描述
+    incomeDescription: '',                //收益描述
     teamIntroduction: null,                 //公司、团队介绍
     throwInTheCity: null,                   //投放城市
     phone: null,                            //电话号码
     currentCity: null,                      //当前城市
-    imageArray: [] ,                      //数组
+    imageArray: [] ,                        //数组
+    text:"发布",                            //默认
   },
   //入伙门槛 ,移出
   bindinputValue: function (e) {
@@ -60,9 +61,15 @@ Page({
   //总部位置
   geographicalPositionClick: function (e) {
     console.log("总部位置");
-    wx.navigateTo({
-      url: "/pages/index/release/businessTransfer/geographicalPosition/geographicalPosition"
-    });
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          headquartersLocation: res.address
+        })
+      }
+    })
   },
   //资金布局
   fundsLayoutClick: function (e) {
@@ -317,10 +324,10 @@ Page({
                   threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
                   industryChoice: industryChoice,           //行业选择
                   headquartersLocation: headquartersLocation,//总部位置
-                  fundDistribution: fundDistribution,       //资金布局
-                  projectDescription: projectDescription,   //项目描述
-                  incomeDescription: incomeDescription,     //收益描述
-                  teamIntroduction: teamIntroduction,       //公司、团队介绍
+                  fundDistribution: wx.getStorageSync("fundDistribution"),       //资金布局
+                  projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+                  teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
                   throwInTheCity: throwInTheCity,           //投放城市
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
@@ -343,6 +350,12 @@ Page({
               });
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("projectDescription", "");    //项目描述
+          wx.setStorageSync("incomeDescription", "");     //收益描述
+          wx.setStorageSync("fundDistribution", "");      //资金布局
+          wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
         },
         fail: function () {
           console.log("失败了");
@@ -424,6 +437,8 @@ Page({
       }
     })
   },
+
+  //预览
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
@@ -435,6 +450,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text !=null){
+        this.setData({
+          text:options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId, options.df);
     }
@@ -521,7 +541,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //直接从缓存里面取
+    var that = this;
+    that.setData({
+      projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+      fundDistribution: wx.getStorageSync("fundDistribution"),        //资金布局  
+      teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+    });
   },
 
   /**

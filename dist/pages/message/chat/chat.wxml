@@ -1,12 +1,31 @@
 <view class="wrap"> 
     <view class="containerBox" style="">
        <view wx:key="{{index}}" wx:for="{{allContentList}}">
-            <view wx:key="{{index}}"  wx:if="{{index%2 == 1}}" class="textBox fl" style="">{{item.value}}</view>
-             <view wx:key="{{index}}"  wx:if="{{index%2 == 0}}" class="textBox fr">{{item.value}}</view>
+            <view wx:key="{{index}}"  wx:if="{{index%2 == 1}}" class="textBox fl" style="">
+              <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image_left"/>
+              <text class='text_left'>{{item.value}}</text>
+            </view>
+            <view wx:key="{{index}}"  wx:if="{{index%2 == 0}}" class="textBox fr">
+              <text class='text_right'>{{item.value}}</text>
+              <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+            </view>
        </view>
     </view>
-    <view class="handleBox">
+    
+    <!-- <view class="handleBox">
         <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputTemp}}" bindinput="bindKeyInput"/>
         <button type="submit" class="btn_submit" size="mini" bindtap="submitTo">发送</button>
+    </view> -->
+
+    <!-- 评论文本框  start-->
+    <view class="handleBox">
+      <view class="inputValue">
+        <input class="input_submit"  value="{{inputTemp}}" bindinput="bindKeyInput" placeholder="点击输入，开始聊天吧"/>
+      </view>
+      <view style="float:left;">
+        <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="submitTo" />
+      </view>
     </view>
+    <!-- 评论文本框  end-->
 </view>
+

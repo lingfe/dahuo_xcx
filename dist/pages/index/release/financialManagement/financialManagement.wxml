@@ -65,9 +65,9 @@
                     <view class="weui-label title">收益描述</view>
                 </view>
                 <view class="weui-cell__ft weui-cell__ft_in-access title">
-                    {{incomeDescription  == null ? '请填写' : ''}}
+                    {{incomeDescription  == '' ? '请填写' : ''}}
                     <input type="text" hidden="true" name="incomeDescription" value="{{incomeDescription}}" />
-                    <view wx:if="{{incomeDescription  != null}}">
+                    <view wx:if="{{incomeDescription  != ''}}">
                       <image class="img_wh" src="/assets/images/uii.png" />
                     </view>
                 </view>
@@ -80,9 +80,9 @@
                     <view class="weui-label title">公司/团队介绍</view>
                 </view>
                 <view  class="weui-cell__ft weui-cell__ft_in-access title">
-                    {{teamIntroduction  == null ? '请填写' : ''}}
+                    {{teamIntroduction  == '' ? '请填写' : ''}}
                     <input type="text" hidden="true" name="teamIntroduction" value="{{teamIntroduction}}" />
-                    <view wx:if="{{teamIntroduction  != null}}">
+                    <view wx:if="{{teamIntroduction  != ''}}">
                       <image class="img_wh" src="/assets/images/uii.png" />
                     </view>
                 </view>
@@ -143,7 +143,7 @@
 
           <!-- 提交按钮  start -->
           <view class="page__bd page__bd_spacing">
-                <button class="weui-btn"  form-type="submit" style="background-color:#14BAC8;border:none;" type="primary" >发布</button>
+                <button class="weui-btn"  form-type="submit" style="background-color:#14BAC8;border:none;" type="primary" >{{text}}</button>
           </view>
           <!-- 提交按钮  end -->  
         </form>

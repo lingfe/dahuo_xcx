@@ -20,10 +20,11 @@ Page({
     title: null,                              //标题
     threshold: 0,                             //入伙门槛
     industryChoice: null,                     //行业选择
-    projectDescription: null,                 //项目描述
-    incomeDescription: null,                  //收益描述
+    projectDescription: "",                   //项目描述
+    incomeDescription: "",                    //收益描述
     phone: null,                              //电话号码
     imageArray: [],                         //图片数组
+    text: "发布",                     //默认
   },
 
   //需要金额,移出
@@ -251,13 +252,14 @@ Page({
               releaseinfo: {
                 Query: [{
                   id: that.data.id,                                    //发布信息id
+                  df:4,                                       //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
                   releaseType: '其他',                        //发布类型
                   personalId: wx.getStorageSync("personalId"),      //个人资料id
                   title: title,                             //标题
                   threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
                   industryChoice: industryChoice,           //行业选择
-                  projectDescription: projectDescription,   //项目描述
-                  incomeDescription: incomeDescription,     //收益描述
+                  projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
                   phone: phone,                             //电话号码
                   currentCity: wx.getStorageSync("currentCity"), //当前城市
                   imageArray: pathArr                          //图片数组
@@ -279,6 +281,10 @@ Page({
                 url: "/pages/index/index",});
             }
           });
+
+          //清除缓存
+          wx.setStorageSync("projectDescription", "");    //项目描述
+          wx.setStorageSync("incomeDescription", "");     //收益描述
         },
         fail: function () {
           console.log("失败了");
@@ -376,6 +382,11 @@ Page({
    */
   onLoad: function (options) {
     if (options.releaseId != null) {
+      if (options.text != null) {
+        this.setData({
+          text: options.text
+        });
+      }
       //调用函数编辑
       this.getReleaseInfo(options.releaseId, options.df);
     }
@@ -456,7 +467,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //直接从缓存里面取
+    var that=this;
+    that.setData({
+      projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+    });
 
+    
   },
 
   /**

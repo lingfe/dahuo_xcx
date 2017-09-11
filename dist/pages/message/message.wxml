@@ -1,12 +1,19 @@
+<!--
+  /**  
+ *   作者:  lingfe 
+ *   时间:  2017-9-8
+ *   描述:  通知页面
+ * 
+ * */
+-->
 <view  stytle=" overflow-x: hidden; overflow-y: auto;">
-<view class="serach">
-<view class="serach_view_show" bindtap="bindtap"> 搜索搭伙人</view>
-</view>
   <view class="message__list">
      <block wx:for="{{messages}}">
+
         <navigator url="/pages/message/chat/chat">
           <view class="item" >
              <view class="item-left">
+                  <text wx:if="{{item.count !=0 }}" class="mark text">{{item.count}}</text>
                   <image src="{{item.url}}" class="image"/>
              </view>
              <view class="item-middle">
@@ -16,14 +23,17 @@
                   <view>
                       <text class="message">{{item.message}}</text>
                   </view>
+                  <view>
+                    <text class="time">{{item.time}}</text>
+                  </view>
             </view>
             <view class="item_right">
-                <view><text class="time">{{item.time}}</text></view>
-                <view class="mark" wx:if="{{item.count>0}}"><text class="text">{{item.count}}</text></view>
+                  <image src="{{item.url}}" class="image_right"/>
             </view>
          </view>
          <view  class="line"></view>
        </navigator>
+
     </block>
   </view>
 </view>

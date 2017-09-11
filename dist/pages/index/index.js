@@ -349,20 +349,6 @@ Page({
     that.getAddress(that);
     //必要参数
     var cookie = wx.getStorageSync("cookie");
-    if(cookie == "" ||cookie == null){
-      wx.redirectTo({
-        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
-      });
-      return;
-    }
-    var user = wx.getStorageSync("user");
-    if (user == "" || user == null) {
-      wx.redirectTo({
-        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
-      });
-      return;
-    }
-
     var time = new Date().getTime();
     var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
     //设置参数
@@ -412,6 +398,8 @@ Page({
   requestData: function (that) { 
     //定义查询参数
     var query = {
+      releaseTypeList:[],
+      industryChoiceList:[],
       pagenum: that.data.pagenum,          //当前业
       pagesize: that.data.pagesize,        //数据大小长度
       pageable: 1                          //是否分页
@@ -422,10 +410,22 @@ Page({
 
     //类型
     var releaseTypeList = that.data.str.releaseTypeList;
-    if (releaseTypeList.length != 0) query.releaseTypeList = releaseTypeList;
+    if (releaseTypeList.length != 0){
+      for (var i = 0; i < releaseTypeList.length; ++i) {
+        query.releaseTypeList[i] = releaseTypeList[i].releaseType;
+      }
+      query.releaseTypeList = query.releaseTypeList.join(",");
+    } 
+
     //行业
     var industryChoiceList = that.data.str.industryChoiceList;
-    if (industryChoiceList.length != 0) query.industryChoiceList = industryChoiceList;
+    if (industryChoiceList.length != 0) {
+      for(var i=0;i<industryChoiceList.length;++i){
+        query.industryChoiceList[i] = industryChoiceList[i].industryChoice;
+      }
+      query.industryChoiceList = query.industryChoiceList.join(",");
+    }
+
     //金额
     var AmountOfMoney = that.data.str.AmountOfMoney;
     if (AmountOfMoney.length != 0) {
@@ -460,6 +460,10 @@ Page({
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = that.getDate(list[i].cdate);
           if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
+          if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 60);
+          if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 60);
+          if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 60);
+
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
@@ -537,9 +541,23 @@ Page({
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
-    
+    //当前
+    var that=this;
+    //判断地址
+    if (that.data.addressInfo != that.data.city && that.data.city!=null){
+      that.setData({
+        pagenum: 0,         //第几页
+        addressInfo: that.data.city ,
+        isCaidan: true,    //显示底部菜单
+        list: []           //发布信息数据,清空   
+      });
+      that.requestData(that);
+    }
   },
 
+  /**
+   * 隐藏
+   */
   onHide:function(){
     this.data.isPrices = false;
   },
