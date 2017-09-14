@@ -281,8 +281,8 @@
 
                             <!-- 图片  start-->
                             <view class="page-section page-section-gap">
-                              <view class="page-section-ctn" wx:for="{{imageArray}}" wx:key="*this">
-                                <image class="images_item" src="{{imgPass}}{{item}}"/>
+                              <view class="page-section-ctn" wx:for="{{imageArray}}" bindlongtap="previewImage" id="{{item}}" wx:key="*this">
+                                <image mode="widthFix"  class="images_item" src="{{item}}"/>
                               </view>
                             </view>
                             <!-- 图片  end-->

@@ -276,7 +276,7 @@ Page({
             icon: 'ok',
             duration: 3000,
             success: function () {
-              wx.navigateTo({
+              wx.redirectTo({
                 //url: '/pages/index/info/info?releaseId='+res.data.rows[0].id+'&personalId='+res.data.rows[0].personalId,
                 url: "/pages/index/index",});
             }

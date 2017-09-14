@@ -34,15 +34,21 @@
     -->
 
     <view class="page_view">
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="餐饮业">餐饮业</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="餐饮">餐饮</view>
       <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="休闲娱乐">休闲娱乐</view>
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="旅游／酒店业">旅游／酒店业</view>
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="美容/美发/化妆品">美容/美发/化妆品</view>
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="服装与百货">服装与百货</view>
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="汽车行业">汽车行业</view>
-      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="建筑工程">建筑工程</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="旅游与酒店">旅游与酒店</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="美发美容">美容美发</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="教育">教育</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="服饰鞋包">服饰鞋包</view>
       <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="生活服务">生活服务</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="汽车">汽车</view>
       <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="地产">地产</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="金融">金融</view>   
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="家装建材">家装建材</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="百货超市">百货超市</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="医疗保健">医疗保健</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="建筑工程">建筑工程</view>
+      <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="工厂">工厂</view>
       <view class="placeholder" bindtap="bindtapGetIndustryChoice" data-name="其他">其他</view>
     </view>
     <view class="page_view">

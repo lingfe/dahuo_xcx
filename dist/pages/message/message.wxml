@@ -8,27 +8,29 @@
 -->
 <view  stytle=" overflow-x: hidden; overflow-y: auto;">
   <view class="message__list">
-     <block wx:for="{{messages}}">
-
-        <navigator url="/pages/message/chat/chat">
-          <view class="item" >
+     <block wx:for="{{messages}}" wx:key="{{*this}}">
+        <navigator bindlongpress='bindlongtapURL'
+          id='{{item.id}}'
+          data-index="{{index}}"
+          url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}">
+          <view  class="item" >
              <view class="item-left">
-                  <text wx:if="{{item.count !=0 }}" class="mark text">{{item.count}}</text>
-                  <image src="{{item.url}}" class="image"/>
+                  <text wx:if="{{item.static !=1 }}" class="mark text"></text>
+                  <image  mode="widthFix"  src="{{item.imgUrl}}" class="image"/>
              </view>
              <view class="item-middle">
                   <view>
-                       <text class="title">{{item.title}}</text>
+                       <text class="title">{{item.notifyname}}</text>
                   </view>
                   <view>
-                      <text class="message">{{item.message}}</text>
+                      <text class="message">{{item.content}}</text>
                   </view>
                   <view>
-                    <text class="time">{{item.time}}</text>
+                    <text class="time">{{item.cdate}}</text>
                   </view>
             </view>
             <view class="item_right">
-                  <image src="{{item.url}}" class="image_right"/>
+                  <image  mode="widthFix"  src="{{item.imgUrl}}" class="image_right"/>
             </view>
          </view>
          <view  class="line"></view>

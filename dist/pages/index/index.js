@@ -88,39 +88,39 @@ Page({
     {
       name: "行业",
       content: [ {
-        name: '餐饮业',
+        name: '餐饮',
         value: '1',
         checked: false,
       }, {
-        name: '休闲娱乐',
+          name: '休闲娱乐',
         value: '2001',
         checked: false,
       }, {
-        name: '金融业',
+          name: '旅游与酒店',
         value: '2',
         checked: false,
       }, {
-        name: '旅游／酒店业',
+          name: '美发美容',
         value: '3',
         checked: false,
       },{
-        name:"美容/美发/化妆品",
+          name:"教育",
         value:'30001',
         checked:false,
       },{
-        name: '服装与百货',
+          name: '服饰鞋包',
         value: '4',
         checked: false,
       }, {
-        name: "汽车行业",
+          name: "生活服务",
         value:'40001',
         checked:false,
       }, {
-        name: "建筑工程",
+          name: "汽车",
         value: '40002',
         checked: false,
       },{
-        name: '生活服务',
+          name: '地产',
         value: '5',
         checked: false,
       }, {
@@ -128,9 +128,33 @@ Page({
         value: '50001',
         checked: false,
       },{
-        name: '其他',
+          name: '金融',
         value: '6',
         checked: false,
+      },{
+          name:"家装建材",
+          value:'7',
+          checked:false
+      },{
+          name:'百货超市',
+          value:'8',
+          checked:false
+      },{
+          name:'医疗保健',
+          value:'9',
+          checked:false
+      },{
+          name:'建筑工程',
+          value:'10',
+          checked:false,
+      },{
+          name:'工厂',
+          value:'11',
+          checked:false
+      },{
+          name:'其他',
+          value:'12',
+          checked:false
       }],
     }],
     activeIndex: 0,         //tab切换下标
@@ -185,14 +209,15 @@ Page({
       for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
         for (var j = 0; j < values.length; ++j) {
           if (tabs[index].content[i].value == values[j]) {
-            if (tabs[index].content[i].checked == true) continue;
-            tabs[index].content[i].checked = true;
+            if (tabs[index].content[i].checked == true)continue;
+            
+            tabs[index].content[i].checked = true; tabs[index].content[i].i = i;
             str.releaseTypeList.push({ releaseType: tabs[index].content[i].name, i: i });
             console.log("tabs[index].name:" + tabs[index].name);
             break;
           } else {
             //tabs[index].content[i].checked = false;
-          }
+          }   
         }
       }
     } else if (tabs[index].name == '行业') {
@@ -200,6 +225,7 @@ Page({
         for (var j = 0; j < values.length; ++j) {
           if (tabs[index].content[i].value == values[j]) {
             if (tabs[index].content[i].checked == true) continue;
+            
             tabs[index].content[i].checked = true;
             str.industryChoiceList.push({ industryChoice: tabs[index].content[i].name, i: i });
             console.log("tabs[index].name:" + tabs[index].name);
@@ -236,6 +262,64 @@ Page({
       tabs[2].content[i].checked = false;
     }
     that.setData({ tabs: tabs, str: values });
+  },
+
+  //删除筛选条件,重复点击去除
+  clearBtn_to: function (e) {
+    var that = this;
+    var str = that.data.str;
+    //得到name 
+    var name = e.currentTarget.dataset.name;
+    //得到index 
+    var index = e.currentTarget.dataset.index;
+    var i = e.currentTarget.dataset.i;
+    //得到value
+    var value= e.currentTarget.dataset.value;
+    //得到tabs
+    var tabs = that.data.tabs;
+    //判断
+    if (name == "AmountOfMoney") {
+      for (var k = 0; k < tabs[0].content.length; ++k) {
+        if (tabs[0].content[k].minThreshold == value) {
+          tabs[0].content[k].checked = false;
+          break;
+        }
+      }
+      str.AmountOfMoney.splice(0, 1);
+      return e.stopPropagation();
+    } else if (name == 'releaseTypeList') {
+      for (var k = 0; k < tabs[1].content.length; ++k) {
+        if(tabs[1].content[k].name == value){
+          tabs[1].content[k].checked=false;
+          break;
+        }
+      }
+
+      for (var k = 0; k < str.releaseTypeList.length; ++k) {
+        if (str.releaseTypeList[k].releaseType == value) {
+          str.releaseTypeList.splice(k,1);
+          break;
+        }
+      }
+      return e.stopPropagation();
+    } else if (name == "industryChoiceList") {
+      for (var k = 0; k < tabs[2].content.length; ++k) {
+        if (tabs[2].content[k].name == value) {
+          tabs[2].content[k].checked = false;
+          break;
+        }
+      }
+
+      for (var k = 0; k < str.industryChoiceList.length; ++k) {
+        if (str.industryChoiceList[k].industryChoice == value) {
+          str.industryChoiceList.splice(k, 1);
+          break;
+        }
+      }
+      return e.stopPropagation();
+    }
+    that.setData({ tabs: tabs, str: values });
+    return e.stopPropagation();
   },
 
   //重置筛选
@@ -414,7 +498,6 @@ Page({
       for (var i = 0; i < releaseTypeList.length; ++i) {
         query.releaseTypeList[i] = releaseTypeList[i].releaseType;
       }
-      query.releaseTypeList = query.releaseTypeList.join(",");
     } 
 
     //行业
@@ -423,7 +506,6 @@ Page({
       for(var i=0;i<industryChoiceList.length;++i){
         query.industryChoiceList[i] = industryChoiceList[i].industryChoice;
       }
-      query.industryChoiceList = query.industryChoiceList.join(",");
     }
 
     //金额
@@ -570,7 +652,6 @@ Page({
     that.setData({
       pagenum: 0,         //第几页
       isPrices:false,
-      isCaidan: true,    //显示底部菜单
       list: []           //发布信息数据    
     });
     that.requestData(that);

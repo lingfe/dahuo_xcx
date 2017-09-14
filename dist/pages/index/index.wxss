@@ -437,6 +437,7 @@
   position: fixed;
   bottom: -1rpx;
   background-color: #fff;
+  padding-top: 12rpx;
 }
 
 .bottomMenu_dahuo_img{

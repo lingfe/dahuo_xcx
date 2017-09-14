@@ -27,6 +27,13 @@ Page({
     releaseInfo:null,              //发布信息，单个
     length:null,                   //信息描述         
   },
+  //预览
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.imgPass // 需要预览的图片http链接列表
+    })
+  },
 
   //收藏,添加收藏
   bindtapSC:function(e){
@@ -50,7 +57,7 @@ Page({
               collectioninfo: {
                 Query: [{
                   releaseId: that.data.releaseId,     //发布信息id
-                  personalId: that.data.personalId    //个人资料id
+                  personalId: wx.getStorageSync("personalId")    //个人资料id
                 }]
               }
             }
@@ -63,11 +70,33 @@ Page({
               df: 1,
             });
             reqCloseData(that);
+
+            //获取用户
+            var user = wx.getStorageSync("user");
+            var userName = user.cnName;
+            //参数
+            that.data.notifyname=userName;
+            that.data.content ="我取消收藏你的项目。";
+            that.data.tile="";
+            that.data.ntype=3;
+            //设置通知
+            that.setNotice(that);
           }else{
             that.setData({
               df: 0,
             });
             reqCloseData(that);
+
+            //获取用户
+            var user = wx.getStorageSync("user");
+            var userName = user.cnName;
+            //参数
+            that.data.notifyname = userName;
+            that.data.content = "我收藏了你的项目。";
+            that.data.tile = "";
+            that.data.ntype = 3;
+            //设置通知
+            that.setNotice(that);
           }
         },
         fail: function (res) {},
@@ -94,7 +123,7 @@ Page({
                   id: that.data.id,
                   df: that.data.df,
                   releaseId: that.data.releaseId,     //发布信息id
-                  personalId: that.data.personalId    //个人资料id
+                  personalId: wx.getStorageSync("personalId")    //个人资料id
                 }]
               }
             }
@@ -265,8 +294,23 @@ Page({
         success: function (res) {
           if (that.data.inputHf == true) {
             wx.showToast({ title: '已回复!', icon: 'toast', duration: 1000 });//提示
+            //参数
+            that.data.notifyname = userName;
+            that.data.content = that.data.inputValue;
+            that.data.tile = "";
+            that.data.ntype = 2;
+            //设置通知
+            that.setNotice(that);
           }else{
             wx.showToast({ title: '评论成功!', icon: 'toast', duration: 1000 });//提示
+            
+            //参数
+            that.data.notifyname = userName;
+            that.data.content = "我评论了你的项目：‘" + that.data.inputValue+"'";
+            that.data.tile = "";
+            that.data.ntype = 1;
+            //设置通知
+            that.setNotice(that);
           }
           //获取评论信息
           that.conmmentGetData(that);
@@ -339,6 +383,49 @@ Page({
       }
     });
   },
+  
+  /**
+   * 设置通知
+   * that           当前页面对象
+   */
+  setNotice: function (that){
+    //发送请求
+    wx.request({
+      url: __config.basePath_web + "api/exe/save",
+      method: "POST",
+      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      data: {
+        timeStamp: that.data.time,
+        token: that.data.token,
+        reqJson: JSON.stringify({
+          nameSpace: 'notice',
+          scriptName: 'Query',
+          cudScriptName: 'Update',
+          nameSpaceMap: {
+            notice: {
+              Query: [{
+                personalId: that.data.personalId,         //接收者id
+                releaseId: that.data.releaseId,           //发布信息id
+                imgUrl: that.data.imageArray[0],          //发布信息对应的图片
+                ntype: that.data.ntype,                   //通知类型 0=系统,1=评论，2=回复,3=收藏，4=审核，5=..',
+                content: that.data.content,               //通知内容
+                tile: that.data.tile,                     //通知标题
+                creator: wx.getStorageSync("personalId"), //通知者
+                notifyname: that.data.notifyname,        //通知者名称
+              }]
+            }
+          }
+        })
+      },
+      //请求成功
+      success: function (res) {
+        var row = res.data.rows;
+
+      },
+      fail: function (res) { },
+      complete: function () { }
+    });
+  },
 
   //获取发布人发布信息数量
   getReleaseInfoNumber:function(that){
@@ -403,6 +490,7 @@ Page({
           nameSpaceMap: {
             collectioninfo: {
               Query: [{
+                df:0,
                 personalId: that.data.personalId,    //个人资料id
                 releaseId: that.data.releaseId       //发布信息id
               }],
@@ -416,6 +504,9 @@ Page({
         if(list.length != 0){
           //设置收藏
           that.setData({ sc: 2, });
+        }else{
+          //设置收藏
+          that.setData({ sc: 1, });
         }
       },
       fail: function (res) { },
@@ -439,8 +530,8 @@ Page({
           nameSpaceMap: {
             previewinformation: {
               "com.dahuo.plugin.impl.PreviewinformationPlugin":[{ 
-                id: that.data.personalId,
-                releaseId: that.data.releaseId,   //发布id
+                id: wx.getStorageSync("personalId"),         //用户id
+                releaseId: that.data.releaseId,      //发布id
               }]
             }
           }
@@ -456,40 +547,6 @@ Page({
       },
       fail: function (res) { },
       complete: function () { }
-    });
-  },
-
-  //设置访问时间
-  setAccesstime:function(that){
-    //发送请求
-    wx.request({
-      url: __config.basePath_web + "api/exe/save",
-      method: "POST",
-      header: { cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
-      data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
-        reqJson: JSON.stringify({
-          nameSpace: 'previewinformation',       //最新访问时间信息表
-          scriptName: 'Query',
-          cudScriptName: 'Update',
-          nameSpaceMap: {
-            previewinformation: {
-              Query: [{
-                id: that.data.personalId,
-                releaseId: that.data.releaseId,   //发布id
-                personalId: that.data.personalId    //个人id
-              }],
-            }
-          }
-        })
-      },
-      //请求成功
-      success: function (res) {},
-      //请求失败
-      fail: function (res) {},
-      //不管成功失败都执行
-      complete: function () {}
     });
   },
 
@@ -560,6 +617,19 @@ Page({
       header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
       data: that.data.data,
       success: function (res) {   //请求成功
+        if (res.statusCode == 408) {
+          wx.showToast({
+            title: "会话已过期，请重新登录！",
+            icon: 'loading',
+            duration: 2000,
+            success:function(res){
+              wx.redirectTo({
+                url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+              });
+              return;
+            }
+          });
+        }
         that.setData({ userinfo: res.data.rows[0]});
       },
       fail: function (res) {},
@@ -649,13 +719,18 @@ Page({
         }
         var strTime = that.getDate(info.cdate);
         info.cdate = strTime;
-
+        if (info.imageArray!=null){
+          var imageArray=info.imageArray.split(",");
+          for(var k=0;k<imageArray.length;++k){
+            imageArray[k] = __config.domainImage+imageArray[k];
+          }
+        }
         //设置值
         that.setData({
           length: length>100?true:false,
           releaseInfo: info,
-          imageArray: info.imageArray!=null?info.imageArray.split(","):null,
-          imgPass: __config.domainImage,
+          imageArray: imageArray,
+          imgPass: imageArray ,
         });
       },
       fail: function (res) {},

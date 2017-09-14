@@ -15,6 +15,394 @@
     </view>
   </template>
 
+
+
+
+
+
+
+<!--
+/**  作者:  lingfe 
+ *   时间:  2017-7-7
+ *   描述:  详细信息页面
+ * 
+ * */
+ -->
+<!-- 详细信息页面 start   -->
+<view class="page">
+  <view class="">
+    <view class="page_top">
+                    <!-- 项目基本信息  start -->
+                    <view class="neiro">
+                      <view class="data_top">
+                          <view style="float:left;" class="float-btn">
+                            <view class="float-btn title title_top">
+                              <image src="/assets/images/info/title.png"></image>{{releaseInfo.title}}
+                            </view>
+                            <view class="SC_JB" >
+                              <view class="float-btn_neiro" bindtap="bindtapSC" data-rId="{{releaseInfo.id}}">
+                                <image style="height:28rpx;width:28rpx;" src="/assets/images/sc{{sc}}.png"></image>
+                              </view>
+                              <view class="float-btn_neiro" bindtap="bindtapJB">
+                                <image style="height:28rpx;width:28rpx;" src="/assets/images/info/jb.png"></image>
+                              </view>
+                            </view>
+                             <view class="float-btn_neiro ">
+                                {{strTime}}
+                              </view>
+                              <view class="float-btn_neiro " >
+                                <span style="color: #14bac8;">{{previewinCount}}</span>人浏览
+                              </view>
+                              <view class="float-btn_neiro ">
+                                <image src="/assets/images/info/type.png"></image>{{releaseInfo.releaseType}}
+                              </view>
+                              <view class="float-btn_neiro ">
+                                <image src="/assets/images/info/hy.png"></image>{{releaseInfo.industryChoice}}
+                              </view>
+                            </view>
+                          </view>
+                      </view>
+                      <view class="info" >
+                        <view class="title_prics" style="height:{{ bl != true ? '80px': 'auto'}};" selection="true" >
+                          <view wx:if="{{releaseInfo.projectDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">项目描述:</span> 
+                            <!-- 项目描述 -->
+                            {{releaseInfo.projectDescription}}
+                          </view>
+                          <view wx:elif="{{releaseInfo.incomeDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">收益描述:</span> 
+                            <!-- 收益描述 -->
+                            {{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}
+                          </view>
+                          <view wx:if="{{releaseInfo.businessDescription != null }}">
+                            <span style="color: #000000;font-size: 24rpx;">营业描述:</span> 
+                            <!-- 营业描述 -->
+                            {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
+                          </view>
+                        </view>
+                        <!-- 查看全文 start -->
+                        <view wx:if="{{length == true}}">
+                          <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl!=true ? 'block': 'none'}};"></view>
+                          <view class="select_textONE" bindtap="bindtapSelectInfo">
+                              查看全文<image src="/assets/images/info.png"></image>
+                          </view>
+                        </view>
+                        <!-- 查看全文 end -->
+                        </view>
+                    </view>
+                    <!-- 项目基本信息  end -->
+                    
+                    <!-- 发布人基本信息  start -->
+                    <view class="viewMy">
+                      <navigator url="/pages/index/info/visitFriends/visitFriends?personalId={{userinfo.id}}">
+                        <view class="item" >
+                          <view class="item-left">
+                                <image src="{{userinfo.avatarUrl}}" class="image"/>
+                          </view>
+                          <view class="item-middle" style="margin-left: 30rpx;">
+                                <view>
+                                    <text style="font-size:28rpx;" class="title">{{userinfo.realname}}</text>
+                                    <text class="lingfe_tie"><text wx:if="{{userinfo.provinceName !=null}}">{{userinfo.provinceName}}</text><text wx:elif="{{userinfo.provinceName ==null}}">火星</text>   已发布{{numBer}}帖</text>
+                                </view>
+                                <view>
+                                    <text class="message">
+                                      <text wx:if="{{userinfo.memo!=null}}">{{userinfo.memo}}</text>
+                                      <text wx:elif="{{userinfo.memo ==null}}">来自星星的我..还没有设置签名</text>
+                                    </text>
+                                </view>
+                          </view>
+                          <view class="item_right">
+                              <view class="info_lingfe "><text class="text weui-cell__ft_in-access"></text></view>
+                          </view>
+                        </view>
+                        <view  class="line"></view>
+                      </navigator>
+                    </view>
+                    <!-- 发布人基本信息  end -->
+
+                    <!-- tab切换  start-->
+                    <view class="weui-tab">
+                      <!-- tab菜单  start-->
+                      <view class="weui-navbar_to" style="border:none;">
+                          <block wx:for="{{tabs}}" wx:key="*this">
+                              <view id="{{index}}" 
+                              class="weui-navbar__item  {{activeIndex == index ? ' select_text' : ''}}" bindtap="tabClick">
+                                  <view class="weui-navbar__title">{{item}}</view>
+                              </view>
+                          </block>
+                          <view class="weui-navbar__slider" 
+                          style="background-color:#14BAC8;width:150rpx;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+                      </view>
+                      <!-- tab菜单  end-->
+
+                      <view class="weui-tab__panel_to">
+                          <!-- 项目细节  start-->
+                          <view class="weui-tab__content_to" hidden="{{activeIndex != 0}}">
+                            <!-- 项目详细信息  start-->
+                            <!-- 入伙门槛 -->
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">入伙门槛:</view>
+                                    <view class="data_info">{{releaseInfo.threshold}}万</view>
+                                </view>
+                            </view>
+                            <!-- 类型选择 -->
+                            <view class="prices" >
+                                <view class="prices_info">
+                                    <view class="data_title">类型选择:</view>
+                                    <view class="data_info">{{releaseInfo.releaseType}}</view>
+                                </view>
+                            </view>
+                            <!-- 行业选择 -->
+                            <view class="prices">
+                                <view class="prices_info">
+                                    <view class="data_title">行业选择:</view>
+                                    <view class="data_info">{{releaseInfo.industryChoice}}</view>
+                                </view>
+                            </view>
+                            <!--资金布局 -->
+                            <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
+                                <view class="prices_info">
+                                  <view class="data_title">资金布局</view>
+                                  <view class="data_info">{{releaseInfo.fundDistribution}}</view>
+                                </view>
+                            </view>
+                            <!-- 项目描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.projectDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">项目描述:</view>
+                                    <view class="data_info">{{releaseInfo.projectDescription}} </view>
+                                </view>
+                            </view>
+                            <!-- 收益描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">收益描述:</view>
+                                    <view class="data_info">{{releaseInfo.incomeDescription}} </view>
+                                </view>
+                            </view>
+                            <!-- 发布人身份 -->
+                            <view class="prices" wx:if="{{releaseInfo.publisherIdentity !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">发布人身份:</view>
+                                    <view class="data_info" style="width: auto;">{{releaseInfo.publisherIdentity}} </view>
+                                </view>
+                            </view>
+                            <!-- 地理位置 -->
+                            <view class="prices" wx:if="{{releaseInfo.geographicalPosition !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">地理位置:</view>
+                                    <view class="data_info">{{releaseInfo.geographicalPosition}} </view>
+                                </view>
+                            </view>
+                            <!-- 经营面积 -->
+                            <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">经营面积:</view>
+                                    <view class="data_info">{{releaseInfo.operatingArea}} /平方</view>
+                                </view>
+                            </view>
+                            <!-- 每月租金 -->
+                            <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">每月租金:</view>
+                                    <view class="data_info">{{releaseInfo.monthlyRent}} /月</view>
+                                </view>
+                            </view>
+                            <!-- 经营描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">经营描述:</view>
+                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
+                                </view>
+                            </view>
+                            <!-- 转让原因 -->
+                            <view class="prices" wx:if="{{releaseInfo.transferReason !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">转让原因:</view>
+                                    <view class="data_info">{{releaseInfo.transferReason}} </view>
+                                </view>
+                            </view>
+                            <!-- 投放城市 -->
+                            <view class="prices" wx:if="{{releaseInfo.throwInTheCity !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">投放城市:</view>
+                                    <view class="data_info">{{releaseInfo.throwInTheCity}} </view>
+                                </view>
+                            </view>
+                            <!-- 总部位置 -->
+                            <view class="prices" wx:if="{{releaseInfo.headquartersLocation !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">总部位置:</view>
+                                    <view class="data_info">{{releaseInfo.headquartersLocation}} </view>
+                                </view>
+                            </view>
+                            <!-- 技能/资源要求 -->
+                            <view class="prices" wx:if="{{releaseInfo.resourceRequirements !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">技能/资源要求:</view>
+                                    <view class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </view>
+                                </view>
+                            </view>
+                            <!-- 股份划分 -->
+                            <view class="prices" wx:if="{{releaseInfo.shareDivision !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">股份划分:</view>
+                                    <view class="data_info">{{releaseInfo.shareDivision}} </view>
+                                </view>
+                            </view>
+                            <!-- 产品种类 -->
+                            <view class="prices" wx:if="{{releaseInfo.productType !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">产品种类:</view>
+                                    <view class="data_info">{{releaseInfo.productType}} </view>
+                                </view>
+                            </view>
+                            <!-- 房产类型 -->
+                            <view class="prices" wx:if="{{releaseInfo.houseType !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">房产类型:</view>
+                                    <view class="data_info">{{releaseInfo.houseType}} </view>
+                                </view>
+                            </view>
+                            <!-- 项目优势 -->
+                            <view class="prices" wx:if="{{releaseInfo.projectAdvantage !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">项目优势:</view>
+                                    <view class="data_info">{{releaseInfo.projectAdvantage}} </view>
+                                </view>
+                            </view>
+                            <!-- 产品类目 -->
+                            <view class="prices" wx:if="{{releaseInfo.productCategory !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">产品类目:</view>
+                                    <view class="data_info">{{releaseInfo.productCategory}} </view>
+                                </view>
+                            </view>
+                            <!-- 产品亮点 -->
+                            <view class="prices" wx:if="{{releaseInfo.productHighlights !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">产品亮点:</view>
+                                    <view class="data_info">{{releaseInfo.productHighlights}} </view>
+                                </view>
+                            </view>
+                            <!-- 代理条件 -->
+                            <view class="prices" wx:if="{{releaseInfo.agentCondition !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">代理条件:</view>
+                                    <view class="data_info">{{releaseInfo.agentCondition}} </view>
+                                </view>
+                            </view>
+                            <!-- 代理规则 -->
+                            <view class="prices" wx:if="{{releaseInfo.agencyRule !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">代理规则:</view>
+                                    <view class="data_info">{{releaseInfo.agencyRule}} </view>
+                                </view>
+                            </view>
+                            <!-- 公司/团队介绍 -->
+                            <view class="prices" wx:if="{{releaseInfo.teamIntroduction !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">公司/团队介绍:</view>
+                                    <view class="data_info"  style="width: auto;">{{releaseInfo.teamIntroduction}} </view>
+                                </view>
+                            </view>
+                            <!-- 项目详细信息  end-->
+
+                            <!-- 图片  start-->
+                            <view class="page-section page-section-gap">
+                              <view class="page-section-ctn" wx:for="{{imageArray}}" bindlongtap="previewImage" id="{{item}}" wx:key="*this">
+                                <image mode="widthFix"  class="images_item" src="{{item}}"/>
+                              </view>
+                            </view>
+                            <!-- 图片  end-->
+
+                            <!-- 确定   start-->
+                            <view class="weui-btn-area">
+                                <view class="view_phon" bindtap="bindtapPhone">电话</view>
+                                <view class="view_1">|</view>
+                                <view class="view_info" bindtap="bindtagFasho">私信</view>
+                            </view>
+                            <!-- 确定   start-->
+                          </view>
+                          <!-- 项目细节  end-->
+
+                          <!-- 讨论区  start-->
+                          <view class="weui-tab__content_to"  style="margin-bottom:70px;" hidden="{{activeIndex != 1}}">
+                            <view  wx:for="{{allContentList}}" wx:key="*this">
+                              <view class="item">
+                                  <view class="item-left">
+                                        <image src="{{item.avatarUrl}}" class="image"/>
+                                  </view>
+                                  <view class="item-middle">
+                                        <view>
+                                            <text class="select_text" style="float:none;">{{item.remark}}</text>
+                                        </view>
+                                        <view>
+                                            <text style="width:575rpx;" class="data_info">{{item.commentContent}}</text>
+                                        </view>
+                                        <view>
+                                            <text class="message">{{item.cdate}}</text>
+                                        </view>
+                                  </view>
+                                  <view class="item_right">
+                                    <view bindtap="commentHuiFu" data-name="{{item.remark}}"><text  class="time">回复</text></view>
+                                  </view>
+                              </view>
+                              <view  class="line"></view>
+                            </view>
+                            <view  style="width:640rpx;"></view>
+                        </view>
+                        <!-- 讨论区  end-->
+                      </view>
+                      <!-- tab切换  end-->
+
+    </view>
+  </view>
+</view>
+<!-- 详细信息页面 end   -->
+
+<!-- 举报 start -->
+<view class="jubao_bg" bindtap="bindtapJBclose" wx:if="{{jb == true}}">
+  <view class="jubao" >
+    <view class="jubao_title">举报事项</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}"  data-jbName="垃圾或者广告信息">垃圾或者广告信息</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="内容与主题不符">内容与主题不符</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="涉黄违法">涉黄违法</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="诈骗内容">诈骗内容</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="虚假（电话、描述虚假)">虚假（电话、描述虚假)</view>
+    <view class="jubao_info" bindtap="JB" data-rid="{{releaseInfo.id}}" data-jbName="中介冒充个人">中介冒充个人</view>
+    <view class="jubao_info" bindtap="otherReport" data-rid="{{releaseInfo.id}}" data-jbName="其他">其他</view>
+  </view>
+</view>
+<!-- 举报 end -->
+
+<!-- 评论文本框  start-->
+<view class="handleBox" hidden="{{activeIndex != 1}}">
+  <view class="inputValue">
+    <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
+    <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+  </view>
+  <view style="float:left;">
+    <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="submitTo" />
+  </view>
+</view>
+<!-- 评论文本框  end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <template is="staffName" data="{{...staffA}}"></template>
   <template is="staffName" data="{{...staffB}}"></template>
   <template is="staffName" data="{{...staffC}}"></template>

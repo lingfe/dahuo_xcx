@@ -68,8 +68,6 @@
     margin-left: 50rpx;
     width: 45rpx; 
     height: 45rpx;
-    border-radius: 50rpx; 
-    background-color: #eeeeee;
 }
 .item-middle{
     flex: 1;
@@ -133,21 +131,7 @@ word-wrap:normal;
     color:#808080;
     font-size: 18rpx;
 }
-.mark{
 
-    position: relative;
-    left:15rpx;
-    right: 35rpx;
-    padding-top: 4rpx;
-    background-color:#F74c31; 
-    text-align: center;
-    font-size: 18rpx; 
-    width: 35rpx;
-    height: 35rpx;
-    border-radius:20rpx; 
-    color: #ffffff;
-    display:table-cell;
-}
 .line{
     height: 1px;
     width:100%;
@@ -407,6 +391,7 @@ border-radius:10px;
   position: fixed;
   bottom: -1rpx;
   background-color: #fff;
+  padding-top: 12rpx;
 }
 
 .bottomMenu_dahuo_img{
@@ -448,4 +433,18 @@ border-radius:10px;
   margin-left: 45rpx;
   width: 156rpx;
   height: 105rpx;
+}
+
+
+/* 通知喇叭  小红点*/
+.mark{
+    position:absolute;
+    margin-left:80rpx;
+    margin-top: 90rpx;
+    background-color:#F74c31; 
+    width: 15rpx;
+    height: 15rpx;
+    border-radius:20rpx; 
+    float: right;
+    display:table-cell;
 }

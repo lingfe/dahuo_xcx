@@ -25,6 +25,7 @@ Page({
     data: null,             //请求参数
     userinfo:null,          //个人信息
     numBer:1,               //帖子数量
+    isnotice:false          //是否有通知
   },
   //个人资料,跳转
   bindtapMy:function(e){
@@ -127,7 +128,7 @@ Page({
             reqJson: JSON.stringify({
               nameSpace: 'releaseinfo',       //发布信息信息表
               scriptName: 'Query',
-              cudScriptName: 'UpdateDf',
+              cudScriptName: 'Update',
               nameSpaceMap: {
                 releaseinfo: {
                   Query: [{
@@ -399,6 +400,8 @@ Page({
     that.personalGetData(that);
     //我发布的
     that.requestDataRelease(that);
+    //获取是否有通知
+    that.getIsnotice(that);
 
     //设置tab
     var sliderWidth=50;
@@ -409,6 +412,42 @@ Page({
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
+    });
+  },
+
+  //获取是否有通知
+  getIsnotice:function(that){
+    //发送请求
+    wx.request({
+      url: __config.basePath_web + "api/exe/get",
+      method: "POST",
+      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      data: {
+        timeStamp: that.data.time,
+        token: that.data.token,
+        reqJson: JSON.stringify({
+          nameSpace: 'notice',       //发布信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            notice: {
+              Query: [{
+                static:0,                                      //0=未读
+                personalId: wx.getStorageSync("personalId")    //个人id
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {   //请求成功
+        var row = res.data.rows;
+        if(row.length!=0){
+          that.setData({isnotice: true});
+        }else{
+          that.setData({ isnotice: false });
+        }
+      },
+      fail: function (res) { },
+      complete: function () { }
     });
   },
 
@@ -469,13 +508,13 @@ Page({
         //得到数据
         var list = res.data.rows;
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = that.getDate(list[i].cdate);
+          var strTime = that.getDate(list[i].mdate);
           if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
           if (list[i].projectDescription!=null)list[i].projectDescription = list[i].projectDescription.substring(0,60);
           if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0,60);
           if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0,60);
 
-          list[i].cdate = strTime.date;
+          list[i].mdate = strTime.date;
           list[i].timeNuber = (60-strTime.timeNuber);
           //添加到当前数组
           pageList.push(list[i]);
@@ -513,12 +552,13 @@ Page({
             title: "会话已过期，请重新登录！",
             icon: 'loading',
             duration: 2000,
+            success:function(res){
+              wx.redirectTo({
+                url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+              });
+              return;
+            }
           });
-
-          wx.redirectTo({
-            url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
-          });
-          return;
         }
 
         that.setData({
@@ -541,6 +581,7 @@ Page({
           nameSpaceMap: {
             releaseinfo: {
               Query: [{
+                inDf:[0,4,5],            //0=正常显示，4=正在审核中，5=审核未通过
                 personalId: that.data.personalId,    //个人资料id
               }],
             }
@@ -568,6 +609,7 @@ Page({
         nameSpaceMap: {
           collectioninfo: {
             Query: [{
+              df:0,
               creator: that.data.personalId    //个人资料id
             }],
           }
@@ -689,6 +731,8 @@ Page({
 
     //个人
     that.personalGetData(that);
+    //获取是否有通知
+    that.getIsnotice(that);
     //下拉完成后执行回退
     wx.stopPullDownRefresh();
   },

@@ -204,9 +204,10 @@
 }
 
 .images_item {
-  width: 94%;
-  height: 400rpx;
-  margin-left: 22rpx;
+  width: 92%;
+  /*height: 400rpx;*/
+  margin-left: 32rpx;
+  margin-top: 6rpx;
   border-radius: 0rpx;
 }
 

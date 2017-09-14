@@ -332,6 +332,7 @@ Page({
             nameSpaceMap: {
               releaseinfo: {
                 Query: [{
+                  df: 4,                                       //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
                   id: that.data.id,                                    //发布信息id,如果为空添加，不为空更新
                   releaseType: '生意转让',                   //发布类型
                   personalId: wx.getStorageSync("personalId"),      //个人资料id
@@ -360,7 +361,7 @@ Page({
             icon: 'ok',
             duration: 3000,
             success: function () {
-              wx.navigateTo({
+              wx.redirectTo({
                 //url: '/pages/index/info/info?releaseId='+res.data.rows[0].id+'&personalId='+res.data.rows[0].personalId,
                 url: "/pages/index/index",});
             }
