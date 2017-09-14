@@ -395,7 +395,7 @@ border-radius:10px;
 }
 
 .bottomMenu_dahuo_img{
-  width:42rpx;
+  width:27px;
   height:100rpx;
   left:182rpx;
   position: relative;
@@ -407,7 +407,7 @@ border-radius:10px;
 }
 
 .bottomMenu_user_img{
-  width:42rpx;
+  width:27px;
   height:100rpx;
   position: relative;
   right:176rpx;
@@ -418,7 +418,7 @@ border-radius:10px;
   color: Grey;
 }
 .bottomMenu_img{
-  width: 42rpx;
+  width: 27px;
   height: 27px;
 }
 

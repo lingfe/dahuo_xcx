@@ -169,14 +169,14 @@
                             <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">经营面积:</view>
-                                    <view class="data_info">{{releaseInfo.operatingArea}} /平方</view>
+                                    <view class="data_info">{{releaseInfo.operatingArea}} 平方</view>
                                 </view>
                             </view>
                             <!-- 每月租金 -->
                             <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">每月租金:</view>
-                                    <view class="data_info">{{releaseInfo.monthlyRent}} /月</view>
+                                    <view class="data_info">{{releaseInfo.monthlyRent}} 元/月</view>
                                 </view>
                             </view>
                             <!-- 经营描述 -->
@@ -281,7 +281,7 @@
 
                             <!-- 图片  start-->
                             <view class="page-section page-section-gap">
-                              <view class="page-section-ctn" wx:for="{{imageArray}}" bindlongtap="previewImage" id="{{item}}" wx:key="*this">
+                              <view class="page-section-ctn" wx:for="{{imageArray}}" bindtap="previewImage" id="{{item}}" wx:key="*this">
                                 <image mode="widthFix"  class="images_item" src="{{item}}"/>
                               </view>
                             </view>

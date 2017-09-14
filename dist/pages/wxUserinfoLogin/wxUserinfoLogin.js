@@ -56,7 +56,7 @@ Page({
                   wx.setStorageSync("user",user );
 
                   //登录成功！跳转到首页
-                  wx.redirectTo({
+                  wx.switchTab({
                     url: '/pages/index/index',
                   });
                   return;

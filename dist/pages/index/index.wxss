@@ -308,8 +308,8 @@
 }
 
 .www{
-  width:150rpx;
-  height: 1000rpx;
+  width:156rpx;
+  height: 1018rpx;
   background-color: #fff;
   border-right:1px solid #E4E4E4;
   float: left;
@@ -344,13 +344,13 @@
   height: 100rpx;
   background-color: red;
   text-align: center;
-  bottom: 0rpx;
+  bottom: -2rpx;
   position: fixed;
   margin-top: 0px;
 }
 .operation_close{
  height: 100rpx; 
- width: 200rpx;
+ width: 156rpx;
  background-color: #F2F2F2;
  line-height: 100rpx;
  float: left;
@@ -380,7 +380,7 @@
   font-size:26rpx; 
 }
 .stop{
-  margin-top: 10rpx;
+  margin-top: 12rpx;
   height: 17px;
   font-size:26rpx; 
 }
@@ -441,7 +441,7 @@
 }
 
 .bottomMenu_dahuo_img{
-  width:42rpx;
+  width:27px;
   height:100rpx;
   left:182rpx;
   position: relative;
@@ -453,7 +453,7 @@
 }
 
 .bottomMenu_user_img{
-  width:42rpx;
+  width:27px;
   height:100rpx;
   position: relative;
   right:176rpx;
@@ -464,7 +464,7 @@
   color: Grey;
 }
 .bottomMenu_img{
-  width: 42rpx;
+  width: 27px;
   height: 27px;
 }
 
@@ -476,13 +476,14 @@
 
 /* 沟沟 */
 .img_wh{
-  width:16px;
-  height:11px;
+  width:20px;
+  height:20px;
 }
 
-/* 变行 */
+/* 变行 
 .line{
   width:100%;
   height:58px;
   float: left;
 }
+*/

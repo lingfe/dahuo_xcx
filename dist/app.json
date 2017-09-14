@@ -73,6 +73,25 @@
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark"
   },
+    "tabBar": {
+      "color": "Grey",
+      "backgroundColor": "#fff",
+      "selectedColor": "#5E7E88",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "text": "搭伙",
+          "iconPath": "assets/images/dahuo_1.png",
+          "selectedIconPath": "assets/images/dahuo_0.png"
+        },
+        {
+          "pagePath": "pages/personal/personal",
+          "text": "个人",
+          "iconPath": "assets/images/user_1.jpg",
+          "selectedIconPath": "assets/images/user_0.jpg"
+        }
+      ]
+    },
   "networkTimeout": {
     "request": 100000,
     "connectSocket": 10000,

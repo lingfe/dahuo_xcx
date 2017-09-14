@@ -158,14 +158,14 @@
 </view>
 
 <!--item底部 start-->
-<view class="bottomMenu">
+<!-- <view class="bottomMenu">
   <view bindtap="bindtapDahuo" class="bottomMenu_dahuo_img">
-      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_1.jpg"></image></view>
+      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_1.png"></image></view>
       <view style="float:left;">搭伙</view>
   </view>
     <view bindtap="bindtapUser" class="bottomMenu_user_img selectedColor">
       <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/user_0.jpg"></image></view>
       <view style="float:left;">个人</view>
   </view>
-</view>
+</view> -->
 <!--item底部 end-->

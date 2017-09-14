@@ -16,7 +16,7 @@
           <view  class="item" >
              <view class="item-left">
                   <text wx:if="{{item.static !=1 }}" class="mark text"></text>
-                  <image  mode="widthFix"  src="{{item.imgUrl}}" class="image"/>
+                  <image src="{{item.imgUrl}}" class="image"/>
              </view>
              <view class="item-middle">
                   <view>
@@ -30,7 +30,7 @@
                   </view>
             </view>
             <view class="item_right">
-                  <image  mode="widthFix"  src="{{item.imgUrl}}" class="image_right"/>
+                  <image src="{{item.imgUrl}}" class="image_right"/>
             </view>
          </view>
          <view  class="line"></view>

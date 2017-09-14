@@ -94,25 +94,22 @@
             <view class="ccc">
                 <!-- 金额  start -->
                 <view class="" hidden="{{activeIndex != 0}}">                
-                  <checkbox-group  bindchange="checkboxChange" data-index="{{activeIndex}}">
-                  <label  wx:for="{{tabs[activeIndex].content}}" data-index="{{index}}" data-i="{{item.i}}" wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop">
-                    <checkbox class="weui-check"   value="{{item.value}}" checked="{{item.checked}}"/>
-                    <view wx:if="{{item.minThreshold == 100}}" class="weui-navbar__title stop_1 flaot_left">
-                      100万+
-                    </view>
-                    <view wx:else="{{item.minThreshold != 100}}" class="weui-navbar__title stop_1 flaot_left">
-                      {{item.minThreshold}} - {{item.maxThreshold}} 万
-                    </view>
-                    <view class="flaot_right"  wx:if="{{item.checked}}">
-                      <image class="img_wh"                       
+                  <checkbox-group  data-index="{{activeIndex}}">
+                  <label  wx:for="{{tabs[activeIndex].content}}"
                       bindtap='clearBtn_to'
                       data-value='{{item.minThreshold}}'
                       data-index='{{index}}'
-                      data-i='{{item.i}}'
-                      data-name="AmountOfMoney" src="/assets/images/ttt.png" />
-                        <!-- <icon class="weui-icon-radio" type="success_no_circle" color="#14BAC8" size="16"></icon> -->
-                    </view>
+                      data-name="AmountOfMoney" wx:key="{{*this}}">
+                    <view class="weui-navbar__item stop">
+                      <view wx:if="{{item.minThreshold == 100}}" class="weui-navbar__title stop_1 flaot_left">
+                        100万+
+                      </view>
+                      <view wx:else="{{item.minThreshold != 100}}" class="weui-navbar__title stop_1 flaot_left">
+                        {{item.minThreshold}} - {{item.maxThreshold}} 万
+                      </view>
+                      <view class="flaot_right"  wx:if="{{item.checked}}">
+                        <image class="img_wh" src="/assets/images/ttt.png" />
+                      </view>
                     </view>
                   </label>
                   </checkbox-group>
@@ -121,20 +118,18 @@
 
                 <!-- 类型  start -->
                 <view class="" hidden="{{activeIndex != 1}}">                
-                  <checkbox-group style="overflow:scroll;max-height:400px;"  bindchange="checkboxChange" data-index="{{activeIndex}}">
-                  <label  wx:for="{{tabs[activeIndex].content}}"   wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop">
-                    <checkbox class="weui-check"  value="{{item.value}}" checked="{{item.checked}}"/>
-                    <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                    <view class="flaot_right"  wx:if="{{item.checked}}">
-                    <image class="img_wh"  
+                  <checkbox-group style="overflow:scroll;height:400px;"  data-index="{{activeIndex}}">
+                  <label  wx:for="{{tabs[activeIndex].content}}"
                       bindtap='clearBtn_to'
                       data-value='{{item.name}}'
                       data-index='{{index}}'
-                      data-i='{{item.i}}'
-                      data-name="releaseTypeList" src="/assets/images/ttt.png" />
-                        <!-- <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon> -->
-                    </view> 
+                      data-name="releaseTypeList"
+                     wx:key="{{*this}}">
+                    <view  class="weui-navbar__item stop">
+                      <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
+                      <view class="flaot_right"  wx:if="{{item.checked}}">
+                        <image class="img_wh"   src="/assets/images/ttt.png" />
+                      </view> 
                     </view>
                   </label>
                   </checkbox-group>
@@ -144,20 +139,18 @@
 
                 <!-- 行业  start -->
                 <view class="" hidden="{{activeIndex != 2}}">                
-                  <checkbox-group style="overflow:scroll;max-height:440px;" bindchange="checkboxChange" data-index="{{activeIndex}}">
-                  <label wx:for="{{tabs[activeIndex].content}}" wx:key="{{*this}}">
+                  <checkbox-group style="overflow:scroll;max-height:515px;" data-index="{{activeIndex}}">
+                  <label wx:for="{{tabs[activeIndex].content}}"
+                      bindtap='clearBtn_to'
+                      data-value='{{item.name}}'
+                      data-index='{{index}}'
+                      data-name="industryChoiceList" wx:key="{{*this}}">
                     <view class="weui-navbar__item stop">
-                    <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-                    <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                    <view class="flaot_right"  wx:if="{{item.checked}}">
-                      <image class="img_wh"                       
-                        bindtap='clearBtn_to'
-                        data-value='{{item.name}}'
-                        data-index='{{index}}'
-                        data-i='{{item.i}}'
-                        data-name="industryChoiceList" src="/assets/images/ttt.png" />
-                        <!-- <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon> -->
-                    </view>
+                      <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
+                      <view class="flaot_right"  wx:if="{{item.checked}}">
+                        <image class="img_wh"  src="/assets/images/ttt.png" />
+                          <!-- <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon> -->
+                      </view>
                     </view>
                   </label>
 
@@ -173,35 +166,35 @@
             </view>
             <view class="botton_view">
               <!-- 标签  start -->
-              <view class="biaoqian">
+              <!-- <view class="biaoqian"> -->
                 <!-- 金额  start -->
-                <view  wx:for="{{str.AmountOfMoney}}" wx:key="{{*this}}">
+                <!-- <view  wx:for="{{str.AmountOfMoney}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
                     <view class="delete_text" wx:if="{{item.minThreshold !=100 }}">{{item.minThreshold}} - {{item.maxThreshold}} 万</view>
                     <view class="delete_text" wx:else="{{item.minThreshold == 100}}">100万+</view>
                     <image class="delete_image"  bindtap="clearBtn" data-name="AmountOfMoney" data-index="{{index}}" data-i="{{item.i}}"  data-value="{{item}}" src="/assets/images/delete.png"></image>
                   </view>
-                </view>
+                </view> -->
                 <!-- 金额  end -->
                 
                 <!-- 类型  start -->
-                <view  wx:for="{{str.releaseTypeList}}" wx:key="{{*this}}">
+                <!-- <view  wx:for="{{str.releaseTypeList}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
                     <view class="delete_text">{{item.releaseType}}</view>
                     <image class="delete_image"  bindtap="clearBtn"  data-name="releaseTypeList" data-index="{{index}}" data-i="{{item.i}}"  data-value="{{item.releaseType}}" src="/assets/images/delete.png"></image>
                   </view>
-                </view>
+                </view> -->
                 <!-- 类型  end -->
 
                 <!-- 行业  start -->
-                <view  wx:for="{{str.industryChoiceList}}" wx:key="{{*this}}">
+                <!-- <view  wx:for="{{str.industryChoiceList}}" wx:key="{{*this}}">
                   <view class="delete" wx:if="{{item != ''}}">
                     <view class="delete_text">{{item.industryChoice}}</view>
                     <image class="delete_image"  bindtap="clearBtn" data-name="industryChoiceList" data-index="{{index}}" data-i="{{item.i}}" data-value="{{item.industryChoice}}" src="/assets/images/delete.png"></image>
                   </view>
-                </view>
+                </view> -->
                 <!-- 行业  end -->
-              </view>
+              <!-- </view> -->
               <!-- 标签  end -->
 
               <!-- 操作  start -->
@@ -223,16 +216,16 @@
 <!-- 发布按钮  end-->
 
 <!--item底部 start  -->
-<view class="bottomMenu" style="display:{{ isCaidan == false ? 'none':''}}">
+<!-- <view class="bottomMenu" style="display:{{ isCaidan == false ? 'none':''}}">
   <view bindtap="bindtapDahuo" class="bottomMenu_dahuo_img selectedColor">
-      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_0.jpg"></image></view>
-      <view style="float:left;">搭伙</view>
+      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_0.png"></image></view>
+      <view style="float:left;margin-left:0rpx;">搭伙</view>
   </view>
     <view bindtap="bindtapUser" class="bottomMenu_user_img">
       <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/user_1.jpg"></image></view>
-      <view style="float:left;">个人</view>
+      <view style="float:left;margin-left:0rpx;">个人</view>
   </view>
-</view>
+</view> -->
 <!--item底部 end-->
 <loading hidden="{{isHiddenLoading}}">加载中...</loading>
 <toast duration="1500" bindchange="closeToast" hidden="{{isHiddenToast}}">加载完成</toast>

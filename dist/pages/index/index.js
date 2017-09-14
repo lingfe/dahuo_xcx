@@ -51,7 +51,11 @@ Page({
     },
     {
       name: "类型",
-      content: [ {
+      content: [{
+        name: '全部',
+        value: '0',
+        checked: false,
+      },{
         name: '合伙创业',
         value: '1001',
         checked: false,
@@ -87,7 +91,11 @@ Page({
     },
     {
       name: "行业",
-      content: [ {
+      content: [{
+        name: '全部',
+        value: '0',
+        checked: false,
+      },{
         name: '餐饮',
         value: '1',
         checked: false,
@@ -122,10 +130,6 @@ Page({
       },{
           name: '地产',
         value: '5',
-        checked: false,
-      }, {
-        name: "地产",
-        value: '50001',
         checked: false,
       },{
           name: '金融',
@@ -171,7 +175,7 @@ Page({
     },
     num:1,                  //获取选中的价格索引，控制样式
     list:[],                //发布信息数据
-    pagenum:0,              //分页，第几业
+    pagenum:1,              //分页，第几业
     pagesize:20,            //返回数据量
     isCaidan:true,          //底部菜单是否显示
     dahuo:1,                //搭伙菜单
@@ -206,6 +210,8 @@ Page({
         }
       }
     } else if (tabs[index].name == '类型') {
+
+
       for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
         for (var j = 0; j < values.length; ++j) {
           if (tabs[index].content[i].value == values[j]) {
@@ -272,7 +278,6 @@ Page({
     var name = e.currentTarget.dataset.name;
     //得到index 
     var index = e.currentTarget.dataset.index;
-    var i = e.currentTarget.dataset.i;
     //得到value
     var value= e.currentTarget.dataset.value;
     //得到tabs
@@ -281,45 +286,81 @@ Page({
     if (name == "AmountOfMoney") {
       for (var k = 0; k < tabs[0].content.length; ++k) {
         if (tabs[0].content[k].minThreshold == value) {
+          if (tabs[0].content[k].checked ==false){
+            tabs[0].content[k].checked = true;
+            str.AmountOfMoney[0] = {
+              minThreshold: tabs[0].content[k].minThreshold,
+              maxThreshold: tabs[0].content[k].maxThreshold, i: k
+            };
+          }else{
+            tabs[0].content[k].checked = false;
+            str.AmountOfMoney[0] = [];
+          }
+        }else{
           tabs[0].content[k].checked = false;
-          break;
         }
       }
-      str.AmountOfMoney.splice(0, 1);
-      return e.stopPropagation();
     } else if (name == 'releaseTypeList') {
-      for (var k = 0; k < tabs[1].content.length; ++k) {
-        if(tabs[1].content[k].name == value){
-          tabs[1].content[k].checked=false;
-          break;
+      if (value == "全部") {
+        str.releaseTypeList = [];
+        if (tabs[1].content[0].checked == true){
+          for (var k = 0; k < tabs[1].content.length; ++k) {
+            tabs[1].content[k].checked = false;
+            str.releaseTypeList.splice(k, 1);
+          }
+        }else{
+          for (var k = 0; k < tabs[1].content.length; ++k) {
+            tabs[1].content[k].checked = true;
+            str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+          }
+        }
+        
+      }else{
+        for (var k = 0; k < tabs[1].content.length; ++k) {
+          if (tabs[1].content[k].name == value) {
+            if (tabs[1].content[k].checked == false) {
+              tabs[1].content[k].checked = true;
+              str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+            } else {
+              tabs[1].content[k].checked = false;
+              str.releaseTypeList.splice(k, 1);
+            }
+            break;
+          }
         }
       }
-
-      for (var k = 0; k < str.releaseTypeList.length; ++k) {
-        if (str.releaseTypeList[k].releaseType == value) {
-          str.releaseTypeList.splice(k,1);
-          break;
-        }
-      }
-      return e.stopPropagation();
     } else if (name == "industryChoiceList") {
-      for (var k = 0; k < tabs[2].content.length; ++k) {
-        if (tabs[2].content[k].name == value) {
-          tabs[2].content[k].checked = false;
-          break;
+      if (value == "全部") {
+        str.industryChoiceList=[];
+        if (tabs[2].content[0].checked == true) {
+          for (var k = 0; k < tabs[2].content.length; ++k) {
+            tabs[2].content[k].checked = false;
+            str.industryChoiceList.splice(k, 1);
+          }
+        }else{
+          for (var k = 0; k < tabs[2].content.length; ++k) {
+            tabs[2].content[k].checked = true;
+            str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+          }
         }
-      }
 
-      for (var k = 0; k < str.industryChoiceList.length; ++k) {
-        if (str.industryChoiceList[k].industryChoice == value) {
-          str.industryChoiceList.splice(k, 1);
-          break;
+      }else{
+        for (var k = 0; k < tabs[2].content.length; ++k) {
+          if (tabs[2].content[k].name == value) {
+            if (tabs[2].content[k].checked ==false){
+              tabs[2].content[k].checked=true;
+              str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+            }else{
+              tabs[2].content[k].checked=false;
+              str.industryChoiceList.splice(k, 1);
+            }
+            break;
+          }
         }
       }
-      return e.stopPropagation();
     }
-    that.setData({ tabs: tabs, str: values });
-    return e.stopPropagation();
+
+    that.setData({ tabs: tabs, str: str });
   },
 
   //重置筛选
@@ -375,7 +416,7 @@ Page({
     str.AmountOfMoney=[{ minThreshold: min, maxThreshold: max ,i:index}];     //金额
     that.setData({
       str:str,                 //筛选参数
-      pagenum: 0,
+      pagenum: 1,
       priceIndex: index,       //选择价格索引
       list: [],                //发布信息数据
       num: index,              //获取选中的价格索引，控制样式
@@ -469,7 +510,7 @@ Page({
     //设置参数值
     that.setData({
       list:[],                 //初始化list
-      pagenum:0,               //初始化
+      pagenum:1,               //初始化
       isCaidan:true,           //显示底部菜单
       isPrices:false,          //隐藏价格
       screen: false,           //隐藏删选      
@@ -628,7 +669,7 @@ Page({
     //判断地址
     if (that.data.addressInfo != that.data.city && that.data.city!=null){
       that.setData({
-        pagenum: 0,         //第几页
+        pagenum: 1,         //第几页
         addressInfo: that.data.city ,
         isCaidan: true,    //显示底部菜单
         list: []           //发布信息数据,清空   
@@ -650,7 +691,7 @@ Page({
   onPullDownRefresh: function () {
     var that = this;
     that.setData({
-      pagenum: 0,         //第几页
+      pagenum: 1,         //第几页
       isPrices:false,
       list: []           //发布信息数据    
     });

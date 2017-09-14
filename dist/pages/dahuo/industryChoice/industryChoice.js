@@ -22,8 +22,8 @@ Page({
     });
   },
   //确定
-  bindtapOk:function(){
-    var industryChoice = this.data.industryChoice;
+  bindtapOk:function(e){
+    var industryChoice = e.currentTarget.dataset.name;
     //判断是否为空
     if (industryChoice == null) {
       wx.showModal({
