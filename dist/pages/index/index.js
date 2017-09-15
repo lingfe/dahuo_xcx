@@ -245,31 +245,6 @@ Page({
     this.setData({ tabs: tabs,  str: str  });
   },
 
-  //删除筛选条件
-  clearBtn: function (e) {
-    var that=this;
-    var values = that.data.str;
-    //得到name 
-    var name = e.currentTarget.dataset.name;
-    //得到index 
-    var index = e.currentTarget.dataset.index;
-    var i = e.currentTarget.dataset.i;
-    //得到tabs
-    var tabs = that.data.tabs;
-    //判断
-    if (name == "AmountOfMoney") {
-      values.AmountOfMoney.splice(index, 1);
-      tabs[0].content[i].checked=false;
-    } else if (name == 'releaseTypeList') {
-      values.releaseTypeList.splice(index, 1);
-      tabs[1].content[i].checked = false;
-    } else if (name == "industryChoiceList") {
-      values.industryChoiceList.splice(index, 1);
-      tabs[2].content[i].checked = false;
-    }
-    that.setData({ tabs: tabs, str: values });
-  },
-
   //删除筛选条件,重复点击去除
   clearBtn_to: function (e) {
     var that = this;

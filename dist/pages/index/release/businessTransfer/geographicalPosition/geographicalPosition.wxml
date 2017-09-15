@@ -6,12 +6,21 @@
  * */-->
 
 <view class="page">
+  <view class="top_top"  bindtap="bindtapGetAddres" data-info="{{addressInfo}}"  size="mini">
+    <view class="bg_b_text">贵阳</view>
+    <view class="bg_b_img"><image src="/assets/images/address.png"></image></view>
+  </view>
 <!-- 筛选   start-->
 <view  style="display: {{screen == false ? 'none' : 'block' }};"  class="page pageScreen">
     <view  class="page_bd page__bdScreen" >
         <view class="weui-tab">
             <!-- tab菜单  start -->
             <view class="www">
+                <block>
+                    <view id="全部"  class="weui-navbar__item stop_title {{activeIndex==-1?'border_tab' : 'stop_title'}}" bindtap="tabClick">
+                        <view class="weui-navbar__title stop_1">全贵阳</view>
+                    </view>
+                </block>
                 <block wx:for="{{tabs}}" wx:key="{{*this}}">
                     <view id="{{index}}"  class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
                         <view class="weui-navbar__title stop_1">{{item.name}}</view>
@@ -23,20 +32,26 @@
                 <!-- 金额  start -->
                 <view class="" hidden="{{activeIndex != 0}}">                
                   <checkbox-group  data-index="{{activeIndex}}">
+                  <label bindtap='clearBtn_to'
+                      data-value='全部'
+                      data-index='0'
+                      data-name="AmountOfMoney">
+                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
+                      <view  class="weui-navbar__title stop_1 flaot_left">全云岩</view>
+                    </view>
+                  </label>
+
                   <label  wx:for="{{tabs[activeIndex].content}}"
                       bindtap='clearBtn_to'
                       data-value='{{item.minThreshold}}'
                       data-index='{{index}}'
                       data-name="AmountOfMoney" wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop">
+                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
                       <view wx:if="{{item.minThreshold == 100}}" class="weui-navbar__title stop_1 flaot_left">
                         100万+
                       </view>
                       <view wx:else="{{item.minThreshold != 100}}" class="weui-navbar__title stop_1 flaot_left">
                         {{item.minThreshold}} - {{item.maxThreshold}} 万
-                      </view>
-                      <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <image class="img_wh" src="/assets/images/ttt.png" />
                       </view>
                     </view>
                   </label>
@@ -53,11 +68,8 @@
                       data-index='{{index}}'
                       data-name="releaseTypeList"
                      wx:key="{{*this}}">
-                    <view  class="weui-navbar__item stop">
+                    <view  class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
                       <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                      <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <image class="img_wh"   src="/assets/images/ttt.png" />
-                      </view> 
                     </view>
                   </label>
                   </checkbox-group>
@@ -73,19 +85,8 @@
                       data-value='{{item.name}}'
                       data-index='{{index}}'
                       data-name="industryChoiceList" wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop">
+                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
                       <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                      <view class="flaot_right"  wx:if="{{item.checked}}">
-                        <image class="img_wh"  src="/assets/images/ttt.png" />
-                          <!-- <icon class="weui-icon-radio" type="success_no_circle"  color="#14BAC8" size="16"></icon> -->
-                      </view>
-                    </view>
-                  </label>
-
-                  <label>
-                    <view class="weui-navbar__item stop">
-                      <checkbox class="weui-check"/>
-                      <view class="weui-navbar__title stop_1 flaot_left"></view>
                     </view>
                   </label>
                   </checkbox-group>

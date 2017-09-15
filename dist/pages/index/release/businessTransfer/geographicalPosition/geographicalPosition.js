@@ -4,7 +4,11 @@
  *   描述:  发布_生意转让_地理位置页面
  * 
  * */
- var app=getApp();
+//获取应用实例
+var app = getApp();
+var server = require('../../../../../utils/server');
+var utilMd5 = require('../../../../../utils/md5.js');
+import __config from '../../../../../config/config'
 
 Page({
 
@@ -46,7 +50,7 @@ Page({
     },{
       name:"南明",
       content: [{
-        name: '全部',
+        name: '全南明',
         value: '0',
         checked: false,
       }, {
@@ -85,7 +89,7 @@ Page({
     },{
       name:"花溪",
       content: [{
-        name: '全部',
+        name: '全花溪',
         value: '0',
         checked: false,
       }, {
@@ -154,8 +158,111 @@ Page({
         checked: false
       }],
     }],
+    str: {
+      AmountOfMoney: [{
+        minThreshold: 1,
+        maxThreshold: 5, i: 1
+      }],                           //金额
+      releaseTypeList: [],          //类型
+      industryChoiceList: [],       //行业
+    },
+    addressInfo: '定位中..',     //定位
+    ad_info:'',                 //地址信息
     geographicalPosition:null,
     num:0
+  },
+
+  //删除筛选条件,重复点击去除
+  clearBtn_to: function (e) {
+    var that = this;
+    var str = that.data.str;
+    //得到name 
+    var name = e.currentTarget.dataset.name;
+    //得到index 
+    var index = e.currentTarget.dataset.index;
+    //得到value
+    var value = e.currentTarget.dataset.value;
+    //得到tabs
+    var tabs = that.data.tabs;
+    //判断
+    if (name == "AmountOfMoney") {
+      for (var k = 0; k < tabs[0].content.length; ++k) {
+        if (tabs[0].content[k].minThreshold == value) {
+          if (tabs[0].content[k].checked == false) {
+            tabs[0].content[k].checked = true;
+            str.AmountOfMoney[0] = {
+              minThreshold: tabs[0].content[k].minThreshold,
+              maxThreshold: tabs[0].content[k].maxThreshold, i: k
+            };
+          } else {
+            tabs[0].content[k].checked = false;
+            str.AmountOfMoney[0] = [];
+          }
+        } else {
+          tabs[0].content[k].checked = false;
+        }
+      }
+    } else if (name == 'releaseTypeList') {
+      if (value == "全部") {
+        str.releaseTypeList = [];
+        if (tabs[1].content[0].checked == true) {
+          for (var k = 0; k < tabs[1].content.length; ++k) {
+            tabs[1].content[k].checked = false;
+            str.releaseTypeList.splice(k, 1);
+          }
+        } else {
+          for (var k = 0; k < tabs[1].content.length; ++k) {
+            tabs[1].content[k].checked = true;
+            str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+          }
+        }
+
+      } else {
+        for (var k = 0; k < tabs[1].content.length; ++k) {
+          if (tabs[1].content[k].name == value) {
+            if (tabs[1].content[k].checked == false) {
+              tabs[1].content[k].checked = true;
+              str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+            } else {
+              tabs[1].content[k].checked = false;
+              str.releaseTypeList.splice(k, 1);
+            }
+            break;
+          }
+        }
+      }
+    } else if (name == "industryChoiceList") {
+      if (value == "全部") {
+        str.industryChoiceList = [];
+        if (tabs[2].content[0].checked == true) {
+          for (var k = 0; k < tabs[2].content.length; ++k) {
+            tabs[2].content[k].checked = false;
+            str.industryChoiceList.splice(k, 1);
+          }
+        } else {
+          for (var k = 0; k < tabs[2].content.length; ++k) {
+            tabs[2].content[k].checked = true;
+            str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+          }
+        }
+
+      } else {
+        for (var k = 0; k < tabs[2].content.length; ++k) {
+          if (tabs[2].content[k].name == value) {
+            if (tabs[2].content[k].checked == false) {
+              tabs[2].content[k].checked = true;
+              str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+            } else {
+              tabs[2].content[k].checked = false;
+              str.industryChoiceList.splice(k, 1);
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    that.setData({ tabs: tabs, str: str });
   },
 
   //tab切换
@@ -208,10 +315,62 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //重新赋值
-    this.setData({
-      geographicalPosition: app.globalData.geographicalPosition
+    var that = this;
+    //定位
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        server.getJSON('/waimai/api/location.php', {
+          latitude: latitude,
+          longitude: longitude
+        }, function (res) {
+          if (res.data.status != -1) {
+            var city = res.data.result.ad_info.city;
+            if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
+            else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
+            var city_code = res.data.result.ad_info.city_code
+            var code = city_code.substring(3, city_code.length);
+            that.setData({ addressInfo: city, code: code });
+          } else {
+            that.setData({ addressInfo: '定位失败' });
+          }
+        });
+      }
     });
+
+    ////从缓存里去地址数据
+    var ad_info = wx.getStorageSync("ad_info");
+    if (ad_info != "") {
+      that.setData({ ad_info: ad_info });
+      return;
+    }
+
+    //必要参数
+    var time = new Date().getTime();
+    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    var cookie = wx.getStorageSync("cookie");
+
+    //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
+    getAdressData(that);
+    function getAdressData(that) {
+      wx.request({
+        url: __config.basePath_sys + "api/exe/getCityList",
+        method: "POST",
+        header: { cookie: cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        data: { timeStamp: time, token: token },
+        success: function (res) {   //请求成功
+          //得到地址数据
+          var ad_info = res.data;
+          //放进本地缓存
+          wx.setStorageSync("ad_info", ad_info);
+          that.setData({ ad_info: ad_info });
+        },
+        fail: function (res) { },
+        complete: function () { }
+      });
+    }
   },
 
   /**

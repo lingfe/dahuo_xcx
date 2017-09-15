@@ -165,38 +165,6 @@
                 <!-- 行业  end -->
             </view>
             <view class="botton_view">
-              <!-- 标签  start -->
-              <!-- <view class="biaoqian"> -->
-                <!-- 金额  start -->
-                <!-- <view  wx:for="{{str.AmountOfMoney}}" wx:key="{{*this}}">
-                  <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text" wx:if="{{item.minThreshold !=100 }}">{{item.minThreshold}} - {{item.maxThreshold}} 万</view>
-                    <view class="delete_text" wx:else="{{item.minThreshold == 100}}">100万+</view>
-                    <image class="delete_image"  bindtap="clearBtn" data-name="AmountOfMoney" data-index="{{index}}" data-i="{{item.i}}"  data-value="{{item}}" src="/assets/images/delete.png"></image>
-                  </view>
-                </view> -->
-                <!-- 金额  end -->
-                
-                <!-- 类型  start -->
-                <!-- <view  wx:for="{{str.releaseTypeList}}" wx:key="{{*this}}">
-                  <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text">{{item.releaseType}}</view>
-                    <image class="delete_image"  bindtap="clearBtn"  data-name="releaseTypeList" data-index="{{index}}" data-i="{{item.i}}"  data-value="{{item.releaseType}}" src="/assets/images/delete.png"></image>
-                  </view>
-                </view> -->
-                <!-- 类型  end -->
-
-                <!-- 行业  start -->
-                <!-- <view  wx:for="{{str.industryChoiceList}}" wx:key="{{*this}}">
-                  <view class="delete" wx:if="{{item != ''}}">
-                    <view class="delete_text">{{item.industryChoice}}</view>
-                    <image class="delete_image"  bindtap="clearBtn" data-name="industryChoiceList" data-index="{{index}}" data-i="{{item.i}}" data-value="{{item.industryChoice}}" src="/assets/images/delete.png"></image>
-                  </view>
-                </view> -->
-                <!-- 行业  end -->
-              <!-- </view> -->
-              <!-- 标签  end -->
-
               <!-- 操作  start -->
               <view class="operation">
                 <view class="operation_close"  bindtap="bindtapReset">重置</view>

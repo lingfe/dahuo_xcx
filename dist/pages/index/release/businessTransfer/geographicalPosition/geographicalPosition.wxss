@@ -7,12 +7,34 @@
  page{
   background-color: #E8EFEF;
 }
+/*定位*/
+.top_top{
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+}
+.bg_b_img{
+  margin-top: 30rpx;
+  float: right;
+}
+.bg_b_img image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.bg_b_text{
+  margin-left: 14rpx;
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  margin-right: 278rpx;
+  float: right;
+}
+
 /*筛选*/
 .pageScreen{
   width: 100%;
   height: auto;
-  position:fixed;
-  top: -1rpx;
+  position: fixed;
+  top: 100rpx;
   background-color:rgba(0, 0, 0, 0.5);
 }
 .scressClose{
@@ -41,9 +63,9 @@
 
 .ccc{
   float: left;
-  width: 400rpx;
-  background-color: #fff;
+  width: 408rpx;
   height: 1360rpx;
+  background-color: #ebebeb;
 }
 .botton_view{
   height: 400rpx;
@@ -91,28 +113,28 @@
 
 .border_tab{
   border-left: 8px #14BAC8 solid;
-  color: #14BAC8; 
   height: 17px;
   font-size: 26rpx;
-  margin-top: 10rpx;
   text-align:left;
+  background-color: #ebebeb;
+  color: #636363;
 }
 
 .stop_title{
   border-left: 8px #fff solid;
-  margin-top: 10rpx;
   height: 17px;
   font-size:26rpx; 
   text-align:left;
 
 }
 .stop{
-  margin-top: 12rpx;
   height: 17px;
+  margin-bottom: 2rpx;
   font-size:26rpx; 
 }
 .stop_1{
   font-size: 26rpx;
+  margin-left: 26rpx;
 }
 .stop_1:before{
   border-top:0px solid #fff; 
@@ -130,6 +152,13 @@
   margin-right: 30rpx;
   float: right;
 }
+
+.bg_color{
+  color: #636363;
+  background-color: #d9d9d9;
+}
+
+
 /* 沟沟 */
 .img_wh{
   width:20px;
