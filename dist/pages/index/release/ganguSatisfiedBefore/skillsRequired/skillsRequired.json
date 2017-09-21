@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "技能要求"
+  "navigationBarTitleText": "技能要求",
+  "enablePullDownRefresh": false
 }

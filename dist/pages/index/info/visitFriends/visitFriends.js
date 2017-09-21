@@ -3,7 +3,6 @@
  *   描述:  查看搭友——页面
  * 
  * */
-var app = getApp();
 var utilMd5 = require('../../../../utils/md5.js');
 import __config from '../../../../config/config'
 
@@ -13,8 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[],      //数据集合
-    numBer:1      //帖子数量
+    list: [],      //数据集合
+    numBer: 1      //帖子数量
   },
 
   /**
@@ -24,75 +23,40 @@ Page({
     var that = this;
     that.setData({
       personalId: options.personalId
-    }); 
+    });
 
     //获取发布相关信息
     that.requestData(that);
     //获取个人信息
-    that.personalGetData(that);
-  },
-
-  //获取个人信息
-  personalGetData: function (that) {
-    //必要参数
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    //个人资料id
-    var personalId = that.data.personalId;
-    //设置请求参数获取数据,默认0第一页
-    var data = {
-      timeStamp: time,
-      token: token,
-      reqJson: JSON.stringify({
-        nameSpace: 'sys_userinfo',       //个人信息表
-        scriptName: 'Query',
-        nameSpaceMap: {
-          sys_userinfo: {
-            Query: [{
-              id: personalId    //个人资料id
-            }],
-          }
-        }
-      })
-    };
-    that.setData({
-      data: data,
-    });
-
-    //发送请求
-    this.requestDataPersonal(that);
+    that.requestDataPersonal(that);
   },
 
   //请求获取数据,个人信息
   requestDataPersonal: function (that) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
     wx.request({
       url: __config.basePath_sys + "api/exe/get",
       method: "POST",
-      header: {
-        cookie: cookie,
-        "Content-Type": "application/x-www-form-urlencoded"
+      header: {cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded"},
+      data: {
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
+        reqJson: JSON.stringify({
+          nameSpace: 'sys_userinfo',       //个人信息表
+          scriptName: 'Query',
+          nameSpaceMap: {
+            sys_userinfo: {
+              Query: [{
+                id: that.data.personalId    //个人资料id
+              }],
+            }
+          }
+        })
       },
-      data: that.data.data,
       success: function (res) {   //请求成功
-        console.log("userinfo:");
-        console.log(res);
         that.setData({
           userinfo: res.data.rows[0]
         });
-      },
-      fail: function (res) {      //请求失败
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
+      }
     });
   },
 
@@ -141,100 +105,52 @@ Page({
   },
 
   //请求获取数据,发布信息
-  requestData: function (self) {
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    //个人资料id
-    var personalId = self.data.personalId;
-    //设置请求参数获取数据,默认0第一页
-    var data = {
-      timeStamp: time,
-      token: token,
-      reqJson: JSON.stringify({
-        nameSpace: 'releaseinfo',
-        scriptName: 'Query',
-        nameSpaceMap: {
-          releaseinfo: {
-            Query: [{
-              personalId: personalId    //发布信息id
-            }],
-          }
-        }
-      })
-    };
+  requestData: function (that) {
     //请求获取发布信息,
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
       header: {
-        cookie: cookie,
+        cookie: wx.getStorageSync("cookie"),
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      data: data,
+      data: {
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                personalId: that.data.personalId    //发布信息id
+              }],
+            }
+          }
+        })
+      },
       success: function (res) {
-        console.log(res);
-        var pageList = self.data.list;
+        var pageList = [];
         //得到数据
         var list = res.data.rows;
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = self.getDate(list[i].cdate);
+          var strTime = that.getDate(list[i].cdate);
           if (list[i].imageArray != null) list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
           if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 60);
           if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 60);
           if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 60);
-          
+
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
         }
         //设置值
-        self.setData({
+        that.setData({
           list: pageList,
-          numBer:pageList.length
+          numBer: pageList.length
         });
-      },
-      fail: function (res) {
-        //提示
-        wx.showToast({
-          title: "请求失败！",
-          icon: 'loading',
-          duration: 3000,
-        });
-        console.log("失败了");
-      },
-      //不管成功失败都执行
-      complete: function () { }
+      }
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
   },
 
   /**
@@ -251,18 +167,4 @@ Page({
     //下拉完成后执行回退
     wx.stopPullDownRefresh();
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

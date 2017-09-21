@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "加盟分店"
+  "navigationBarTitleText": "加盟分店",
+  "enablePullDownRefresh": false
 }

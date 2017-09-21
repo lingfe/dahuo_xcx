@@ -10,7 +10,7 @@ import __config from '../../../config/config'
 Page({
   data:{
     bl:false,                      //是否显示查看全文
-    tabs: ["项目细节", "讨论区"],    //tab
+    tabs: ["项目细节", "问问看"],    //tab
     activeIndex: 0,                //tab切换索引
     sliderOffset: 0,               //x坐标    
     sliderLeft: 0,                 //y坐标
@@ -33,6 +33,73 @@ Page({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.imgPass // 需要预览的图片http链接列表
     })
+  },
+
+  //长按提示删除
+  bindlongtapURL: function (e) {
+    var that = this;
+    var id = e.currentTarget.id;
+    var index = e.currentTarget.dataset.index;
+    var comenntid = e.currentTarget.dataset.comenntid;//评论人id
+    var personalId = wx.getStorageSync('personalId');//用户id
+
+    wx.showModal({
+      title: '删除通知',
+      content: '是否删除？',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          if (personalId != that.data.personalId){
+            if (comenntid != personalId) {
+              wx.showToast({ title: '你不能删除哦!', icon: 'toast', duration: 1000 });//提示
+              return;
+            }
+          }       
+          that.data.id = id;
+          that.data.index = index;
+          //删除通知
+          that.neticeDelete(that);
+        }
+      }
+    });
+  },
+
+  //删除评论
+  neticeDelete: function (that) {
+    //发送请求
+    wx.request({
+      url: __config.basePath_web + "api/exe/save",
+      method: "POST",
+      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      data: {
+        timeStamp: that.data.time,
+        token: that.data.token,
+        reqJson: JSON.stringify({
+          nameSpace: 'commentinfo',       //评论表
+          scriptName: 'Query',
+          cudScriptName: 'Delete',
+          nameSpaceMap: {
+            notice: {
+              Query: [{
+                id: that.data.id,
+              }],
+            }
+          }
+        })
+      },
+      success: function (res) {
+        var allContentList = that.data.allContentList;
+        var index = that.data.index;
+        allContentList.splice(index, 1);
+        that.setData({
+          allContentList: allContentList
+        });
+      },
+      fail: function (res) { },
+      complete: function () { }
+    });
   },
 
   //收藏,添加收藏
@@ -293,17 +360,24 @@ Page({
         },
         success: function (res) {
           if (that.data.inputHf == true) {
+            that.setData({
+              inputHf:false,
+              inputValue:'',
+            });
             wx.showToast({ title: '已回复!', icon: 'toast', duration: 1000 });//提示
             //参数
             that.data.notifyname = userName;
             that.data.content = that.data.inputValue;
             that.data.tile = "";
             that.data.ntype = 2;
+
             //设置通知
             that.setNotice(that);
           }else{
             wx.showToast({ title: '评论成功!', icon: 'toast', duration: 1000 });//提示
-            
+            that.setData({
+              inputValue: '',
+            });
             //参数
             that.data.notifyname = userName;
             that.data.content = "我评论了你的项目：‘" + that.data.inputValue+"'";
@@ -443,6 +517,7 @@ Page({
           nameSpaceMap: {
             releaseinfo: {
               Query: [{
+                df:0,
                 personalId: that.data.personalId    //发布信息id
               }],
             }

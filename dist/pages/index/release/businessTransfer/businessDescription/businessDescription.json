@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "营业描述"
+  "navigationBarTitleText": "营业描述",
+  "enablePullDownRefresh": false
 }

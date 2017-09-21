@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "行业选择"
+  "navigationBarTitleText": "行业选择",
+  "enablePullDownRefresh":false
 }

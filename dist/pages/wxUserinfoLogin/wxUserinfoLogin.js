@@ -5,8 +5,8 @@
  * 
  * */
 var app=getApp();
+var utilMd5 = require('../../utils/md5.js');
 import __config from '../../config/config'
-
 Page({
 
   /**
@@ -42,12 +42,14 @@ Page({
                   });
 
                   //得到cookie
-                  var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0] + ";" + res.header["Set-Cookie"].split(",")[1].split(";")[0];
+                  var cookie = res.header["Set-Cookie"].split(",")[0].split(";")[0] + ";" +
+                               res.header["Set-Cookie"].split(",")[1].split(";")[0]; 
+                  var time = new Date().getTime();
+                  var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
                   //保存在本地缓存中
-                  wx.setStorage({
-                    key: 'cookie',
-                    data: cookie
-                  });
+                  wx.setStorageSync("cookie", cookie);
+                  wx.setStorageSync("time", time);
+                  wx.setStorageSync("token", token);
 
                   //得到个人id，保存在本地缓存中
                   var personalId = res.data.rows.id;

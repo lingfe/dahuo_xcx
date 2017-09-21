@@ -1,15 +1,9 @@
-// pages/index/release/affiliateStores/throwInTheCity/throwInTheCity.js
 /**  
  *   作者:  lingfe 
  *   时间:  2017-9-15
  *   描述:  发布_加盟分店_投放城市页面
- * 
+ *   url:pages/index/release/affiliateStores/throwInTheCity/throwInTheCity.js
  * */
-//获取应用实例
-var app = getApp();
-var server = require('../../../../../utils/server');
-var utilMd5 = require('../../../../../utils/md5.js');
-import __config from '../../../../../config/config'
 
 Page({
 
@@ -17,206 +11,214 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputShowed: false,
-    inputVal: "",               //文本框值
-    Letter26: ["A", "B", "C",
-      "D", "E", "F", "G", "H",
-      "I", "J", "K", "L", "M",
-      "N", "O", "P", "Q", "R",
-      "S", "T", "U", "V", "W",
-      "X", "Y", "Z"],          //二十六字母
-    address: [],                 //地址数据
-    addressInfo: '定位中..',     //定位
-    str:["全国"],
-  },
+    str: [{
+      name: "华东地区",
+      index: 0,
+      content: [{
+        name: "山东",
+        checked: false,
+      }, {
+        name: "江苏",
+        checked: false,
+      }, {
+        name: "安徽",
+        checked: false,
+      }, {
+        name: "浙江",
+        checked: false,
+      }, {
+        name: "福建",
+        checked: false,
+      }, {
+        name: "上海",
+        checked: false,
+      }]
 
+    }, {
+      name: '华南地区',
+      index: 1,
+      content: [{
+        name: "广东",
+        checked: false,
+      }, {
+        name: "广西",
+        checked: false,
+      }, {
+        name: '海南',
+        checked: false,
+      }]
+    }, {
+      name: "华中地区",
+      index: 2,
+      content: [{
+        name: "湖北",
+        checked: false,
+      }, {
+        name: "湖南",
+        checked: false
+      }, {
+        name: "河南",
+        checked: false
+      }, {
+        name: "江西",
+        checked: false
+      }]
+    }, {
+      name: '华北地区',
+      index: 3,
+      content: [{
+        name: "北京",
+        checked: false,
+      }, {
+        name: "天津",
+        checked: false
+      }, {
+        name: "河北",
+        checked: false
+      }, {
+        name: "山西",
+        checked: false
+      }, {
+        name: "内蒙古",
+        checked: false
+      }]
+    }, {
+      name: "西北地区",
+      index: 4,
+      content: [{
+        name: "宁夏",
+        checked: false
+      }, {
+        name: "新疆",
+        checked: false
+      }, {
+        name: "青海",
+        checked: false
+      }, {
+        name: "陕西",
+        checked: false
+      }, {
+        name: "甘肃",
+        checked: false
+      }]
+    }, {
+      name: "西南地区",
+      index: 5,
+      content: [{
+        name: "四川",
+        checked: false
+      }, {
+        name: "云南",
+        checked: false
+      }, {
+        name: "贵州",
+        checked: false
+      }, {
+        name: "西藏",
+        checked: false
+      }, {
+        name: "重庆",
+        checked: false
+      }]
+    }, {
+      name: "东北地区",
+      index: 6,
+      content: [{
+        name: "辽宁",
+        checked: false
+      }, {
+        name: "吉林",
+        checked: false
+      }, {
+        name: "黑龙江",
+        checked: false,
+      }]
+    }, {
+      name: "台港澳地区",
+      index: 7,
+      content: [{
+        name: "台湾",
+        checked: false,
+      }, {
+        name: "香港",
+        checked: false
+      }, {
+        name: "澳门",
+        checked: false
+      }]
+    }],               //城市数据
+    data:[],          //参数
+    checked: false,   //全国是否选中
+  },
 
   //删除筛选条件
   clearBtn: function (e) {
     var that = this;
+    //得到数据，参数对象
     var values = that.data.str;
+    var data = that.data.data;
+    var checked = that.data.checked;
     //得到name 
     var name = e.currentTarget.dataset.name;
     //得到index 
     var index = e.currentTarget.dataset.index;
+    var indexto = e.currentTarget.dataset.indexto;
     //判断
-    if (name != "" && name!=null) {
-      values.splice(index, 1);
+    if (name == "全国") {
+      if (checked == false) {
+        data = [];
+        checked = true;
+        //全部选中
+        for (var i = 0; i < values.length; ++i) {
+          for (var j = 0; j < values[i].content.length; ++j) {
+            values[i].content[j].checked = true;
+            data.push(values[i].content[j].name);
+          }
+        }
+      } else {
+        data = [];
+        checked = false;
+        //全部取消
+        for (var i = 0; i < values.length; ++i) {
+          for (var j = 0; j < values[i].content.length; ++j) {
+            values[i].content[j].checked = false;
+          }
+        }
+      }
+    } else {
+      if (values[indexto].content[index].checked == true) {
+        for (var k = 0; k < data.length; ++k) {
+          if (data[k] == name) {
+            data.splice(k, 1);
+            break;
+          }
+        }
+        values[indexto].content[index].checked = false;
+      } else {
+        data.push(values[indexto].content[index].name);
+        values[indexto].content[index].checked = true;
+      }
     }
-    that.setData({str: values });
+
+    that.setData({ str: values, data: data, checked: checked });
   },
 
   //选择一个地址城市
-  bindtapGetAddres: function (e) {
+  savabusinessDescription: function (e) {
+    var that=this;
+    var throwInTheCity=that.data.data;
     //得到打开的页面
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];  //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
 
-    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    var city = e.currentTarget.dataset.info;
-    if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
-    else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
-    var str=this.data.str;
-    str.push(city);
-
-    this.setData({
-      str:str,
-    });
+    //放到缓存中
+    wx.setStorageSync("throwInTheCity", throwInTheCity);
     prevPage.setData({
-      city: city,
-      "userinfo.provinceName": city,                             //个人地址
+      throwInTheCity: that.data.data,
     });
 
     //返回上一页
     wx.navigateBack();
-  },
-
-  //搜索
-  bindtapSearch: function () {
-    //从缓存里去地址数据
-    var address = wx.getStorageSync("address");
-    //判断是否为空
-    if (address != "") {
-      var that = this;
-      var arr = address;
-      var arrTo = [];
-      for (var i = 0; i < arr.length; ++i) {
-        if (arr[i].grup == that.data.inputVal || arr[i].domainName == that.data.inputVal) {
-          arrTo.push(arr[i]);
-        }
-      }
-      //重新设置地址数据
-      that.setData({
-        address: arrTo
-      });
-    }
-  },
-
-  //清空搜索框
-  clearInput: function () {
-    //从缓存里去地址数据
-    var address = wx.getStorageSync("address");
-    //判断是否为空
-    if (address != "") {
-      this.setData({
-        inputVal: "",
-        address: address
-      });
-      return;
-    }
-  },
-
-  //文本框输入事件
-  bindinputValue: function (e) {
-    this.setData({ inputVal: e.detail.value });    //搜索框key
-  },
-
-  //页面加载
-  onLoad: function () {
-    var that = this;
-    //定位
-    wx.getLocation({
-      type: 'gcj02',
-      success: function (res) {
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        server.getJSON('/waimai/api/location.php', {
-          latitude: latitude,
-          longitude: longitude
-        }, function (res) {
-          if (res.data.status != -1) {
-            var city = res.data.result.ad_info.city;
-            if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
-            else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
-
-            that.setData({ addressInfo: city });
-          } else {
-            that.setData({ addressInfo: '定位失败' });
-          }
-        });
-      }
-    });
-
-    ////从缓存里去地址数据
-    var address = wx.getStorageSync("address");
-    if (address != "") {
-      that.setData({ address: address });
-      return;
-    }
-
-    //必要参数
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    var cookie = wx.getStorageSync("cookie");
-
-    //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
-    getAdressData(that);
-    function getAdressData(that) {
-      wx.request({
-        url: __config.basePath_sys + "api/exe/getCityList",
-        method: "POST",
-        header: { cookie: cookie, "Content-Type": "application/x-www-form-urlencoded" },
-        data: { timeStamp: time, token: token },
-        success: function (res) {   //请求成功
-          //得到地址数据
-          var address = res.data;
-          //放进本地缓存
-          wx.setStorageSync("address", address);
-          that.setData({ address: address });
-        },
-        fail: function (res) { },
-        complete: function () { }
-      });
-    }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

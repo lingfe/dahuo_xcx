@@ -4,8 +4,6 @@
  *   描述:  发布_加盟分店页面
  * 
  * */
-var app=getApp();
-var utilMd5 = require('../../../../utils/md5.js');
 import __config from '../../../../config/config'
 
 Page({
@@ -14,53 +12,88 @@ Page({
    * 页面的初始数据
    */
   data: {
-    files: [],
-    isAgree: false,
-    PriceRange: ['1 - 5 万', '5 - 15 万', '15 - 25 万', '25 - 50 万', '50 - 500 万'],
-    priceIndex: 0,
-    address: ['北京', '上海', '深圳', '广州', '贵阳'],
-    addressIndex: 0,
-    arr:[],
+    files: [],                            //选择图片的数组，原始。包含完整的图片url，以及现在编辑数据，用于预览
+    arr: [],                              //选择图片的数组，预留。不包含编辑之前的数据，用于组装
+    isAgree: false,                       //同意条款
 
-    title: "",                              //标题
-    threshold: 0,                           //入伙门槛s
-    industryChoice: null,                   //行业选择
-    headquartersLocation: null,             //总部位置
+    title: null,                          //标题
+    threshold: null,                      //入伙门槛
+    industryChoice: null,                 //行业选择
+    headquartersLocation: null,           //总部位置
     fundDistribution: "",                 //资金布局
     projectDescription: '',               //项目描述
     incomeDescription: '',                //收益描述
-    teamIntroduction: null,                 //公司、团队介绍
-    throwInTheCity: null,                   //投放城市
-    phone: null,                            //电话号码
-    currentCity: null,                      //当前城市
-    imageArray: [] ,                        //数组
-    text:"发布",                            //默认
+    teamIntroduction: null,               //公司、团队介绍
+    throwInTheCity: '',                   //投放城市
+    phone: null,                          //电话号码
+    currentCity: null,                    //当前城市
+    imageArray: [],                       //图片数组，原始。不包含完整url，用于储存
+
+    df: 4,                                //发布信息状态，0=正常显示,1=已下架,2=未发布，4=审核中，5=未通过
+    text: "发布",                         //默认
+    dad: false   //是否保存到档案袋
   },
-  //入伙门槛 ,移出
-  bindinputValue: function (e) {
-    console.log('移出', e.detail.value);
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    var that = this;
+    var dad = that.data.title == null ? false : true;
+    if (dad == true && that.data.dad == false) {
+      that.setData({ df: 2, dad: dad });
+      //是否加入档案袋
+      wx.showModal({
+        title: '提示',
+        content: '还有没有保存，是否放入档案袋？',
+        confirmText: "是",
+        cancelText: "否",
+        success: function (res) {
+          if (res.confirm) {
+            //发送请求发布
+            that.reqSetData("");
+          }
+        }
+      });
+    }
+
+        //清除缓存
+        wx.setStorageSync("projectDescription", "");    //项目描述
+        wx.setStorageSync("incomeDescription", "");     //收益描述
+        wx.setStorageSync("fundDistribution", "");      //资金布局
+        wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
+  },
+
+  //标题
+  bindinput_title: function (e) {
     this.setData({
-      threshold: e.detail.value + "万"
+      title: e.detail.value
     });
   },
-  //入伙门槛,移入
-  bindfocusValue:function(e){
-    console.log("移入", e.detail.value);
-    let that = this; 
-    that.setData({
-      threshold:null,
+
+  //电话号码
+  bindinput_phone: function (e) {
+    this.setData({
+      phone: e.detail.value
     });
   },
+
+  //入伙门槛
+  bindinputValue: function (e) {
+    this.setData({
+      threshold: e.detail.value,
+    });
+  },
+
   //选择行业
   industryChoiceClick: function (e) {
-    console.log('行业选择  发生选择改变，携带值为', e.detail.value);
     wx.navigateTo({
       url: "/pages/dahuo/industryChoice/industryChoice"
     });
   },
+
   //总部位置
   geographicalPositionClick: function (e) {
-    console.log("总部位置");
     var that = this
     wx.chooseLocation({
       success: function (res) {
@@ -71,13 +104,14 @@ Page({
       }
     })
   },
+
   //资金布局
   fundsLayoutClick: function (e) {
-    console.log("资金布局");
     wx.navigateTo({
       url: '/pages/index/release/partnership/fundsLayout/fundsLayout'
     });
   },
+
   //项目描述
   projectDescriptionClick: function (e) {
     console.log("项目描述");
@@ -85,6 +119,7 @@ Page({
       url: "/pages/index/release/partnership/projectDescription/projectDescription"
     });
   },
+
   //收益描述
   incomeDescriptionClick: function (e) {
     console.log("收益描述");
@@ -92,26 +127,28 @@ Page({
       url: "/pages/index/release/partnership/incomeDescription/incomeDescription"
     });
   },
+
   //团队/公司介绍
   introduceClick: function (e) {
-    console.log("团队/公司介绍");
     wx.navigateTo({
       url: '/pages/index/release/partnership/introduce/introduce',
     });
   },
+
   //投放城市
-  setAddressInfo: function (e) {
-    console.log('投放城市 发生选择改变，携带值为', e.detail.value);
-    this.setData({
-      addressIndex: e.detail.value
+  throwInTheCityClick: function (e) {
+    wx.navigateTo({
+      url: '/pages/index/release/affiliateStores/throwInTheCity/throwInTheCity',
     });
   },
+
   //阅读并同意,相关条约
   bindAgreeChange: function (e) {
     this.setData({
       isAgree: !!e.detail.value.length
     });
   },
+
   //提示框
   showModal: function (msg) {
     wx.showModal({
@@ -119,6 +156,7 @@ Page({
       showCancel: false,
     });
   },
+
   //表单提交
   submitForm: function (e) {
     var that=this;
@@ -138,6 +176,9 @@ Page({
     if (threshold == "" || threshold == null) {
       that.showModal("加盟金额不能为空!");
       return;
+    } else {
+      var threshold = that.data.threshold.substring(0, that.data.threshold.indexOf('万'));
+      wx.setStorageSync("threshold", threshold);
     }
 
 
@@ -150,7 +191,7 @@ Page({
     //总部位置
     var headquartersLocation = e.detail.value.headquartersLocation;
     if (headquartersLocation == "" || headquartersLocation == null) {
-      that.showModal("总部不能为空!");
+      that.showModal("总部位置不能为空!");
       return;
     }
     //资金布局
@@ -193,35 +234,23 @@ Page({
       that.showModal("电话号码必须是11位数！");
       return;
     }
-    //正则表达式验证电话号码
-    var pattern = /[^\d]/g;
-    //获取电话号码
-    var flag = pattern.test(e.detail.value.phone);
-    if (flag) {
-      //弹出提示
-      wx.showModal({
-        content: '电话号码不正确',
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          }
-        }
-      });
-      return;
-    }
 
-    //图片
+    //图片数组
     var imageArray = [];
+    //判断原始图片数组是否为空
     if (that.data.imageArray.length != 0) {
+      //不为空，加上预留选择图片数组
       imageArray = that.data.imageArray;
       var arr = that.data.arr;
       for (var i = 0; i < arr.length; ++i) {
         imageArray.push(arr[i]);
       }
     } else {
+      //为空,得到原始数据
       imageArray = that.data.files;
     }
+
+    //判断图片数组是否为空
     if (imageArray == null || imageArray.length == 0) {
       that.showModal("请上传图片!");
       return;
@@ -230,17 +259,13 @@ Page({
       that.showModal("图片最多只能上传六张!");
       return;
     }
+
     //同意条款
     var isAgree = e.detail.value.isAgree;
     if (isAgree != 'agree') {
       that.showModal("请同意相关条款!");
       return;
     }
-
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
 
     //提示
     wx.showToast({
@@ -254,7 +279,7 @@ Page({
       uploadimg(imageArray.splice(0, 1), [], imageArray);
     } else {
       //调用请求发布
-      reqSetData(imageArray.join(","));
+      that.reqSetData(imageArray.join(","));
     }
 
     //多张图片上传
@@ -264,10 +289,9 @@ Page({
         filePath: path[0],                          //要上传文件资源的路径
         name: 'file',                                //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
         header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
-          cookie: cookie,
+          cookie: wx.getStorageSync("cookie"),
           "Content-Type": "application/x-www-form-urlencoded"
         },
-
         formData: null,                             //参数(HTTP 请求中其他额外的 form data)
         success: (resp) => {                         //接口调用成功的回调函数
           var json = JSON.parse(resp.data);
@@ -277,7 +301,7 @@ Page({
             uploadimg(dataArr.splice(0, 1), pathArr, dataArr);
           } else {
             //调用请求发布
-            reqSetData(pathArr.join(","));
+            that.reqSetData(pathArr.join(","));
           }
         },
         fail: function (res) {                         //接口调用失败的回调函数
@@ -295,89 +319,78 @@ Page({
         }
       });
     }
+  },
 
-    //请求更新
-    function reqSetData(pathArr) {
-      //发送请求,发布信息,
-      wx.request({
-        url: __config.basePath_web+"api/exe/save",
-        method: "POST",
-        header: {
-          cookie: cookie,
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        dataType: '',
-        data: {
-          timeStamp: time,
-          token: token,
-          reqJson: JSON.stringify({
-            nameSpace: 'releaseinfo',
-            scriptName: 'Query',
-            cudScriptName: 'Update',
-            nameSpaceMap: {
-              releaseinfo: {
-                Query: [{
-                  df: 4,                                       //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
-                  id: that.data.id,                                    //发布信息id,如果为空添加，不为空更新
-                  releaseType: '加盟分店',                   //发布类型
-                  personalId: wx.getStorageSync("personalId"),      //个人资料id
-                  title: title,                             //标题
-                  threshold: threshold.substring(0, threshold.indexOf('万')),                     //入伙门槛
-                  industryChoice: industryChoice,           //行业选择
-                  headquartersLocation: headquartersLocation,//总部位置
-                  fundDistribution: wx.getStorageSync("fundDistribution"),       //资金布局
-                  projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
-                  incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
-                  teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
-                  throwInTheCity: throwInTheCity,           //投放城市
-                  phone: phone,                             //电话号码
-                  currentCity: wx.getStorageSync("currentCity"), //当前城市
-                  imageArray:pathArr                             //数组
-                }]
-              }
+  //请求更新
+  reqSetData:function (pathArr) {
+    var that=this;
+    //发送请求,发布信息,
+    wx.request({
+      url: __config.basePath_web + "api/exe/save",
+      method: "POST",
+      header: {cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded"},
+      data: {
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          cudScriptName: 'Update',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                df: that.data.df,                                               //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+                id: that.data.id,                                               //发布信息id,如果为空添加，不为空更新
+                releaseType: '加盟分店',                                         //发布类型
+                personalId: wx.getStorageSync("personalId"),                    //个人资料id
+                title: that.data.title,                                         //标题
+                threshold: that.data.threshold,                                 //入伙门槛
+                industryChoice: that.data.industryChoice,                       //行业选择
+                headquartersLocation: that.data.headquartersLocation,           //总部位置
+                fundDistribution: wx.getStorageSync("fundDistribution"),        //资金布局
+                projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+                incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+                teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+                throwInTheCity: that.data.throwInTheCity,                       //投放城市
+                phone: that.data.phone,                                         //电话号码
+                currentCity: wx.getStorageSync("currentCity"),                  //当前城市
+                imageArray: pathArr                                             //数组
+              }]
             }
-          })
-        },
-        success: function (res) {
+          }
+        })
+      },
+      success: function (res) {
+
+        //判断是否加入档案袋
+        if (that.data.dad == false) {
+          that.setData({ dad: true });
           //提示
           wx.showToast({
             title: res.data.message,
             icon: 'ok',
             duration: 3000,
-            success:function(){
-              wx.redirectTo({
-                //url: '/pages/index/info/info?releaseId='+res.data.rows[0].id+'&personalId='+res.data.rows[0].personalId,
-                url:"/pages/index/index",
-              });
+            success: function () {
+              wx.switchTab({ url: "/pages/index/index" });
             }
           });
-
-          //清除缓存
-          wx.setStorageSync("projectDescription", "");    //项目描述
-          wx.setStorageSync("incomeDescription", "");     //收益描述
-          wx.setStorageSync("fundDistribution", "");      //资金布局
-          wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
-        },
-        fail: function () {
-          console.log("失败了");
-        },
-        complete: function () {
-
+        } else {
+          //提示
+          wx.showToast({ title: "保存成功！", icon: 'ok', duration: 3000 });
         }
-      });
-
-    }
+      }
+    });
   },
+
   //删除图片
   bindtapImageDelete: function (e) {
-    var img = e.currentTarget.dataset.img;
     var that = this;
     var files = that.data.files;
-
+    var img = e.currentTarget.dataset.img;
     for (var j = 0; j < files.length; j++) {
       if (files[j] == img) {
-        //files[j]='';
         files.splice(j, 1);
+        break;
       }
     }
 
@@ -386,6 +399,7 @@ Page({
       var strImg = __config.domainImage + imageArray[j];
       if (strImg == img) {
         imageArray.splice(j, 1);
+        break;
       }
     }
 
@@ -393,7 +407,6 @@ Page({
       files: files,
       imageArray: imageArray
     });
-    return false;
   },
 
   //获取 图片
@@ -446,6 +459,7 @@ Page({
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -464,78 +478,77 @@ Page({
   //根据id获取发布信息
   getReleaseInfo: function (id,df) {
     var that = this;
-
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
-    reqSetData(id,df);
-
-    //请求更新
-    function reqSetData(id,df) {
-      //发送请求,发布信息,
-      wx.request({
-        url: __config.basePath_web + "api/exe/get",
-        method: "POST",
-        header: {
-          cookie: cookie,
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        data: {
-          timeStamp: time,
-          token: token,
-          reqJson: JSON.stringify({
-            nameSpace: 'releaseinfo',
-            scriptName: 'Query',
-            nameSpaceMap: {
-              releaseinfo: {
-                Query: [{
-                  id: id,                        //发布信息id
-                  df:df
-                }]
-              }
+    //发送请求,发布信息,
+    wx.request({
+      url: __config.basePath_web + "api/exe/get",
+      method: "POST",
+      header: {cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded"},
+      data: {
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
+        reqJson: JSON.stringify({
+          nameSpace: 'releaseinfo',
+          scriptName: 'Query',
+          nameSpaceMap: {
+            releaseinfo: {
+              Query: [{
+                id: id,                        //发布信息id
+                df: df
+              }]
             }
-          })
-        },
-        success: function (res) {
-          //得到信息
-          var info = res.data.rows[0];
-
-          var arr = info.imageArray.split(',');
-          for (var i = 0; i < arr.length; ++i) {
-            arr[i] = __config.domainImage + arr[i];
           }
+        })
+      },
+      success: function (res) {
+        //得到信息
+        var info = res.data.rows[0];
+        var imageArray = [];
+        var files = [];
+        if (info.imageArray != null && info.imageArray != "") {
+          var files = info.imageArray.split(',');
+          for (var i = 0; i < files.length; ++i) {
+            files[i] = __config.domainImage + files[i];
+          }
+          imageArray = info.imageArray.split(",");
+        }
 
-          //设置到this
-          that.setData({
-            id: id,
-            title: info.title,                             //标题
-            threshold: info.threshold,                     //入伙门槛
-            industryChoice: info.industryChoice,           //行业选择
-            headquartersLocation: info.headquartersLocation,//总部位置
-            fundDistribution: info.fundDistribution,       //资金布局
-            projectDescription: info.projectDescription,   //项目描述
-            incomeDescription: info.incomeDescription,     //收益描述
-            teamIntroduction: info.teamIntroduction,       //公司、团队介绍
-            throwInTheCity: info.throwInTheCity,           //投放城市
-            phone: info.phone,                             //电话号码
-            currentCity: info.currentCity, //当前城市
-            imageArray: info.imageArray.split(','),                             //数组
-            files: arr
-          });
-        },
-        fail: function () { },
-        complete: function () { }
-      });
-    }
-  },
+        //资金布局
+        if (info.fundDistribution == null) info.fundDistribution = '';
+        else wx.setStorageSync("fundDistribution", info.fundDistribution);
+        //项目描述
+        if (info.projectDescription == null) info.projectDescription = '';
+        else wx.setStorageSync("projectDescription", info.projectDescription);
+        //收益描述
+        if (info.incomeDescription == null) info.incomeDescription = '';
+        else wx.setStorageSync("incomeDescription", info.incomeDescription);
+        //公司、团队介绍
+        if (info.teamIntroduction == null) info.teamIntroduction = '';
+        else wx.setStorageSync("teamIntroduction", info.teamIntroduction);
+        //投放城市
+        if (info.throwInTheCity == null) info.throwInTheCity='';
+        else wx.setStorageSync("throwInTheCity", info.throwInTheCity);
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+        //设置到this
+        that.setData({
+          id: id,
+          title: info.title,                             //标题
+          threshold: info.threshold,                     //入伙门槛
+          industryChoice: info.industryChoice,           //行业选择
+          headquartersLocation: info.headquartersLocation,//总部位置
+          fundDistribution: info.fundDistribution,       //资金布局
+          projectDescription: info.projectDescription,   //项目描述
+          incomeDescription: info.incomeDescription,     //收益描述
+          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
+          throwInTheCity: info.throwInTheCity,           //投放城市
+          phone: info.phone,                             //电话号码
+          currentCity: info.currentCity,                 //当前城市
+          imageArray: imageArray,                       
+          files: files
+        });
+      },
+      fail: function () { },
+      complete: function () { }
+    });
   },
 
   /**
@@ -545,45 +558,11 @@ Page({
     //直接从缓存里面取
     var that = this;
     that.setData({
+      throwInTheCity: wx.getStorageSync("throwInTheCity"),            //投放城市
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
       fundDistribution: wx.getStorageSync("fundDistribution"),        //资金布局  
       teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
     });
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

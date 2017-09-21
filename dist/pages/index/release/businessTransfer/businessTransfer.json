@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "生意转让"
+  "navigationBarTitleText": "生意转让",
+  "enablePullDownRefresh": false
 }

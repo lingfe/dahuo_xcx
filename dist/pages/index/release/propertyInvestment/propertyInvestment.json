@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "房产投资"
+  "navigationBarTitleText": "房产投资",
+  "enablePullDownRefresh": false
 }

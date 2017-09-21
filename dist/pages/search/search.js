@@ -22,7 +22,7 @@ Page({
       "S", "T", "U", "V", "W",
        "X", "Y", "Z"],          //二十六字母
     address:[],                 //地址数据
-    addressInfo: '定位中..',     //定位
+    addressInfo: '贵阳',     //定位
   },
 
   //选择一个地址城市
@@ -56,7 +56,7 @@ Page({
       var arr = address;
       var arrTo = [];
       for (var i = 0; i < arr.length; ++i) {
-        if (arr[i].grup == that.data.inputVal || arr[i].domainName == that.data.inputVal) {
+        if (arr[i].firstChar == that.data.inputVal || arr[i].shortName == that.data.inputVal) {
           arrTo.push(arr[i]);
         }
       }
@@ -98,9 +98,9 @@ Page({
         server.getJSON('/waimai/api/location.php', {
           latitude: latitude,
           longitude: longitude
-        }, function (res) {
-          if (res.data.status != -1) {
-            var city = res.data.result.ad_info.city;
+        }, function (res2) {
+          if (res2.data.status != -1) {
+            var city = res2.data.result.ad_info.city;
             if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
             else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
 

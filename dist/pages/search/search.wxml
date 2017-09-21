@@ -8,7 +8,7 @@
     <!--  搜索栏  start   -->
     <view class="page__bd">
         <!-- 关键字  start -->
-        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border-bottom:1rpx solid #FFF;">
+        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border:none;">
             <view class="bg_search">
                 <view class="weui-search-bar__box ">
                     <icon bindtap="bindtapSearch" class="weui-icon-search_in-box" type="search" size="14"></icon>
@@ -42,10 +42,10 @@
                   bindtap="bindtapGetAddres"  
                   wx:for="{{address}}" 
                   wx:for-item="lettt" 
-                  wx:if="{{item == lettt.grup}}"  
+                  wx:if="{{item == lettt.firstChar}}"  
                   wx:key="{{*this}}" 
                   data-info="{{lettt.domainName}}">
-                      <view class="font_left">{{lettt.domainName}}</view>     
+                      <view class="font_left">{{lettt.shortName}}</view>     
                   </view>
             </view>
         </view>

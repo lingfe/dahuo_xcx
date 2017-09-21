@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "微商代理"
+  "navigationBarTitleText": "微商代理",
+  "enablePullDownRefresh": false
 }

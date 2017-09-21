@@ -5,8 +5,9 @@
  * 
  * */
  page{
-  background-color: #E8EFEF;
+  background-color: #fff;
 }
+
 /*定位*/
 .top_top{
   width: 100%;
@@ -15,7 +16,8 @@
 }
 .bg_b_img{
   margin-top: 30rpx;
-  float: right;
+  margin-left: 46rpx;
+  float: left;
 }
 .bg_b_img image{
   width: 40rpx;
@@ -25,16 +27,13 @@
   margin-left: 14rpx;
   margin-top: 30rpx;
   font-size: 30rpx;
-  margin-right: 278rpx;
-  float: right;
+  float: left;
 }
 
 /*筛选*/
 .pageScreen{
   width: 100%;
   height: auto;
-  position: fixed;
-  top: 100rpx;
   background-color:rgba(0, 0, 0, 0.5);
 }
 .scressClose{
@@ -54,8 +53,8 @@
 }
 
 .www{
-  width:340rpx;
-  height: 1300rpx;
+  width:100%;
+  height: auto;
   background-color: #fff;
   border-right:1px solid #E4E4E4;
   float: left;

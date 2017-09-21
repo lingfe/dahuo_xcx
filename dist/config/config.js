@@ -1,9 +1,9 @@
 export default {
 	// 线上环境
-  basePath_web: 'http://web.daho.club/',
-  basePath_sys: 'http://sys.daho.club/',
+  basePath_web: 'https://web.daho.club/',
+  basePath_sys: 'https://sys.daho.club/',
   // 上传图片地址
-  domain: 'http://web.daho.club/upload/doUpload',
+  domain: 'https://web.daho.club/upload/doUpload',
 
 
 	// 本地环境
@@ -14,6 +14,6 @@ export default {
 
 
   //获取图片
-	domainImage: "http://static.daho.club/static/upload/",
+	domainImage: "https://static.daho.club/static/upload/",
  
 }

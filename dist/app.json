@@ -64,7 +64,8 @@
     "example/navbar/navbar",
     "example/tabbar/tabbar",
     "example/searchbar/searchbar",
-    "pages/index/release/affiliateStores/throwInTheCity/throwInTheCity"
+    "pages/index/release/affiliateStores/throwInTheCity/throwInTheCity",
+    "pages/index/release/ganguSatisfiedBefore/shareDivision/shareDivision"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -75,7 +76,7 @@
     "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "Grey",
+    "color": "#C4C4C4",
     "backgroundColor": "#fff",
     "selectedColor": "#5E7E88",
     "list": [

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "代理规则"
+  "navigationBarTitleText": "代理规则",
+  "enablePullDownRefresh": false
 }

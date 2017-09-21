@@ -27,10 +27,12 @@
                     </view>
               </view>
               <view class="item_right">
-                <view bindtap="bindtapMy" id="{{userinfo.id}}"><text class="title_address">个人资料 ></text></view>
+                <view bindtap="bindtapMy" id="{{userinfo.id}}">
+                  <text class="title_address">个人资料></text>
+                </view>
                 <view bindtap="bindtapService" session-from="weapp">
                     <text wx:if="{{isnotice}}" class="mark text"></text>
-                   <image src="/assets/images/tzhi.png" class="image_service"/> 
+                   <image  mode="widthFix" src="/assets/images/tzhi.png" class="image_service"/> 
                   <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
                 </view>
               </view>
@@ -64,7 +66,9 @@
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">{{item.timeNuber}}天后自动下架</view>
                         </view>
                         <view class="neiro_img">
-                          <image src="{{item.imageArray}}"></image>
+                          <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}">
+                            <image src="{{item.imageArray}}"></image>
+                          </navigator>
                         </view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
@@ -83,7 +87,6 @@
                             <button  class="weui-btn mini-btn button_css" bindtap="bindtapOffTheShelf" id="{{item.id}}" type="default" size="mini">下架</button></view>
                         </view>
                       </view>
-
                   </view>
                 </view>
                 <!-- 我的发布  end-->
@@ -130,7 +133,10 @@
                     <view class="neiro"  wx:for="{{list}}" wx:key="*this">
                         <view class="data_top">
                             <view class="float-btn"><button bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
-                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">已下架</view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">
+                              <view wx:if="{{item.df==1}}">已下架</view>
+                              <view wx:if="{{item.df==2}}">未发布</view>
+                            </view>
                         </view>
                         <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
@@ -156,16 +162,3 @@
         <!-- tab切换  end -->
     </view>
 </view>
-
-<!--item底部 start-->
-<!-- <view class="bottomMenu">
-  <view bindtap="bindtapDahuo" class="bottomMenu_dahuo_img">
-      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/dahuo_1.png"></image></view>
-      <view style="float:left;">搭伙</view>
-  </view>
-    <view bindtap="bindtapUser" class="bottomMenu_user_img selectedColor">
-      <view style="float:left;"><image class="bottomMenu_img" src="/assets/images/user_0.jpg"></image></view>
-      <view style="float:left;">个人</view>
-  </view>
-</view> -->
-<!--item底部 end-->

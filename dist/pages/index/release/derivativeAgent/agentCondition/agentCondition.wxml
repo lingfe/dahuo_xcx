@@ -4,29 +4,28 @@
  *   描述:  发布_微商代理_代理条件页面
  * 
  * */-->
-
 <view class="page">
-        <!-- 标题与内容   start-->
-        <view class="report">
-          <view class="title"><text style="color:red;">*</text>代理条件</view>
-          <view class="info">
-            <textarea 
-              auto-focus="true" 
-              name="agentCondition"   
-              value="{{agentCondition}}" 
-              bindinput="dataChange"  
-              placeholder="请输入.."  
-              maxlength="501"  
-              class="text"/>
-          </view>
-          <view class="title"><text style="color:#14BAC8;float:right;">{{num}}/500</text></view>
-        </view>
-        <!-- 标题与内容   end-->
+  <!-- 标题与内容   start-->
+  <view class="report">
+    <view class="title">
+      <text style="color:red;">*</text>代理条件</view>
+    <view class="info">
+      <textarea auto-focus="true" 
+      name="agentCondition" 
+      value="{{agentCondition}}" 
+      bindinput="dataChange" 
+      placeholder="请输入.." 
+      maxlength="501" class="text" />
+    </view>
+    <view class="title">
+      <text style="color:#14BAC8;float:right;">{{num}}/500</text>
+    </view>
+  </view>
+  <!-- 标题与内容   end-->
 
-        <!-- 确定   start-->
-        <view class="weui-btn-area" bindtap="savaagentCondition">
-            <button class="weui-btn"  style="background-color:#14BAC8;border:none;"  type="primary" bindtap="showTopTips">确定保存</button>
-        </view>
-        <!-- 确定   start-->
+  <!-- 确定   start-->
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="savaagentCondition">确定</button>
+  </view>
+  <!-- 确定   start-->
 </view>
-

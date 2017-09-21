@@ -16,7 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ["我发布的", "收藏夹", "回收站"],   //tab菜单列
+    tabs: ["我发布的", "收藏夹", "档案袋"],   //tab菜单列
     activeIndex: 0,         //tab切换下标
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
@@ -45,7 +45,7 @@ Page({
     }else if(name == "收藏夹"){
       //收藏夹
       that.requestDataFavorites(that);
-    }else if(name == "回收站"){
+    } else if (name == "档案袋"){
       //回收站
       that.requestDataRecovery(that);
     }
@@ -679,8 +679,8 @@ Page({
         nameSpaceMap: {
           releaseinfo: {
             Query: [{
+              inDf: [1,2],            //0=正常显示，1=已下架，2=未发布，4=正在审核中，5=审核未通过
               personalId: that.data.personalId,    //个人资料id
-              df: 1                       //0，正常;1,删除，下架
             }],
           }
         }

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "转让原因"
+  "navigationBarTitleText": "转让原因",
+  "enablePullDownRefresh": false
 }

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "金融理财"
+  "navigationBarTitleText": "金融理财",
+  "enablePullDownRefresh": false
 }

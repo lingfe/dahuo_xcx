@@ -1,0 +1,92 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-9-19
+ *   描述:  发布_干股纳才_股权划分页面
+ * 
+ * */
+
+page {
+  background-color: #e8efef;
+}
+
+.page {
+  width: 100%;
+  height: auto;
+}
+
+/*内容*/
+
+.report_other {
+  width: 100%;
+  height: auto;
+}
+
+.report {
+  width: 650rpx;
+  height: 300rpx;
+  margin-top: 25rpx;
+  margin-left: 25rpx;
+  border-radius: 25rpx;
+  background-color: #fff;
+  padding: 26rpx;
+}
+
+.text {
+  height: 200rpx;
+  width: 620rpx;
+}
+
+.title {
+  color: #000;
+  font-weight: bold;
+  line-height: 50rpx;
+  font-size: 25rpx;
+  margin-left: 14rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
+}
+
+.info {
+  color: #808080;
+  font-size: 25rpx;
+  background-color: #fff;
+  height: 200rpx;
+  width: 620rpx;
+  padding: 14rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*确定选择*/
+
+.weui-btn-area {
+  margin: 1.17647059em 15px 0.3em;
+  padding-bottom: 80rpx;
+}
+
+button[type="primary"] {
+  color: #fff;
+  background-color: #14bac8;
+  border-radius: 8px;
+}
+
+.button-hover[type="primary"] {
+  background-color: #14bac8;
+}
+
+button::after {
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #e8efef;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}

@@ -61,7 +61,7 @@
   left: -9rpx;
   padding:32rpx;
   width:119px;
-  font-size:25rpx;
+  font-size:28rpx;
   height:130px;
 
 }
@@ -104,7 +104,7 @@
   margin-left: 3%;
   height: 80rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   float: left;
   position: absolute;
 }
@@ -126,25 +126,25 @@
 }
 .top_zho_button {
   background-color: #14BAC8;
-  height: 51rpx;
-  line-height: 51rpx;
+  height: 28px;
+  line-height: 28px;
   border: 0rpx #fff solid;
   color: #fff;
   margin-left: 38rpx;
   width: 262rpx;
-  font-size:25rpx;
-  margin-top: 0.58em;
+  font-size:28rpx;
+  margin-top: 10rpx;
   border-radius:8px;
 }
 .top_right {
   line-height: 80rpx;
-  margin-top: 0.85em;
+  margin-top: 0.72em;
   float:right;
   margin-right: 3%;
 }
 .top_right image {
-  width:35rpx;
-  height:28rpx;
+  width:38rpx;
+  height:30rpx;
   float: left;
 }
 
@@ -169,7 +169,7 @@
   float: left;
   margin-top: 26rpx;
   margin-bottom: 26rpx;
-  margin-left: 34rpx;
+  margin-left: 24rpx;
 }
 .neiro_img image{
   width: 210rpx;
@@ -194,7 +194,7 @@
   line-height: 50rpx;
   float: left;
   width: 300rpx;
-  font-size: 21rpx;
+  font-size: 24rpx;
   color: #333;
 }
 .data_pro text {
@@ -228,7 +228,7 @@
 }
 .data_biaoqian_view{
   margin-right: 20rpx;
-  font-size: 19rpx;
+  font-size: 22rpx;
   float: left;
   color: #333;
   overflow: hidden; /**自动隐藏文字*/
@@ -243,12 +243,14 @@
 }
 
 .data_info{
-  padding-top: 17rpx;
-  margin-left: 30rpx;
-  width: 645rpx;
+  padding-top: 16rpx;
+  padding-bottom: 5rpx;
+  margin-left: 24rpx;
+  line-height:33rpx;
+  width: 670rpx;
   background-color: #fff;
   color: #666;
-  font-size: 22rpx;
+  font-size: 26rpx;
   border-top: 1rpx solid #F0F0F0;
   float: left;
   height: auto;
@@ -259,7 +261,7 @@
 .release{
  position: fixed;
  right: 1.3em;
- bottom: 150rpx;
+ bottom: 24rpx;
 }
 .release image{
   width: 60px;

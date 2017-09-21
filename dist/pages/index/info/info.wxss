@@ -32,7 +32,6 @@
 .float-btn_neiro {
   float: left;
   margin-right: 15rpx;
-  font-family: "微软雅黑";
   color: #808080;
   margin-top: 9rpx;
   font-size: 17rpx;
@@ -86,9 +85,8 @@
 
 .info {
   margin-right: 15rpx;
-  font-family: "微软雅黑";
-  color: #808080;
-  font-size: 24rpx;
+  color: #666;
+  font-size: 26rpx;
   padding-bottom: 15rpx;
   background-color: #fff;
   float: left;
@@ -119,7 +117,6 @@
 
 .info_lingfe {
   margin-right: 15rpx;
-  font-family: "微软雅黑";
   color: #808080;
   font-size: 24rpx;
   margin-top: 28rpx;
@@ -164,6 +161,16 @@
   position: relative;
 }
 
+.select_text_to{
+    text-align: center;
+  color: #14bac8;
+  height: 40rpx;
+  float: left;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+  position: relative;
+}
+
 .select_textONE image {
   width: 22rpx;
   height: 22rpx;
@@ -196,18 +203,22 @@
 }
 
 .image {
-  width: 110rpx;
-  height: 110rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50px;
   background-color: #eee;
   margin-left: 10rpx;
+}
+.img_top{
+  position: relative;
+  top: 34rpx;
 }
 
 .images_item {
   width: 92%;
   /*height: 400rpx;*/
   margin-left: 32rpx;
-  margin-top: 6rpx;
+  margin-top: -5rpx;
   border-radius: 0rpx;
 }
 
@@ -218,8 +229,7 @@
 }
 
 .message {
-  font-family: "微软雅黑";
-  color: #808080;
+  color: #999;
   line-height: 10rpx;
   font-size: 23rpx;
   padding: 0 16rpx, 0, 16rpx;
@@ -291,12 +301,12 @@
   height:50rpx;
   float:left;
   background-color:#fff;
+  border-radius: 6px;
 }
 .input_submit {
   width: 86%;
   display: inline;
   float: left;
-  font-family: "微软雅黑";
   color: #808080;
   height: 53rpx;
   font-size: 24rpx;
@@ -304,16 +314,16 @@
   border-radius: 5px;
 }
 .faso{
-  width:70rpx;
-  height:70rpx;
-  margin-left:0rpx;
+  width:58rpx;
+  height:58rpx;
+  margin-left:10rpx;
+  margin-top: 10rpx;
 }
 
 .data_biaoqian_view {
   margin-right: 20rpx;
   font-size: 19rpx;
   float: left;
-  font-family: "微软雅黑";
   color: #333;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis; /**文字隐藏后添加省略号*/
@@ -332,7 +342,6 @@
   background-color: #fff;
   margin-top: 17rpx;
   float: left;
-  padding-bottom: 3em;
 }
 
 .weui-navbar_to {
@@ -346,7 +355,6 @@
 .weui-navbar__title {
   position: relative;
   font-size:28rpx;
-  font-family:"微软雅黑";
 }
 
 weui-tab__panel {
@@ -378,20 +386,18 @@ weui-tab__panel {
 .data_title {
   float: left;
   padding: 0rpx;
-  font-size: 24rpx;
-  color: #333;
-  font-family:"微软雅黑";
+  font-size: 26rpx;
+  color: #000;
   margin-top: 0rpx;
   margin-left: 32rpx;
 }
 
 .data_info {
   margin-top: 0rpx;
-  color: #808080;
-  font-family:"微软雅黑";
+  color: #666;
   height: auto;
   float: left;
-  font-size: 24rpx;
+  font-size: 26rpx;
   width: 580rpx;
   margin-left:20rpx;
    word-wrap: break-word;   /* 强制换行*/
@@ -444,9 +450,8 @@ weui-tab__panel {
   padding:42rpx;
   position:fixed;
   top:120rpx;
-  left:120rpx;
+  left:132rpx;
   background-color:#fff;
-  box-shadow:1px 1px 10px #aaa;
   float:left;
   border-radius:36rpx;
   z-index: 600;
@@ -465,7 +470,7 @@ weui-tab__panel {
   color:#333;
   margin-left:0rpx;
   margin-top:0rpx;
-  font-size:24rpx;
+  font-size:26rpx;
   float:left;
   width:500rpx;
   height:80rpx;
@@ -480,4 +485,17 @@ weui-tab__panel {
   right: 10rpx;
 }
 
-
+.select_img {
+  text-align: center;
+  color: #999;
+  width: 726rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  float: left;
+  font-size: 24rpx;
+  position: relative;
+  padding: 13rpx;
+  margin-top: 0rpx;
+  margin-bottom: 2rpx;
+  background-color: #fff;
+}

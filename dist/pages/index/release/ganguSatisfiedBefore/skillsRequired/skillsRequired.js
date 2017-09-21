@@ -4,8 +4,6 @@
  *   描述:  发布_干股纳才_技能要求页面
  * 
  * */
-var app = getApp();
-
 Page({
 
   /**
@@ -35,7 +33,7 @@ Page({
   savaskillsRequired: function () {
     var resourceRequirements = this.data.resourceRequirements;
     //判断是否为空
-    if (resourceRequirements == null) {
+    if (resourceRequirements == '') {
       wx.showModal({
         title: '内容不能为空!',
         showCancel: false,
@@ -66,53 +64,4 @@ Page({
       resourceRequirements: app.globalData.resourceRequirements
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

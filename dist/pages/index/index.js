@@ -498,6 +498,7 @@ Page({
   requestData: function (that) { 
     //定义查询参数
     var query = {
+      df:0,
       releaseTypeList:[],
       industryChoiceList:[],
       pagenum: that.data.pagenum,          //当前业
@@ -553,20 +554,27 @@ Page({
         var pageList = that.data.list;
         //得到数据
         var list = res.data.rows;
-        if(list == null || list.length == 0) return;
+        if(list == null || list.length == 0){
+          //提示
+          wx.showToast({
+            title: '没有更多了!',
+            icon: 'loading',
+            duration: 1000,
+          });
+          return;
+        } 
 
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = that.getDate(list[i].cdate);
           if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
-          if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 60);
-          if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 60);
-          if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 60);
+          if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 55);
+          if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 55);
+          if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 55);
 
           list[i].cdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
         }
-        pageList.reverse();
         //设置数据，提示框
         that.setData({
           list: pageList
@@ -687,6 +695,13 @@ Page({
       isPrices:false,
     });
     that.requestData(that);
+    
+    //提示
+    wx.showToast({
+      title: '正在加载..',
+      icon: 'loading',
+      duration: 2000,
+    });
   }
 });
 

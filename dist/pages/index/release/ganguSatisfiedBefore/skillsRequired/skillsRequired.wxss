@@ -4,35 +4,37 @@
  *   描述:  发布_干股纳才_技能要求页面
  * 
  * */
-  page{
-  background-color: #E8EFEF;
+
+page {
+  background-color: #e8efef;
 }
-.page{
+
+.page {
   width: 100%;
   height: auto;
 }
-.report_other{
+
+/*内容*/
+
+.report_other {
   width: 100%;
   height: auto;
 }
-.report{
-  width:650rpx;
-  height:300rpx;
-  margin-top:25rpx;
-  margin-left:25rpx;
+
+.report {
+  width: 650rpx;
+  height: 300rpx;
+  margin-top: 25rpx;
+  margin-left: 25rpx;
   border-radius: 25rpx;
   background-color: #fff;
   padding: 26rpx;
 }
-.text{
-height:200rpx;
-width:620rpx;
 
+.text {
+  height: 200rpx;
+  width: 620rpx;
 }
-.btn{
-
-}
-
 
 .title {
   color: #000;
@@ -46,44 +48,45 @@ width:620rpx;
 }
 
 .info {
-color:#808080;
-font-size:25rpx;
-background-color:#fff;
-height:200rpx;
-width:620rpx;
-padding:14rpx;
-overflow:hidden;
-text-overflow:ellipsis;
+  color: #808080;
+  font-size: 25rpx;
+  background-color: #fff;
+  height: 200rpx;
+  width: 620rpx;
+  padding: 14rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+/*确定选择*/
 
+.weui-btn-area {
+  margin: 1.17647059em 15px 0.3em;
+  padding-bottom: 80rpx;
 }
-.weui-cell__bd{
-  margin-left: -29rpx;
-}
-.weui-cell__ft{
- margin-right:-30rpx;
-}
-.weui-uploader__title{
-  margin-left: 25rpx;
-    margin-top: 16rpx
-}
-.weui-uploader__info{
-  margin-right: 25rpx;
-    margin-top: 16rpx
-}
-.weui-uploader__input-box{
-  margin-left: 25rpx;
-}
-.weui-uploader__file{
-  margin-top: 0rpx;
-  margin-left: 25rpx;
-}
-.img_tt{
-  z-index: 3;
-  position:absolute;
-  width: 45rpx;
-  height: 45rpx;
-  margin-left:128rpx;
-  margin-top:-25rpx;
 
+button[type="primary"] {
+  color: #fff;
+  background-color: #14bac8;
+  border-radius: 8px;
+}
+
+.button-hover[type="primary"] {
+  background-color: #14bac8;
+}
+
+button::after {
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #e8efef;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border-radius: 10px;
 }

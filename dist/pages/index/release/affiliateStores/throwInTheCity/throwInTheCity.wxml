@@ -1,66 +1,27 @@
-<!--pages/index/release/affiliateStores/throwInTheCity/throwInTheCity.wxml-->
 <!--/**  
  *   作者:  lingfe 
  *   时间:  2017-9-15
  *   描述:  发布_加盟分店_投放城市页面
  * 
  * */-->
-<view class="page bg">
-    <!--  搜索栏  start   -->
-    <view class="page__bd">
-        <!-- 关键字  start -->
-        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border-bottom:1rpx solid #FFF;">
-            <view class="bg_search">
-                <view class="weui-search-bar__box ">
-                    <icon bindtap="bindtapSearch" class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" 
-                    class="weui-search-bar__input" 
-                    bindinput="bindinputValue" 
-                    placeholder="请输入城市名称或字母" 
-                    value="{{inputVal}}" 
-                    focus="{{inputShowed}}" />
-                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                        <icon type="clear" size="14"></icon>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <!-- 关键字  end -->
-
-        <!-- 地址数据  start -->
-        <view class="searchbar-result bg " wx:if="{{inputVal.length >= 0}}">
-          <!-- 标签  start -->
-          <view class="biaoqian" wx:if="{{str != ''}}" >
-            <view  wx:for="{{str}}" wx:key="{{*this}}">
-              <view class="delete" wx:if="{{item != ''}}">
-                <view class="delete_text">{{item}}</view>
-                <image class="delete_image"
-                  bindtap="clearBtn"
-                  data-name="releaseTypeList" 
-                  data-index="{{index}}" 
-                  data-value="{{item}}" src="/assets/images/delete.png"></image>
-                </view>
-            </view>
-          </view>
-          <!-- 标签  end -->
-
-          <!-- 数据  strar -->
-          <view wx:for="{{Letter26}}"  wx:key="{{*this}}">
-              <view class="weui-cells__title ">{{item}}</view>
-                <view class="weui-cells__title border_bottom" 
-                hover-class="weui-cell_active" 
-                bindtap="bindtapGetAddres"  
-                wx:for="{{address}}" 
-                wx:for-item="lettt" 
-                wx:if="{{item == lettt.grup}}"  
-                wx:key="{{*this}}" 
-                data-info="{{lettt.domainName}}">
-                <view class="font_left">{{lettt.domainName}}</view>     
-              </view>
-          </view>
-          <!-- 数据  end -->
-        </view>
-        <!--  地址数据  end   -->
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <!--城市数据 start-->
+    <view class="placeholder {{checked==true?'bg':''}}" bindtap="clearBtn" data-name="全国">全国</view>
+    <view wx:for="{{str}}" wx:for-item="and" wx:key="*this">
+      <view class="title">{{and.name}}</view>
+      <view class="placeholder {{ent.checked==true?'bg':''}}" 
+      data-indexto='{{and.index}}' 
+      wx:for="{{str[and.index].content}}" 
+      wx:for-item="ent" bindtap="clearBtn" 
+      data-index='{{index}}' 
+      data-name="{{ent.name}}">{{ent.name}}</view>
     </view>
-    <!--  搜索栏  end   -->
+    <!--城市数据 end-->
+  </view>
+  <!-- 确定   start-->
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="savabusinessDescription">确定</button>
+  </view>
+  <!-- 确定   end-->
 </view>

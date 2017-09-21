@@ -6,95 +6,37 @@
  * */-->
 
 <view class="page">
-  <view class="top_top"  bindtap="bindtapGetAddres" data-info="{{addressInfo}}"  size="mini">
-    <view class="bg_b_text">贵阳</view>
-    <view class="bg_b_img"><image src="/assets/images/address.png"></image></view>
-  </view>
-<!-- 筛选   start-->
-<view  style="display: {{screen == false ? 'none' : 'block' }};"  class="page pageScreen">
-    <view  class="page_bd page__bdScreen" >
-        <view class="weui-tab">
-            <!-- tab菜单  start -->
-            <view class="www">
-                <block>
-                    <view id="全部"  class="weui-navbar__item stop_title {{activeIndex==-1?'border_tab' : 'stop_title'}}" bindtap="tabClick">
-                        <view class="weui-navbar__title stop_1">全贵阳</view>
-                    </view>
-                </block>
-                <block wx:for="{{tabs}}" wx:key="{{*this}}">
-                    <view id="{{index}}"  class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
-                        <view class="weui-navbar__title stop_1">{{item.name}}</view>
-                    </view>
-                </block>
-             </view>
-             <!-- tab菜单  end -->
-            <view class="ccc">
-                <!-- 金额  start -->
-                <view class="" hidden="{{activeIndex != 0}}">                
-                  <checkbox-group  data-index="{{activeIndex}}">
-                  <label bindtap='clearBtn_to'
-                      data-value='全部'
-                      data-index='0'
-                      data-name="AmountOfMoney">
-                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
-                      <view  class="weui-navbar__title stop_1 flaot_left">全云岩</view>
-                    </view>
-                  </label>
-
-                  <label  wx:for="{{tabs[activeIndex].content}}"
-                      bindtap='clearBtn_to'
-                      data-value='{{item.minThreshold}}'
-                      data-index='{{index}}'
-                      data-name="AmountOfMoney" wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
-                      <view wx:if="{{item.minThreshold == 100}}" class="weui-navbar__title stop_1 flaot_left">
-                        100万+
-                      </view>
-                      <view wx:else="{{item.minThreshold != 100}}" class="weui-navbar__title stop_1 flaot_left">
-                        {{item.minThreshold}} - {{item.maxThreshold}} 万
-                      </view>
-                    </view>
-                  </label>
-                  </checkbox-group>
-                </view>
-                <!-- 金额  end -->
-
-                <!-- 类型  start -->
-                <view class="" hidden="{{activeIndex != 1}}">                
-                  <checkbox-group style="overflow:scroll;height:400px;"  data-index="{{activeIndex}}">
-                  <label  wx:for="{{tabs[activeIndex].content}}"
-                      bindtap='clearBtn_to'
-                      data-value='{{item.name}}'
-                      data-index='{{index}}'
-                      data-name="releaseTypeList"
-                     wx:key="{{*this}}">
-                    <view  class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
-                      <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                    </view>
-                  </label>
-                  </checkbox-group>
-                  
-                </view>
-                <!-- 类型  end -->
-
-                <!-- 行业  start -->
-                <view class="" hidden="{{activeIndex != 2}}">                
-                  <checkbox-group style="overflow:scroll;max-height:515px;" data-index="{{activeIndex}}">
-                  <label wx:for="{{tabs[activeIndex].content}}"
-                      bindtap='clearBtn_to'
-                      data-value='{{item.name}}'
-                      data-index='{{index}}'
-                      data-name="industryChoiceList" wx:key="{{*this}}">
-                    <view class="weui-navbar__item stop {{item.checked==true?'bg_color':''}}">
-                      <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
-                    </view>
-                  </label>
-                  </checkbox-group>
-                </view>
-                <!-- 行业  end -->
-            </view>
-        </view>
+  <!-- 定位   start-->
+  <view class="top_top" bindtap="bindtapGetAddres" data-info="{{addressInfo}}" size="mini">
+    <view class="bg_b_img">
+      <image src="/assets/images/address.png"></image>
     </view>
-</view>
-<!-- 筛选   end-->
+    <view class="bg_b_text">{{addressInfo}}</view>
+  </view>
+  <!-- 定位   end-->
+
+  <!-- 地理位置   start-->
+  <view class="page pageScreen">
+    <view class="page_bd page__bdScreen">
+      <view class="weui-tab">
+        <!-- tab菜单  start -->
+        <view class="www">
+          <block>
+            <view id="-1" data-shortName="{{addressInfo == '定位中..'?'贵阳':addressInfo}}"
+            class="weui-navbar__item {{activeIndex==-1?'border_tab' : 'stop_title'}}" bindtap="tabClick">
+              <view class="weui-navbar__title stop_1">全{{addressInfo == '定位中..'?'贵阳':addressInfo}}</view>
+            </view>
+          </block>
+          <block wx:for="{{ad_info}}" wx:key="{{*this}}">
+            <view id="{{index}}" data-shortName='{{item.shortName}}' 
+            class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
+              <view class="weui-navbar__title stop_1">{{item.shortName}}</view>
+            </view>
+          </block>
+        </view>
+        <!-- tab菜单  end -->
+      </view>
+    </view>
+  </view>
+  <!-- 筛地理位置选   end-->
 </view>

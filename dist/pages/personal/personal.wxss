@@ -65,9 +65,9 @@
 
 .image_service{
     margin-top: 90rpx;
-    margin-left: 50rpx;
-    width: 45rpx; 
-    height: 45rpx;
+    margin-left: 40rpx;
+    width: 40rpx; 
+    height: 40rpx;
 }
 .item-middle{
     flex: 1;
@@ -88,7 +88,6 @@
 
 .title_address{
   color: #fff;
-  font-weight:bold;
   line-height: 20rpx;
   padding: 32rpx 16rpx,0,16rpx;
   font-size: 20rpx;
@@ -116,7 +115,7 @@ word-wrap:normal;
 .message{
   color: #fff;
   line-height: 10rpx;
-  font-size: 20rpx;
+  font-size: 24rpx;
   padding: 0 16rpx,0,16rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
@@ -125,7 +124,7 @@ word-wrap:normal;
 .item_right{
     padding-top: 13rpx;
     overflow: hidden; 
-    margin-right: 26rpx;
+    margin-right: 16rpx;
 }
 .time{
     color:#808080;
@@ -198,7 +197,7 @@ background-color: #fff;
   height: 50rpx;
   line-height: 50rpx;
   float: left;
-  font-size: 21rpx;
+  font-size: 24rpx;
   color: #333;
   width: 300rpx;
 }
@@ -233,7 +232,7 @@ background-color: #fff;
 }
 .data_biaoqian_view{
   margin-right: 20rpx;
-  font-size: 19rpx;
+  font-size: 22rpx;
   float: left;
   color: #333;
   overflow: hidden; /**自动隐藏文字*/
@@ -253,7 +252,7 @@ background-color: #fff;
   width: 645rpx;
   background-color: #fff;
   color: #666;
-  font-size: 22rpx;
+  font-size: 26rpx;
   border-top: 1rpx solid #F0F0F0;
   float: left;
 }
@@ -319,7 +318,7 @@ width:100%;
 button[type="default"] {
 color:#000000;
 background-color:#fff;
-
+z-index: 10000;
 }
 button::after {
 content:" ";
@@ -378,7 +377,7 @@ border-radius:10px;
 .info_info {
   margin-right:15rpx;
   color:#808080;
-  font-size:22rpx;
+  font-size:26rpx;
   overflow:hidden;
   text-overflow:ellipsis;
   -overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/

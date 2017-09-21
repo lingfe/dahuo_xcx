@@ -3,22 +3,13 @@
  *   时间:  2017-7-7
  *   描述:  信息页面
  * 
- * */ 
-var app = getApp();
+ * */
 var utilMd5 = require('../../utils/md5.js');
 import __config from '../../config/config';
 
 Page({
   data:{
-    messages:[
-      {
-        title:"搭伙小秘书",
-        url:"http://img1.3lian.com/gif/more/11/201212/0d1252b54be4f2d240b6b7fe4ed35054.jpg",
-        message:"您发布的'花果园火锅店转让..'未通过",
-        time:"刚刚",
-        count:5
-      }
-    ]
+    messages:[]
   },
 
   //跳转
@@ -216,17 +207,4 @@ Page({
       return "刚刚";
     }
   },
-
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  }
 })

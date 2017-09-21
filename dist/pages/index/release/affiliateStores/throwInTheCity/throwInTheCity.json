@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "投放城市"
+  "navigationBarTitleText": "投放城市",
+  "enablePullDownRefresh": false
 }
