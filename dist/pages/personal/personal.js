@@ -456,11 +456,7 @@ Page({
     var date1 = new Date(date);    //开始时间
     var date2 = new Date();    //结束时间
     var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
-
-      //计算出相差年
-      //还有一个小bug，当事件差为负数时，值为负数，将上面leftsecond代码改一下
-      //var leftsecond = parseInt(Math.abs((date2.getTime() - date1.getTime())) / 1000);
-
+    
       //计算出相差月
       var months = (date2.getFullYear() - date1.getFullYear()) * 12;
     if(months != 0) {
@@ -487,8 +483,8 @@ Page({
       return { date: minutes + "分钟", timeNuber:days};
     }
 
-      //计算相差秒数
-      var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
+    //计算相差秒数
+    var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
     var seconds = Math.round(leave3 / 1000);
     if(seconds != 0) {
       return { date: seconds + "秒", timeNuber: days };

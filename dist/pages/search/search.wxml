@@ -5,51 +5,51 @@
  * 
  * */-->
 <view class="page bg">
-    <!--  搜索栏  start   -->
-    <view class="page__bd">
-        <!-- 关键字  start -->
-        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border:none;">
-            <view class="bg_search">
-                <view class="weui-search-bar__box ">
-                    <icon bindtap="bindtapSearch" class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" 
-                    class="weui-search-bar__input" 
-                    bindinput="bindinputValue" 
-                    placeholder="请输入城市名称或字母" 
-                    value="{{inputVal}}" 
-                    focus="{{inputShowed}}" />
-                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                        <icon type="clear" size="14"></icon>
-                    </view>
-                </view>
-            </view>
+  <!--  搜索栏  start   -->
+  <view class="page__bd">
+    <!-- 关键字  start -->
+    <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;border:none;">
+      <view class="bg_search">
+        <view class="weui-search-bar__box ">
+          <icon bindtap="bindtapSearch" class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" 
+          class="weui-search-bar__input" 
+          bindinput="bindinputValue" 
+          placeholder="请输入城市名称或字母" 
+          value="{{inputVal}}" focus="{{inputShowed}}" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
         </view>
-        <!-- 关键字  end -->
-
-        <!-- 地址数据  start -->
-        <view class="searchbar-result bg " wx:if="{{inputVal.length >= 0}}">
-            <view class="weui-cells__title">当前城市</view>
-            <view class="weui-cells__title weui-cell_bd bg stop_1" >
-              <view class="weui-btn mini-btn bg_b"  bindtap="bindtapGetAddres" data-info="{{addressInfo}}"  size="mini">
-                <view class="bg_b_img"><image src="/assets/images/address.png"></image></view>
-                <view class="bg_b_text">{{addressInfo}}</view>
-              </view>
-            </view>
-            <view wx:for="{{Letter26}}"  wx:key="{{*this}}">
-              <view class="weui-cells__title ">{{item}}</view>
-                  <view class="weui-cells__title border_bottom" 
-                  hover-class="weui-cell_active" 
-                  bindtap="bindtapGetAddres"  
-                  wx:for="{{address}}" 
-                  wx:for-item="lettt" 
-                  wx:if="{{item == lettt.firstChar}}"  
-                  wx:key="{{*this}}" 
-                  data-info="{{lettt.domainName}}">
-                      <view class="font_left">{{lettt.shortName}}</view>     
-                  </view>
-            </view>
-        </view>
-        <!--  地址数据  end   -->
+      </view>
     </view>
-    <!--  搜索栏  end   -->
+    <!-- 关键字  end -->
+
+    <!-- 地址数据  start -->
+    <view class="searchbar-result bg " wx:if="{{inputVal.length >= 0}}">
+      <view class="weui-cells__title">当前城市</view>
+      <view class="weui-cells__title weui-cell_bd bg stop_1">
+        <view class="weui-btn mini-btn bg_b" bindtap="bindtapGetAddres" data-info="{{addressInfo}}" size="mini">
+          <view class="bg_b_img">
+            <image src="/assets/images/address.png"></image>
+          </view>
+          <view class="bg_b_text">{{addressInfo}}</view>
+        </view>
+      </view>
+      <view wx:for="{{Letter26}}" wx:key="{{*this}}">
+        <view class="weui-cells__title ">{{item}}</view>
+        <view class="weui-cells__title border_bottom" 
+        hover-class="weui-cell_active" 
+        bindtap="bindtapGetAddres" 
+        wx:for="{{address}}" 
+        wx:for-item="lettt" 
+        wx:if="{{item == lettt.firstChar}}" 
+        wx:key="{{*this}}" data-info="{{lettt.domainName}}">
+          <view class="font_left">{{lettt.shortName}}</view>
+        </view>
+      </view>
+    </view>
+    <!--  地址数据  end   -->
+  </view>
+  <!--  搜索栏  end   -->
 </view>

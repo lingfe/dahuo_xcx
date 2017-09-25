@@ -13,27 +13,27 @@ import __config from '../../config/config'
 
 Page({
   data: {
-    inputShowed: false,     
+    inputShowed: false,
     inputVal: "",               //文本框值
-    Letter26: ["A", "B", "C", 
-    "D", "E", "F", "G", "H",
-     "I", "J", "K", "L", "M", 
-     "N", "O", "P", "Q", "R",
+    Letter26: ["A", "B", "C",
+      "D", "E", "F", "G", "H",
+      "I", "J", "K", "L", "M",
+      "N", "O", "P", "Q", "R",
       "S", "T", "U", "V", "W",
-       "X", "Y", "Z"],          //二十六字母
-    address:[],                 //地址数据
+      "X", "Y", "Z"],        //二十六字母
+    address: [],             //地址数据
     addressInfo: '贵阳',     //定位
   },
 
   //选择一个地址城市
-  bindtapGetAddres:function(e){
+  bindtapGetAddres: function (e) {
     //得到打开的页面
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];  //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
 
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    var city=e.currentTarget.dataset.info;
+    var city = e.currentTarget.dataset.info;
     if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
     else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
 
@@ -41,13 +41,13 @@ Page({
       city: city,
       "userinfo.provinceName": city,                             //个人地址
     });
-    
+
     //返回上一页
     wx.navigateBack();
   },
 
   //搜索
-  bindtapSearch:function(){
+  bindtapSearch: function () {
     //从缓存里去地址数据
     var address = wx.getStorageSync("address");
     //判断是否为空
@@ -82,12 +82,12 @@ Page({
   },
 
   //文本框输入事件
-  bindinputValue:function(e){
-    this.setData({ inputVal: e.detail.value});    //搜索框key
+  bindinputValue: function (e) {
+    this.setData({ inputVal: e.detail.value });    //搜索框key
   },
 
   //页面加载
-  onLoad:function(){
+  onLoad: function () {
     var that = this;
     //定位
     wx.getLocation({
@@ -106,15 +106,15 @@ Page({
 
             that.setData({ addressInfo: city });
           } else {
-            that.setData({addressInfo: '定位失败' });
+            that.setData({ addressInfo: '定位失败' });
           }
         });
       }
     });
 
     ////从缓存里去地址数据
-    var address=wx.getStorageSync("address");
-    if(address !="") {
+    var address = wx.getStorageSync("address");
+    if (address != "") {
       that.setData({ address: address });
       return;
     }
@@ -126,20 +126,20 @@ Page({
 
     //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
     getAdressData(that);
-    function getAdressData(that){
+    function getAdressData(that) {
       wx.request({
         url: __config.basePath_sys + "api/exe/getCityList",
         method: "POST",
-        header: {cookie: cookie,"Content-Type": "application/x-www-form-urlencoded"},
-        data: {timeStamp: time,token: token },
+        header: { cookie: cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        data: { timeStamp: time, token: token },
         success: function (res) {   //请求成功
           //得到地址数据
-          var address=res.data;
+          var address = res.data;
           //放进本地缓存
           wx.setStorageSync("address", address);
-          that.setData({ address: address});
+          that.setData({ address: address });
         },
-        fail: function (res) {},
+        fail: function (res) { },
         complete: function () { }
       });
     }
