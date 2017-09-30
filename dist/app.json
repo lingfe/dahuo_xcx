@@ -65,7 +65,10 @@
     "example/tabbar/tabbar",
     "example/searchbar/searchbar",
     "pages/index/release/affiliateStores/throwInTheCity/throwInTheCity",
-    "pages/index/release/ganguSatisfiedBefore/shareDivision/shareDivision"
+    "pages/index/release/ganguSatisfiedBefore/shareDivision/shareDivision",
+    "pages/message/search/feedback/feedback",
+    "pages/dahuo/releaseRule/releaseRule",
+    "pages/dahuo/useProtocol/useProtocol"
   ],
   "window": {
     "navigationBarTextStyle": "white",

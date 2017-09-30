@@ -32,7 +32,7 @@ Page({
   //保存收益描述
   savaskillsRequired: function () {
     var shareDivision = this.data.shareDivision;
-    if(shareDivision ==""){
+    if(shareDivision.length==0){
       wx.showModal({
         title: '收益描述不能为空!',
         showCancel: false,

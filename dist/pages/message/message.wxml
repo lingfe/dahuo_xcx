@@ -6,36 +6,52 @@
  * 
  * */
 -->
-<view  stytle=" overflow-x: hidden; overflow-y: auto;">
+<view stytle=" overflow-x: hidden; overflow-y: auto;">
   <view class="message__list">
-     <block wx:for="{{messages}}" wx:key="{{*this}}">
-        <navigator bindlongpress='bindlongtapURL'
-          id='{{item.id}}'
-          data-index="{{index}}"
-          url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}">
-          <view  class="item" >
-             <view class="item-left">
-                  <text wx:if="{{item.static !=1 }}" class="mark text"></text>
-                  <image src="{{item.imgUrl}}" class="image"/>
-             </view>
-             <view class="item-middle">
-                  <view>
-                       <text class="title">{{item.notifyname}}</text>
-                  </view>
-                  <view>
-                      <text class="message">{{item.content}}</text>
-                  </view>
-                  <view>
-                    <text class="time">{{item.cdate}}</text>
-                  </view>
+    <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/search/search">
+      <view class="item">
+        <view class="item-left">
+          <text class="mark text"></text>
+          <image src="/assets/images/xms.jpg" class="image" />
+        </view>
+        <view class="item-middle">
+          <view class='bujugo'>
+            <text class="title">搭伙小秘书</text>
+          </view>
+          <view class='bujugo'>
+            <text class="message">有新的消息未查看</text>
+          </view>
+          <view class='bujugo'>
+            <text class="time">刚刚</text>
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+    </navigator>
+    <block wx:for="{{messages}}" wx:key="{{*this}}">
+      <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}">
+        <view class="item">
+          <view class="item-left">
+            <text wx:if="{{item.static !=1 }}" class="mark text"></text>
+            <image src="{{item.avatarUrl}}" class="image" />
+          </view>
+          <view class="item-middle">
+            <view class='bujugo'>
+              <text class="title">{{item.notifyname}}</text>
             </view>
-            <view class="item_right">
-                  <image src="{{item.imgUrl}}" class="image_right"/>
+            <view class='bujugo'>
+              <text class="message">{{item.content}}</text>
             </view>
-         </view>
-         <view  class="line"></view>
-       </navigator>
-
+            <view class='bujugo'>
+              <text class="time">{{item.cdate}}</text>
+            </view>
+          </view>
+          <view class="item_right">
+            <image src="{{item.imgUrl}}" class="image_right" />
+          </view>
+        </view>
+        <view class="line"></view>
+      </navigator>
     </block>
   </view>
 </view>

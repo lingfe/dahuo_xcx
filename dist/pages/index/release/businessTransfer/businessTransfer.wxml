@@ -178,7 +178,7 @@
               <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
             </view>
             阅读并同意
-            <navigator url="" class="weui-agree__link">《搭伙平台信息发布规则》</navigator>
+            <navigator url="/pages/dahuo/releaseRule/releaseRule" class="weui-agree__link">《搭伙平台信息发布规则》</navigator>
           </view>
         </label>
       </checkbox-group>

@@ -2,7 +2,7 @@
 /**  
  *   作者:  lingfe 
  *   时间:  2017-7-10
- *   描述:  合伙创业_输入资金布局.wxxml
+ *   描述:  合伙创业_输入资金规划.wxxml
  * 
  * */
 -->
@@ -10,7 +10,7 @@
   <!-- 标题与内容   start-->
   <view class="report">
     <view class="title">
-      <text style="color:red;">*</text>资金布局</view>
+      <text style="color:red;">*</text>资金规划</view>
     <view class="info">
       <textarea auto-focus="true" 
       name="fundDistribution" 

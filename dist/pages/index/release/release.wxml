@@ -20,6 +20,39 @@
             </view>
             <!-- 合伙创业  end -->
 
+            <!-- 干股纳才  start -->
+            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapGanguSatisfiedBefore">
+                <view class="weui-cell__hd">
+                    <image src="/assets/images/ico/ganguSatisfiedBefore2.png" 
+                    class="ico_image"></image>
+                </view>
+                <view class="weui-cell__bd title">干股纳才</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <!-- 干股纳才  end -->
+
+            <!-- 加盟代理  start -->
+            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapAffiliateStores">
+                <view class="weui-cell__hd">
+                    <image src="/assets/images/ico/affiliateStores2.png" 
+                    class="ico_image"></image>
+                </view>
+                <view class="weui-cell__bd title">加盟代理</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <!-- 加盟代理   end -->
+
+            <!-- 股权交易  start -->
+            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapDerivativeAgent">
+                <view class="weui-cell__hd">
+                    <image src="/assets/images/ico/aerivativeAgent2.png" 
+                   class="ico_image"></image>
+                </view>
+                <view class="weui-cell__bd title">股权交易</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <!-- 股权交易  end -->
+
             <!-- 生意转让  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapBusinessTransfer">
                 <view class="weui-cell__hd">
@@ -31,28 +64,6 @@
             </view>
             <!-- 生意转让  end -->
 
-            <!-- 加盟分店  start -->
-            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapAffiliateStores">
-                <view class="weui-cell__hd">
-                    <image src="/assets/images/ico/affiliateStores2.png" 
-                    class="ico_image"></image>
-                </view>
-                <view class="weui-cell__bd title">加盟分店</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <!-- 加盟分店   end -->
-
-            <!-- 干股纳才  start -->
-            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapGanguSatisfiedBefore">
-                <view class="weui-cell__hd">
-                    <image src="/assets/images/ico/ganguSatisfiedBefore2.png" 
-                    class="ico_image"></image>
-                </view>
-                <view class="weui-cell__bd title">干股纳才</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <!-- 干股纳才  end -->
-            
             <!-- 金融理财  start -->
             <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapFinancialManagement">
                 <view class="weui-cell__hd">
@@ -75,17 +86,6 @@
             </view>
             <!-- 房产投资  end -->
 
-            <!-- 微商代理  start -->
-            <view class="weui-cell weui-cells weui-cells_after-title" bindtap="bindtapDerivativeAgent">
-                <view class="weui-cell__hd">
-                    <image src="/assets/images/ico/aerivativeAgent2.png" 
-                   class="ico_image"></image>
-                </view>
-                <view class="weui-cell__bd title">微商代理</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <!-- 微商代理  end -->
-            
             <!-- 其他  start -->
             <view class="weui-cell weui-cells_to weui-cells_after-title" bindtap="bindtapOther">
                 <view class="weui-cell__hd">

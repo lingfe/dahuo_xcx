@@ -9,7 +9,7 @@ export default {
 	// 本地环境
   //basePath_web: 'http://web.echsoft.cn/',
   //basePath_sys: 'http://sys.echsoft.cn/',
-  // 上传图片地址
+  // 上传图片地址   
   //domain: 'http://web.echsoft.cn/upload/doUpload',
 
 

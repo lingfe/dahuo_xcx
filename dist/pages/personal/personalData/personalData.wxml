@@ -12,7 +12,7 @@
                 <view class="weui-cell__bd">头像</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">
                   <view>
-                    <image class="img_title" src="{{userinfo.avatarUrl}}"/>
+                    <image class="img_title" src="{{avatarUrl}}"/>
                   </view>
                 </view>
             </view>

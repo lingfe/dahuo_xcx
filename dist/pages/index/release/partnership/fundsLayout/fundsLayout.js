@@ -1,7 +1,7 @@
 /**  
  *   作者:  lingfe 
  *   时间:  2017-7-10
- *   描述:  合伙创业_输入资金布局.wxxml
+ *   描述:  合伙创业_输入资金规划.wxxml
  * 
  * */
 
@@ -30,14 +30,14 @@ Page({
     });
   },
 
-  //保存资金布局
+  //保存资金规划
   bindtapFundsLayout: function (e){
     var fundDistribution = this.data.fundDistribution;
     //判断是否为空
-    if (fundDistribution == null) {
+    if (fundDistribution.length==0) {
       //提示
       wx.showModal({
-        title: '资金布局不能为空!',
+        title: '资金规划不能为空!',
         showCancel: false,
       });
     } else {

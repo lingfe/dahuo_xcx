@@ -33,7 +33,7 @@ Page({
   savaagentCondition: function (e) {
     var agentCondition = this.data.agentCondition;
     //判断是否为空
-    if (agentCondition == null) {
+    if (agentCondition.length==0) {
       wx.showModal({
         title: '内容不能为空!',
         showCancel: false,

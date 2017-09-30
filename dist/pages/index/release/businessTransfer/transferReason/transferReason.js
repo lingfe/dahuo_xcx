@@ -34,7 +34,7 @@ Page({
   savatransferReason: function (e) {
     var transferReason = this.data.transferReason;
     //判断是否为空
-    if (transferReason == null) {
+    if (transferReason.length==0) {
       wx.showModal({
         title: '转让原因不能为空!',
         showCancel: false,

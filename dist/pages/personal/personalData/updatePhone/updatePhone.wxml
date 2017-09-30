@@ -6,33 +6,35 @@
  * */-->
 <view class="page">
   <view class="margin_left">
-        <view class="text_center">
-          <text>当前绑定的手机号</text>
-          <text>137136*****55</text>
+    <view class="text_center">
+      <text>当前绑定的手机号</text>
+      <text>137136*****55</text>
+    </view>
+    <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;">
+      <view class="bg_search">
+        <view class="weui-search-bar__box ">
+          <input type="text" class="weui-search-bar__input" 
+          bindinput="bindinputValue" placeholder="请输入电话号码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTypingPhone" />
         </view>
-        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;">
-            <view class="bg_search">
-                <view class="weui-search-bar__box ">
-                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="请输入电话号码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                </view>
-            </view>
+      </view>
+    </view>
+    <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;">
+      <view class="bg_search">
+        <view class="weui-search-bar__box ">
+          <input type="text" class="weui-search-bar__input" 
+          bindinput="bindinputValue" placeholder="请输入验证码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTypingYZM" />
         </view>
-        <view class="weui-search-bar" style="background-color:#fff;padding:10px 10px;">
-            <view class="bg_search">
-                <view class="weui-search-bar__box ">
-                    <input type="text" class="weui-search-bar__input" bindinput="bindinputValue" placeholder="请输入验证码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                </view>
-                <view class="VerificationCode">
-                  <view style="display:{{selected  == true?'block':'none'}};"  bindtap="countdown">{{second}}s后重新获取</view>
-                  <view style="display:{{selected1 == true?'block':'none'}};"  bindtap="getphone" >点击获取验证码</view>
-                </view>
-            </view>
+        <view class="VerificationCode">
+          <view style="display:{{selected  == true?'block':'none'}};" bindtap="countdown">{{second}}s后重新获取</view>
+          <view style="display:{{selected1 == true?'block':'none'}};" bindtap="getphone">点击获取验证码</view>
         </view>
+      </view>
+    </view>
 
-          <!-- 提交按钮  start -->
-          <view class="page__bd page__bd_spacing">
-                <button  style="background-color:#14BAC8;border:none;"  form-type="submit"  type="primary" >确认修改</button>
-          </view>
-          <!-- 提交按钮  end -->
-  </view>  
+    <!-- 提交按钮  start -->
+    <view class="weui-btn-area">
+      <button form-type="submit" bindtap='bindtapUpdatePhone' type="primary">确认修改</button>
+    </view>
+    <!-- 提交按钮  end -->
+  </view>
 </view>

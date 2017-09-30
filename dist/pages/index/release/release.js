@@ -19,7 +19,7 @@ Page({
       url: '/pages/index/release/businessTransfer/businessTransfer',
     })
   },
-  //加盟分店
+  //加盟代理
   bindtapAffiliateStores:function(){
     wx.navigateTo({
       url: '/pages/index/release/affiliateStores/affiliateStores',
@@ -43,7 +43,7 @@ Page({
       url: '/pages/index/release/propertyInvestment/propertyInvestment',
     })
   },
-  //微商代理
+  //股权交易
   bindtapDerivativeAgent:function(){
     wx.navigateTo({
       url: '/pages/index/release/derivativeAgent/derivativeAgent',

@@ -25,7 +25,8 @@ Page({
     strTime:'刚刚来过',             //最新访问日期
     numBer:1,                      //发布帖子数量
     releaseInfo:null,              //发布信息，单个
-    length:null,                   //信息描述         
+    length:null,                   //信息描述     
+    userAn:true,                 //是否是自己的项目    
   },
   //预览
   previewImage: function (e) {
@@ -81,11 +82,9 @@ Page({
           scriptName: 'Query',
           cudScriptName: 'Delete',
           nameSpaceMap: {
-            notice: {
-              Query: [{
-                id: that.data.id,
-              }],
-            }
+            rows: [{
+              id: that.data.id,
+            }],
           }
         })
       },
@@ -121,12 +120,10 @@ Page({
             nameSpace: 'collectioninfo',
             scriptName: 'Query',
             nameSpaceMap: {
-              collectioninfo: {
-                Query: [{
-                  releaseId: that.data.releaseId,     //发布信息id
-                  personalId: wx.getStorageSync("personalId")    //个人资料id
-                }]
-              }
+              rows: [{
+                releaseId: that.data.releaseId,     //发布信息id
+                personalId: wx.getStorageSync("personalId")    //个人资料id
+              }]
             }
           })
         },
@@ -146,6 +143,7 @@ Page({
             that.data.content ="我取消收藏你的项目。";
             that.data.tile="";
             that.data.ntype=3;
+            that.data.avatarUrl = user.avatarUrl;
             //设置通知
             that.setNotice(that);
           }else{
@@ -162,6 +160,7 @@ Page({
             that.data.content = "我收藏了你的项目。";
             that.data.tile = "";
             that.data.ntype = 3;
+            that.data.avatarUrl = user.avatarUrl;
             //设置通知
             that.setNotice(that);
           }
@@ -183,16 +182,14 @@ Page({
           reqJson: JSON.stringify({
             nameSpace: 'collectioninfo',
             scriptName: 'Query',
-            cudScriptName: 'Update',
+            cudScriptName: 'Save',
             nameSpaceMap: {
-              collectioninfo: {
-                Query: [{
-                  id: that.data.id,
-                  df: that.data.df,
-                  releaseId: that.data.releaseId,     //发布信息id
-                  personalId: wx.getStorageSync("personalId")    //个人资料id
-                }]
-              }
+              rows: [{
+                id: that.data.id,
+                df: that.data.df,
+                releaseId: that.data.releaseId,     //发布信息id
+                personalId: wx.getStorageSync("personalId")    //个人资料id
+              }]
             }
           })
         },
@@ -241,15 +238,13 @@ Page({
           reqJson: JSON.stringify({
             nameSpace: 'reportinfo',
             scriptName: 'Query',
-            cudScriptName: 'Update',
+            cudScriptName: 'Save',
             nameSpaceMap: {
-              reportinfo: {
-                Query: [{
-                  releaseId: that.data.releaseId,        //发布信息id
-                  personalId: that.data.personalId,      //个人id   
-                  reportTypeId: reportTypeId             //举报类型
-                }]
-              }
+              rows: [{
+                releaseId: that.data.releaseId,        //发布信息id
+                personalId: that.data.personalId,      //个人id   
+                reportTypeId: reportTypeId             //举报类型
+              }]
             }
           })
         },
@@ -344,17 +339,15 @@ Page({
           reqJson: JSON.stringify({
             nameSpace: 'commentinfo',
             scriptName: 'Query',
-            cudScriptName: 'Update',
+            cudScriptName: 'Save',
             nameSpaceMap: {
-              commentinfo: {
-                Query: [{
-                  avatarUrl: user.avatarUrl,                        //头像
-                  releaseId: that.data.releaseId,                   //发布信息id
-                  personalId: that.data.personalId,                 //个人id
-                  commentContent: that.data.inputValue,             //评论内容
-                  remark: userName,                                 //名称
-                }]
-              }
+              rows: [{
+                avatarUrl: user.avatarUrl,                        //头像
+                releaseId: that.data.releaseId,                   //发布信息id
+                personalId: that.data.personalId,                 //个人id
+                commentContent: that.data.inputValue,             //评论内容
+                remark: userName,                                 //名称
+              }]
             }
           })
         },
@@ -370,6 +363,8 @@ Page({
             that.data.content = that.data.inputValue;
             that.data.tile = "";
             that.data.ntype = 2;
+            that.data.avatarUrl = user.avatarUrl;
+            
 
             //设置通知
             that.setNotice(that);
@@ -383,6 +378,7 @@ Page({
             that.data.content = "我评论了你的项目：‘" + that.data.inputValue+"'";
             that.data.tile = "";
             that.data.ntype = 1;
+            that.data.avatarUrl = user.avatarUrl;
             //设置通知
             that.setNotice(that);
           }
@@ -474,20 +470,19 @@ Page({
         reqJson: JSON.stringify({
           nameSpace: 'notice',
           scriptName: 'Query',
-          cudScriptName: 'Update',
+          cudScriptName: 'Save',
           nameSpaceMap: {
-            notice: {
-              Query: [{
-                personalId: that.data.personalId,         //接收者id
-                releaseId: that.data.releaseId,           //发布信息id
-                imgUrl: that.data.imageArray[0],          //发布信息对应的图片
-                ntype: that.data.ntype,                   //通知类型 0=系统,1=评论，2=回复,3=收藏，4=审核，5=..',
-                content: that.data.content,               //通知内容
-                tile: that.data.tile,                     //通知标题
-                creator: wx.getStorageSync("personalId"), //通知者
-                notifyname: that.data.notifyname,        //通知者名称
-              }]
-            }
+            rows: [{
+              personalId: that.data.personalId,         //接收者id
+              releaseId: that.data.releaseId,           //发布信息id
+              imgUrl: that.data.imageArray[0],          //发布信息对应的图片
+              ntype: that.data.ntype,                   //通知类型 0=系统,1=评论，2=回复,3=收藏，4=审核，5=..',
+              content: that.data.content,               //通知内容
+              tile: that.data.tile,                     //通知标题
+              creator: wx.getStorageSync("personalId"), //通知者
+              notifyname: that.data.notifyname,        //通知者名称
+              avatarUrl: that.data.avatarUrl          //头像
+            }]
           }
         })
       },
@@ -515,12 +510,11 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                df:0,
-                personalId: that.data.personalId    //发布信息id
-              }],
-            }
+            pageable:0,
+            rows: [{
+              df: 0,
+              personalId: that.data.personalId    //发布信息id
+            }],
           }
         })
       },
@@ -563,13 +557,11 @@ Page({
           nameSpace: 'collectioninfo',       //收藏夹表
           scriptName: 'Query',
           nameSpaceMap: {
-            collectioninfo: {
-              Query: [{
-                df:0,
-                personalId: that.data.personalId,    //个人资料id
-                releaseId: that.data.releaseId       //发布信息id
-              }],
-            }
+            rows: [{
+              df: 0,
+              personalId: wx.getStorageSync("personalId"),    //个人资料id
+              releaseId: that.data.releaseId                  //发布信息id
+            }],
           }
         })
       },
@@ -603,12 +595,10 @@ Page({
           nameSpace: "previewinformation", 
           scriptName: "com.dahuo.plugin.impl.PreviewinformationPlugin", 
           nameSpaceMap: {
-            previewinformation: {
-              "com.dahuo.plugin.impl.PreviewinformationPlugin":[{ 
-                id: wx.getStorageSync("personalId"),         //用户id
-                releaseId: that.data.releaseId,      //发布id
-              }]
-            }
+            rows: [{
+              id: wx.getStorageSync("personalId"),         //用户id
+              releaseId: that.data.releaseId,      //发布id
+            }]
           }
         })
       },
@@ -616,7 +606,12 @@ Page({
       success: function (res) {
         var row=res.data.rows;
         if (row != null){
-          var mdate = that.getDate(row.mdate);
+          var mdate;
+          if (app.checkInput(row.mdate)){
+            mdate="正在查看";
+          }else{
+            mdate=that.getDate(row.mdate);
+          }
           that.setData({ strTime: mdate, previewinCount: row.previewinCount });
         }
       },
@@ -639,11 +634,9 @@ Page({
           nameSpace: 'commentinfo',       //发布信息表
           scriptName: 'Query',
           nameSpaceMap: {
-            commentinfo: {
-              Query: [{
-                releaseId: that.data.releaseId    //发布id
-              }],
-            }
+            rows: [{
+              releaseId: that.data.releaseId    //发布id
+            }],
           }
         })
       },
@@ -670,11 +663,9 @@ Page({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
         nameSpaceMap: {
-          sys_userinfo: {
-            Query: [{
-              id: that.data.personalId    //个人资料id
-            }],
-          }
+          rows: [{
+            id: that.data.personalId    //个人资料id
+          }],
         }
       })
     };
@@ -770,11 +761,9 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                id: that.data.releaseId    //发布信息id
-              }],
-            }
+            rows: [{
+              id: that.data.releaseId    //发布信息id
+            }],
           }
         })
       },
@@ -786,11 +775,17 @@ Page({
         //取详细信息的描述
         var info = list[0];
         var length = 0;
+        var userAn=true;
+
+        if (info.personalId == wx.getStorageSync("personalId")){
+          userAn=false;
+        }
+
         //判断
         if (info != null) {
           if (info.projectDescription != null) length = info.projectDescription.length;
-          else if (info.incomeDescription != null) length = info.incomeDescription.length;
-          else length = info.businessDescription.length;
+          else if (info.businessDescription != null) length = info.businessDescription.length;
+          else length = info.incomeDescription.length;
         }
         var strTime = that.getDate(info.cdate);
         info.cdate = strTime;
@@ -802,10 +797,11 @@ Page({
         }
         //设置值
         that.setData({
-          length: length>100?true:false,
+          length: length>90?true:false,
           releaseInfo: info,
           imageArray: imageArray,
           imgPass: imageArray ,
+          userAn: userAn
         });
       },
       fail: function (res) {},
@@ -832,5 +828,14 @@ Page({
     that.getReleaseInfoNumber(that);
     //下拉完成后执行回退
     wx.stopPullDownRefresh();
-  }
+  },
+
+  //转发，分享
+  onShareAppMessage:function (e){
+    return {
+      title: '搭伙',
+      desc: '同城生意人必备神器!',
+      path: '/pages/index/info/info?releaseId=' + this.data.releaseId + "&personalId=" + this.data.personalId,
+    }
+  },
 });

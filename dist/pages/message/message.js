@@ -12,15 +12,6 @@ Page({
     messages:[]
   },
 
-  //跳转
-  navigateInfo:function(e){
-    var that=this;
-    var id = e.currentTarget.id;
-    var releaseId = e.currentTarget.dataset.releaseId;
-    var personalId = e.currentTarget.dataset.personalId;
-
-  },
-
   //长按提示删除
   bindlongtapURL:function(e){
     var that = this;
@@ -59,11 +50,9 @@ Page({
           scriptName: 'Query',
           cudScriptName: 'Delete',
           nameSpaceMap: {
-            notice: {
-              Query: [{
-                id:that.data.id,
-              }],
-            }
+            rows: [{
+              id: that.data.id,
+            }],
           }
         })
       },
@@ -85,41 +74,42 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     console.log(options);
     var that=this;
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    //设置参数
-    that.setData({
-      cookie: cookie,          //请求cookie
-      time: time,              //请求时间
-      token: token,            //请求token
-    });
+    that.getmessteges(that);
+  },
 
+  /**
+* 页面相关事件处理函数--监听用户下拉动作
+*/
+  onPullDownRefresh: function () {
+    var that = this;
+    that.getmessteges(that);
+    //下拉完成后执行回退
+    wx.stopPullDownRefresh();
+  },
+
+  getmessteges:function(that){
     //发送请求
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
         reqJson: JSON.stringify({
           nameSpace: 'notice',       //通知表
           scriptName: 'Query',
           nameSpaceMap: {
-            notice: {
-              Query: [{
-                personalId: wx.getStorageSync("personalId")    //个人id
-              }],
-            }
+            rows: [{
+              personalId: wx.getStorageSync("personalId")    //个人id
+            }],
           }
         })
       },
       success: function (res) {   //请求成功
         var row = res.data.rows;
         for (var i = 0; i < row.length; ++i) {
-          if (row[i].imgUrl != null) row[i].imgUrl = __config.domainImage + row[i].imgUrl;
+          if (row[i].imgUrl != null) row[i].imgUrl = row[i].imgUrl;
           row[i].cdate = that.getDate(row[i].cdate);
           if (row[i].static != 1) biaoweiyidu(that, row[i].id);
         }
@@ -131,27 +121,25 @@ Page({
     });
 
     //标为已读
-    function biaoweiyidu(that,id){
+    function biaoweiyidu(that, id) {
       //发送请求
       wx.request({
         url: __config.basePath_web + "api/exe/save",
         method: "POST",
-        header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
         data: {
-          timeStamp: that.data.time,
-          token: that.data.token,
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
           reqJson: JSON.stringify({
             nameSpace: 'notice',       //通知表
             scriptName: 'Query',
-            cudScriptName: 'Update',
+            cudScriptName: 'Save',
             nameSpaceMap: {
-              notice: {
-                Query: [{
-                  id:id,
-                  static: 1,                                       //0=未查看，1=已查看', 
-                  personalId: wx.getStorageSync("personalId")    //个人id
-                }],
-              }
+              rows: [{
+                id: id,
+                static: 1,                                       //0=未查看，1=已查看', 
+                personalId: wx.getStorageSync("personalId")    //个人id
+              }],
             }
           })
         },
@@ -161,7 +149,6 @@ Page({
         complete: function () { }
       });
     }
-
   },
 
   //获取时间差

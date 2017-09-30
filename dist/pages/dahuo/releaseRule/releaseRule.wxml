@@ -1,0 +1,51 @@
+<!--/**  作者:  lingfe 
+ *   时间:  2017-9-27
+ *   描述:  搭伙信息发布规则
+ * 
+ * */-->
+<view class='page'>
+  <view class='title_top'>搭伙信息发布规则</view>
+  <view class='neiro'>
+    <view class='neiro_fei'>
+      欢迎您使用搭伙！本《搭伙信息发布规则》（以下简称“本规则”）系由您与贵州合丰力科技有限公司（以下简称“搭伙”）订立的《搭伙用户协议》的有效组成部分，与《搭伙用户协议》共同构成您与搭伙合作的法律文件。您在注册、使用搭伙软件发布职位信息之前，请务必审慎阅读、充分理解本规则。您使用搭伙软件职位信息服务的行为，即表示您已阅读并同意本规则所涉全部内容。搭伙有权根据法律法规、政策及产品需求更新本规则，并通过软件发布更新版本的方式修改本规则，修改后的规则于发布时生效。请您定期访问并查看最新规则。如您继续使用BOSS直聘服务的，即表示您接受经修订后的规则。
+    </view>
+    <view class='neiro_fei'>
+      1.搭伙为用户提供发布生意信息的免费服务和增值服务。用户使用搭伙APP与搭伙微信小程序应当遵守本规则协议。
+    </view>
+    <view class='neiro_fei'>
+      2.搭伙有权对用户发布的生意信息进行审核，对于不符合本规则的内容，有权拒绝发布或者删除。
+    </view>
+    <view class='neiro_fei'>
+      4.用户不得发布包含下列内容的职位信息或其他信息：
+    </view>
+    <view class='neiro_fei'>
+      <view class='neiro_fei_title'>（1）包含淘宝刷单、广告、传销、直销等内容</view>
+      <view class='neiro_fei_title'>（2）包含色情、淫秽内容 </view>
+      <view class='neiro_fei_title'>（3）包含违法、政治敏感内容 </view>
+      <view class='neiro_fei_title'>（4）包含不真实的金额、身份、地址、项目描述信息 </view>
+      <view class='neiro_fei_title'>（5）重复发布同一信息</view>
+      <view class='neiro_fei_title'>（6）项目描述与收益描述不明确的 </view>
+      <view class='neiro_fei_title'>（7）涉及违反法律规定 </view>
+      <view class='neiro_fei_title'>（7）包含人身攻击内容 </view>
+      <view class='neiro_fei_title'>（8）其他（鸡汤、段子、水贴等） </view>
+      用户发布的生意信息或其他信息包含上述内容的，经搭伙发现或用户投诉后核实的，搭伙有权驳回其职位发布申请、删除职位信息。
+    </view>
+    <view class='neiro_fei'>
+      5.搭伙不为下述公司提供职位发布服务，因此如使用搭伙的用户服务于下述单位的，搭伙有权删除其发布的生意信息：
+    </view>
+    <view class='neiro_fei'>
+      <view class='neiro_fei_title'>（1）传销、直销单位 </view>
+      <view class='neiro_fei_title'>（2）存在淘宝刷单、手机兼职、微商代理业务的单位 </view>
+      <view class='neiro_fei_title'>（3）涉及色情暴力业务的单位内 </view>
+      <view class='neiro_fei_title'>（4）涉及冒充其他单位发布信息的保险公司 </view>
+      <view class='neiro_fei_title'>（5）其他违反法律规定的行为 </view>
+      用户实施上述行为，经搭伙发现或用户投诉后核实的，搭伙有权立即停止对该用户提供服务、删除用户发布的职位信息。
+    </view>
+    <view class='neiro_fei'>
+      7.若用户违反以上规定的内容，或者有其他明显损害搭伙平台利益或违法行为的，搭伙有权视情节采取冻结用户账户的方式暂时乃至永久停止其使用搭伙平台服务且不做解封与退款处理。如用户行为涉嫌违法的，搭伙有权向有关政府部门举报、披露相关信息。
+    </view>
+    <view class='neiro_fei'>
+      8.用户违反本规则的，搭伙可以依据本规则直接采取相关措施，并视情况通知用户。用户可以通过客户服务渠道向搭伙提交申诉。
+    </view>
+  </view>
+</view>

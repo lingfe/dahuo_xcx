@@ -20,7 +20,7 @@ Page({
     title: null,                          //标题
     threshold: null,                      //入伙门槛
     industryChoice: null,                 //行业选择
-    fundDistribution: '',                 //资金布局
+    fundDistribution: '',                 //资金规划
     projectDescription: "",               //项目描述
     incomeDescription: "",                //收益描述
     teamIntroduction: '',                 //公司、团队介绍
@@ -57,7 +57,7 @@ Page({
       });
     }
     //清除缓存
-    wx.setStorageSync("fundDistribution", "");      //资金布局
+    wx.setStorageSync("fundDistribution", "");      //资金规划
     wx.setStorageSync("incomeDescription", "");     //收益描述
     wx.setStorageSync("projectDescription", "");    //项目描述
     wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
@@ -91,7 +91,7 @@ Page({
     });
   },
 
-  //资金布局
+  //资金规划
   fundsLayoutClick: function (e) {
     wx.navigateTo({
       url: '/pages/index/release/partnership/fundsLayout/fundsLayout'
@@ -139,7 +139,7 @@ Page({
     var that = this;
     //标题
     var title= e.detail.value.title;
-    if (title == "" || title == null || title.length == 0) {
+    if (app.checkInput(title)) {
       that.showModal("标题不能为空!");
       return;
     }
@@ -150,42 +150,37 @@ Page({
 
     //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
     var threshold = e.detail.value.threshold;
-    if(threshold==""||threshold==null){
+    if (app.checkInput(threshold)){
       that.showModal("入伙门槛不能为空!");
       return;
-    } else {
-      var threshold = that.data.threshold.substring(0, that.data.threshold.indexOf('万'));
-      wx.setStorageSync("threshold", threshold);
     }
-
-
     //行业选择
     var industryChoice = e.detail.value.industryChoice;
-    if(industryChoice == "" || industryChoice == null){
+    if (app.checkInput(industryChoice)){
       that.showModal("行业选择不能为空!");
       return;
     }
-    //资金布局
+    //资金规划
     var fundDistribution = e.detail.value.fundDistribution;
-    if(fundDistribution == "" || fundDistribution == null){
-      that.showModal("资金布局不能为空!");
+    if (app.checkInput(fundDistribution)){
+      that.showModal("资金规划不能为空!");
       return;
     } 
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
-    if(projectDescription=="" || projectDescription==null){
+    if (app.checkInput(projectDescription)){
       that.showModal("项目描述不能为空!");
       return;
     }
     //收益描述
     var incomeDescription = e.detail.value.incomeDescription;
-    if(incomeDescription==""||incomeDescription==null){
+    if (app.checkInput(incomeDescription)){
       that.showModal("收益描述不能为空!");
       return;
     }
     //公司、团队介绍
     var teamIntroduction = e.detail.value.teamIntroduction;
-    if(teamIntroduction == "" || teamIntroduction == null){
+    if (app.checkInput(teamIntroduction)){
       that.showModal("公司/团队介绍不能为空!");
       return;
     }
@@ -300,26 +295,24 @@ Page({
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
-          cudScriptName: 'Update',
+          cudScriptName: 'Save',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                df: that.data.df,                                              //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
-                id: that.data.id,                                              //发布信息id,如果为空添加，不为空更新
-                releaseType: '合伙创业',                                        //发布类型
-                personalId: wx.getStorageSync("personalId"),                   //个人资料id
-                title: that.data.title,                                        //标题
-                threshold: wx.getStorageSync("threshold"),                     //入伙门槛
-                industryChoice: that.data.industryChoice,                      //行业选择
-                fundDistribution: wx.getStorageSync("fundDistribution"),       //资金布局
-                projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
-                incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
-                teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
-                phone: that.data.phone,                                        //电话号码
-                currentCity: wx.getStorageSync("currentCity"),                 //当前城市
-                imageArray: pathArr                                            //图片数组
-              }]
-            }
+            rows: [{
+              df: that.data.df,                                              //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+              id: that.data.id,                                              //发布信息id,如果为空添加，不为空更新
+              releaseType: '合伙创业',                                        //发布类型
+              personalId: wx.getStorageSync("personalId"),                   //个人资料id
+              title: that.data.title,                                        //标题
+              threshold: wx.getStorageSync("threshold"),                     //入伙门槛
+              industryChoice: that.data.industryChoice,                      //行业选择
+              fundDistribution: wx.getStorageSync("fundDistribution"),       //资金规划
+              projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
+              phone: that.data.phone,                                        //电话号码
+              currentCity: wx.getStorageSync("currentCity"),                 //当前城市
+              imageArray: pathArr                                            //图片数组
+            }]
           }
         })
       },
@@ -473,10 +466,18 @@ Page({
           img = info.imageArray.split(",");
         }
 
+        //资金规划
         if (info.fundDistribution == null) info.fundDistribution='';
+        else wx.setStorageSync('fundDistribution', info.fundDistribution);
+        //项目描述
         if (info.projectDescription == null) info.projectDescription='';
+        else wx.setStorageSync('projectDescription', info.projectDescription);
+        //收益描述
         if (info.incomeDescription == null) info.incomeDescription='';
+        else wx.setStorageSync('incomeDescription', info.incomeDescription);
+        //团队介绍
         if (info.teamIntroduction == null) info.teamIntroduction='';
+        else wx.setStorageSync('teamIntroduction', info.teamIntroduction );
 
         //设置到this
         that.setData({
@@ -484,7 +485,7 @@ Page({
           title: info.title,                             //标题
           threshold: info.threshold,                     //入伙门槛
           industryChoice: info.industryChoice,           //行业选择
-          fundDistribution: info.fundDistribution,       //资金布局
+          fundDistribution: info.fundDistribution,       //资金规划
           projectDescription: info.projectDescription,   //项目描述
           incomeDescription: info.incomeDescription,     //收益描述
           teamIntroduction: info.teamIntroduction,       //公司、团队介绍
@@ -504,7 +505,7 @@ Page({
     //直接从缓存里面取
     var that = this;
     that.setData({
-      fundDistribution: wx.getStorageSync("fundDistribution"),        //资金布局
+      fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
       teamIntroduction: wx.getStorageSync('teamIntroduction'),        //公司、团队介绍

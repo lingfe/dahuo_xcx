@@ -12,8 +12,8 @@ import __config from '../../config/config'
 
 Page({
   data: {
-    PriceRange: ['0 - 1万','1 - 5 万', '5 - 30 万','30 - 100 万','100万+'],
-    priceIndex:1,           //选择价格索引 
+    PriceRange: ['全部','0 - 1 万', '1 - 5 万','5 - 50 万','50万+'],
+    priceIndex:0,           //选择价格索引 
     addressInfo:'贵阳',     //城市定位
     isHiddenLoading: true,  //加载中提示控制
     isHiddenToast:true,     //加载完成提示控制
@@ -23,27 +23,27 @@ Page({
     tabs: [{                //删选数据
       name: "金额",
       content: [{
-        minThreshold: 0,
-        maxThreshold: 1,
+        minThreshold: '全部',
+        maxThreshold: null,
         value: '0',
+        checked: true,
+      }, {
+          minThreshold: 0,
+          maxThreshold: 1,
+        value: '1',
         checked: false,
       }, {
           minThreshold: 1,
           maxThreshold: 5,
-        value: '1',
-        checked: true,
-      }, {
-          minThreshold: 5,
-          maxThreshold: 30,
         value: '2',
         checked: false,
       }, {
-          minThreshold: 30,
-          maxThreshold: 100,
+          minThreshold: 5,
+          maxThreshold: 50,
         value: '3',
         checked: false,
       }, {
-          minThreshold: 100,
+          minThreshold: 50,
         maxThreshold: null,
         value: '4',
         checked: false,
@@ -60,33 +60,38 @@ Page({
         value: '1001',
         checked: false,
       }, {
-        name: '生意转让',
+          name: '干股纳才 ',
         value: '1002',
         checked: false,
       }, {
-        name: '加盟分店',
+        name: '加盟代理',
         value: '1003',
         checked: false,
+        notype: '非搭伙类型',
       }, {
-        name: '干股纳才',
+          name: '股权交易',
         value: '1004',
         checked: false,
       }, {
-        name: '金融理财',
+          name: '生意转让',
         value: '1005',
         checked: false,
+        notype: '非搭伙类型',
       }, {
-        name: '房产投资',
+          name: '金融理财',
         value: '1006',
         checked: false,
+        notype: '非搭伙类型',
       }, {
-        name: '微商代理',
+          name: '房产投资',
         value: '1007',
         checked: false,
+        notype: '非搭伙类型',
       }, {
         name: '其他',
         value: '1008',
         checked: false,
+        notype:'非搭伙类型',
       }],
     },
     {
@@ -167,82 +172,20 @@ Page({
     tabsName: ['金额','类型','行业'],   //筛选类型
     str: {
       AmountOfMoney: [{
-        minThreshold:1,
-        maxThreshold:5,i:1
+        minThreshold:'全部',
+        maxThreshold:null,i:0
       }],                           //金额
       releaseTypeList: [],          //类型
       industryChoiceList: [],       //行业
     },
-    num:1,                  //获取选中的价格索引，控制样式
+    num:0,                  //获取选中的价格索引，控制样式
     list:[],                //发布信息数据
     pagenum:1,              //分页，第几业
-    pagesize:20,            //返回数据量
+    pagesize:10,            //返回数据量
     isCaidan:true,          //底部菜单是否显示
     dahuo:1,                //搭伙菜单
     personal:1,             //个人菜单
     data:null               //请求参数
-  },
-
-  //筛选复选
-  checkboxChange: function (e) {
-    //得到activeIndex
-    var index = e.currentTarget.dataset.index;
-    //得到str
-    var str = this.data.str;
-    //得到tabs
-    var tabs = this.data.tabs;
-    var values = e.detail.value;
-
-    if (tabs[index].name == '金额') {
-      for (var j = 0; j < values.length; ++j) {
-        for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
-          if (tabs[index].content[i].value == values[j]) {
-            tabs[index].content[i].checked = tabs[index].content[i].checked == true ? false : true;
-            str.AmountOfMoney[0] = {
-              minThreshold: tabs[index].content[i].minThreshold,
-              maxThreshold: tabs[index].content[i].maxThreshold, i: i
-            };
-            console.log("tabs[index].name:" + tabs[index].name);
-            break;
-          }else{
-            tabs[index].content[i].checked =false;
-          }
-        }
-      }
-    } else if (tabs[index].name == '类型') {
-
-
-      for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
-        for (var j = 0; j < values.length; ++j) {
-          if (tabs[index].content[i].value == values[j]) {
-            if (tabs[index].content[i].checked == true)continue;
-            
-            tabs[index].content[i].checked = true; tabs[index].content[i].i = i;
-            str.releaseTypeList.push({ releaseType: tabs[index].content[i].name, i: i });
-            console.log("tabs[index].name:" + tabs[index].name);
-            break;
-          } else {
-            //tabs[index].content[i].checked = false;
-          }   
-        }
-      }
-    } else if (tabs[index].name == '行业') {
-      for (var i = 0, lenI = tabs[index].content.length; i < lenI; ++i) {
-        for (var j = 0; j < values.length; ++j) {
-          if (tabs[index].content[i].value == values[j]) {
-            if (tabs[index].content[i].checked == true) continue;
-            
-            tabs[index].content[i].checked = true;
-            str.industryChoiceList.push({ industryChoice: tabs[index].content[i].name, i: i });
-            console.log("tabs[index].name:" + tabs[index].name);
-            break;
-          } else {
-            //tabs[index].content[i].checked = false;
-          }
-        }
-      }
-    }
-    this.setData({ tabs: tabs,  str: str  });
   },
 
   //删除筛选条件,重复点击去除
@@ -267,6 +210,10 @@ Page({
               minThreshold: tabs[0].content[k].minThreshold,
               maxThreshold: tabs[0].content[k].maxThreshold, i: k
             };
+            that.setData({
+              priceIndex: k,
+              num: k,
+            });
           }else{
             tabs[0].content[k].checked = false;
             str.AmountOfMoney[0] = [];
@@ -335,7 +282,9 @@ Page({
       }
     }
 
-    that.setData({ tabs: tabs, str: str });
+    that.setData({
+      tabs: tabs,
+      str: str,});
   },
 
   //重置筛选
@@ -355,7 +304,9 @@ Page({
     //设置值
     this.setData({
       tabs:tabs,
-      str: { AmountOfMoney: [{ minThreshold: 1, maxThreshold:5,i:1}],releaseTypeList: [],industryChoiceList: [] },
+      priceIndex:0,
+      num:0,
+      str: { AmountOfMoney: [{ minThreshold: '全部', maxThreshold:null,i:0}],releaseTypeList: [],industryChoiceList: [] },
     });
   },
 
@@ -371,7 +322,11 @@ Page({
 
   //分享
   onShareAppMessage: function (e) {
-    return { title: '分享', path: '/page/user?id=123' }
+    return {
+      title: '搭伙',
+      desc: '同城生意人必备神器!',
+      path: '/pages/index/index?id=1001'
+    }
   },
 
   //是否显示选择价格
@@ -388,10 +343,19 @@ Page({
     var min = e.currentTarget.dataset.min;
     var index=e.currentTarget.dataset.index;
     var str= that.data.str;
+    var tabs=that.data.tabs;
+    for (var i = 0; i < tabs[0].content.length;++i) {
+      if(i==index){
+        tabs[0].content[i].checked = true;
+      }else{
+        tabs[0].content[i].checked = false;
+      }
+    }
     str.AmountOfMoney=[{ minThreshold: min, maxThreshold: max ,i:index}];     //金额
     that.setData({
       str:str,                 //筛选参数
       pagenum: 1,
+      tabs: tabs,
       priceIndex: index,       //选择价格索引
       list: [],                //发布信息数据
       num: index,              //获取选中的价格索引，控制样式
@@ -399,7 +363,7 @@ Page({
     });
 
     //调用删选
-    this.requestData(that);
+    that.requestData(that);
   },
 
   //发布
@@ -424,7 +388,6 @@ Page({
         }, function (res) {
           //判断状态
           if (res.data.status != -1) {
-
             var city=res.data.result.ad_info.city;
             if (city.lastIndexOf("市") != -1) city = city.substring(0,city.lastIndexOf("市"));
             else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
@@ -445,24 +408,14 @@ Page({
   onLoad: function () {
     //当前
     var that = this;
+
     //定位
     that.getAddress(that);
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    //设置参数
-    that.setData({
-      cookie: cookie,          //请求cookie
-      time: time,              //请求时间
-      token: token,            //请求token
-    });
-
     //调用默认请求
-    this.requestData(that);
+    that.requestData(that);
 
     //设置页面高度
-    this.setData({
+    that.setData({
       windowHeight: wx.getStorageSync('windowHeight')
     });
 
@@ -491,29 +444,31 @@ Page({
       screen: false,           //隐藏删选      
     });
     //调用请求
-    this.requestData(that);
+    that.requestData(that);
   },
 
   //请求获取数据
   requestData: function (that) { 
     //定义查询参数
     var query = {
-      df:0,
-      releaseTypeList:[],
-      industryChoiceList:[],
+      orderByClause:'top desc,mdate desc',
       pagenum: that.data.pagenum,          //当前业
       pagesize: that.data.pagesize,        //数据大小长度
-      pageable: 1                          //是否分页
+      rows:[{
+        df: 0,
+        releaseTypeList: [],
+        industryChoiceList: [],
+      }]  
     };
     //地址 
     var currentCity = that.data.addressInfo;
-    if (currentCity.length != 0) query.currentCity = currentCity;
+    if (currentCity.length != 0) query.rows[0].currentCity = currentCity;
 
     //类型
     var releaseTypeList = that.data.str.releaseTypeList;
     if (releaseTypeList.length != 0){
       for (var i = 0; i < releaseTypeList.length; ++i) {
-        query.releaseTypeList[i] = releaseTypeList[i].releaseType;
+        query.rows[0].releaseTypeList[i] = releaseTypeList[i].releaseType;
       }
     } 
 
@@ -521,33 +476,31 @@ Page({
     var industryChoiceList = that.data.str.industryChoiceList;
     if (industryChoiceList.length != 0) {
       for(var i=0;i<industryChoiceList.length;++i){
-        query.industryChoiceList[i] = industryChoiceList[i].industryChoice;
+        query.rows[0].industryChoiceList[i] = industryChoiceList[i].industryChoice;
       }
     }
 
     //金额
     var AmountOfMoney = that.data.str.AmountOfMoney;
     if (AmountOfMoney.length != 0) {
-      query.minThreshold = AmountOfMoney[0].minThreshold;
-      if (AmountOfMoney[0].maxThreshold!=null)query.maxThreshold = AmountOfMoney[0].maxThreshold;
+      if (AmountOfMoney[0].minThreshold != '全部') {
+        query.rows[0].minThreshold = AmountOfMoney[0].minThreshold;
+        if (AmountOfMoney[0].maxThreshold != null) query.rows[0].maxThreshold = AmountOfMoney[0].maxThreshold;
+      }
     }
 
     //发送请求  
     wx.request({
       url: __config.basePath_web+"api/exe/get",
       method: "POST",
-      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
+      header: { cookie: wx.getStorageSync('cookie'),"Content-Type": "application/x-www-form-urlencoded"},
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
-          nameSpace: 'releaseinfo',
-          scriptName: 'Query',
-          nameSpaceMap: {
-            releaseinfo: {
-              Query: [query],
-            },
-          }
+          nameSpace: "releaseinfo",
+          scriptName: "Query",
+          nameSpaceMap: query
         })
       },
       success: function (res) {
@@ -565,13 +518,13 @@ Page({
         } 
 
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
-          var strTime = that.getDate(list[i].cdate);
+          var strTime = that.getDate(list[i].mdate);
           if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
           if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 55);
           if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 55);
           if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 55);
 
-          list[i].cdate = strTime;
+          list[i].mdate = strTime;
           //添加到当前数组
           pageList.push(list[i]);
         }

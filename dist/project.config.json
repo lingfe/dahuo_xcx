@@ -1,0 +1,61 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true
+	},
+	"compileType": "weapp",
+	"libVersion": "1.5.3",
+	"appid": "wxdb07051dc3fc031e",
+	"projectname": "dahuo",
+	"condition": {
+		"weapp": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/wxUserinfoLogin/wxUserinfoLogin",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "通知",
+					"pathName": "pages/message/message",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "个人",
+					"pathName": "pages/index/release/affiliateStores/throwInTheCity/throwInTheCity",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 3,
+					"name": "发布",
+					"pathName": "pages/index/release/release",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 4,
+					"name": "chat",
+					"pathName": "pages/dahuo/useProtocol/useProtocol",
+					"query": "",
+					"scene": "1001"
+				}
+			]
+		},
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

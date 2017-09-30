@@ -33,7 +33,7 @@ Page({
   savaagencyRule: function (e) {
     var agencyRule = this.data.agencyRule;
     //判断是否为空
-    if (agencyRule == null) {
+    if (agencyRule.length==0) {
       wx.showModal({
         title: '代理规则不能为空!',
         showCancel: false,

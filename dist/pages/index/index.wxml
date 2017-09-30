@@ -22,17 +22,29 @@
         <image class="img" src="/assets/images/u218.png"></image>
         <view class="bor">
           <view class="border_bottom" wx:for="{{tabs[0].content}}" wx:key="{{*this}}">
-            <view wx:if="{{tabs[0].content[index].minThreshold != 100}}" class="prices {{index == num ? 'color': ''}}" bindtap="bindtapPrices" data-min="{{tabs[0].content[index].minThreshold}}" data-max="{{tabs[0].content[index].maxThreshold}}" data-index="{{index}}">
-              {{tabs[0].content[index].minThreshold}} - {{tabs[0].content[index].maxThreshold}} 万</view>
-
-            <view wx:else="{{tabs[0].content[index].minThreshold == 100}}" class="prices {{index == num ? 'color': ''}}" bindtap="bindtapPrices" data-min="{{tabs[0].content[index].minThreshold}}" data-max="{{tabs[0].content[index].maxThreshold}}" data-index="{{index}}">
-              100万+</view>
+            <view wx:if="{{tabs[0].content[index].minThreshold != 50}}" 
+            class="prices {{index == num ? 'color': ''}}" 
+            bindtap="bindtapPrices" 
+            data-min="{{tabs[0].content[index].minThreshold}}" 
+            data-max="{{tabs[0].content[index].maxThreshold}}" 
+            data-index="{{index}}">
+              <view wx:if="{{tabs[0].content[index].minThreshold == '全部'}}">全部</view>
+              <view wx:else="">{{tabs[0].content[index].minThreshold}} - {{tabs[0].content[index].maxThreshold}} 万</view>
+            </view>
+            <view wx:else="{{tabs[0].content[index].minThreshold == 50}}" 
+            class="prices {{index == num ? 'color': ''}}" 
+            bindtap="bindtapPrices" 
+            data-min="{{tabs[0].content[index].minThreshold}}" 
+            data-max="{{tabs[0].content[index].maxThreshold}}" data-index="{{index}}">
+              50万+</view>
           </view>
         </view>
       </view>
     </view>
     <view class="top_right" bindtap="bindtapScreen">
-      <image class="kind-list__img" src="/assets/images/fandaj.png"></image>
+      <!-- <text wx:if="{{screen == false}}" class="mark"></text>
+      <image class="kind-list__img" src="/assets/images/fandaj.png"></image> -->
+      筛选
     </view>
   </view>
   <!-- 头部 end  -->
@@ -54,7 +66,7 @@
               <image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
             <view class="data_biaoqian_view">
               <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-            <view class="data_biaoqian_view">{{item.cdate}}前</view>
+            <view class="data_biaoqian_view">{{item.mdate}}前</view>
           </view>
         </view>
         <view class="data_info info">
@@ -64,10 +76,11 @@
           <view wx:elif="{{item.incomeDescription != null }}">
             <!-- 收益描述 -->{{item.incomeDescription == null ?'' : item.incomeDescription}}
           </view>
-          <view wx:if="{{item.businessDescription != null }}">
+          <view wx:elif="{{item.businessDescription != null }}">
             <!-- 营业描述 -->{{item.businessDescription == null ?'':item.businessDescription}}
           </view>
         </view>
+        <image src="/assets/images/jian.png" wx:if="{{item.top>0}}" class='img_jian'></image>
       </view>
     </navigator>
     <view class="line"></view>
@@ -96,11 +109,12 @@
           <checkbox-group data-index="{{activeIndex}}">
             <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.minThreshold}}' data-index='{{index}}' data-name="AmountOfMoney" wx:key="{{*this}}">
               <view class="weui-navbar__item stop">
-                <view wx:if="{{item.minThreshold == 100}}" class="weui-navbar__title stop_1 flaot_left">
-                  100万+
+                <view wx:if="{{item.minThreshold == 50}}" class="weui-navbar__title stop_1 flaot_left">
+                  50万+
                 </view>
-                <view wx:else="{{item.minThreshold != 100}}" class="weui-navbar__title stop_1 flaot_left">
-                  {{item.minThreshold}} - {{item.maxThreshold}} 万
+                <view wx:else="{{item.minThreshold != 50}}" class="weui-navbar__title stop_1 flaot_left">
+                  <view wx:if="{{tabs[0].content[index].minThreshold == '全部'}}">全部</view>
+                  <view wx:else="">{{tabs[0].content[index].minThreshold}} - {{tabs[0].content[index].maxThreshold}} 万</view>
                 </view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
                   <image class="img_wh" src="/assets/images/ttt.png" />
@@ -113,17 +127,17 @@
 
         <!-- 类型  start -->
         <view class="" hidden="{{activeIndex != 1}}">
-          <checkbox-group style="overflow:scroll;height:400px;" data-index="{{activeIndex}}">
+          <checkbox-group style="overflow:scroll;height:515px;" data-index="{{activeIndex}}">
             <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="releaseTypeList" wx:key="{{*this}}">
               <view class="weui-navbar__item stop">
                 <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
+                  <text class='type_text'>{{item.notype}}</text>
                   <image class="img_wh" src="/assets/images/ttt.png" />
                 </view>
               </view>
             </label>
           </checkbox-group>
-
         </view>
         <!-- 类型  end -->
 

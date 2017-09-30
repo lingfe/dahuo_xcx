@@ -1,0 +1,32 @@
+/**  作者:  lingfe 
+ *   时间:  2017-9-27
+ *   描述:  用户使用协议
+ * 
+ * */
+ .title_top{
+  width: 100%;
+  text-align: left;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  margin-left: 15rpx;
+}
+
+.neiro{
+  width: 100%;
+  height: auto;
+  margin-top: 30rpx;
+}
+.neiro_fei{
+  font-size: 25rpx;
+  margin-top: 20rpx;
+  margin-left: 15rpx;
+  line-height: 50rpx;
+}
+
+.title{
+  width: 100%;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  margin-left: 15rpx;
+  font-family: '黑体';
+}

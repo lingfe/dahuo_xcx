@@ -176,8 +176,9 @@ background-color: #fff;
   margin-left: 34rpx;
 }
 .neiro_img image{
-  width: 210rpx;
-  height: 124rpx;
+  max-width: 210rpx;
+  max-height: 124rpx;
+  image-rendering: pixelated ;/*清晰度 高清*/
 }
 .neiro_data {
   width: 450rpx;
@@ -438,12 +439,15 @@ border-radius:10px;
 /* 通知喇叭  小红点*/
 .mark{
     position:absolute;
-    margin-left:80rpx;
-    margin-top: 90rpx;
+    margin-left:66rpx;
+    margin-top: 87rpx;
     background-color:#F74c31; 
-    width: 15rpx;
-    height: 15rpx;
     border-radius:20rpx; 
+    color: #fff;
+    height:20rpx;
+    width: auto;
+    font-size: 16rpx;
     float: right;
+    padding: 3rpx;
     display:table-cell;
 }

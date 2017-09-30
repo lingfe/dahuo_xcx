@@ -19,7 +19,9 @@ Page({
     phone:null,//电话
     isUpdateName:false,   //是否显示弹窗修改名称
     inputValue:'',
+    avatarUrl:'',
   },
+  
   //获取 图片
   chooseImage: function (e) {
     var that = this;
@@ -37,30 +39,31 @@ Page({
         }
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         that.setData({
-          "userinfo.avatarUrl": res.tempFilePaths
+          avatarUrl:res.tempFilePaths
         });
         //上传图片到服务器
         uploadimg(res.tempFilePaths);
       }
     })
 
-
     //多张图片上传
     function uploadimg(imgPath) {
       wx.uploadFile({
         url: __config.domain,                       //开发者服务器 url
-        filePath: imgPath,                          //要上传文件资源的路径
-        name: 'file',                                //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+        filePath: imgPath[0],                          //要上传文件资源的路径
+        name: 'file',                               //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
         header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
-          cookie: cookie,
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
+          cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded"},
         formData: null,                             //参数(HTTP 请求中其他额外的 form data)
-        success: function (res) {                         //接口调用成功的回调函数
+        success: function (res) {                   //接口调用成功的回调函数
+          var json = JSON.parse(res.data);
+          that.setData({
+            avatarUrl: __config.domainImage +json[0]
+          });
           //上传成功，执行修改()
           that.personalUpdate(that);
         },
-        fail: function (res) {                         //接口调用失败的回调函数
+        fail: function (res) {                      //接口调用失败的回调函数
           //提示
           wx.showToast({
             title: '上传文件失败',
@@ -75,6 +78,7 @@ Page({
       });
     }
   },
+
   //文本框内容改变
   inputGetValue:function(e){
     console.log("文本框内容改变：" + e.detail.value);
@@ -82,6 +86,7 @@ Page({
       inputValue: e.detail.value
     });
   },
+
   //取消
   bindtapClear:function(){
     console.log("取消");
@@ -89,6 +94,7 @@ Page({
       isUpdateName: this.data.isUpdateName == true ? false : true
     });
   },
+
   //确定修改姓名
   bindtapUpdateName:function(){
     console.log("确定修改姓名");
@@ -102,18 +108,21 @@ Page({
     //调用函数修改名称
     that.personalUpdate(that);
   },
+
   //修改地域
   bindtapSearch:function(e){
     wx.navigateTo({
       url: '/pages/search/search?personalId=' + e.currentTarget.id,
     });
   },
+
   //修改签名
   bindtapAutograph:function(e){
     wx.navigateTo({
       url: '/pages/personal/personalData/autograph/autograph?personalId=' + e.currentTarget.id + "&autograph=" + e.currentTarget.dataset.autograph,
     });
   },
+
   //修改手机号
   bindtapPhone:function(e){
     wx.navigateTo({
@@ -127,6 +136,7 @@ Page({
       isUpdateName: this.data.isUpdateName == true ? false : true
     });
   },
+
   //修改个人信息
   personalUpdate:function(that){
     //必要参数
@@ -139,16 +149,14 @@ Page({
       reqJson: JSON.stringify({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
-        cudScriptName: 'Update',
+        cudScriptName: 'Save',
         nameSpaceMap: {
-          sys_userinfo: {
-            Query: [{
-              id: that.data.personalId,           //个人资料id
-              realname: that.data.userinfo.realname,      //名称
-              avatarUrl: that.data.userinfo.avatarUrl,    //头像
-              provinceName: that.data.userinfo.provinceName,  //地址
-            }],
-          }
+          rows: [{
+            id: that.data.personalId,           //个人资料id
+            realname: that.data.userinfo.realname,      //名称
+            avatarUrl: that.data.avatarUrl,    //头像
+            provinceName: that.data.userinfo.provinceName,  //地址
+          }],
         }
       })
     };
@@ -200,11 +208,9 @@ Page({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
         nameSpaceMap: {
-          sys_userinfo: {
-            Query: [{
-              id: personalId    //个人资料id
-            }],
-          }
+          rows: [{
+            id: personalId    //个人资料id
+          }],
         }
       })
     };
@@ -229,10 +235,9 @@ Page({
       },
       data: that.data.data,
       success: function (res) {   //请求成功
-        console.log("userinfo:");
-        console.log(res);
         that.setData({
-          userinfo: res.data.rows[0]
+          userinfo: res.data.rows[0],
+          avatarUrl: res.data.rows[0].avatarUrl
         });
       },
       fail: function (res) {      //请求失败
@@ -248,6 +253,7 @@ Page({
       complete: function () { }
     });
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -260,12 +266,6 @@ Page({
 
     //获取个人信息
     that.personalGetData(that);
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
   },
 
   /**

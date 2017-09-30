@@ -81,17 +81,15 @@ Page({
           reqJson: JSON.stringify({
             nameSpace: 'reportinfo',
             scriptName: 'Query',
-            cudScriptName: 'Update',
+            cudScriptName: 'Save',
             nameSpaceMap: {
-              reportinfo: {
-                Query: [{
-                  releaseId: that.data.releaseId,               //发布信息id
-                  personalId: that.data.personalId,             //个人id
-                  reportTypeId: that.data.reportTypeId,         //举报类型
-                  remark: that.data.remark,                     //举报内容
-                  imageArray: pathArr                           //举报图片
-                }]
-              }
+              rows: [{
+                releaseId: that.data.releaseId,               //发布信息id
+                personalId: that.data.personalId,             //个人id
+                reportTypeId: that.data.reportTypeId,         //举报类型
+                remark: that.data.remark,                     //举报内容
+                imageArray: pathArr                           //举报图片
+              }]
             }
           })
         },

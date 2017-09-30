@@ -39,7 +39,7 @@ display: block;
   flex-direction: row;
   justify-content: space-between;
   padding: 8rpx;
-  margin-left: 8rpx;
+  width: 100%;
   margin-right: 8rpx;
   background-color: #fff;
 /**  border: 1rpx solid #eaeaea;
@@ -50,6 +50,7 @@ display: block;
 .item-left{
     margin-top: 15rpx;
     display:table-cell;
+    margin-left: 7rpx;
     text-align: center; 
 }
 
@@ -73,6 +74,12 @@ display: block;
     margin-left: 10rpx;
     overflow: hidden;
 }
+
+.bujugo{
+  margin-top: 0rpx;
+  margin-left: 11rpx;
+  margin-bottom: -11rpx;
+}
 .title{
   color: #000000;
   font-family:"微软雅黑";
@@ -93,6 +100,7 @@ display: block;
 }
 .item_right{
     overflow: hidden; 
+    margin-right: 25rpx;
 }
 .time{
     color:#808080;

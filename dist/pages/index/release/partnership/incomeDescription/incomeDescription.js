@@ -33,7 +33,7 @@ Page({
   savaincomeDescription:function(){
     var incomeDescription = this.data.incomeDescription;
     //判断是否为空
-    if (incomeDescription == null) {
+    if (incomeDescription.length==0) {
       wx.showModal({
         title: '收益描述不能为空!',
         showCancel: false,

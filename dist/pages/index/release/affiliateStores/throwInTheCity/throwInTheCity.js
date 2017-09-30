@@ -207,6 +207,12 @@ Page({
   savabusinessDescription: function (e) {
     var that=this;
     var throwInTheCity=that.data.data;
+    if(throwInTheCity.length==0){
+      wx.showModal({
+        title: '请选择投放城市!',
+        showCancel: false,
+      });
+    } 
     //得到打开的页面
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];  //当前页面

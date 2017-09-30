@@ -44,11 +44,9 @@ Page({
           nameSpace: 'sys_userinfo',       //个人信息表
           scriptName: 'Query',
           nameSpaceMap: {
-            sys_userinfo: {
-              Query: [{
-                id: that.data.personalId    //个人资料id
-              }],
-            }
+            rows: [{
+              id: that.data.personalId    //个人资料id
+            }],
           }
         })
       },
@@ -121,11 +119,11 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                personalId: that.data.personalId    //发布信息id
-              }],
-            }
+            pageable: 0,
+            rows: [{
+              df:0,
+              personalId: that.data.personalId    //发布信息id
+            }],
           }
         })
       },

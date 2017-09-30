@@ -16,17 +16,17 @@ Page({
     files: [],                            //选择图片的数组，原始。包含完整的图片url，以及现在编辑数据，用于预览
     arr: [],                              //选择图片的数组，预留。不包含编辑之前的数据，用于组装
     isAgree: false,                       //同意条款
-    dailiType: ["母婴", "美妆护肤", "保健品", "服饰背包", "珠宝", "电子设备", "农副食品", "其他"],
-    dailiTypeIndex: 0,
 
     title: null,                        //标题
-    threshold: null,                    //入伙门槛
+    threshold: null,                    //出售金额 
     industryChoice: null,               //行业选择
-    productCategory: null,              //产品类目
-    productHighlights: '',            //产品亮点
-    agentCondition: '',               //代理条件
-    agencyRule: '',                     //代理规则
-    incomeDescription: '',              //收益描述
+    productHighlights: null,            //出售股份
+    geographicalPosition:null,          //地理位置
+    projectDescription: "",             //项目描述
+    incomeDescription: "",              //收益描述
+    operatingArea:null,                 //项目面积
+    transferReason:'',                  //转让原因
+    teamIntroduction: '',               //公司、团队介绍
     phone: null,                        //电话号码
     currentCity: null,                  //当前城市
     imageArray: [],                     //图片数组，原始。不包含完整url，用于储存
@@ -59,10 +59,10 @@ Page({
       });
     }
     //清除缓存
-    wx.setStorageSync("incomeDescription", '');    
-    wx.setStorageSync("agencyRule", '');            
-    wx.setStorageSync('productHighlights','');
-    wx.setStorageSync('agentCondition', '');
+    wx.setStorageSync("incomeDescription", "");     //收益描述
+    wx.setStorageSync("projectDescription", "");    //项目描述
+    wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍       
+    wx.setStorageSync('transferReason','');      //出售股份
   },
 
   //标题
@@ -79,12 +79,13 @@ Page({
     });
   },
 
-  //代理金额
+  //出售金额
   bindinputValue: function (e) {
     this.setData({
       threshold: e.detail.value
     });
   },
+
 
   //选择行业
   industryChoiceClick: function (e) {
@@ -93,31 +94,40 @@ Page({
     });
   },
 
-  //产品类目
-  setdailiType: function (e) {
+  //出售股份
+  productHighlightsvalue: function (e) {
+    // wx.navigateTo({
+    //   url: "/pages/index/release/derivativeAgent/productHighlights/productHighlights"
+    // });
     this.setData({
-      dailiTypeIndex: e.detail.value
+      productHighlights: e.detail.value
     });
   },
 
-  //产品亮点
-  productHighlightsClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/index/release/derivativeAgent/productHighlights/productHighlights"
+  //地理位置
+  geographicalPositionClick: function (e) {
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          geographicalPosition: res.address
+        })
+      }
+    })
+  },
+
+  //项目面积
+  bindPingfangValue: function (e) {
+    this.setData({
+      operatingArea: e.detail.value
     });
   },
 
-  //代理条件
-  agentConditionClick: function (e) {
+  //项目描述
+  projectDescriptionClick: function (e) {
     wx.navigateTo({
-      url: "/pages/index/release/derivativeAgent/agentCondition/agentCondition"
-    });
-  },
-
-  //代理规则
-  agencyRuleClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/index/release/derivativeAgent/agencyRule/agencyRule"
+      url: "/pages/index/release/partnership/projectDescription/projectDescription"
     });
   },
 
@@ -128,6 +138,20 @@ Page({
     });
   },
 
+  //转让原因
+  transferReasonClick: function () {
+    wx.navigateTo({
+      url: "/pages/index/release/businessTransfer/transferReason/transferReason",
+    });
+  },
+
+  //团队/公司介绍
+  introduceClick: function (e) {
+    wx.navigateTo({
+      url: '/pages/index/release/partnership/introduce/introduce',
+    });
+  },
+  
   //阅读并同意,相关条约
   bindAgreeChange: function (e) {
     this.setData({
@@ -148,7 +172,7 @@ Page({
     var that = this;
     //标题
     var title = e.detail.value.title;
-    if (title == "" || title == null || title.length == 0) {
+    if (app.checkInput(title)) {
       that.showModal("标题不能为空!");
       return;
     }
@@ -159,49 +183,63 @@ Page({
 
     //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
     var threshold = e.detail.value.threshold;
-    if (threshold == "" || threshold == null) {
-      that.showModal("代理金额不能为空!");
+    if (app.checkInput(threshold)) {
+      that.showModal("出售金额不能为空!");
       return;
-    } else {
-      var threshold = that.data.threshold.substring(0, that.data.threshold.indexOf('万'));
-      wx.setStorageSync("threshold", threshold);
     }
-
-
     //行业选择
     var industryChoice = e.detail.value.industryChoice;
-    if (industryChoice == "" || industryChoice == null) {
+    if (app.checkInput(industryChoice)) {
       that.showModal("行业选择不能为空!");
       return;
     }
-    //产品类目
-    var productCategory = e.detail.value.productCategory;
-    if (productCategory == "" || productCategory == null) {
-      that.showModal("产品类目不能为空!");
-      return;
-    }
-    //产品亮点
+
+    //出售股份
     var productHighlights = e.detail.value.productHighlights;
-    if (productHighlights == "" || productHighlights == null) {
-      that.showModal("产品亮点不能为空!");
+    if (app.checkInput(productHighlights)) {
+      that.showModal("出售股份不能为空!");
       return;
     }
-    //代理条件
-    var agentCondition = e.detail.value.agentCondition;
-    if (agentCondition.length == 0 || agentCondition == null) {
-      that.showModal("代理条件不能为空！");
+
+    //地理位置
+    var geographicalPosition = e.detail.value.geographicalPosition;
+    if (app.checkInput(geographicalPosition)) {
+      that.showModal("地理位置不能为空!");
       return;
     }
-    //代理规则
-    var agencyRule = e.detail.value.agencyRule;
-    if (agencyRule.length == 0 || agencyRule == null) {
-      that.showModal("代理规则不能为空!");
+    
+    //项目面积
+    var operatingArea = e.detail.value.operatingArea;
+    if (app.checkInput(operatingArea)) {
+      that.showModal("项目面积不能为空!");
       return;
     }
+
+    //项目描述
+    var projectDescription = e.detail.value.projectDescription;
+    if (app.checkInput(projectDescription)) {
+      that.showModal("项目描述不能为空!");
+      return;
+    }
+
     //收益描述
     var incomeDescription = e.detail.value.incomeDescription;
-    if (incomeDescription == "" || incomeDescription == null) {
+    if (app.checkInput(incomeDescription)) {
       that.showModal("收益描述不能为空!");
+      return;
+    } 
+
+    //转让原因
+    var transferReason = e.detail.value.transferReason;
+    if (app.checkInput(transferReason)) {
+      that.showModal("转让原因不能为空!");
+      return;
+    }
+    
+    //公司、团队介绍
+    var teamIntroduction = e.detail.value.teamIntroduction;
+    if (app.checkInput(teamIntroduction)) {
+      that.showModal("公司/团队介绍不能为空!");
       return;
     }
 
@@ -329,27 +367,27 @@ Page({
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
-          cudScriptName: 'Update',
+          cudScriptName: 'Save',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                df: that.data.df,                                   //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
-                id: that.data.id,                                   //发布信息id,如果为空添加，不为空更新
-                releaseType: '微商代理',                              //发布类型
-                personalId: wx.getStorageSync("personalId"),        //个人资料id
-                title: that.data.title,                             //标题
-                threshold: that.data.threshold,                     //入伙门槛
-                industryChoice: that.data.industryChoice,           //行业选择
-                productCategory: that.data.productCategory,         //产品类目
-                productHighlights: that.data.productHighlights,     //产品亮点
-                agentCondition: that.data.agentCondition,           //代理条件
-                agencyRule: wx.getStorageSync("agencyRule"),                   //代理规则
-                incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
-                phone: that.data.phone,                                        //电话号码
-                currentCity: wx.getStorageSync("currentCity"),                 //当前城市
-                imageArray: pathArr                                            //图片
-              }]
-            }
+            rows: [{
+              df: that.data.df,                                   //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+              id: that.data.id,                                   //发布信息id,如果为空添加，不为空更新
+              releaseType: '微商代理',                              //发布类型
+              personalId: wx.getStorageSync("personalId"),        //个人资料id
+              title: that.data.title,                             //标题
+              threshold: that.data.threshold,                     //入伙门槛
+              industryChoice: that.data.industryChoice,           //行业选择
+              productHighlights: that.data.productHighlights,     //出售股份
+              geographicalPosition: that.data.geographicalPosition,          //地理位置
+              projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+              operatingArea: that.data.operatingArea,                        //项目面积
+              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              transferReason: wx.getStorageSync('transferReason'),           //转让原因
+              teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
+              phone: that.data.phone,                                        //电话号码
+              currentCity: wx.getStorageSync("currentCity"),                 //当前城市
+              imageArray: pathArr                                            //图片
+            }]
           }
         })
       },
@@ -483,12 +521,10 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                id: id,                        //发布信息id
-                df: df,
-              }]
-            }
+            rows: [{
+              id: id,                        //发布信息id
+              df: df,
+            }]
           }
         })
       },
@@ -504,12 +540,15 @@ Page({
           }
           img = info.imageArray.split(",");
         }
+        //项目描述
+        if (info.projectDescription == null) info.projectDescription = '';
+        else wx.setStorageSync('projectDescription', info.projectDescription);
         //收益描述
         if (info.incomeDescription == null) info.incomeDescription = '';
         else wx.setStorageSync('incomeDescription', info.incomeDescription);
-        //代理规则
-        if (info.agencyRule == null) info.agencyRule = '';
-        else wx.setStorageSync('agencyRule', info.agencyRule);
+        //团队介绍
+        if (info.teamIntroduction == null) info.teamIntroduction = '';
+        else wx.setStorageSync('teamIntroduction', info.teamIntroduction);
 
         //设置到this
         that.setData({
@@ -517,11 +556,13 @@ Page({
           title: info.title,                             //标题
           threshold: info.threshold,                     //入伙门槛
           industryChoice: info.industryChoice,           //行业选择
-          productCategory: info.productCategory,         //产品类目
-          productHighlights: info.productHighlights,     //产品亮点
-          agentCondition: info.agentCondition,           //代理条件
-          agencyRule: info.agencyRule,                   //代理规则
+          productHighlights: info.productHighlights,     //出售股份
+          geographicalPosition: info.geographicalPosition,//地理位置
+          projectDescription: info.projectDescription,   //项目描述
+          operatingArea: info.operatingArea,             //项目面积
           incomeDescription: info.incomeDescription,     //收益描述
+          transferReason: info.transferReason,           //转让原因
+          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity, //当前城市
           imageArray: img,                             //图片
@@ -541,10 +582,10 @@ Page({
     //直接从缓存里面取
     var that = this;
     that.setData({
-      incomeDescription: wx.getStorageSync("incomeDescription"),      
-      agentCondition: wx.getStorageSync("agentCondition"),
-      agencyRule: wx.getStorageSync('agencyRule'),
-      productHighlights: wx.getStorageSync('productHighlights'),
+      projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
+      incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+      transferReason: wx.getStorageSync('transferReason'),            //转让原因
+      teamIntroduction: wx.getStorageSync('teamIntroduction'),        //公司、团队介绍 
     });
   },
 })

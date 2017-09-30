@@ -33,7 +33,7 @@ Page({
   savaskillsRequired: function () {
     var resourceRequirements = this.data.resourceRequirements;
     //判断是否为空
-    if (resourceRequirements == '') {
+    if (resourceRequirements.length==0) {
       wx.showModal({
         title: '内容不能为空!',
         showCancel: false,

@@ -1,7 +1,7 @@
 <!--/**  
  *   作者:  lingfe 
  *   时间:  2017-7-11
- *   描述:  发布_微商代理_产品亮点页面
+ *   描述:  发布_微商代理_出售股份页面
  * 
  * */-->
 
@@ -9,7 +9,7 @@
   <!-- 标题与内容   start-->
   <view class="report">
     <view class="title">
-      <text style="color:red;">*</text>产品亮点</view>
+      <text style="color:red;">*</text>出售股份</view>
     <view class="info">
       <textarea auto-focus="true" 
       name="productHighlights" 

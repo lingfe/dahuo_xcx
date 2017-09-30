@@ -1,5 +1,47 @@
-<view  stytle=" overflow-x: hidden; overflow-y: auto;">
-<view class="serach">
-<view class="serach_view_show" > 搜索搭伙人 </view>
-</view>
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-9-25
+ *   描述:  通知_搭伙小秘书页面
+ * 
+ * */-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <!-- start tab切换 -->
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" 
+        style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+        <!-- end tab切换 -->
+      </view>
+
+      <!-- start 内容-->
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view wx:key="{{index}}" wx:for="{{allContentList}}">
+            <view class="containerBox">
+              <view class="imgtox"><image src="/assets/images/xms.jpg" class="image_left" /></view>
+              <view class="textBox fl">
+                <view class='triangle'></view>
+                <text>{{item.value}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <!-- 确定   start-->
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary"  bindtap="bindtapfeedback">我要反馈</button>
+          </view>
+          <!-- 确定   end-->
+        </view>
+      </view>
+      <!-- end 内容 -->
+    </view>
+  </view>
 </view>

@@ -35,7 +35,7 @@ Page({
  */
   onUnload: function () {
     var that = this;
-    var dad=that.data.title.length<=0?false:true;
+    var dad=that.data.title==null?false:true;
     if(dad==true && that.data.dad==false){
       that.setData({df:2,dad:dad});
       //是否加入档案袋
@@ -52,6 +52,10 @@ Page({
         }
       });
     }
+
+    //清除缓存
+    wx.setStorageSync("projectDescription", "");    //项目描述
+    wx.setStorageSync("incomeDescription", "");     //收益描述
   },
 
   //标题
@@ -117,7 +121,7 @@ Page({
 
     //标题
     var title = e.detail.value.title;
-    if (title == "" || title == null || title.length == 0) {
+    if (app.checkInput(title)) {
       that.showModal("标题不能为空!");
       return;
     }
@@ -128,30 +132,27 @@ Page({
 
     //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
     var threshold = e.detail.value.threshold;
-    if (threshold == "" || threshold == null) {
+    if (app.checkInput(threshold)) {
       that.showModal("入伙门槛不能为空!");
       return;
-    }else{
-      var threshold =that.data.threshold.substring(0, that.data.threshold.indexOf('万'));
-      wx.setStorageSync("threshold", threshold);
     }
 
 
     //行业选择
     var industryChoice = e.detail.value.industryChoice;
-    if (industryChoice == "" || industryChoice == null) {
+    if (app.checkInput(industryChoice)) {
       that.showModal("行业选择不能为空!");
       return;
     }
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
-    if (projectDescription == "" || projectDescription == null) {
+    if (app.checkInput(projectDescription)) {
       that.showModal("项目描述不能为空!");
       return;
     }
     //收益描述
     var incomeDescription = e.detail.value.incomeDescription;
-    if (incomeDescription == "" || incomeDescription == null) {
+    if (app.checkInput(incomeDescription)) {
       that.showModal("收益描述不能为空!");
       return;
     }
@@ -265,24 +266,22 @@ Page({
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
-          cudScriptName: 'Update',
+          cudScriptName: 'Save',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                id: that.data.id,                                              //发布信息id
-                df: that.data.df,                                              //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
-                releaseType: '其他',                                           //发布类型
-                personalId: wx.getStorageSync("personalId"),                   //个人资料id
-                title: that.data.title,                                        //标题
-                threshold: wx.getStorageSync("threshold"),                     //入伙门槛
-                industryChoice: that.data.industryChoice,                      //行业选择
-                projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
-                incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
-                phone: that.data.phone,                                        //电话号码
-                currentCity: wx.getStorageSync("currentCity"),                 //当前城市
-                imageArray: pathArr                                            //图片数组
-              }]
-            }
+            rows: [{
+              id: that.data.id,                                              //发布信息id
+              df: that.data.df,                                              //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+              releaseType: '其他',                                           //发布类型
+              personalId: wx.getStorageSync("personalId"),                   //个人资料id
+              title: that.data.title,                                        //标题
+              threshold: that.data.threshold,                                //入伙门槛
+              industryChoice: that.data.industryChoice,                      //行业选择
+              projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
+              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              phone: that.data.phone,                                        //电话号码
+              currentCity: wx.getStorageSync("currentCity"),                 //当前城市
+              imageArray: pathArr                                            //图片数组
+            }]
           }
         })
       },
@@ -417,12 +416,10 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                id: id,                        //发布信息id
-                df: df,
-              }]
-            }
+            rows: [{
+              id: id,                        //发布信息id
+              df: df,
+            }]
           }
         })
       },
@@ -440,7 +437,9 @@ Page({
         }
 
         if (info.projectDescription == null) info.projectDescription='';
+        else wx.setStorageSync('projectDescription', info.projectDescription);
         if (info.incomeDescription == null) info.incomeDescription='';
+        else wx.setStorageSync('incomeDescription', info.incomeDescription);
 
         //设置到this
         that.setData({

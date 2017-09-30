@@ -34,7 +34,7 @@ Page({
   savaintroduce: function () {
     var teamIntroduction = this.data.teamIntroduction;
     //判断是否为空
-    if (teamIntroduction == null) {
+    if (teamIntroduction.length==0) {
       wx.showModal({
         title: '内容不能为空!',
         showCancel: false,

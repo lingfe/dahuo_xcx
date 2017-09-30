@@ -152,7 +152,7 @@ Page({
     var that=this;
     //标题
     var title = e.detail.value.title;
-    if (title == "" || title == null || title.length == 0) {
+    if (app.checkInput(title)) {
       that.showModal("标题不能为空!");
       return;
     }
@@ -163,7 +163,7 @@ Page({
 
     //入伙门槛，转让门槛,加盟金额,购入门槛，投资金额，代理金额,需要金额
     var threshold = e.detail.value.threshold;
-    if (threshold == "" || threshold == null) {
+    if (app.checkInput(threshold)) {
       that.showModal("转让门槛不能为空!");
       return;
     } else {
@@ -174,43 +174,43 @@ Page({
 
     //每月租金
     var monthlyRent = e.detail.value.monthlyRent;
-    if (monthlyRent == "" || monthlyRent == null) {
+    if (app.checkInput(monthlyRent)) {
       that.showModal("每月租金不能为空!");
       return;
     }
     //店铺面积 
     var operatingArea = e.detail.value.operatingArea;
-    if (operatingArea == "" || operatingArea == null) {
+    if (app.checkInput(operatingArea)) {
       that.showModal("店铺面积不能为空!");
       return;
     }
     //发布人身份
     var publisherIdentity = e.detail.value.publisherIdentity;
-    if (publisherIdentity == "" || publisherIdentity == null) {
+    if (app.checkInput(publisherIdentity)) {
       that.showModal("请选择发布人身份!");
       return;
     }
     //行业选择
     var industryChoice = e.detail.value.industryChoice;
-    if (industryChoice == "" || industryChoice == null) {
+    if (app.checkInput(industryChoice)) {
       that.showModal("行业选择不能为空!");
       return;
     }
     //地理位置
     var geographicalPosition = e.detail.value.geographicalPosition;
-    if (geographicalPosition == "" || geographicalPosition == null) {
+    if (app.checkInput(geographicalPosition)) {
       that.showModal("地理位置不能为空!");
       return;
     }
     //营业描述
     var businessDescription = e.detail.value.businessDescription;
-    if (businessDescription == "" || businessDescription == null) {
+    if (app.checkInput(businessDescription)) {
       that.showModal("营业描述不能为空!");
       return;
     }
     //转让原因
     var transferReason = e.detail.value.transferReason;
-    if (transferReason == "" || transferReason == null) {
+    if (app.checkInput(transferReason)) {
       that.showModal("转让原因不能为空!");
       return;
     }
@@ -326,28 +326,26 @@ Page({
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
-          cudScriptName: 'Update',
+          cudScriptName: 'Save',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                df: that.data.df,                                   //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
-                id: that.data.id,                                   //发布信息id,如果为空添加，不为空更新
-                releaseType: '生意转让',                             //发布类型
-                personalId: wx.getStorageSync("personalId"),        //个人资料id
-                title: that.data.title,                             //标题
-                threshold: that.data.threshold,                     //入伙门槛
-                monthlyRent: that.data.monthlyRent,                 //每月租金
-                operatingArea: that.data.operatingArea,             //店铺面积
-                publisherIdentity: that.data.publisherIdentity,     //发布人身份
-                industryChoice: that.data.industryChoice,           //行业选择
-                geographicalPosition: that.data.geographicalPosition,          //地理位置
-                businessDescription: wx.getStorageSync("businessDescription"), //营业描述
-                transferReason: wx.getStorageSync("transferReason"),           //转让原因
-                phone: that.data.phone,                                        //电话号码
-                currentCity: wx.getStorageSync("currentCity"),                 //当前城市
-                imageArray: pathArr                                            //图片
-              }]
-            }
+            rows: [{
+              df: that.data.df,                                   //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+              id: that.data.id,                                   //发布信息id,如果为空添加，不为空更新
+              releaseType: '生意转让',                             //发布类型
+              personalId: wx.getStorageSync("personalId"),        //个人资料id
+              title: that.data.title,                             //标题
+              threshold: that.data.threshold,                     //入伙门槛
+              monthlyRent: that.data.monthlyRent,                 //每月租金
+              operatingArea: that.data.operatingArea,             //店铺面积
+              publisherIdentity: that.data.publisherIdentity,     //发布人身份
+              industryChoice: that.data.industryChoice,           //行业选择
+              geographicalPosition: that.data.geographicalPosition,          //地理位置
+              businessDescription: wx.getStorageSync("businessDescription"), //营业描述
+              transferReason: wx.getStorageSync("transferReason"),           //转让原因
+              phone: that.data.phone,                                        //电话号码
+              currentCity: wx.getStorageSync("currentCity"),                 //当前城市
+              imageArray: pathArr                                            //图片
+            }]
           }
         })
       },
@@ -481,12 +479,10 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
-                id: id,                        //发布信息id
-                df: df,
-              }]
-            }
+            rows: [{
+              id: id,                        //发布信息id
+              df: df,
+            }]
           }
         })
       },

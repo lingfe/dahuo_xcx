@@ -41,15 +41,15 @@
                             <!-- 项目描述 -->
                             {{releaseInfo.projectDescription}}
                           </view>
+                          <view wx:elif="{{releaseInfo.businessDescription != null }}">
+                            <span style="color: #000000;font-size: 26rpx;">经营描述:</span> 
+                            <!-- 经营描述 -->
+                            {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
+                          </view>
                           <view wx:elif="{{releaseInfo.incomeDescription != null }}">
                             <span style="color: #000000;font-size: 26rpx;">收益描述:</span> 
                             <!-- 收益描述 -->
                             {{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}
-                          </view>
-                          <view wx:if="{{releaseInfo.businessDescription != null }}">
-                            <span style="color: #000000;font-size: 26rpx;">营业描述:</span> 
-                            <!-- 营业描述 -->
-                            {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
                           </view>
                         </view>
                         <!-- 查看全文 start -->
@@ -116,11 +116,32 @@
                                     <view class="data_info">{{releaseInfo.threshold}}万</view>
                                 </view>
                             </view>
+                            <!-- 出售股份 -->
+                            <view class="prices" wx:if="{{releaseInfo.shareDivision !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">出售股份:</view>
+                                    <view class="data_info">{{releaseInfo.shareDivision}} %</view>
+                                </view>
+                            </view>
                             <!-- 类型选择 -->
                             <view class="prices" >
                                 <view class="prices_info">
                                     <view class="data_title">类型选择:</view>
                                     <view class="data_info">{{releaseInfo.releaseType}}</view>
+                                </view>
+                            </view>
+                            <!-- 经营面积 -->
+                            <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">经营面积:</view>
+                                    <view class="data_info">{{releaseInfo.operatingArea}} 平方</view>
+                                </view>
+                            </view>
+                            <!-- 每月租金 -->
+                            <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">每月租金:</view>
+                                    <view class="data_info">{{releaseInfo.monthlyRent}} 元/月</view>
                                 </view>
                             </view>
                             <!-- 行业选择 -->
@@ -130,10 +151,17 @@
                                     <view class="data_info">{{releaseInfo.industryChoice}}</view>
                                 </view>
                             </view>
-                            <!--资金布局 -->
+                            <!-- 经营描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">经营描述:</view>
+                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
+                                </view>
+                            </view>
+                            <!--资金规划 -->
                             <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
                                 <view class="prices_info">
-                                  <view class="data_title">资金布局</view>
+                                  <view class="data_title">资金规划</view>
                                   <view class="data_info">{{releaseInfo.fundDistribution}}</view>
                                 </view>
                             </view>
@@ -165,27 +193,6 @@
                                     <view class="data_info">{{releaseInfo.geographicalPosition}} </view>
                                 </view>
                             </view>
-                            <!-- 经营面积 -->
-                            <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">经营面积:</view>
-                                    <view class="data_info">{{releaseInfo.operatingArea}} 平方</view>
-                                </view>
-                            </view>
-                            <!-- 每月租金 -->
-                            <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">每月租金:</view>
-                                    <view class="data_info">{{releaseInfo.monthlyRent}} 元/月</view>
-                                </view>
-                            </view>
-                            <!-- 经营描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">经营描述:</view>
-                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
-                                </view>
-                            </view>
                             <!-- 转让原因 -->
                             <view class="prices" wx:if="{{releaseInfo.transferReason !=null}}">
                                 <view class="prices_info">
@@ -212,13 +219,6 @@
                                 <view class="prices_info">
                                     <view class="data_title">技能/资源要求:</view>
                                     <view class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </view>
-                                </view>
-                            </view>
-                            <!-- 股份划分 -->
-                            <view class="prices" wx:if="{{releaseInfo.shareDivision !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">股权配出:</view>
-                                    <view class="data_info">{{releaseInfo.shareDivision}} </view>
                                 </view>
                             </view>
                             <!-- 产品种类 -->
@@ -273,8 +273,8 @@
                             <!-- 公司/团队介绍 -->
                             <view class="prices" wx:if="{{releaseInfo.teamIntroduction !=null}}">
                                 <view class="prices_info">
-                                    <view class="data_title">公司/团队介绍:</view>
-                                    <view class="data_info"  style="width: auto;">{{releaseInfo.teamIntroduction}} </view>
+                                    <view class="data_title">团队介绍:</view>
+                                    <view class="data_info">{{releaseInfo.teamIntroduction}} </view>
                                 </view>
                             </view>
                             <!-- 项目详细信息  end-->
@@ -289,7 +289,7 @@
                             <!-- 图片  end-->
 
                             <!-- 确定   start-->
-                            <view class="weui-btn-area">
+                            <view class="weui-btn-area" wx:if="{{userAn}}">
                                 <view class="view_phon" bindtap="bindtapPhone">电话</view>
                                 <view class="view_1">|</view>
                                 <view class="view_info" bindtap="bindtagFasho">私信</view>

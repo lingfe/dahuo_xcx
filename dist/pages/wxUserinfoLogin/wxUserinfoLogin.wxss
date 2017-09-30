@@ -12,6 +12,19 @@
   flex-direction: column;
   align-items: center;
 }
+/*标题字体*/
+ .title{
+  font-size: 26rpx;
+  font-family:"黑体";
+}
+
+/*用户使用规则*/
+.weui-agree {
+  display:block;
+  padding:.5em 15px;
+  font-size:13px;
+  margin-left: 165rpx;
+}
 
 .userinfo-avatar {
   width: 128rpx;

@@ -4,13 +4,27 @@
  *   描述:  微信登录
  * 
  * */-->
- <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
+<view class="container">
+  <view bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     <text class="userinfo-motto">{{text}}</text>
   </view>
+  <!-- 相关条款  end -->
+  <checkbox-group bindchange="bindAgreeChange" name="isAgree">
+    <label class="weui-agree" for="weuiAgree">
+      <view class="weui-agree__text title">
+        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+        <view class="weui-agree__checkbox-icon">
+          <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+        </view>
+        阅读并同意
+        <navigator url="/pages/dahuo/useProtocol/useProtocol" class="weui-agree__link">《用户使用规则》</navigator>
+      </view>
+    </label>
+  </checkbox-group>
+  <!-- 相关条款  end -->
   <view class="usermotto">
-    <button style="background-color:#14BAC8;border:none;width:239rpx;"  type="primary" bindtap="bindtapLogin">确定登录</button>
+    <button style="background-color:#14BAC8;border:none;width:239rpx;" type="primary" bindtap="bindtapLogin">确定登录</button>
   </view>
 </view>

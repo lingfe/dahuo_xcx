@@ -1,7 +1,7 @@
 /**  
  *   作者:  lingfe 
  *   时间:  2017-7-11
- *   描述:  发布_微商代理_产品亮点页面
+ *   描述:  发布_微商代理_出售股份页面
  * 
  * */
 Page({
@@ -29,13 +29,13 @@ Page({
     });
   },
 
-  //保存产品亮点
+  //保存出售股份
   savaproductHighlights: function (e) {
     var productHighlights = this.data.productHighlights;
     //判断是否为空
-    if (productHighlights == null) {
+    if (productHighlights.length==0) {
       wx.showModal({
-        title: '产品亮点不能为空!',
+        title: '出售股份不能为空!',
         showCancel: false,
       });
     } else {

@@ -93,18 +93,19 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {
+        console.log(res)
         var latitude = res.latitude;
         var longitude = res.longitude;
         server.getJSON('/waimai/api/location.php', {
           latitude: latitude,
           longitude: longitude
-        }, function (res2) {
-          if (res2.data.status != -1) {
-            var city = res2.data.result.ad_info.city;
-            if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
-            else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
-
-            that.setData({ addressInfo: city });
+        }, function (res) {
+          console.log(res)
+          if (res.data.status != -1) {
+             var city = res.data.result.ad_info.city;
+             if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
+             else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
+             that.setData({ addressInfo: city });
           } else {
             that.setData({ addressInfo: '定位失败' });
           }
@@ -112,35 +113,29 @@ Page({
       }
     });
 
-    ////从缓存里去地址数据
+
+    //从缓存里去地址数据
     var address = wx.getStorageSync("address");
     if (address != "") {
       that.setData({ address: address });
       return;
     }
-
-    //必要参数
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-    var cookie = wx.getStorageSync("cookie");
-
-    //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
+    //调用获取地址
     getAdressData(that);
+    //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
     function getAdressData(that) {
       wx.request({
         url: __config.basePath_sys + "api/exe/getCityList",
         method: "POST",
-        header: { cookie: cookie, "Content-Type": "application/x-www-form-urlencoded" },
-        data: { timeStamp: time, token: token },
+        header: { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" },
+        data: { timeStamp: wx.getStorageSync("time"), token: wx.getStorageSync("token") },
         success: function (res) {   //请求成功
           //得到地址数据
-          var address = res.data;
+          var address = res.data.rows;
           //放进本地缓存
           wx.setStorageSync("address", address);
           that.setData({ address: address });
-        },
-        fail: function (res) { },
-        complete: function () { }
+        }
       });
     }
   }

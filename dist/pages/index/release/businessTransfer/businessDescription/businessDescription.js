@@ -34,7 +34,7 @@ Page({
   savabusinessDescription: function (e) {
     var businessDescription = this.data.businessDescription;
     //判断是否为空
-    if (businessDescription == null) {
+    if (businessDescription.length==0) {
       wx.showModal({
         title: '营业描述不能为空！',
         showCancel: false,

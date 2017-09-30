@@ -1,0 +1,27 @@
+/**  作者:  lingfe 
+ *   时间:  2017-9-27
+ *   描述:  搭伙信息发布规则
+ * 
+ * */
+.title_top{
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}
+
+.neiro{
+  width: 100%;
+  height: auto;
+  margin-top: 30rpx;
+}
+.neiro_fei{
+  font-size: 25rpx;
+  margin-top: 20rpx;
+  padding-left: 15rpx;
+  line-height: 50rpx;
+}
+
+.neiro_fei_title{
+  width: 100%;
+}

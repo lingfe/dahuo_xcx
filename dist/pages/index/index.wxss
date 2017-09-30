@@ -98,6 +98,7 @@
   background-color: #fff;
   position: fixed;
   top:0%;
+  z-index: 5;
 }
 .top_left {
   line-height: 80rpx;
@@ -138,13 +139,13 @@
 }
 .top_right {
   line-height: 80rpx;
-  margin-top: 0.72em;
   float:right;
+  font-size: 26rpx;
   margin-right: 3%;
 }
 .top_right image {
-  width:38rpx;
-  height:30rpx;
+  width:40rpx;
+  height:32rpx;
   float: left;
 }
 
@@ -217,8 +218,8 @@
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis; /**文字隐藏后添加省略号*/
   white-space: nowrap; /**强制不换行*/
-
 }
+
 .info{
   margin-right: 15rpx;
   color: #808080;
@@ -226,6 +227,7 @@
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis;/**文字隐藏后添加省略号*/
 }
+
 .data_biaoqian_view{
   margin-right: 20rpx;
   font-size: 22rpx;
@@ -251,7 +253,7 @@
   background-color: #fff;
   color: #666;
   font-size: 26rpx;
-  border-top: 1rpx solid #F0F0F0;
+  border-top: 1rpx solid #E4E4E4;
   float: left;
   height: auto;
   max-height: 36px;
@@ -290,6 +292,7 @@
   height: auto;
   position:fixed;
   top: -1rpx;
+  z-index: 10;
   background-color:rgba(0, 0, 0, 0.5);
 }
 .scressClose{
@@ -305,13 +308,13 @@
   width: 600rpx;
   background-color: #fff;
   margin-left: 200rpx;
-  z-index: 11;
+  z-index: 1001;
   float: left;
 }
 
 .www{
   width:156rpx;
-  height: 1018rpx;
+  height: 1200rpx;
   background-color: #fff;
   border-right:1px solid #E4E4E4;
   float: left;
@@ -404,6 +407,8 @@
 .flaot_right{
   margin-right: 30rpx;
   float: right;
+  font-size: 16rpx;
+  color: #A5A5A5;
 }
 
 .delete{
@@ -474,18 +479,38 @@
   color: #5E7E88;
 }
 
-
-
 /* 沟沟 */
 .img_wh{
   width:20px;
   height:20px;
 }
 
-/* 变行 
-.line{
-  width:100%;
-  height:58px;
-  float: left;
+/*小红点*/
+.mark{
+    position:absolute;
+    margin-left:35rpx;
+    margin-top: -6rpx;
+    background-color:#F74c31; 
+    width: 15rpx;
+    height: 15rpx;
+    border-radius:20rpx; 
+    float: right;
+    display:table-cell;
 }
-*/
+
+/* 发布信息置顶精品显示 */
+.img_jian{
+  position: absolute;
+  margin-left:-29rpx;
+  width:63rpx;
+  height:63rpx;
+
+}
+
+
+/*非搭伙类型*/
+.type_text{
+  position: absolute;
+  margin-top:15rpx;
+  margin-left:-89rpx;
+}

@@ -1,19 +1,119 @@
-.serach{
-    margin-top: 15rpx;
-    margin-left: 25rpx;
-    margin-right: 25rpx;
-    padding-left: 25rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-9-25
+ *   描述:  通知_搭伙小秘书页面
+ * 
+ * */
+
+page, .page, .page__bd {
+  height: 100%;
+  background-color: #E8EFEF;
+}
+
+.page__bd {
+  padding-bottom: 0;
+}
+
+.weui-tab__content {
+  text-align: center;
+}
+.weui-navbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: absolute;
+  z-index: 500;
+  background-color: #fff;
+  top: 0;
+  width: 100%;
+  border-bottom: 1rpx solid #fff;
+}
+
+
+/*三角*/
+.triangle{
+  position: absolute;
+  margin-top:23rpx;
+  margin-left:-32rpx;
+  width:0;
+  height:0;
+  border-top:5px solid transparent;
+  border-right:12px solid #fff;
+  border-bottom:5px solid transparent;
 
 }
-.serach_view_show{
-    display: block;
-    color: #808080;
-    margin-top: 15rpx;
-    margin-left: 25rpx;
-    margin-right: 25rpx;
-    padding-left: 275rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
+
+/*系统消息*/
+.containerBox {
+  width: 100%;
+  display: flex;
+  margin-top: 30rpx;
+  padding-bottom: 56px;
+}
+
+.textBox {
+  display: block;
+  text-align: left;
+  max-width: 82%;
+  border-radius: 5px;
+  font-size: 13px;
+  width: 500rpx;
+  height: auto;
+  margin-left:  48rpx;
+  padding: 18rpx;
+}
+
+.fl {
+  float: left;
+  background: #fff;
+}
+.imgtox{
+  width: 100rpx;
+  height: auto;
+  float: left;
+}
+.image_left {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 21rpx;
+  border-radius: 50px;
+  float: left;
+}
+
+.text_left {
+  margin-left: 14rpx;
+}
+
+
+
+/*我要反馈*/
+.weui-btn-area {
+  margin:1.17647059em 15px .3em;
+  padding-bottom: 80rpx;
+}
+
+button[type="primary"] {
+  color:#FFFFFF;
+  background-color:#14BAC8;
+  border-radius: 8px;
+}
+
+.button-hover[type="primary"] {
+  background-color:#14BAC8;
+}
+button::after {
+content:" ";
+width:200%;
+height:200%;
+position:absolute;
+top:0;
+left:0;
+border:1px solid  #E8EFEF;
+-webkit-transform:scale(0.5);
+transform:scale(0.5);
+-webkit-transform-origin:0 0;
+transform-origin:0 0;
+box-sizing:border-box;
+border-radius:10px;
+
 }

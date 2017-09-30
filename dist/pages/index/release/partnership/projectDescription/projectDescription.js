@@ -33,7 +33,7 @@ Page({
   savaprojectDescription: function (e) {
     var projectDescription = this.data.projectDescription;
     //判断是否为空
-    if (projectDescription == null) {
+    if (projectDescription.length==0) {
       wx.showModal({
         title: '项目描述不能为空！',
         showCancel: false,
