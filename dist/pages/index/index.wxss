@@ -514,3 +514,8 @@
   margin-top:15rpx;
   margin-left:-89rpx;
 }
+
+/*行业选择后*/
+.hui{
+  color: #aaa;
+}

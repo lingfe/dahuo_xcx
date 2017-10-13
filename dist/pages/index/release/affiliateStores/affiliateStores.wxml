@@ -39,9 +39,8 @@
           <view class="weui-cell__bd">
             <view class="weui-label title">行业选择</view>
           </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access title_color">
-            {{industryChoice == null ? '请选择' : industryChoice}}
-            <input type="text" hidden="true" name="industryChoice" value="{{industryChoice}}" />
+          <view class="weui-cell__ft weui-cell__ft_in-access title">
+            <input type="text" name="industryChoice" value="{{industryChoice}}" placeholder='请选择' />
           </view>
         </view>
         <!-- 输入行业选择    end -->

@@ -86,6 +86,11 @@ Page({
         })
       },
       success: function (res) {   //请求成功
+        wx.showToast({
+          title: "刷新完成!",
+          icon: 'ok',
+          duration: 1000,
+        });
         //调用我的发布
         that.requestDataRelease(that);
       },
@@ -106,7 +111,7 @@ Page({
   //下架
   bindtapOffTheShelf: function (e) {
     var that = this;
-    if (e.currentTarget.dataset.df!=0){
+    if (e.currentTarget.dataset.df != 0 || e.currentTarget.dataset.df!=5){
       //提示
       wx.showToast({
         title: "不允许下架！",
@@ -194,7 +199,7 @@ Page({
     var id=e.currentTarget.id;
     var name = e.currentTarget.dataset.name;
     var df = e.currentTarget.dataset.df;
-    if (df != 0) {
+    if ("025".indexOf(df)==-1) {
       //提示
       wx.showToast({
         title: "不允许编辑！",

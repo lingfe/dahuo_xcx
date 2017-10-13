@@ -38,7 +38,6 @@ Page({
     else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
 
     prevPage.setData({
-      city: city,
       "userinfo.provinceName": city,                             //个人地址
     });
 

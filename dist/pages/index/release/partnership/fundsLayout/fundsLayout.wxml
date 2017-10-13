@@ -16,7 +16,7 @@
       name="fundDistribution" 
       value="{{fundDistribution}}" 
       bindinput="dataChange" 
-      placeholder="请输入.." 
+      placeholder="请描述筹集后的资金如何使用，例如XXX用于装修、XXX用于采购XX...." 
       maxlength="801" class="text" />
     </view>
     <view class="title">

@@ -28,15 +28,17 @@ Page({
     length:null,                   //信息描述     
     userAn:true,                 //是否是自己的项目    
   },
+
   //预览
   previewImage: function (e) {
+    var that=this;
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.imgPass // 需要预览的图片http链接列表
-    })
+      urls: that.data.imgPass // 需要预览的图片http链接列表
+    });
   },
 
-  //长按提示删除
+  //长按提示删除评论
   bindlongtapURL: function (e) {
     var that = this;
     var id = e.currentTarget.id;
@@ -45,7 +47,7 @@ Page({
     var personalId = wx.getStorageSync('personalId');//用户id
 
     wx.showModal({
-      title: '删除通知',
+      title: '删除评论',
       content: '是否删除？',
       confirmText: "确定",
       cancelText: "取消",

@@ -1,7 +1,7 @@
 /**  
  *   作者:  lingfe 
  *   时间:  2017-7-11
- *   描述:  发布_微商代理页面
+ *   描述:  发布_股权交易页面
  * 
  * */
 var app = getApp();
@@ -372,7 +372,7 @@ Page({
             rows: [{
               df: that.data.df,                                   //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
               id: that.data.id,                                   //发布信息id,如果为空添加，不为空更新
-              releaseType: '微商代理',                              //发布类型
+              releaseType: '股权交易',                              //发布类型
               personalId: wx.getStorageSync("personalId"),        //个人资料id
               title: that.data.title,                             //标题
               threshold: that.data.threshold,                     //入伙门槛

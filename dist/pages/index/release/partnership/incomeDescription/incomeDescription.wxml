@@ -16,7 +16,7 @@
       name="incomeDescription" 
       value="{{incomeDescription}}" 
       bindinput="dataChange" 
-      placeholder="请输入.." 
+      placeholder="请描述本项目正在或即将取得何种收益，表达方式可多样，也可举例说明...." 
       maxlength="801" class="text" />
     </view>
     <view class="title">

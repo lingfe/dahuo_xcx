@@ -16,7 +16,7 @@
       name="introduce" 
       value="{{introduce}}"
       bindinput="dataChange" 
-      placeholder="请输入.." 
+      placeholder="请介绍目前运营本项目的核心成员，包括他（她）们的履历、故事、成就，帮助项目取得更高的信任力...." 
       maxlength="801" class="text" />
     </view>
     <view class="title">

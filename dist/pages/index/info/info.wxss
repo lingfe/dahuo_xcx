@@ -232,6 +232,7 @@
   color: #999;
   line-height: 10rpx;
   font-size: 23rpx;
+  margin-left: 20rpx;
   padding: 0 16rpx, 0, 16rpx;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis; /**文字隐藏后添加省略号*/

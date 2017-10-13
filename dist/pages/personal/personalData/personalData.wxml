@@ -40,9 +40,12 @@
             <!-- 签名  end -->
 
             <!-- 手机号  start -->
-            <view class="weui-cell_to weui-cells_to weui-cells_after-title title" style="border:none;" bindtap="bindtapPhone">
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title title" style="border:none;" >
                 <view class="weui-cell__bd">手机号</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.tel != null ? userinfo.tel:'未绑定'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                暂时未开通
+                <!-- bindtap="bindtapPhone"  {{userinfo.mobile != null ? userinfo.mobile:'未绑定'}} -->
+                </view>
             </view>
             <!-- 手机号  end -->
         </view>

@@ -16,7 +16,7 @@
       name="projectDescription" 
       value="{{projectDescription}}" 
       bindinput="dataChange" 
-      placeholder="请输入.." 
+      placeholder="请描述项目亮点、吸引点...." 
       maxlength="801" class="text" />
     </view>
     <view class="title">

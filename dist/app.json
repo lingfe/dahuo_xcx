@@ -68,7 +68,8 @@
     "pages/index/release/ganguSatisfiedBefore/shareDivision/shareDivision",
     "pages/message/search/feedback/feedback",
     "pages/dahuo/releaseRule/releaseRule",
-    "pages/dahuo/useProtocol/useProtocol"
+    "pages/dahuo/useProtocol/useProtocol",
+    "pages/dahuo/indexCity/indexCity"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -86,8 +87,8 @@
       {
         "pagePath": "pages/index/index",
         "text": "搭伙",
-        "iconPath": "assets/images/dahuo_1.png",
-        "selectedIconPath": "assets/images/dahuo_0.png"
+        "iconPath": "assets/images/dahuo_1.jpg",
+        "selectedIconPath": "assets/images/dahuo_0.jpg"
       },
       {
         "pagePath": "pages/personal/personal",

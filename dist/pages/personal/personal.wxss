@@ -171,14 +171,14 @@ background-color: #fff;
   width: 210rpx;
   height: 124rpx;
   float: left;
-  margin-top: 17rpx;
-  margin-bottom: 41rpx;
+  margin-top: 26rpx;
+  margin-bottom: 26rpx;
   margin-left: 34rpx;
 }
 .neiro_img image{
   max-width: 210rpx;
   max-height: 124rpx;
-  image-rendering: pixelated ;/*清晰度 高清*/
+  /*image-rendering: pixelated ;清晰度 高清*/
 }
 .neiro_data {
   width: 450rpx;
@@ -362,26 +362,29 @@ border-radius:10px;
 
 }
 
+
+
 .info_data_info {
-  padding-top:17rpx;
-  margin-left:30rpx;
-  width:645rpx;
-  background-color:#fff;
-  color:#666;
-  font-size:22rpx;
-  border-top:1rpx solid #F0F0F0;
-  float:left;
+  padding-top: 16rpx;
+  padding-bottom: 5rpx;
+  margin-left: 24rpx;
+  line-height:33rpx;
+  width: 670rpx;
+  background-color: #fff;
+  color: #666;
+  font-size: 26rpx;
+  border-top: 1rpx solid #E4E4E4;
+  float: left;
   height: auto;
-  max-height: 40px;
+  max-height: 36px;
 
 }
 .info_info {
-  margin-right:15rpx;
-  color:#808080;
-  font-size:26rpx;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  -overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
+  margin-right: 15rpx;
+  color: #808080;
+  font-size: 25rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
 }
 
 /*底部菜单*/
@@ -445,7 +448,9 @@ border-radius:10px;
     border-radius:20rpx; 
     color: #fff;
     height:20rpx;
-    width: auto;
+    width: 20rpx;
+    max-width: 20rpx;
+    text-align: center;
     font-size: 16rpx;
     float: right;
     padding: 3rpx;

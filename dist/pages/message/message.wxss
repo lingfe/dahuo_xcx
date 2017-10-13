@@ -56,8 +56,8 @@ display: block;
 
 .image{
     margin-top: 10rpx;
-    width: 100rpx; 
-    height: 100rpx;
+    width: 95rpx; 
+    height: 95rpx;
     border-radius: 50rpx; 
     background-color: #eeeeee;
 }
@@ -76,7 +76,7 @@ display: block;
 }
 
 .bujugo{
-  margin-top: 0rpx;
+  margin-top: 6rpx;
   margin-left: 11rpx;
   margin-bottom: -11rpx;
 }
@@ -110,6 +110,7 @@ display: block;
 .mark{
     position:absolute;
     margin-left:66rpx;
+    margin-top: 0rpx;
     padding-top: 0rpx;
     background-color:#F74c31; 
     text-align: center;

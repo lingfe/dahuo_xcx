@@ -65,20 +65,20 @@
                             <view class="float-btn"><button bindtap="bindtapRefresh" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">{{item.timeNuber}}天后自动下架</view>
                         </view>
-                        <view class="neiro_img">
-                          <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}">
+                         <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}"> 
+                          <view class="neiro_img">
                             <image src="{{item.imageArray}}"></image>
-                          </navigator>
-                        </view>
-                        <view class="neiro_data">
-                          <view class="data_titile title">{{item.title}}</view>
-                          <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
-                          <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-                              <view class="data_biaoqian_view">{{item.mdate}}前</view>
                           </view>
-                        </view>
+                          <view class="neiro_data">
+                            <view class="data_titile title">{{item.title}}</view>
+                            <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
+                            <view class="data_biaoqian">
+                                <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                                <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                                <view class="data_biaoqian_view">{{item.mdate}}前</view>
+                            </view>
+                          </view>
+                        </navigator>
                         <view class="data_info info">
                             <image src='/assets/images/{{item.df}}.png' class='img_fabu'></image>
                             <view class="float-btn">
@@ -147,16 +147,20 @@
                               <view wx:if="{{item.df==2}}">未发布</view>
                             </view>
                         </view>
-                        <view class="neiro_img"><image src="{{item.imageArray !=null?item.imageArray :'/assets/images/wsc.png'}}"></image></view>
-                        <view class="neiro_data">
-                          <view class="data_titile title">{{item.title}}</view>
-                          <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
-                          <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-                              <view class="data_biaoqian_view">{{item.mdate}}前</view>
+                        <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}"> 
+                          <view class="neiro_img">
+                            <image src="{{item.imageArray !=null?item.imageArray :'/assets/images/wsc.png'}}"></image>
                           </view>
-                        </view>
+                          <view class="neiro_data">
+                            <view class="data_titile title">{{item.title}}</view>
+                            <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
+                            <view class="data_biaoqian">
+                                <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
+                                <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                                <view class="data_biaoqian_view">{{item.mdate}}前</view>
+                            </view>
+                          </view>
+                        </navigator>
                         <view class="data_info info">
                             <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-df="{{item.df}}" data-name="{{item.releaseType}}" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
                             <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>

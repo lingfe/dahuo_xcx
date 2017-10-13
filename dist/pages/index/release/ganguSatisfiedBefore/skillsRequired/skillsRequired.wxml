@@ -14,7 +14,7 @@
       name="resourceRequirements" 
       value="{{resourceRequirements}}" 
       bindinput="dataChange" 
-      placeholder="请输入.." 
+      placeholder="项目需要的人才具备何种技能，或者何种资源.." 
       maxlength="501" class="text" />
     </view>
     <view class="title">

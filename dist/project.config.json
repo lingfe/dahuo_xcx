@@ -12,7 +12,7 @@
 	"projectname": "dahuo",
 	"condition": {
 		"weapp": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -29,7 +29,7 @@
 				{
 					"id": 2,
 					"name": "个人",
-					"pathName": "pages/index/release/affiliateStores/throwInTheCity/throwInTheCity",
+					"pathName": "pages/dahuo/indexCity/indexCity",
 					"query": "",
 					"scene": "1001"
 				},

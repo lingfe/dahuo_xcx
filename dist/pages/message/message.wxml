@@ -11,7 +11,7 @@
     <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/search/search">
       <view class="item">
         <view class="item-left">
-          <text class="mark text"></text>
+          <!-- <text class="mark text"></text> -->
           <image src="/assets/images/xms.jpg" class="image" />
         </view>
         <view class="item-middle">

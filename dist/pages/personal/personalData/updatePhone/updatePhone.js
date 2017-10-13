@@ -73,8 +73,16 @@ Page({
         })
       },
       success: function (res) { 
-        console.log(res);
-
+        wx.showToast({
+          title: res.data.message,
+          icon: 'Ok',
+          duration: 1000,
+          success: function (res) {
+            wx.switchTab({
+              url: '/pages/personal/personal',
+            });
+          }
+        }); 
       },
     });
   },

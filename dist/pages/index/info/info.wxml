@@ -151,34 +151,6 @@
                                     <view class="data_info">{{releaseInfo.industryChoice}}</view>
                                 </view>
                             </view>
-                            <!-- 经营描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">经营描述:</view>
-                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
-                                </view>
-                            </view>
-                            <!--资金规划 -->
-                            <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
-                                <view class="prices_info">
-                                  <view class="data_title">资金规划</view>
-                                  <view class="data_info">{{releaseInfo.fundDistribution}}</view>
-                                </view>
-                            </view>
-                            <!-- 项目描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.projectDescription !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">项目描述:</view>
-                                    <view class="data_info">{{releaseInfo.projectDescription}} </view>
-                                </view>
-                            </view>
-                            <!-- 收益描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">收益描述:</view>
-                                    <view class="data_info">{{releaseInfo.incomeDescription}} </view>
-                                </view>
-                            </view>
                             <!-- 发布人身份 -->
                             <view class="prices" wx:if="{{releaseInfo.publisherIdentity !=null}}">
                                 <view class="prices_info">
@@ -191,6 +163,34 @@
                                 <view class="prices_info">
                                     <view class="data_title">地理位置:</view>
                                     <view class="data_info">{{releaseInfo.geographicalPosition}} </view>
+                                </view>
+                            </view>
+                            <!-- 项目描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.projectDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">项目描述:</view>
+                                    <view class="data_info">{{releaseInfo.projectDescription}} </view>
+                                </view>
+                            </view>
+                            <!-- 经营描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">经营描述:</view>
+                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
+                                </view>
+                            </view>
+                            <!-- 收益描述 -->
+                            <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
+                                <view class="prices_info">
+                                    <view class="data_title">收益描述:</view>
+                                    <view class="data_info">{{releaseInfo.incomeDescription}} </view>
+                                </view>
+                            </view>
+                            <!--资金规划 -->
+                            <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
+                                <view class="prices_info">
+                                  <view class="data_title">资金规划</view>
+                                  <view class="data_info">{{releaseInfo.fundDistribution}}</view>
                                 </view>
                             </view>
                             <!-- 转让原因 -->
@@ -217,7 +217,7 @@
                             <!-- 技能/资源要求 -->
                             <view class="prices" wx:if="{{releaseInfo.resourceRequirements !=null}}">
                                 <view class="prices_info">
-                                    <view class="data_title">技能/资源要求:</view>
+                                    <view class="data_title">能力要求:</view>
                                     <view class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </view>
                                 </view>
                             </view>
@@ -270,7 +270,7 @@
                                     <view class="data_info">{{releaseInfo.agencyRule}} </view>
                                 </view>
                             </view>
-                            <!-- 公司/团队介绍 -->
+                            <!-- 团队介绍 -->
                             <view class="prices" wx:if="{{releaseInfo.teamIntroduction !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">团队介绍:</view>
@@ -281,7 +281,10 @@
 
                             <!-- 图片  start-->
                             <view class='img_top'>
-                              <view class="page-section-ctn" wx:for="{{imageArray}}" bindtap="previewImage" id="{{item}}" wx:key="*this">
+                              <view class="page-section-ctn" 
+                                wx:for="{{imageArray}}" 
+                                bindtap="previewImage" 
+                                id="{{item}}" wx:key="*this">
                                 <image mode="widthFix"  class="images_item" src="{{item}}"/>
                               </view>
                               <view class="select_img" style='padding-bottom: 6em;'>没有更多了</view>

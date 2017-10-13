@@ -67,7 +67,6 @@ Page({
         name: '加盟代理',
         value: '1003',
         checked: false,
-        notype: '非搭伙类型',
       }, {
           name: '股权交易',
         value: '1004',
@@ -109,11 +108,11 @@ Page({
         value: '2001',
         checked: false,
       }, {
-          name: '旅游与酒店',
+          name: '互联网',
         value: '2',
         checked: false,
       }, {
-          name: '美发美容',
+          name: '传媒',
         value: '3',
         checked: false,
       },{
@@ -121,7 +120,7 @@ Page({
         value:'30001',
         checked:false,
       },{
-          name: '服饰鞋包',
+          name: '装修',
         value: '4',
         checked: false,
       }, {
@@ -129,40 +128,36 @@ Page({
         value:'40001',
         checked:false,
       }, {
-          name: "汽车",
+          name: "生活服务",
         value: '40002',
         checked: false,
       },{
-          name: '地产',
+          name: '百货',
         value: '5',
         checked: false,
       },{
-          name: '金融',
+          name: '医疗保健',
         value: '6',
         checked: false,
       },{
-          name:"家装建材",
+          name:"美容美发",
           value:'7',
           checked:false
       },{
-          name:'百货超市',
+          name:'汽车',
           value:'8',
           checked:false
       },{
-          name:'医疗保健',
+          name:'地产',
           value:'9',
           checked:false
       },{
-          name:'建筑工程',
+          name:'金融',
           value:'10',
           checked:false,
       },{
-          name:'工厂',
-          value:'11',
-          checked:false
-      },{
           name:'其他',
-          value:'12',
+          value:'11',
           checked:false
       }],
     }],
@@ -245,7 +240,12 @@ Page({
               str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
             } else {
               tabs[1].content[k].checked = false;
-              str.releaseTypeList.splice(k, 1);
+              for(var j=0;j<str.releaseTypeList.length;++j){
+                if (str.releaseTypeList[j].i==k){
+                  str.releaseTypeList.splice(j, 1);
+                  break;
+                }
+              }
             }
             break;
           }
@@ -274,7 +274,12 @@ Page({
               str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
             }else{
               tabs[2].content[k].checked=false;
-              str.industryChoiceList.splice(k, 1);
+              for (var j = 0; j < str.industryChoiceList.length; ++j) {
+                if (str.industryChoiceList[j].i == k) {
+                  str.industryChoiceList.splice(j, 1);
+                  break;
+                }
+              }
             }
             break;
           }

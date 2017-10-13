@@ -7,6 +7,10 @@
   page{
   background-color: #E8EFEF;
  }
+.container{
+  margin-top: 90rpx;
+}
+
  .userinfo {
   display: flex;
   flex-direction: column;
