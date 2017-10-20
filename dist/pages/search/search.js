@@ -7,9 +7,6 @@
 
 //获取应用实例
 var app = getApp();
-var server = require('../../utils/server');
-var utilMd5 = require('../../utils/md5.js');
-import __config from '../../config/config'
 
 Page({
   data: {
@@ -34,11 +31,9 @@ Page({
 
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
     var city = e.currentTarget.dataset.info;
-    if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
-    else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
-
     prevPage.setData({
-      "userinfo.provinceName": city,                             //个人地址
+      "userinfo.provinceName": city,        //个人地址
+      obj:city
     });
 
     //返回上一页
@@ -46,38 +41,44 @@ Page({
   },
 
   //搜索
-  bindtapSearch: function () {
+  bindtapSearch: function (e) {
     //从缓存里去地址数据
     var address = wx.getStorageSync("address");
     //判断是否为空
     if (address != "") {
       var that = this;
-      var arr = address;
       var arrTo = [];
-      for (var i = 0; i < arr.length; ++i) {
-        if (arr[i].firstChar == that.data.inputVal || arr[i].shortName == that.data.inputVal) {
-          arrTo.push(arr[i]);
+      var inputVal=that.data.inputVal;
+      var json=JSON.stringify(address);
+      //判断搜索
+      if (json.lastIndexOf(inputVal)!=-1){
+        for (var i = 0; i < address.length; ++i) {
+          if (address[i].shortName == inputVal) {
+            arrTo.push(address[i]);
+          }
         }
+
+        //重新设置地址数据
+        that.setData({
+          address: arrTo
+        });
+      }else{
+        wx.showModal({
+          title: '没有搜索到:'+inputVal,
+          showCancel: false,
+        });
       }
-      //重新设置地址数据
-      that.setData({
-        address: arrTo
+    }else{
+      wx.showModal({
+        title: '没有数据!',
+        showCancel: false,
       });
     }
   },
 
   //清空搜索框
-  clearInput: function () {
-    //从缓存里去地址数据
-    var address = wx.getStorageSync("address");
-    //判断是否为空
-    if (address != "") {
-      this.setData({
-        inputVal: "",
-        address: address
-      });
-      return;
-    }
+  clearInput: function (e) {
+    this.setData({inputVal: ""});
   },
 
   //文本框输入事件
@@ -93,15 +94,14 @@ Page({
       type: 'gcj02',
       success: function (res) {
         console.log(res)
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        server.getJSON('/waimai/api/location.php', {
-          latitude: latitude,
-          longitude: longitude
+        app.service.getJSON('/waimai/api/location.php', {
+          latitude: res.latitude,
+          longitude: res.longitude
         }, function (res) {
           console.log(res)
           if (res.data.status != -1) {
              var city = res.data.result.ad_info.city;
+             if (app.checkInput(city)) return;
              if (city.lastIndexOf("市") != -1) city = city.substring(0, city.lastIndexOf("市"));
              else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
              that.setData({ addressInfo: city });
@@ -112,30 +112,33 @@ Page({
       }
     });
 
-
     //从缓存里去地址数据
     var address = wx.getStorageSync("address");
     if (address != "") {
       that.setData({ address: address });
       return;
     }
+
     //调用获取地址
-    getAdressData(that);
-    //获取地址信息http://sys.echsoft.cn/api/exe/getCityList 
-    function getAdressData(that) {
-      wx.request({
-        url: __config.basePath_sys + "api/exe/getCityList",
-        method: "POST",
-        header: { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" },
-        data: { timeStamp: wx.getStorageSync("time"), token: wx.getStorageSync("token") },
-        success: function (res) {   //请求成功
-          //得到地址数据
-          var address = res.data.rows;
-          //放进本地缓存
-          wx.setStorageSync("address", address);
-          that.setData({ address: address });
-        }
-      });
-    }
+    var url = app.config.basePath_sys + "api/exe/getCityList";
+    //请求头
+    header= { 
+      cookie: wx.getStorageSync("cookie"), 
+      "Content-Type": "application/x-www-form-urlencoded" 
+    };
+    //参数
+    var data={
+      timeStamp: wx.getStorageSync("time"), 
+      token: wx.getStorageSync("token") 
+    };
+
+    //发送请求
+    app.request.reqPost(url,header,data,function(res){
+      //得到地址数据
+      var address = res.data.rows;
+      //放进本地缓存
+      wx.setStorageSync("address", address);
+      that.setData({ address: address });
+    });
   }
 });

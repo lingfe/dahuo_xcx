@@ -26,7 +26,6 @@ Page({
     incomeDescription: "",              //收益描述
     operatingArea:null,                 //项目面积
     transferReason:'',                  //转让原因
-    teamIntroduction: '',               //公司、团队介绍
     phone: null,                        //电话号码
     currentCity: null,                  //当前城市
     imageArray: [],                     //图片数组，原始。不包含完整url，用于储存
@@ -60,8 +59,7 @@ Page({
     }
     //清除缓存
     wx.setStorageSync("incomeDescription", "");     //收益描述
-    wx.setStorageSync("projectDescription", "");    //项目描述
-    wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍       
+    wx.setStorageSync("projectDescription", "");    //项目描述  
     wx.setStorageSync('transferReason','');      //出售股份
   },
 
@@ -235,13 +233,6 @@ Page({
       that.showModal("转让原因不能为空!");
       return;
     }
-    
-    //公司、团队介绍
-    var teamIntroduction = e.detail.value.teamIntroduction;
-    if (app.checkInput(teamIntroduction)) {
-      that.showModal("公司/团队介绍不能为空!");
-      return;
-    }
 
     //电话号码
     var phone = e.detail.value.phone;
@@ -383,7 +374,6 @@ Page({
               operatingArea: that.data.operatingArea,                        //项目面积
               incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
               transferReason: wx.getStorageSync('transferReason'),           //转让原因
-              teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
               phone: that.data.phone,                                        //电话号码
               currentCity: wx.getStorageSync("currentCity"),                 //当前城市
               imageArray: pathArr                                            //图片
@@ -546,10 +536,6 @@ Page({
         //收益描述
         if (info.incomeDescription == null) info.incomeDescription = '';
         else wx.setStorageSync('incomeDescription', info.incomeDescription);
-        //团队介绍
-        if (info.teamIntroduction == null) info.teamIntroduction = '';
-        else wx.setStorageSync('teamIntroduction', info.teamIntroduction);
-
         //设置到this
         that.setData({
           id: id,
@@ -562,7 +548,6 @@ Page({
           operatingArea: info.operatingArea,             //项目面积
           incomeDescription: info.incomeDescription,     //收益描述
           transferReason: info.transferReason,           //转让原因
-          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity, //当前城市
           imageArray: img,                             //图片
@@ -585,7 +570,6 @@ Page({
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
       transferReason: wx.getStorageSync('transferReason'),            //转让原因
-      teamIntroduction: wx.getStorageSync('teamIntroduction'),        //公司、团队介绍 
     });
   },
 })

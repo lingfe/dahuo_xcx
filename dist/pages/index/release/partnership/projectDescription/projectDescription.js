@@ -19,7 +19,7 @@ Page({
     if (e.detail.value.length > 800) {
       wx.showModal({
         title: '内容的长度不能打大于800',
-        showCancel: false,
+        showCancel: false,   
       });
       return;
     }
@@ -38,6 +38,13 @@ Page({
         title: '项目描述不能为空！',
         showCancel: false,
       });
+      return;
+    }else if (projectDescription.length < 50) {
+      wx.showModal({
+        title: '项目描述不能低于50字!',
+        showCancel: false,
+      });
+      return;
     } else {
       //得到打开的页面
       var pages = getCurrentPages();

@@ -62,8 +62,16 @@
                   <view class="dahuo_neiro">
                       <view class="neiro" wx:for="{{list}}" wx:key="*this">
                         <view class="data_top">
-                            <view class="float-btn"><button bindtap="bindtapRefresh" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">刷新</button></view>
-                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">{{item.timeNuber}}天后自动下架</view>
+                            <view class="float-btn">
+                              <button bindtap="bindtapRefresh" 
+                              id="{{item.id}}"
+                              data-day="{{item.timeNuber}}" 
+                              class="weui-btn mini-btn button_css" 
+                              type="default" size="mini">刷新</button>
+                            </view>
+                            <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">
+                              {{item.timeNuber}}天后自动下架
+                            </view>
                         </view>
                          <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}"> 
                           <view class="neiro_img">

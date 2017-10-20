@@ -106,7 +106,7 @@
         <!-- 输入收益描述    end -->
 
         <!-- 输入团队介绍    start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="introduceClick">
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="introduceClick">
           <view class="weui-cell__bd">
             <view class="weui-label title">团队介绍</view>
           </view>
@@ -117,7 +117,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入团队介绍    end -->
 
         <!-- 投放城市    start -->

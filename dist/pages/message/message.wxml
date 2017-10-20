@@ -28,8 +28,12 @@
       </view>
       <view class="line"></view>
     </navigator>
+    
     <block wx:for="{{messages}}" wx:key="{{*this}}">
-      <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}">
+      <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" 
+       bindlongpress='bindlongtapURL' 
+       id='{{item.id}}' data-index="{{index}}">
+      <!-- <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/chat/chat"> -->
         <view class="item">
           <view class="item-left">
             <text wx:if="{{item.static !=1 }}" class="mark text"></text>

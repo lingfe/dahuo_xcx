@@ -24,7 +24,7 @@ Page({
     fundDistribution: "",                 //资金规划
     projectDescription: '',               //项目描述
     incomeDescription: '',                //收益描述
-    teamIntroduction: null,               //公司、团队介绍
+    //teamIntroduction: null,               //公司、团队介绍
     throwInTheCity: '',                   //投放城市
     phone: null,                          //电话号码
     currentCity: null,                    //当前城市
@@ -62,7 +62,7 @@ Page({
         wx.setStorageSync("projectDescription", "");    //项目描述
         wx.setStorageSync("incomeDescription", "");     //收益描述
         wx.setStorageSync("fundDistribution", "");      //资金规划
-        wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
+        //wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
   },
 
   //标题
@@ -130,11 +130,11 @@ Page({
   },
 
   //团队/公司介绍
-  introduceClick: function (e) {
-    wx.navigateTo({
-      url: '/pages/index/release/partnership/introduce/introduce',
-    });
-  },
+  // introduceClick: function (e) {
+  //   wx.navigateTo({
+  //     url: '/pages/index/release/partnership/introduce/introduce',
+  //   });
+  // },
 
   //投放城市
   throwInTheCityClick: function (e) {
@@ -210,11 +210,11 @@ Page({
       return;
     }
     //公司、团队介绍
-    var teamIntroduction = e.detail.value.teamIntroduction;
-    if (app.checkInput(teamIntroduction)) {
-      that.showModal("公司/团队介绍不能为空!");
-      return;
-    }
+    // var teamIntroduction = e.detail.value.teamIntroduction;
+    // if (app.checkInput(teamIntroduction)) {
+    //   that.showModal("公司/团队介绍不能为空!");
+    //   return;
+    // }
     //投放城市
     var throwInTheCity = e.detail.value.throwInTheCity;
     if (app.checkInput(throwInTheCity)) {
@@ -346,7 +346,7 @@ Page({
               fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划
               projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
               incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
-              teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+              //teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
               throwInTheCity: that.data.throwInTheCity,                       //投放城市
               phone: that.data.phone,                                         //电话号码
               currentCity: wx.getStorageSync("currentCity"),                  //当前城市
@@ -515,8 +515,8 @@ Page({
         if (info.incomeDescription == null) info.incomeDescription = '';
         else wx.setStorageSync("incomeDescription", info.incomeDescription);
         //公司、团队介绍
-        if (info.teamIntroduction == null) info.teamIntroduction = '';
-        else wx.setStorageSync("teamIntroduction", info.teamIntroduction);
+        // if (info.teamIntroduction == null) info.teamIntroduction = '';
+        // else wx.setStorageSync("teamIntroduction", info.teamIntroduction);
         //投放城市
         if (info.throwInTheCity == null) info.throwInTheCity='';
         else wx.setStorageSync("throwInTheCity", info.throwInTheCity);
@@ -531,7 +531,7 @@ Page({
           fundDistribution: info.fundDistribution,       //资金规划
           projectDescription: info.projectDescription,   //项目描述
           incomeDescription: info.incomeDescription,     //收益描述
-          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
+          //teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           throwInTheCity: info.throwInTheCity,           //投放城市
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity,                 //当前城市
@@ -555,7 +555,7 @@ Page({
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
       fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划  
-      teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
+      //teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
     });
   },
 })

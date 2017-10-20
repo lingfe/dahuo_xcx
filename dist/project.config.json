@@ -15,28 +15,30 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "login",
 					"pathName": "pages/wxUserinfoLogin/wxUserinfoLogin",
-					"query": ""
+					"query": "",
+					"scene": "1001"
 				},
 				{
 					"id": 1,
 					"name": "通知",
-					"pathName": "pages/message/message",
-					"query": ""
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": "1001"
 				},
 				{
 					"id": 2,
 					"name": "个人",
-					"pathName": "pages/dahuo/indexCity/indexCity",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": "1001"
 				},
 				{
 					"id": 3,
 					"name": "发布",
-					"pathName": "pages/index/release/release",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": "1001"
 				},
@@ -44,6 +46,13 @@
 					"id": 4,
 					"name": "chat",
 					"pathName": "pages/dahuo/useProtocol/useProtocol",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": "1001"
 				}

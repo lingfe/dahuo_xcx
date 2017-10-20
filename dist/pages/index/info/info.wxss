@@ -91,7 +91,7 @@
   background-color: #fff;
   float: left;
   height: auto;
-  width: 100%;
+  width: 98%;
   overflow: hidden; /**自动隐藏文字*/
   text-overflow: ellipsis; /**文字隐藏后添加省略号*/
 }
@@ -320,6 +320,14 @@
   margin-left:10rpx;
   margin-top: 10rpx;
 }
+.faso_button{
+  width:58rpx;
+  height:58rpx;
+  margin-left:10rpx;
+  margin-top: -77rpx;
+  opacity: -0.5;
+}
+
 
 .data_biaoqian_view {
   margin-right: 20rpx;
@@ -415,6 +423,7 @@ weui-tab__panel {
   box-shadow:1px 1px 3px #aaa;
   position: fixed;
   bottom: 5rpx;
+  z-index: 1000;
 }
 .view_phon{
   float: left;

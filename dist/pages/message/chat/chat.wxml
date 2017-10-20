@@ -1,21 +1,50 @@
 <view class="wrap"> 
-    <view class="containerBox" style="">
+    <!-- 信息 start-->
+    <view class='dahuo_neiro'>
+      <navigator url="/pages/index/info/info">
+      <view class="neiro" bindtap="getInputValue">
+        <view class="neiro_img">
+          <image src="https://static.daho.club/static/upload/web.echsoft.cn/admin/0f2ab319bae84dedbd123fb098e0adc6.jpg"></image>
+        </view>
+        <view class="neiro_data">
+          <view class="data_titile title">啊啊啊啊啊啊啊啊啊啊啊啊</view>
+          <view class="data_pro">搭伙金额
+            <text>0万</text>
+          </view>
+          <view class="data_biaoqian">
+            <view class="data_biaoqian_view">
+              <image src="/assets/images/type.png"></image>生意转让</view>
+            <view class="data_biaoqian_view">
+              <image src="/assets/images/hanye.png"></image>餐饮</view>
+            <view class="data_biaoqian_view">10天前</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    </view>
+    <!-- 信息 end-->
+
+    <!-- 聊天窗口  start-->  
+    <view class="containerBox">
        <view wx:key="{{index}}" wx:for="{{allContentList}}">
-            <view wx:key="{{index}}"  wx:if="{{index%2 == 1}}" class="textBox fl" style="">
-              <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image_left"/>
-              <text class='text_left'>{{item.value}}</text>
+            <view class='show_left' wx:key="{{index}}"  wx:if="{{index%2 == 1}}">
+              <view class='imgtox_left'>
+                <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image_left"/>
+              </view>
+              <view class='triangle_left'></view>
+              <view class='textBox_left fl'>{{item.value}}</view>
             </view>
-            <view wx:key="{{index}}"  wx:if="{{index%2 == 0}}" class="textBox fr">
-              <text class='text_right'>{{item.value}}</text>
-              <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+
+            <view class='show_right' wx:key="{{index}}"  wx:if="{{index%2 == 0}}">
+              <view class='imgtox_right'>
+                <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+              </view>
+              <view class='triangle_right'></view>
+              <view class='textBox_right fr'>{{item.value}}</view>
             </view>
        </view>
     </view>
-    
-    <!-- <view class="handleBox">
-        <input  class="input_submit" placeholder="点击输入，开始聊天吧" value="{{inputTemp}}" bindinput="bindKeyInput"/>
-        <button type="submit" class="btn_submit" size="mini" bindtap="submitTo">发送</button>
-    </view> -->
+    <!-- 聊天窗口  end-->   
 
     <!-- 评论文本框  start-->
     <view class="handleBox">

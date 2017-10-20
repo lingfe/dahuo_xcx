@@ -44,7 +44,7 @@
         wx:for="{{address}}" 
         wx:for-item="lettt" 
         wx:if="{{item == lettt.firstChar}}" 
-        wx:key="{{*this}}" data-info="{{lettt.domainName}}">
+        wx:key="{{*this}}" data-info="{{lettt.shortName}}">
           <view class="font_left">{{lettt.shortName}}</view>
         </view>
       </view>

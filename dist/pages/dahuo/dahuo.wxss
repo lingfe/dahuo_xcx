@@ -4,6 +4,39 @@
  * 
  * */
  
+.o{
+  width:119px;
+  height:24px;
+  padding:.5em 1em .35em;
+  position:relative;
+  color:#000;
+  margin-top:56rpx;
+  margin-left:638rpx;
+  transform:rotate(45deg);
+  -ms-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  -o-transform:rotate(45deg);
+  text-align: center;
+
+}
+.o::before{
+    content: "精品";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: yellow;
+    transform: perspective(.5em) rotateX(3deg);
+    /*设置成底部固定旋转*/
+    transform-origin: bottom;
+        /*底部固定旋转后，导致文字偏上*/
+    /*通过放大scale()解决此问题*/
+    transform: perspective(.5em) rotateX(6deg) scale(1.3);
+}
+
 /**内容**/
 .dahuo_neiro{
   margin-left: 18rpx;

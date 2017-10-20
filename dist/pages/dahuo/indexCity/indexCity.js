@@ -17,7 +17,7 @@ Page({
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
     addressInfo:"定位中..",
-    ad_info: ["成都", "重庆", "贵阳", "昆明", "南宁", "广州", "深圳", " 遵义"],   //城市信息
+    ad_info: ["成都", "重庆", "贵阳"],   //城市信息
   },
 
   //tab切换

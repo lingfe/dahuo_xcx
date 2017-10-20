@@ -66,7 +66,7 @@
               <image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
             <view class="data_biaoqian_view">
               <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-            <view class="data_biaoqian_view">{{item.mdate}}前</view>
+            <view class="data_biaoqian_view">{{item.top>0?'今天':item.mdate+'前'}}</view>
           </view>
         </view>
         <view class="data_info info">
@@ -80,7 +80,8 @@
             <!-- 营业描述 -->{{item.businessDescription == null ?'':item.businessDescription}}
           </view>
         </view>
-        <image src="/assets/images/jian.png" wx:if="{{item.top>0}}" class='img_jian'></image>
+        <image src="/assets/images/dahuo.png" wx:if="{{item.top==100}}" class='img_jian'></image>
+        <image src="/assets/images/jian.png" wx:elif="{{item.top>0}}" class='img_jian'></image>
       </view>
     </navigator>
     <view class="line"></view>

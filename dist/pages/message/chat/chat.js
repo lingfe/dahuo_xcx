@@ -7,9 +7,9 @@
  
 Page({
   data: {
-    inputValue: '',
+    inputValue: '',               //文本框值
     returnValue: '',
-    allContentList: [],
+    allContentList: [],           //聊天数据
     key: "d13b441029804ee99fc4e3b617a5f557",
     num: 0,
     inputTemp: ''
@@ -72,16 +72,14 @@ Page({
       }
     })
   },
-  onReady:function(){
-    // 页面渲染完成
+  
+  /**
+* 页面相关事件处理函数--监听用户下拉动作
+*/
+  onPullDownRefresh: function () {
+    var that = this;
+    
+    //下拉完成后执行回退
+    wx.stopPullDownRefresh();
   },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  }
 })

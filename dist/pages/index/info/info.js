@@ -75,10 +75,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/save",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'commentinfo',       //评论表
           scriptName: 'Query',
@@ -114,10 +114,10 @@ Page({
       wx.request({
         url: __config.basePath_web+"api/exe/get",
         method: "POST",
-        header: {  cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        header: {  cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
         data: {
-          timeStamp: that.data.time,
-          token: that.data.token,
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
           reqJson: JSON.stringify({
             nameSpace: 'collectioninfo',
             scriptName: 'Query',
@@ -177,10 +177,10 @@ Page({
       wx.request({
         url: __config.basePath_web + "api/exe/save",
         method: "POST",
-        header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
         data: {
-          timeStamp: that.data.time,
-          token: that.data.token,
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
           reqJson: JSON.stringify({
             nameSpace: 'collectioninfo',
             scriptName: 'Query',
@@ -233,10 +233,10 @@ Page({
       wx.request({
         url: __config.basePath_web + "api/exe/save",
         method: "POST",
-        header: {  cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
         data: {
-          timeStamp: that.data.time,
-          token: that.data.token,
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
           reqJson: JSON.stringify({
             nameSpace: 'reportinfo',
             scriptName: 'Query',
@@ -244,7 +244,7 @@ Page({
             nameSpaceMap: {
               rows: [{
                 releaseId: that.data.releaseId,        //发布信息id
-                personalId: that.data.personalId,      //个人id   
+                personalId: wx.getStorageSync('personalId'),      //个人id   
                 reportTypeId: reportTypeId             //举报类型
               }]
             }
@@ -282,6 +282,7 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
+          console.log(that.data.releaseInfo.phone);
           wx.makePhoneCall({
             phoneNumber: that.data.releaseInfo.phone //仅为示例，并非真实的电话号码
           });
@@ -295,21 +296,26 @@ Page({
     var that=this;
     //复制电话号码
     wx.showModal({
-      title: '复制电话号码',
-      content: '复制电话号码？' + that.data.releaseInfo.phone,
-      confirmText: "复制",
+      title: '私信',
+      content: '亲，搭伙APP与及时通讯功能还差一点完工，仅支持拨打对方电话，是否拨打？' + that.data.releaseInfo.phone,
+      confirmText: "拨打",
       cancelText: "取消",
       success: function (res) {
         console.log(res);
         if (res.confirm) {
+          //if (res.confirm) {
+            //wx.makePhoneCall({
+              //phoneNumber: that.data.releaseInfo.phone 
+            //});
+          //} 
           //剪贴板
-          wx.setClipboardData({
-            data: that.data.releaseInfo.phone,
-            success: function (res) {
-              wx.showToast({ title: '复制成功!', icon: 'ok', duration: 1000 }); //提示
-            },
-            fail:function(res){}
-          });
+          // wx.setClipboardData({
+          //   data: that.data.releaseInfo.phone,
+          //   success: function (res) {
+          //     wx.showToast({ title: '复制成功!', icon: 'ok', duration: 1000 }); //提示
+          //   },
+          //   fail:function(res){}
+          // });
         } 
       }
     });
@@ -320,9 +326,63 @@ Page({
     this.setData({  inputValue: e.detail.value  });
   },
 
+  //发送模板消息
+  webStoketReq: function (res, frmid) {
+    var that = this;
+    console.log(res);
+    //第一步，获取 access_token
+    wx.request({
+      method: 'GET',
+      url: 'https://sys.daho.club/wx/cgi-bin/token?grant_type=client_credential&appid=wxdb07051dc3fc031e&secret=b2dec689f9b117a311891c6ac5ae9407',
+      success: function (res2) { //请求成功！
+        console.log(res2);
+        var url = 'https://sys.daho.club/wx/cgi-bin/message/wxopen/template/send?access_token=' + res2.data.access_token;
+        console.log("url:" + url);
+        var time = new Date().toLocaleString();
+        //第二步，发送模板消息
+        wx.request({
+          method: 'POST',
+          data: {
+            touser: wx.getStorageSync('openid'),                         //微信用户openid
+            template_id: 'aZ_627zngL3YznnN3FfNUGKtNWn5yw4bZUIoxv_gDto',                   //模板id
+            page: 'pages/index/index',                //跳转的页面
+            form_id: frmid,
+            data: {
+              "keyword1": {
+                "value": that.data.releaseInfo.title,
+                "color": "#173177"
+              },
+              "keyword2": {
+                "value": res.neiro,
+                "color": "#173177"
+              },
+              "keyword3": {
+                "value": res.name,
+                "color": "#173177"
+              },
+              "keyword4": {
+                "value": time,
+                "color": "#173177"
+              }
+            }//'模板内容'，
+          },
+          url: url, 
+          success: function (res3) { //请求成功！
+            console.log(res3);
+          }
+        });
+      }
+    });
+  },
+
   //评论,发送评论
   submitTo: function (e) {
     var that = this;
+    if (app.checkInput(that.data.inputValue)) {
+      wx.showToast({ title: '不能为空!', icon: 'toast', duration: 1000 });//提示
+      return;
+    }
+
     //获取评论人
     var user = wx.getStorageSync("user");
     var userName = user.cnName;
@@ -334,10 +394,10 @@ Page({
       wx.request({
         url: __config.basePath_web + "api/exe/save",
         method: "POST",
-        header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+        header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
         data: {
-          timeStamp: that.data.time,
-          token: that.data.token,
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
           reqJson: JSON.stringify({
             nameSpace: 'commentinfo',
             scriptName: 'Query',
@@ -346,7 +406,7 @@ Page({
               rows: [{
                 avatarUrl: user.avatarUrl,                        //头像
                 releaseId: that.data.releaseId,                   //发布信息id
-                personalId: that.data.personalId,                 //个人id
+                personalId: wx.getStorageSync("personalId"),      //个人id
                 commentContent: that.data.inputValue,             //评论内容
                 remark: userName,                                 //名称
               }]
@@ -372,17 +432,31 @@ Page({
             that.setNotice(that);
           }else{
             wx.showToast({ title: '评论成功!', icon: 'toast', duration: 1000 });//提示
-            that.setData({
-              inputValue: '',
-            });
             //参数
             that.data.notifyname = userName;
             that.data.content = "我评论了你的项目：‘" + that.data.inputValue+"'";
             that.data.tile = "";
             that.data.ntype = 1;
             that.data.avatarUrl = user.avatarUrl;
+
+            //发起登录请求，得到code
+            wx.login({
+              success: function (res4) {
+                res4.openid = that.data.content;
+                res4.neiro = that.data.inputValue;
+                res4.name = userName;
+                var frmid = e.detail.formId;
+                console.log("frmid:" + frmid);
+                that.webStoketReq(res4, frmid);
+              }
+            });
             //设置通知
             that.setNotice(that);
+
+            //初始化设置
+            that.setData({
+              inputValue: '',
+            });
           }
           //获取评论信息
           that.conmmentGetData(that);
@@ -408,27 +482,20 @@ Page({
     var that = this;
     var reportTypeId = e.currentTarget.dataset.jbname;    //举报类型
     that.setData({jb: false});    //关闭举报
+    var personalId = wx.getStorageSync('personalId');
     //跳转
     wx.navigateTo({
-      url: "/pages/index/info/report/report?releaseId=" + that.data.releaseId + "&personalId=" + that.data.personalId + "&reportTypeId=" + reportTypeId,
+      url: "/pages/index/info/report/report?releaseId=" + that.data.releaseId + "&personalId=" + personalId + "&reportTypeId=" + reportTypeId,
     });
   },
   
   //加载页面
   onLoad: function (options) {
     var that = this;
-    //必要参数
-    var cookie = wx.getStorageSync("cookie");
-    var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
-
     //设置全局参数
     that.setData({
       releaseId: options.releaseId,         //发布信息id
-      personalId: options.personalId,       //个人id
-      cookie: cookie,                       //请求cookie
-      time:time,                            //请求时间
-      token:token                           //请求token
+      personalId: options.personalId,       //发布者id
     });
 
     //获取发布相关信息
@@ -465,10 +532,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/save",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie') , "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'notice',
           scriptName: 'Query',
@@ -504,10 +571,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
@@ -515,7 +582,7 @@ Page({
             pageable:0,
             rows: [{
               df: 0,
-              personalId: that.data.personalId    //发布信息id
+              personalId: that.data.personalId    //发布者id
             }],
           }
         })
@@ -545,23 +612,25 @@ Page({
     });
   },
 
+  
+
   //获取是否已经收藏
   getIsSC:function(that){
     //请求获取数据,收藏夹
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie') , "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'collectioninfo',       //收藏夹表
           scriptName: 'Query',
           nameSpaceMap: {
             rows: [{
               df: 0,
-              personalId: wx.getStorageSync("personalId"),    //个人资料id
+              personalId: wx.getStorageSync("personalId"),    //个人id
               releaseId: that.data.releaseId                  //发布信息id
             }],
           }
@@ -589,10 +658,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/plug/save",
       method: "POST",
-      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie'),"Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: "previewinformation", 
           scriptName: "com.dahuo.plugin.impl.PreviewinformationPlugin", 
@@ -628,10 +697,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
-      header: { cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
+      header: { cookie: wx.getStorageSync('cookie'),"Content-Type": "application/x-www-form-urlencoded"},
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'commentinfo',       //发布信息表
           scriptName: 'Query',
@@ -659,8 +728,8 @@ Page({
   personalGetData: function (that) {
     //设置请求参数获取数据,默认0第一页
     var data = {
-      timeStamp: that.data.time,
-      token: that.data.token,
+      timeStamp: wx.getStorageSync("time"),
+      token: wx.getStorageSync("token"),
       reqJson: JSON.stringify({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
@@ -682,22 +751,9 @@ Page({
     wx.request({
       url: __config.basePath_sys + "api/exe/get",
       method: "POST",
-      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
+      header: { cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded"},
       data: that.data.data,
       success: function (res) {   //请求成功
-        if (res.statusCode == 408) {
-          wx.showToast({
-            title: "会话已过期，请重新登录！",
-            icon: 'loading',
-            duration: 2000,
-            success:function(res){
-              wx.redirectTo({
-                url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
-              });
-              return;
-            }
-          });
-        }
         that.setData({ userinfo: res.data.rows[0]});
       },
       fail: function (res) {},
@@ -755,10 +811,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/get",
       method: "POST",
-      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded"},
+      header: {cookie: wx.getStorageSync('cookie'),"Content-Type": "application/x-www-form-urlencoded"},
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp: wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
@@ -785,8 +841,12 @@ Page({
 
         //判断
         if (info != null) {
-          if (info.projectDescription != null) length = info.projectDescription.length;
-          else if (info.businessDescription != null) length = info.businessDescription.length;
+          if (info.projectDescription != null){
+            length = info.projectDescription.length;
+          } 
+          else if (info.businessDescription != null) {
+            length = info.businessDescription.length;
+          }
           else length = info.incomeDescription.length;
         }
         var strTime = that.getDate(info.cdate);
@@ -832,10 +892,22 @@ Page({
     wx.stopPullDownRefresh();
   },
 
+  //页面显示的时候执行
+  onShow:function(){
+    //判断cookie
+    var cookie = wx.getStorageSync('cookie');
+    if (app.checkInput(cookie)) {
+      wx.redirectTo({
+        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+      });
+      return;
+    }
+  },
+
   //转发，分享
   onShareAppMessage:function (e){
     return {
-      title: '搭伙',
+      title: '搭伙-邀请全城一起来发布生意',
       desc: '同城生意人必备神器!',
       path: '/pages/index/info/info?releaseId=' + this.data.releaseId + "&personalId=" + this.data.personalId,
     }

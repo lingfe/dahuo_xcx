@@ -128,7 +128,7 @@ Page({
         value:'40001',
         checked:false,
       }, {
-          name: "生活服务",
+          name: "婚庆",
         value: '40002',
         checked: false,
       },{
@@ -394,6 +394,7 @@ Page({
           //判断状态
           if (res.data.status != -1) {
             var city=res.data.result.ad_info.city;
+            if (app.checkInput(city)) return;
             if (city.lastIndexOf("市") != -1) city = city.substring(0,city.lastIndexOf("市"));
             else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
             that.setData({
@@ -415,7 +416,7 @@ Page({
     var that = this;
 
     //定位
-    that.getAddress(that);
+    //that.getAddress(that);
     //调用默认请求
     that.requestData(that);
 
@@ -607,6 +608,15 @@ Page({
   onShow: function () {
     //当前
     var that=this;
+    //判断cookie
+    var cookie=wx.getStorageSync('cookie');
+    if (app.checkInput(cookie)) {
+      wx.redirectTo({
+        url: '/pages/wxUserinfoLogin/wxUserinfoLogin',
+      });
+      return;
+    }
+
     //判断地址
     if (that.data.addressInfo != that.data.city && that.data.city!=null){
       that.setData({

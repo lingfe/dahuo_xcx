@@ -19,7 +19,7 @@
             <!-- 头像  end -->
 
             <!-- 姓名  start -->
-            <view class="weui-cell_to weui-cells_to title" bindtap="bindtapUpdateName">
+            <view class="weui-cell_to weui-cells_to title" bindtap="bindtapClear">
                 <view class="weui-cell__bd">姓名</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.realname  == "" ? '请填写' : userinfo.realname}}</view>
             </view>
@@ -33,7 +33,7 @@
             <!-- 地域  end -->
 
             <!-- 签名  start -->
-            <view class="weui-cell_to weui-cells_to title" id="{{userinfo.id}}" data-autograph="{{userinfo.memo}}"  bindtap="bindtapAutograph">
+            <view class="weui-cell_to weui-cells_to title" data-autograph="{{userinfo.memo}}"  bindtap="bindtapAutograph">
                 <view class="weui-cell__bd">签名</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.memo  == null ? '请填写' : userinfo.memo}}</view>
             </view>

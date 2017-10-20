@@ -23,7 +23,6 @@ Page({
     fundDistribution: '',                 //资金规划
     projectDescription: "",               //项目描述
     incomeDescription: "",                //收益描述
-    teamIntroduction: '',                 //公司、团队介绍
     phone: null,                          //电话号码
     currentCity: null,                    //当前城市
     imageArray: [],                       //图片数组，原始。不包含完整url，用于储存
@@ -60,7 +59,6 @@ Page({
     wx.setStorageSync("fundDistribution", "");      //资金规划
     wx.setStorageSync("incomeDescription", "");     //收益描述
     wx.setStorageSync("projectDescription", "");    //项目描述
-    wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
   },
 
   //标题
@@ -176,12 +174,6 @@ Page({
     var incomeDescription = e.detail.value.incomeDescription;
     if (app.checkInput(incomeDescription)){
       that.showModal("收益描述不能为空!");
-      return;
-    }
-    //公司、团队介绍
-    var teamIntroduction = e.detail.value.teamIntroduction;
-    if (app.checkInput(teamIntroduction)){
-      that.showModal("公司/团队介绍不能为空!");
       return;
     }
     
@@ -303,12 +295,11 @@ Page({
               releaseType: '合伙创业',                                        //发布类型
               personalId: wx.getStorageSync("personalId"),                   //个人资料id
               title: that.data.title,                                        //标题
-              threshold: wx.getStorageSync("threshold"),                     //入伙门槛
+              threshold: that.data.threshold,                     //入伙门槛
               industryChoice: that.data.industryChoice,                      //行业选择
               fundDistribution: wx.getStorageSync("fundDistribution"),       //资金规划
               projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
               incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
-              teamIntroduction: wx.getStorageSync("teamIntroduction"),       //公司、团队介绍
               phone: that.data.phone,                                        //电话号码
               currentCity: wx.getStorageSync("currentCity"),                 //当前城市
               imageArray: pathArr                                            //图片数组
@@ -444,14 +435,12 @@ Page({
           nameSpace: 'releaseinfo',
           scriptName: 'Query',
           nameSpaceMap: {
-            releaseinfo: {
-              Query: [{
+              rows: [{
                 id: id,                        //发布信息id
                 df: df
               }]
             }
-          }
-        })
+          })
       },
       success: function (res) {
         //得到信息
@@ -475,9 +464,6 @@ Page({
         //收益描述
         if (info.incomeDescription == null) info.incomeDescription='';
         else wx.setStorageSync('incomeDescription', info.incomeDescription);
-        //团队介绍
-        if (info.teamIntroduction == null) info.teamIntroduction='';
-        else wx.setStorageSync('teamIntroduction', info.teamIntroduction );
 
         //设置到this
         that.setData({
@@ -488,7 +474,6 @@ Page({
           fundDistribution: info.fundDistribution,       //资金规划
           projectDescription: info.projectDescription,   //项目描述
           incomeDescription: info.incomeDescription,     //收益描述
-          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity,                        //当前城市
           imageArray: img,                           //图片数组
@@ -508,7 +493,6 @@ Page({
       fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
-      teamIntroduction: wx.getStorageSync('teamIntroduction'),        //公司、团队介绍
     });
   },
 })

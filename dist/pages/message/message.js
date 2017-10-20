@@ -17,7 +17,7 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     var index = e.currentTarget.dataset.index;
-
+    
     wx.showModal({
       title: '删除通知',
       content: '是否删除？',
@@ -41,10 +41,10 @@ Page({
     wx.request({
       url: __config.basePath_web + "api/exe/save",
       method: "POST",
-      header: { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" },
+      header: { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" },
       data: {
-        timeStamp: that.data.time,
-        token: that.data.token,
+        timeStamp:wx.getStorageSync('time'),
+        token: wx.getStorageSync('token'),
         reqJson: JSON.stringify({
           nameSpace: 'notice',       //通知表
           scriptName: 'Query',

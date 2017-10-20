@@ -25,7 +25,6 @@ Page({
     industryChoice: "金融",               //行业选择
     productType: null,                    //产品种类
     incomeDescription: '',                //收益描述
-    teamIntroduction: '',                 //公司、团队介绍
     phone: null,                          //电话号码
     currentCity: null,                    //当前城市
     imageArray: [],                       //图片数组，原始。不包含完整url，用于储存
@@ -60,7 +59,6 @@ Page({
 
     //清除缓存
     wx.setStorageSync("incomeDescription", "");     //收益描述
-    wx.setStorageSync("teamIntroduction", "");      //公司、团队介绍
   },
 
   //标题
@@ -165,12 +163,6 @@ Page({
     var incomeDescription = e.detail.value.incomeDescription;
     if (app.checkInput(incomeDescription)) {
       that.showModal("收益描述不能为空!");
-      return;
-    }
-    //公司、团队介绍
-    var teamIntroduction = e.detail.value.teamIntroduction;
-    if (app.checkInput(teamIntroduction)) {
-      that.showModal("公司/团队介绍不能为空!");
       return;
     }
 
@@ -309,7 +301,6 @@ Page({
               industryChoice: '金融',//industryChoice,                        //行业选择
               productType: that.data.productType,                             //产品种类
               incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
-              teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
               phone: that.data.phone,                                         //电话号码
               currentCity: wx.getStorageSync("currentCity"),                  //当前城市
               imageArray: pathArr                                             //图片数组
@@ -468,9 +459,6 @@ Page({
         //收益描述
         if (info.incomeDescription == null) info.incomeDescription = '';
         else wx.setStorageSync('incomeDescription', info.incomeDescription);
-        //团队介绍
-        if (info.teamIntroduction == null) info.teamIntroduction = '';
-        else wx.setStorageSync('teamIntroduction', info.teamIntroduction);
 
         //设置到this
         that.setData({
@@ -480,7 +468,6 @@ Page({
           industryChoice: info.industryChoice,           //行业选择
           productType: info.productType,                 //产品种类
           incomeDescription: info.incomeDescription,     //收益描述
-          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity, //当前城市
           imageArray: img,                              //图片数组
@@ -507,36 +494,7 @@ Page({
     var that = this;
     that.setData({
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
-      teamIntroduction:wx.getStorageSync("teamIntroduction"),          //公司、团队介绍
     });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

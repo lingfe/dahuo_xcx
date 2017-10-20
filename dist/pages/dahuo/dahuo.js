@@ -1,7 +1,12 @@
 /**  作者:  lingfe 
  *   时间:  2017-7-7
  *   描述:  发布页面
- * 
+ *       {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "assets/images/news1.jpg",
+        "selectedIconPath": "assets/images/news0.jpg"
+      },
  * */
 
 Page({

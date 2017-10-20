@@ -23,7 +23,6 @@ Page({
     shareDivision: '',                    //股份划分        
     projectDescription: '',               //项目描述
     incomeDescription: '',                //收益描述
-    teamIntroduction: '',                 //公司、团队介绍
     phone: null,                          //电话号码
     currentCity: null,                    //当前城市
     imageArray: [],                       //图片url
@@ -173,12 +172,6 @@ Page({
       that.showModal("收益描述不能为空!");
       return;
     }
-    //公司、团队介绍
-    var teamIntroduction = e.detail.value.teamIntroduction;
-    if (app.checkInput(teamIntroduction)) {
-      that.showModal("公司/团队介绍不能为空!");
-      return;
-    }
 
     //电话号码
     var phone = e.detail.value.phone;
@@ -316,7 +309,6 @@ Page({
               shareDivision: that.data.shareDivision,                      //股份划分
               projectDescription: wx.getStorageSync("projectDescription"), //项目描述
               incomeDescription: wx.getStorageSync("incomeDescription"),   //收益描述
-              teamIntroduction: wx.getStorageSync("teamIntroduction"),     //公司、团队介绍
               phone: that.data.phone,                                      //电话号码
               currentCity: wx.getStorageSync("currentCity"),               //当前城市
               imageArray: pathArr                                          //图片url
@@ -344,7 +336,6 @@ Page({
         //清除缓存
         wx.setStorageSync("projectDescription", "");    //项目描述
         wx.setStorageSync("incomeDescription", "");     //收益描述
-        wx.setStorageSync("teamIntroduction", "");          //公司、团队介绍
       },
       fail: function () { },
       complete: function () { }
@@ -488,9 +479,6 @@ Page({
         //收益描述
         if (info.incomeDescription == null) info.incomeDescription = '';
         else wx.setStorageSync('incomeDescription', info.incomeDescription);
-        //团队介绍
-        if (info.teamIntroduction == null) info.teamIntroduction = '';
-        else wx.setStorageSync('teamIntroduction', info.teamIntroduction);
 
         //设置到this
         that.setData({
@@ -501,7 +489,6 @@ Page({
           shareDivision: info.shareDivision,             //股份划分
           projectDescription: info.projectDescription,   //项目描述
           incomeDescription: info.incomeDescription,     //收益描述
-          teamIntroduction: info.teamIntroduction,       //公司、团队介绍
           phone: info.phone,                             //电话号码
           currentCity: info.currentCity, //当前城市
           imageArray: img,                           //图片数组
@@ -522,7 +509,6 @@ Page({
     that.setData({
       projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
       incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
-      teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
     });
   },
 })

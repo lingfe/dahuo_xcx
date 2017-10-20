@@ -6,7 +6,6 @@
  * */
 //获取应用实例
 var app = getApp();
-var server = require('../../utils/server');
 var utilMd5 = require('../../utils/md5.js');
 import __config from '../../config/config'
 
@@ -58,12 +57,22 @@ Page({
 
   //刷新
   bindtapRefresh:function(e){
+    console.log(e);
     var that=this;
     //发布信息id
     var releaseId = e.currentTarget.id;
+    var day = e.currentTarget.dataset.day;
+    if(day>59){
+      wx.showToast({
+        title: "今日已刷!",
+        icon: 'ok',
+        duration: 1000,
+      });
+      return;
+    }
     //必要参数
     var time = new Date().getTime();
-    var token = utilMd5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
+    var token = app.md5.hexMD5(app.globalData.token + time.toString()).toUpperCase();
     var cookie = wx.getStorageSync("cookie");
 
     wx.request({
@@ -111,7 +120,8 @@ Page({
   //下架
   bindtapOffTheShelf: function (e) {
     var that = this;
-    if (e.currentTarget.dataset.df != 0 || e.currentTarget.dataset.df!=5){
+    var df = e.currentTarget.dataset.df;
+    if ("0".indexOf(df)==-1){
       //提示
       wx.showToast({
         title: "不允许下架！",
@@ -199,7 +209,7 @@ Page({
     var id=e.currentTarget.id;
     var name = e.currentTarget.dataset.name;
     var df = e.currentTarget.dataset.df;
-    if ("025".indexOf(df)==-1) {
+    if ("0125".indexOf(df) == -1) {
       //提示
       wx.showToast({
         title: "不允许编辑！",
@@ -214,7 +224,7 @@ Page({
       url = '/pages/index/release/partnership/partnership';
     } else if (name == "生意转让"){
       url = '/pages/index/release/businessTransfer/businessTransfer';
-    } else if (name == "加盟分店"){
+    } else if (name == "加盟代理"){
       url = '/pages/index/release/affiliateStores/affiliateStores';
     } else if (name == "干股纳才"){
       url = '/pages/index/release/ganguSatisfiedBefore/ganguSatisfiedBefore';
@@ -222,7 +232,7 @@ Page({
       url = '/pages/index/release/financialManagement/financialManagement';
     }else if (name =="房产投资"){
       url = '/pages/index/release/propertyInvestment/propertyInvestment';
-    } else if (name == "微商代理"){
+    } else if (name == "股权交易"){
       url = '/pages/index/release/derivativeAgent/derivativeAgent';
     }else if(name == "其他"){
       url = '/pages/index/release/other/other';
@@ -364,14 +374,14 @@ Page({
   //获取个人信息
   personalGetData:function(that){
     var data = {
-      timeStamp: that.data.time,
-      token: that.data.token,
+      timeStamp: wx.getStorageSync("time"),
+      token: wx.getStorageSync("token"),
       reqJson: JSON.stringify({
         nameSpace: 'sys_userinfo',       //个人信息表
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            id: that.data.personalId    //个人资料id
+            id: wx.getStorageSync('personalId')    //个人资料id
           }],
         }
       })
@@ -384,7 +394,7 @@ Page({
     this.requestDataPersonal(that);
   },
 
-  //客服,消息
+  //通知
   bindtapService:function(){
     wx.navigateTo({
       url: '/pages/message/message',
@@ -549,7 +559,7 @@ Page({
     wx.request({
       url: __config.basePath_sys+"api/exe/get",
       method: "POST",
-      header: {cookie: that.data.cookie,"Content-Type": "application/x-www-form-urlencoded" },
+      header: {cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded" },
       data: that.data.data,
       success: function (res) {   //请求成功
         console.log("userinfo:");

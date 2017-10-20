@@ -13,10 +13,13 @@
                     <view class="neiro">
                       <view class="data_top">
                           <view style="float:left;" class="float-btn">
-                            <view class="float-btn title title_top"><image src="/assets/images/info/title.png"></image>{{releaseInfo.title}}</view>
+                            <view class="float-btn title title_top">
+                              <image src="/assets/images/info/title.png"></image>{{releaseInfo.title}}</view>
                             <view class="SC_JB" >
-                              <view class="float-btn_neiro" bindtap="bindtapSC" data-rId="{{releaseInfo.id}}"><image style="height:28rpx;width:28rpx;" src="/assets/images/sc{{sc}}.png"></image></view>
-                              <view class="float-btn_neiro" bindtap="bindtapJB"><image style="height:28rpx;width:28rpx;" src="/assets/images/info/jb.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapSC" data-rId="{{releaseInfo.id}}">
+                                <image style="height:28rpx;width:28rpx;" src="/assets/images/info/sc{{sc}}.png"></image></view>
+                              <view class="float-btn_neiro" bindtap="bindtapJB">
+                                <image style="height:28rpx;width:28rpx;" src="/assets/images/info/jb.png"></image></view>
                             </view>
                             <view class="float-btn left_0">
                               <view class="float-btn_neiro ">
@@ -39,24 +42,24 @@
                           <view wx:if="{{releaseInfo.projectDescription != null }}">
                             <span style="color: #000000;font-size: 26rpx;">项目描述:</span> 
                             <!-- 项目描述 -->
-                            {{releaseInfo.projectDescription}}
+                            <text>{{releaseInfo.projectDescription}}</text>
                           </view>
                           <view wx:elif="{{releaseInfo.businessDescription != null }}">
                             <span style="color: #000000;font-size: 26rpx;">经营描述:</span> 
                             <!-- 经营描述 -->
-                            {{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}
+                            <text>{{releaseInfo.businessDescription == null ?'':releaseInfo.businessDescription}}</text>
                           </view>
                           <view wx:elif="{{releaseInfo.incomeDescription != null }}">
                             <span style="color: #000000;font-size: 26rpx;">收益描述:</span> 
                             <!-- 收益描述 -->
-                            {{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}
+                            <text>{{releaseInfo.incomeDescription == null ?'' : releaseInfo.incomeDescription}}</text>
                           </view>
                         </view>
                         <!-- 查看全文 start -->
                         <view wx:if="{{length == true}}">
                           <view wx:if="{{jb != true}}" class="select_tm"  style="display:{{ bl!=true ? 'block': 'none'}};"></view>
                           <view class="select_textONE" bindtap="bindtapSelectInfo">
-                              查看全文<image src="/assets/images/info.png"></image>
+                              查看全文<image src="/assets/images/info/{{bl != true?'info':'info_to'}}.png"></image>
                           </view>
                         </view>
                         <!-- 查看全文 end -->
@@ -77,7 +80,7 @@
                                     <text class="lingfe_tie"><text wx:if="{{userinfo.provinceName !=null}}">{{userinfo.provinceName}}</text><text wx:elif="{{userinfo.provinceName ==null}}">火星</text>   已发布{{numBer}}帖</text>
                                 </view>
                                 <view>
-                                    <text class="message">
+                                    <text class="message" style='margin-left:0rpx;'>
                                       <text wx:if="{{userinfo.memo!=null}}">{{userinfo.memo}}</text>
                                       <text wx:elif="{{userinfo.memo ==null}}">来自星星的我..还没有设置签名</text>
                                     </text>
@@ -169,35 +172,35 @@
                             <view class="prices" wx:if="{{releaseInfo.projectDescription !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">项目描述:</view>
-                                    <view class="data_info">{{releaseInfo.projectDescription}} </view>
+                                    <text class="data_info">{{releaseInfo.projectDescription}} </text>
                                 </view>
                             </view>
                             <!-- 经营描述 -->
                             <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">经营描述:</view>
-                                    <view class="data_info">{{releaseInfo.businessDescription}} </view>
+                                    <text class="data_info">{{releaseInfo.businessDescription}} </text>
                                 </view>
                             </view>
                             <!-- 收益描述 -->
                             <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">收益描述:</view>
-                                    <view class="data_info">{{releaseInfo.incomeDescription}} </view>
+                                    <text class="data_info">{{releaseInfo.incomeDescription}} </text>
                                 </view>
                             </view>
                             <!--资金规划 -->
                             <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
                                 <view class="prices_info">
-                                  <view class="data_title">资金规划</view>
-                                  <view class="data_info">{{releaseInfo.fundDistribution}}</view>
+                                  <view class="data_title">资金规划:</view>
+                                  <text class="data_info">{{releaseInfo.fundDistribution}}</text>
                                 </view>
                             </view>
                             <!-- 转让原因 -->
                             <view class="prices" wx:if="{{releaseInfo.transferReason !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">转让原因:</view>
-                                    <view class="data_info">{{releaseInfo.transferReason}} </view>
+                                    <text class="data_info">{{releaseInfo.transferReason}} </text>
                                 </view>
                             </view>
                             <!-- 投放城市 -->
@@ -218,7 +221,7 @@
                             <view class="prices" wx:if="{{releaseInfo.resourceRequirements !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">能力要求:</view>
-                                    <view class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </view>
+                                    <text class="data_info"  style="width: auto;">{{releaseInfo.resourceRequirements}} </text>
                                 </view>
                             </view>
                             <!-- 产品种类 -->
@@ -239,7 +242,7 @@
                             <view class="prices" wx:if="{{releaseInfo.projectAdvantage !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">项目优势:</view>
-                                    <view class="data_info">{{releaseInfo.projectAdvantage}} </view>
+                                    <text class="data_info">{{releaseInfo.projectAdvantage}} </text>
                                 </view>
                             </view>
                             <!-- 产品类目 -->
@@ -357,12 +360,18 @@
 
 <!-- 评论文本框  start-->
 <view class="handleBox" hidden="{{activeIndex != 1}}">
-  <view class="inputValue">
-    <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
-    <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
-  </view>
-  <view style="float:left;">
-    <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="submitTo" />
-  </view>
+  <form bindsubmit="submitTo" report-submit = "true">
+    <view class="inputValue">
+      <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  
+      value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
+      <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  
+      value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+    </view>
+    
+    <view style="float:left;">
+      <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  />
+      <button class='faso_button' formType="submit"></button>
+    </view>
+  </form>
 </view>
 <!-- 评论文本框  end-->

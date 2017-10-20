@@ -15,22 +15,220 @@
     background: #eee;
     flex-direction: row;
 } */
+
+/*发布信息*/
+
+/**内容**/
+.dahuo_neiro{
+ max-height: 286rpx;
+}
+.neiro {
+  width: 100%;
+  background-color: #fff;
+  height: auto;
+  position: fixed;
+  top: -1rpx;
+  padding-bottom: 12rpx;
+  float: left;
+}
+.neiro_img{
+  width: 210rpx;
+  height: 124rpx;
+  float: left;
+  margin-top: 26rpx;
+  margin-bottom: 26rpx;
+  margin-left: 24rpx;
+}
+.neiro_img image{
+  width: 210rpx;
+  height: 124rpx;
+}
+.neiro_data {
+  width: 450rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  float: left;
+}
+.data_titile {
+  margin-left: 15rpx;
+  margin-top: 23rpx;
+  color: green;
+  font-size: 26rpx;
+}
+.data_pro {
+  margin-left: 15rpx;
+  margin-top: 2rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+  width: 300rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+.data_pro text {
+  color: #14BAC8;
+  margin-left: 4px;
+}
+.data_biaoqian {
+  margin-left: 15rpx;
+  margin-top: -2rpx;
+  margin-bottom: 26rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+}
+
+.title{
+  color: #14BAC8;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
+}
+
+.info{
+  margin-right: 15rpx;
+  color: #808080;
+  font-size: 25rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+}
+
+.data_biaoqian_view{
+  margin-right: 20rpx;
+  font-size: 22rpx;
+  float: left;
+  color: #333;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.data_biaoqian_view image{
+  margin-right: 12rpx;
+  height: 19rpx;
+  width: 22rpx;
+
+}
+
+.data_info{
+  padding-top: 16rpx;
+  padding-bottom: 5rpx;
+  margin-left: 24rpx;
+  line-height:33rpx;
+  width: 670rpx;
+  background-color: #fff;
+  color: #666;
+  font-size: 26rpx;
+  border-top: 1rpx solid #E4E4E4;
+  float: left;
+  height: auto;
+  max-height: 36px;
+}
+
+
+/*对话窗口*/
 .containerBox {
     width: 100%;
     display: flex;
     flex-direction:column;
     padding-bottom:56px; 
     background: #E8EFEF;
+    margin-top: 200rpx;
 }
-.textBox{
-  display:block;text-align: left;
-  max-width: 82%;border-radius:5px;font-size:13px;line-height: 26px;
-  margin:15px 10px 5px;
-  box-sizing: border-box;
-  padding: 0 5px; 
+
+/*左边*/
+/*三角*/
+.triangle_left{
+  margin-top:50rpx;
+  margin-left:32rpx;
+  width:0;
+  height:0;
+  border-top:3px solid transparent;
+  border-right:6px solid #fff;
+  border-bottom:3px solid transparent;
+  float: left;
 }
+
+.show_left {
+  width: 100%;
+  margin-top: 30rpx;
+}
+.textBox_left {
+  display: block;
+  text-align: left;
+  max-width: 55%;
+  border-radius: 5px;
+  font-size: 13px;
+  width: auto;
+  height: auto;
+  padding: 18rpx;
+  margin-top: 20rpx;
+    word-wrap : break-word;/*强制换行,   word-break:break-all;*/
+}
+.imgtox_left{
+  width: 100rpx;
+  height: auto;
+  float: left;
+}
+.image_left {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 21rpx;
+  border-radius: 50px;
+  float: left;
+}
+.fl {float: left;background: #fff;} 
+
+
+/*右边*/
+/*三角*/
+.triangle_right{
+  margin-top:50rpx;
+  margin-right:32rpx;
+  width:0; 
+  height:0; 
+  border-top:3px solid transparent;
+  border-left:6px solid #808080;
+  border-bottom:3px solid transparent;
+  float: right;
+}
+
+.show_right {
+  width: 100%;
+  margin-top: 30rpx;
+  float: right;
+}
+ .textBox_right{
+  display: block;
+  text-align: left;
+  max-width: 55%;
+  border-radius: 5px;
+  font-size: 13px;
+  width: auto;
+  height: auto;
+  padding: 18rpx;
+  word-wrap : break-word;/*强制换行,   word-break:break-all;*/
+  margin-top: 20rpx;
+} 
+
+.imgtox_right{
+  width: 100rpx;
+  height: auto;
+  float: right;
+}
+.image_right {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 21rpx;
+  border-radius: 50px;
+  float: right;
+}
+
 .fr{float:right;background:#808080;}
-.fl{float:left;background:paleturquoise;}
+/* .fl{float:left;background:paleturquoise;} */
+
+
 
 /*  输入文本框 */
 .handleBox {
@@ -72,47 +270,4 @@
   margin-left:0rpx;
 }
 
-/* 
-.handleBox {
-    width:100%;
-    height: 34px;
-    position: fixed;
-    bottom:0;
-    background: #efefef;
-    border-top:1px solid #ddd;
-    padding: 10px 0;
-}
-.btn_submit{
-  float: right; 
-  right: 5px;
-}
-.input_submit{
-    max-width:80%;
-    width:80%;
-    display: inline;
-    float: left;
-    background: #fff;
-    margin:2px 5px;
-    border-radius: 5px;
-} */
 
-.image_left{
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50px;
-  float: left;
-}
-.text_left{
-  margin-left: 14rpx;
-}
-
-
-.image_right{
-  width: 120rpx;
-  height: 120rpx;
-  float: right;
-  border-radius: 50px;
-}
-.text_right{
-  margin-right: 14rpx
-}

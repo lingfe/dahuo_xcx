@@ -1,5 +1,8 @@
 
 <view class="dahuo page">
+
+  <view class="o"></view>
+
   <!-- 列表 -->
   <view wx:for-items="{{array}}"> {{item}} </view>
 
