@@ -135,11 +135,15 @@ Page({
         cudScriptName: 'Save',
         nameSpaceMap: {
           rows: [{
-            id: wx.getStorageSync("personalId"),            //个人资料id
-            realname: that.data.inputValue,                 //名称
-            avatarUrl: that.data.avatarUrl,                 //头像
-            provinceName: that.data.provinceName,           //城市
-          }],
+            sys_userinfo:{
+              save:{
+                realname: that.data.inputValue,                 //名称
+                avatarUrl: that.data.avatarUrl,                 //头像
+                provinceName: that.data.provinceName,           //城市
+              },
+              id: wx.getStorageSync("personalId"),            //个人资料id
+            }
+          }]
         }
       })
     };
@@ -173,7 +177,9 @@ Page({
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            id: wx.getStorageSync("personalId")    //个人资料id
+            sys_userinfo:{
+              id: wx.getStorageSync("personalId")    //个人资料id
+            }
           }],
         }
       })
@@ -203,16 +209,5 @@ Page({
       //获取个人信息
       that.personalGetData(that);
     }
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    var that = this;
-    //获取个人信息
-    that.personalGetData(that);
-    //下拉完成后执行回退
-    wx.stopPullDownRefresh();
-  },
+  }
 })

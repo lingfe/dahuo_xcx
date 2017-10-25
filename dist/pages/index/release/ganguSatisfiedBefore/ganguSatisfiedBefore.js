@@ -263,7 +263,7 @@ Page({
             uploadimg(dataArr.splice(0, 1), pathArr, dataArr);
           } else {
             //调用请求发布
-            taht.reqSetData(pathArr.join(","));
+            that.reqSetData(pathArr.join(","));
           }
         },
         fail: function (res) {                         //接口调用失败的回调函数

@@ -10,35 +10,26 @@
  .page__bd {
    background-color: #E8EFEF;
  }
-.serach{
-    margin-top: 18rpx;
-    margin-left: 25rpx;
-    margin-right: 25rpx;
-    padding-left: 25rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
 
-}
+ /*菜单*/
 .select_text{
   text-align: center;
   color: #14BAC8;
 }
+.weui-navbar__title {
+display:inline-block;
+font-size:26rpx;
+max-width:8em;
+width:auto;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
 
-.serach_view_show{
-    display: block;
-    color: #808080;
-    padding-left: 285rpx;
-    padding-top: 15rpx;
-    padding-bottom: 15rpx;
-    font-size: 18rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
 }
-.message_list{
-  background-color: #f2f2f2;
-  padding-left: 8rpx;
-  padding-right: 8rpx;
-}
+
+
+/*个人信息*/
 .item {
   display: flex;
   flex-direction: row;
@@ -98,19 +89,6 @@
   text-overflow: ellipsis;/*文字隐藏后添加省略号*/
 
 }
-
-.weui-navbar__title {
-display:inline-block;
-font-size:26rpx;
-max-width:8em;
-width:auto;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-word-wrap:normal;
-
-}
-
 
 .message{
   color: #fff;

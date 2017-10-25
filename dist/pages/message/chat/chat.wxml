@@ -1,22 +1,22 @@
 <view class="wrap"> 
     <!-- 信息 start-->
     <view class='dahuo_neiro'>
-      <navigator url="/pages/index/info/info">
+      <navigator url="/pages/index/info/info?releaseId={{releaseInfo.id}}&personalId={{releaseInfo.personalId}}">
       <view class="neiro" bindtap="getInputValue">
         <view class="neiro_img">
-          <image src="https://static.daho.club/static/upload/web.echsoft.cn/admin/0f2ab319bae84dedbd123fb098e0adc6.jpg"></image>
+          <image src="{{releaseInfo.imageArray}}"></image>
         </view>
         <view class="neiro_data">
-          <view class="data_titile title">啊啊啊啊啊啊啊啊啊啊啊啊</view>
+          <view class="data_titile title">{{releaseInfo.title}}</view>
           <view class="data_pro">搭伙金额
-            <text>0万</text>
+            <text>{{releaseInfo.threshold}}万</text>
           </view>
           <view class="data_biaoqian">
             <view class="data_biaoqian_view">
-              <image src="/assets/images/type.png"></image>生意转让</view>
+              <image src="/assets/images/type.png"></image>{{releaseInfo.releaseType}}</view>
             <view class="data_biaoqian_view">
-              <image src="/assets/images/hanye.png"></image>餐饮</view>
-            <view class="data_biaoqian_view">10天前</view>
+              <image src="/assets/images/hanye.png"></image>{{releaseInfo.industryChoice}}</view>
+            <view class="data_biaoqian_view">{{releaseInfo.mdate}}</view>
           </view>
         </view>
       </view>
@@ -27,21 +27,45 @@
     <!-- 聊天窗口  start-->  
     <view class="containerBox">
        <view wx:key="{{index}}" wx:for="{{allContentList}}">
-            <view class='show_left' wx:key="{{index}}"  wx:if="{{index%2 == 1}}">
+            <!-- 搭友  start-->
+            <view class='show_left' wx:key="{{index}}"  wx:if="{{item.to.dex == 1}}">
               <view class='imgtox_left'>
                 <image src="http://img1.3lian.com/gif/more/11/201212/cd1d745ed855bef27f47c8aff0786067.jpg" class="image_left"/>
               </view>
               <view class='triangle_left'></view>
-              <view class='textBox_left fl'>{{item.value}}</view>
+              <view class='textBox_left fl'>{{item.to.value}}</view>
             </view>
+            <!-- 搭友  end-->
 
-            <view class='show_right' wx:key="{{index}}"  wx:if="{{index%2 == 0}}">
-              <view class='imgtox_right'>
-                <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+            <!-- 我  start-->
+            <view wx:if="{{item.to.dex == 0}}">
+              <!-- 图片  start-->
+              <view wx:if="{{item.to.imgs != null }}">
+                <view class='show_right' wx:for-item="img"  wx:key="{{*this}}" wx:for="{{item.to.imgs}}" >
+                  <view class='imgtox_right'>
+                    <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+                  </view>
+                  <view class='triangle_right'></view>
+                  <view  class='textBox_right fr' >
+                      <image src='{{img}}' bindtap='previewImage' id='{{img}}' class='img'/>
+                  </view>
+                </view>
               </view>
-              <view class='triangle_right'></view>
-              <view class='textBox_right fr'>{{item.value}}</view>
+              <!-- 图片  end-->
+
+              <!-- 文本  start-->
+              <view wx:if="{{item.to.value != null }}">
+                <view class='show_right'>
+                  <view class='imgtox_right'>
+                    <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
+                  </view>
+                  <view class='triangle_right'></view>
+                  <view class='textBox_right fr'>{{item.to.value}}</view>
+                </view>
+              </view>
+              <!-- 文本  end-->
             </view>
+            <!-- 我  end-->
        </view>
     </view>
     <!-- 聊天窗口  end-->   
@@ -49,10 +73,14 @@
     <!-- 评论文本框  start-->
     <view class="handleBox">
       <view class="inputValue">
-        <input class="input_submit"  value="{{inputTemp}}" bindinput="bindKeyInput" placeholder="点击输入，开始聊天吧"/>
+        <input class="input_submit" 
+        confirm-type='send'
+        type='text' 
+        bindconfirm="submitTo"
+        bindinput="bindKeyInput" placeholder="点击输入，开始聊天吧"/>
       </view>
       <view style="float:left;">
-        <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="submitTo" />
+        <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  bindtap="getImg" />
       </view>
     </view>
     <!-- 评论文本框  end-->

@@ -4,8 +4,7 @@
  * 
  * */
 var app = getApp();
-var utilMd5 = require('../../../../utils/md5.js');
-import __config from '../../../../config/config'
+
 Page({
 
   /**
@@ -16,19 +15,13 @@ Page({
     num: 0,            //计数
   },
 
-  /**
-   *表单提交，举报信息
-   */
+  //表单提交，举报信息
   submitForm: function () {
     var that = this;
     var imageArray = that.data.files;
 
     //提示
-    wx.showToast({
-      title: '正在上传图片',
-      icon: 'loading',
-      duration: 3000,
-    });
+    wx.showToast({ title: '正在上传图片', icon: 'loading',duration: 3000 });
 
     //上传图片数组
     uploadimg(imageArray.splice(0, 1), [], imageArray);
@@ -71,52 +64,49 @@ Page({
 
     //请求更新
     function reqSetData(pathArr) {
-      wx.request({
-        url: __config.basePath_web + "api/exe/save",
-        method: "POST",
-        header: { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" },
-        data: {
-          timeStamp: wx.getStorageSync("time"),
-          token: wx.getStorageSync("token"),
-          reqJson: JSON.stringify({
-            nameSpace: 'reportinfo',
-            scriptName: 'Query',
-            cudScriptName: 'Save',
-            nameSpaceMap: {
-              rows: [{
-                releaseId: that.data.releaseId,               //发布信息id
-                personalId: that.data.personalId,             //个人id
-                reportTypeId: that.data.reportTypeId,         //举报类型
-                remark: that.data.remark,                     //举报内容
-                imageArray: pathArr                           //举报图片
-              }]
-            }
-          })
-        },
-        success: function (res) {
-          //提示
-          wx.showToast({
-            title: '举报成功!',
-            icon: 'loading',
-            duration: 3000,
-            success: function (res) {
-              wx.switchTab({
-                url: '/pages/index/index',
-              });
-            }
-          });
-        },
-        fail: function (res) { },
-        complete: function () { }
+      var url = app.config.basePath_web + "api/exe/save";
+      //请求头
+      var header={
+        cookie:wx.getStorageSync("cookie"),
+        "Content-Type": "application/x-www-form-urlencoded"
+      };
+      //参数
+      var data = {
+        timeStamp: wx.getStorageSync("time"),
+        token: wx.getStorageSync("token"),
+        reqJson: JSON.stringify({
+          nameSpace: 'reportinfo',
+          scriptName: 'Query',
+          cudScriptName: 'Save',
+          nameSpaceMap: {
+            rows: [{
+              releaseId: that.data.releaseId,               //发布信息id
+              personalId: that.data.personalId,             //个人id
+              reportTypeId: that.data.reportTypeId,         //举报类型
+              remark: that.data.remark,                     //举报内容
+              imageArray: pathArr                           //举报图片
+            }]
+          }
+        })
+      };
+      //发送请求
+      app.request.reqPost(url,header,data,function(res){
+        //提示
+        wx.showToast({
+          title: '举报成功!',
+          icon: 'loading',
+          duration: 3000,
+          success: function (res) {
+            wx.switchTab({
+              url: '/pages/index/index',
+            });
+          }
+        });
       });
-
     }
   },
 
-
-  /**
-   * 内容计数
-   */
+  //内容计数
   bindconfirmValue: function (e) {
     if (e.detail.value.length > 500) {
       wx.showModal({
@@ -131,9 +121,7 @@ Page({
     });
   },
 
-  /**
-   * 删除图片
-   */
+  //删除图片
   bindtapImageDelete: function (e) {
     var img = e.currentTarget.dataset.img;
     var files = this.data.files;
@@ -148,9 +136,7 @@ Page({
     });
   },
 
-  /**
-   * 获取图片
-   */
+  //获取图片
   chooseImage: function (e) {
     var that = this;
     if (that.data.files.length >= 6) {
@@ -174,9 +160,7 @@ Page({
     })
   },
 
-  /**
-   * 图片预览
-   */
+  //图片预览
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id,  // 当前显示图片的http链接
@@ -184,14 +168,13 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //页面加载
   onLoad: function (options) {
+    var data=JSON.parse(options.data);
     this.setData({
-      releaseId: options.releaseId,       //发布信息id
-      personalId: options.personalId,     //个人id
-      reportTypeId: options.reportTypeId  //发布类型
+      releaseId: data.releaseId,       //发布信息id
+      personalId: data.personalId,     //个人id
+      reportTypeId: data.reportTypeId  //发布类型
     });
   },
 

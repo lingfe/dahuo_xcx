@@ -17,8 +17,8 @@ Page({
     //参数
     var data = {
       grant_type: 'client_credential',
-      appid: 'wxdb07051dc3fc031e',
-      secret: 'b2dec689f9b117a311891c6ac5ae9407'
+      appid: app.globalData.appid,
+      secret: app.globalData.secret
     };
 
     //发送请求
@@ -42,7 +42,7 @@ Page({
             "color": "#173177"
           },
           "keyword2": {
-            "value": loginRes.userInfo.nickName,
+            "value": loginRes.data.userInfo.nickName,
             "color": "#173177"
           },
           "keyword3": {
@@ -70,7 +70,7 @@ Page({
     wx.showToast({ title: '正在登录..', icon: 'loading', duration: 1000, });
     //设置参数
     var res = {
-      userInfo: that.data.userInfo,
+      data: { userInfo: that.data.userInfo},
       formid: e.detail.formId,
     }
     //发送模板，并登录
@@ -78,7 +78,7 @@ Page({
   },
 
   //发起登录请求
-  loginRequest:function(res){
+  loginRequest:function(that){
     //地址
     var url = app.config.basePath_sys + "api/plug/save";
     //请求头
@@ -97,8 +97,8 @@ Page({
         nameSpaceMap: {
           rows: [{
             openid: wx.getStorageSync('openid'),         //用户id
-            realname: res.userInfo.nickName,
-            avatarUrl: res.userInfo.avatarUrl,
+            realname: that.data.userInfo.nickName,
+            avatarUrl: that.data.userInfo.avatarUrl,
             appId: app.globalData.loginAppid,
           }]
         }
@@ -141,17 +141,54 @@ Page({
    */
   onLoad: function (options) {
     var that= this;
-    //获取用户信息
-    var userInfo = wx.getStorageSync('userinfo');
-    console.log(userInfo);
-    that.setData({
-      userInfo: userInfo
+    //自动登录第一步，获取openid
+    that.getOpenId(that);
+  },
+
+  //获取openid
+  getOpenId: function (that) {
+    //调用登录接口
+    wx.login({
+      success: function (logRes) {
+        //获取openid
+        var url = app.config.login_sys + 'sns/jscode2session';
+        var data = {
+          appid: app.globalData.appid,
+          secret: app.globalData.secret,
+          js_code: logRes.code,
+          grant_type: 'authorization_code'
+        }
+        //发送请求
+        app.request.reqGet(url, data,
+          function (res) {
+            app.globalData.openid = res.data.openid;
+            wx.setStorageSync('openid', res.data.openid);
+            that.setData({ openid: res.data.openid });
+            //自动登录第二步，获取微信用户
+            that.getUserInfo(that);
+          });
+      }, fail: function (res) {
+        console.log(res);
+      }
     });
-    //设置参数
-    var res = {
-      userInfo: userInfo,
-    }
-    //发送登录服务器请求
-    that.loginRequest(res); 
+  },
+
+  //自定义获取用户数据
+  getUserInfo: function (that) {
+    //调用登录接口
+    wx.login({
+      success: function () {
+        //获取用户
+        wx.getUserInfo({
+          success: function (res) {
+            app.globalData.userInfo = res.userInfo
+            wx.setStorageSync('userinfo', res.userInfo);
+            that.setData({ userInfo: res.userInfo});
+            ////自动登录第三步，发送登录服务器请求
+            that.loginRequest(that); 
+          }
+        });
+      }
+    })
   },
 })

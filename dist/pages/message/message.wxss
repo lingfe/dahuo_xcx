@@ -64,9 +64,9 @@ display: block;
 
 .image_right{
     margin-top: 26rpx;
-    width: 100rpx; 
-    height: 100rpx;
-    border-radius: 20rpx;
+    width: 120rpx; 
+    max-height: 90rpx;
+    background-repeat: no-repeat;
 }
 
 .item-middle{

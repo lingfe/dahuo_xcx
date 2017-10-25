@@ -21,36 +21,42 @@
             <!-- 姓名  start -->
             <view class="weui-cell_to weui-cells_to title" bindtap="bindtapClear">
                 <view class="weui-cell__bd">姓名</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.realname  == "" ? '请填写' : userinfo.realname}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                  {{userinfo.realname  == "" ? '请填写' : userinfo.realname}}
+                </view>
             </view>
             <!-- 姓名  end -->
 
             <!-- 地域  start -->
             <view class="weui-cell_to weui-cells_to weui-cells_after-title title"  bindtap="bindtapSearch">
                 <view class="weui-cell__bd">地域</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.provinceName}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                  {{userinfo.provinceName  == "" ? '请填写' : userinfo.provinceName}}
+                </view>
             </view>
             <!-- 地域  end -->
 
             <!-- 签名  start -->
             <view class="weui-cell_to weui-cells_to title" data-autograph="{{userinfo.memo}}"  bindtap="bindtapAutograph">
                 <view class="weui-cell__bd">签名</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{userinfo.memo  == null ? '请填写' : userinfo.memo}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                  {{userinfo.memo  == null ? '请填写' : userinfo.memo}}
+                </view>
             </view>
             <!-- 签名  end -->
 
             <!-- 手机号  start -->
-            <view class="weui-cell_to weui-cells_to weui-cells_after-title title" style="border:none;" >
+            <view class="weui-cell_to weui-cells_to weui-cells_after-title title" bindtap="bindtapPhone" style="border:none;" >
                 <view class="weui-cell__bd">手机号</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">
-                暂时未开通
-                <!-- bindtap="bindtapPhone"  {{userinfo.mobile != null ? userinfo.mobile:'未绑定'}} -->
+                  {{userinfo.mobile != null ? userinfo.mobile:'未绑定'}}
                 </view>
             </view>
             <!-- 手机号  end -->
         </view>
     </view>       
 </view>
+
 <!-- 弹窗 start -->
 <view class="jubao_bg" wx:if="{{isUpdateName == true}}">
   <view class="jubao" >

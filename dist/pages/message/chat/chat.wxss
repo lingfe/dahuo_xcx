@@ -126,6 +126,11 @@
   max-height: 36px;
 }
 
+/*图片*/
+.img{
+  width:200rpx;
+  height:150rpx;
+}
 
 /*对话窗口*/
 .containerBox {

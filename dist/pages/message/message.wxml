@@ -28,12 +28,14 @@
       </view>
       <view class="line"></view>
     </navigator>
-    
+    <!-- 消息 start -->
     <block wx:for="{{messages}}" wx:key="{{*this}}">
-      <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" 
+       <navigator url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}&activeIndex=1" 
        bindlongpress='bindlongtapURL' 
-       id='{{item.id}}' data-index="{{index}}">
-      <!-- <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/chat/chat"> -->
+       id='{{item.id}}' data-index="{{index}}"> 
+       <!-- <navigator bindlongpress='bindlongtapURL' 
+      id='{{item.id}}' 
+      data-index="{{index}}" url="/pages/message/chat/chat?releaseId={{item.releaseId}}&personalId={{item.personalId}}">  -->
         <view class="item">
           <view class="item-left">
             <text wx:if="{{item.static !=1 }}" class="mark text"></text>
@@ -51,11 +53,12 @@
             </view>
           </view>
           <view class="item_right">
-            <image src="{{item.imgUrl}}" class="image_right" />
+            <image  src="{{item.imgUrl}}" class="image_right" />
           </view>
         </view>
         <view class="line"></view>
       </navigator>
     </block>
+    <!-- 消息 end -->
   </view>
 </view>

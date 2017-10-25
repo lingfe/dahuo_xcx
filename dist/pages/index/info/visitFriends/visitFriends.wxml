@@ -39,7 +39,7 @@
               <view class="data_biaoqian">
                   <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
                   <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-                  <view class="data_biaoqian_view">{{item.cdate}}前</view>
+                  <view class="data_biaoqian_view">{{item.mdate}}前</view>
               </view>
             </view>
             <view class="data_info info">

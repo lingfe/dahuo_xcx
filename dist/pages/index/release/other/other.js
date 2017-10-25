@@ -5,8 +5,7 @@
  * 
  * */
 var app = getApp();
-var utilMd5 = require('../../../../utils/md5.js');
-import __config from '../../../../config/config'
+
 Page({
 
   /**
@@ -30,9 +29,7 @@ Page({
     dad:false,                            //是否保存到档案袋
   },
 
-  /**
- * 生命周期函数--监听页面卸载
- */
+  //页面卸载
   onUnload: function () {
     var that = this;
     var dad=that.data.title==null?false:true;
@@ -67,58 +64,42 @@ Page({
 
   //电话号码
   bindinput_phone:function(e){
-    this.setData({
-      phone: e.detail.value
-    });
+    this.setData({ phone: e.detail.value });
   },
 
   //需要金额
   bindinputValue: function (e) {
-    this.setData({
-      threshold: e.detail.value
-    });
+    this.setData({ threshold: e.detail.value  });
   },
 
   //选择行业
   industryChoiceClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/dahuo/industryChoice/industryChoice"
-    });
+    wx.navigateTo({ url: "/pages/dahuo/industryChoice/industryChoice"   });
   },
 
   //项目描述
   projectDescriptionClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/index/release/partnership/projectDescription/projectDescription"
-    });
+    wx.navigateTo({ url: "/pages/index/release/partnership/projectDescription/projectDescription"  });
   },
 
   //收益描述
   incomeDescriptionClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/index/release/partnership/incomeDescription/incomeDescription"
-    });
+    wx.navigateTo({ url: "/pages/index/release/partnership/incomeDescription/incomeDescription" });
   },
 
   //阅读并同意,相关条约
   bindAgreeChange: function (e) {
-    this.setData({
-      isAgree: !!e.detail.value.length
-    });
+    this.setData({ isAgree: !!e.detail.value.length   });
   },
 
   //提示框
   showModal: function (msg) {
-    wx.showModal({
-      title: msg,
-      showCancel: false,
-    });
+    wx.showModal({ title: msg, showCancel: false });
   },
 
   //表单提交
   formSubmit: function (e) {
     var that =this;
-
     //标题
     var title = e.detail.value.title;
     if (app.checkInput(title)) {
@@ -137,19 +118,20 @@ Page({
       return;
     }
 
-
     //行业选择
     var industryChoice = e.detail.value.industryChoice;
     if (app.checkInput(industryChoice)) {
       that.showModal("行业选择不能为空!");
       return;
     }
+
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
     if (app.checkInput(projectDescription)) {
       that.showModal("项目描述不能为空!");
       return;
     }
+
     //收益描述
     var incomeDescription = e.detail.value.incomeDescription;
     if (app.checkInput(incomeDescription)) {
@@ -167,6 +149,7 @@ Page({
       that.showModal("电话号码必须是11位数！");
       return;
     }
+
     //正则表达式验证电话号码
     var pattern = /[^\d]/g;
     //获取电话号码
@@ -230,10 +213,10 @@ Page({
     //多张图片上传
     function uploadimg(path, pathArr, dataArr) {
       wx.uploadFile({
-        url: __config.domain,                       //开发者服务器 url
-        filePath: path[0],                          //要上传文件资源的路径
-        name: 'file',                                //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
-        header: {                                   //HTTP 请求 Header , header 中不能设置 Referer
+        url: app.config.domain,                       //开发者服务器 url
+        filePath: path[0],                            //要上传文件资源的路径
+        name: 'file',                                 //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+        header: {                                     //HTTP 请求 Header , header 中不能设置 Referer
           cookie: wx.getStorageSync("cookie"),
           "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -257,7 +240,7 @@ Page({
     var that=this;
     //发送请求,发布信息,
     wx.request({
-      url: __config.basePath_web + "api/exe/save",
+      url: app.config.basePath_web + "api/exe/save",
       method: "POST",
       header: { cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded"},
       data: {
@@ -322,7 +305,7 @@ Page({
 
     var imageArray = that.data.imageArray;
     for (var j = 0; j < imageArray.length; j++) {
-      var strImg = __config.domainImage + imageArray[j];
+      var strImg = app.config.domainImage + imageArray[j];
       if (strImg == img) {
         imageArray.splice(j, 1);
       }
@@ -382,13 +365,11 @@ Page({
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files // 需要预览的图片http链接列表
+      urls: this.data.files       // 需要预览的图片http链接列表
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //页面加载
   onLoad: function (options) {
     if (options.releaseId != null) {
       if (options.text != null) {
@@ -406,7 +387,7 @@ Page({
     var that = this;
     //发送请求,获取发布信息,
     wx.request({
-      url: __config.basePath_web + "api/exe/get",
+      url: app.config.basePath_web + "api/exe/get",
       method: "POST",
       header: { cookie: wx.getStorageSync("cookie"),"Content-Type": "application/x-www-form-urlencoded" },
       data: {
@@ -431,7 +412,7 @@ Page({
         if (info.imageArray != null && info.imageArray!=""){
           var arr = info.imageArray.split(',');
           for (var i = 0; i < arr.length; ++i) {
-            arr[i] = __config.domainImage + arr[i];
+            arr[i] = app.config.domainImage + arr[i];
           }
           img = info.imageArray.split(",");
         }
@@ -458,9 +439,7 @@ Page({
   },
 
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  //页面显示
   onShow: function () {
     //直接从缓存里面取
     var that=this;

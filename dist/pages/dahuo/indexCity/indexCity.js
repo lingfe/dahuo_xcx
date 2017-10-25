@@ -38,12 +38,9 @@ Page({
     })
     //返回上一页
     wx.navigateBack();
-
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //页面加载
   onLoad: function (options) {
     var that=this;
     wx.showModal({

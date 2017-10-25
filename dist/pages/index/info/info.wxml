@@ -273,13 +273,6 @@
                                     <view class="data_info">{{releaseInfo.agencyRule}} </view>
                                 </view>
                             </view>
-                            <!-- 团队介绍 -->
-                            <view class="prices" wx:if="{{releaseInfo.teamIntroduction !=null}}">
-                                <view class="prices_info">
-                                    <view class="data_title">团队介绍:</view>
-                                    <view class="data_info">{{releaseInfo.teamIntroduction}} </view>
-                                </view>
-                            </view>
                             <!-- 项目详细信息  end-->
 
                             <!-- 图片  start-->
@@ -298,7 +291,12 @@
                             <view class="weui-btn-area" wx:if="{{userAn}}">
                                 <view class="view_phon" bindtap="bindtapPhone">电话</view>
                                 <view class="view_1">|</view>
-                                <view class="view_info" bindtap="bindtagFasho">私信</view>
+                                <!-- <navigator bindlongpress='bindlongtapURL' 
+                                id='{{item.id}}' 
+                                data-index="{{index}}" 
+                                url="/pages/message/chat/chat?releaseId={{releaseInfo.id}}&personalId={{releaseInfo.personalId}}"> 
+                                   --><view class="view_info">私信</view>
+                                <!-- </navigator> -->
                             </view>
                             <!-- 确定   start-->
                           </view>

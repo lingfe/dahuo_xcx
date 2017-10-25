@@ -4,6 +4,7 @@
  *   描述:  发布_加盟分店_投放城市页面
  *   url:pages/index/release/affiliateStores/throwInTheCity/throwInTheCity.js
  * */
+ var app=getApp();
 
 Page({
 
@@ -11,142 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    str: [{
-      name: "华东地区",
-      index: 0,
-      content: [{
-        name: "山东",
-        checked: false,
-      }, {
-        name: "江苏",
-        checked: false,
-      }, {
-        name: "安徽",
-        checked: false,
-      }, {
-        name: "浙江",
-        checked: false,
-      }, {
-        name: "福建",
-        checked: false,
-      }, {
-        name: "上海",
-        checked: false,
-      }]
-
-    }, {
-      name: '华南地区',
-      index: 1,
-      content: [{
-        name: "广东",
-        checked: false,
-      }, {
-        name: "广西",
-        checked: false,
-      }, {
-        name: '海南',
-        checked: false,
-      }]
-    }, {
-      name: "华中地区",
-      index: 2,
-      content: [{
-        name: "湖北",
-        checked: false,
-      }, {
-        name: "湖南",
-        checked: false
-      }, {
-        name: "河南",
-        checked: false
-      }, {
-        name: "江西",
-        checked: false
-      }]
-    }, {
-      name: '华北地区',
-      index: 3,
-      content: [{
-        name: "北京",
-        checked: false,
-      }, {
-        name: "天津",
-        checked: false
-      }, {
-        name: "河北",
-        checked: false
-      }, {
-        name: "山西",
-        checked: false
-      }, {
-        name: "内蒙古",
-        checked: false
-      }]
-    }, {
-      name: "西北地区",
-      index: 4,
-      content: [{
-        name: "宁夏",
-        checked: false
-      }, {
-        name: "新疆",
-        checked: false
-      }, {
-        name: "青海",
-        checked: false
-      }, {
-        name: "陕西",
-        checked: false
-      }, {
-        name: "甘肃",
-        checked: false
-      }]
-    }, {
-      name: "西南地区",
-      index: 5,
-      content: [{
-        name: "四川",
-        checked: false
-      }, {
-        name: "云南",
-        checked: false
-      }, {
-        name: "贵州",
-        checked: false
-      }, {
-        name: "西藏",
-        checked: false
-      }, {
-        name: "重庆",
-        checked: false
-      }]
-    }, {
-      name: "东北地区",
-      index: 6,
-      content: [{
-        name: "辽宁",
-        checked: false
-      }, {
-        name: "吉林",
-        checked: false
-      }, {
-        name: "黑龙江",
-        checked: false,
-      }]
-    }, {
-      name: "台港澳地区",
-      index: 7,
-      content: [{
-        name: "台湾",
-        checked: false,
-      }, {
-        name: "香港",
-        checked: false
-      }, {
-        name: "澳门",
-        checked: false
-      }]
-    }],               //城市数据
+    str: app.dahuoData.throwInTheCityData,  //投放城市数据
     data:[],          //参数
     checked: false,   //全国是否选中
   },

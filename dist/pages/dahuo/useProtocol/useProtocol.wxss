@@ -3,6 +3,8 @@
  *   描述:  用户使用协议
  * 
  * */
+
+ /*标题*/
  .title_top{
   width: 100%;
   text-align: left;
@@ -11,6 +13,7 @@
   margin-left: 15rpx;
 }
 
+/*内容*/
 .neiro{
   width: 100%;
   height: auto;

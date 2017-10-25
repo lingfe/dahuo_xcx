@@ -6,9 +6,6 @@
  * */
 //获取应用实例
 var app = getApp();
-var server = require('../../utils/server');
-var utilMd5 = require('../../utils/md5.js');
-import __config from '../../config/config'
 
 Page({
   data: {
@@ -20,150 +17,10 @@ Page({
     isPrices:false,         //是否显示价格控制
     windowHeight:1000,      //默认高度
     screen:false,           //是否显示筛选控制
-    tabs: [{                //删选数据
-      name: "金额",
-      content: [{
-        minThreshold: '全部',
-        maxThreshold: null,
-        value: '0',
-        checked: true,
-      }, {
-          minThreshold: 0,
-          maxThreshold: 1,
-        value: '1',
-        checked: false,
-      }, {
-          minThreshold: 1,
-          maxThreshold: 5,
-        value: '2',
-        checked: false,
-      }, {
-          minThreshold: 5,
-          maxThreshold: 50,
-        value: '3',
-        checked: false,
-      }, {
-          minThreshold: 50,
-        maxThreshold: null,
-        value: '4',
-        checked: false,
-      }],
-    },
-    {
-      name: "类型",
-      content: [{
-        name: '全部',
-        value: '0',
-        checked: false,
-      },{
-        name: '合伙创业',
-        value: '1001',
-        checked: false,
-      }, {
-          name: '干股纳才 ',
-        value: '1002',
-        checked: false,
-      }, {
-        name: '加盟代理',
-        value: '1003',
-        checked: false,
-      }, {
-          name: '股权交易',
-        value: '1004',
-        checked: false,
-      }, {
-          name: '生意转让',
-        value: '1005',
-        checked: false,
-        notype: '非搭伙类型',
-      }, {
-          name: '金融理财',
-        value: '1006',
-        checked: false,
-        notype: '非搭伙类型',
-      }, {
-          name: '房产投资',
-        value: '1007',
-        checked: false,
-        notype: '非搭伙类型',
-      }, {
-        name: '其他',
-        value: '1008',
-        checked: false,
-        notype:'非搭伙类型',
-      }],
-    },
-    {
-      name: "行业",
-      content: [{
-        name: '全部',
-        value: '0',
-        checked: false,
-      },{
-        name: '餐饮',
-        value: '1',
-        checked: false,
-      }, {
-          name: '休闲娱乐',
-        value: '2001',
-        checked: false,
-      }, {
-          name: '互联网',
-        value: '2',
-        checked: false,
-      }, {
-          name: '传媒',
-        value: '3',
-        checked: false,
-      },{
-          name:"教育",
-        value:'30001',
-        checked:false,
-      },{
-          name: '装修',
-        value: '4',
-        checked: false,
-      }, {
-          name: "生活服务",
-        value:'40001',
-        checked:false,
-      }, {
-          name: "婚庆",
-        value: '40002',
-        checked: false,
-      },{
-          name: '百货',
-        value: '5',
-        checked: false,
-      },{
-          name: '医疗保健',
-        value: '6',
-        checked: false,
-      },{
-          name:"美容美发",
-          value:'7',
-          checked:false
-      },{
-          name:'汽车',
-          value:'8',
-          checked:false
-      },{
-          name:'地产',
-          value:'9',
-          checked:false
-      },{
-          name:'金融',
-          value:'10',
-          checked:false,
-      },{
-          name:'其他',
-          value:'11',
-          checked:false
-      }],
-    }],
-    activeIndex: 0,         //tab切换下标
-    sliderOffset: 0,        //坐标x
-    sliderLeft: 0,          //坐标y
+    tabs: app.dahuoData.sxData,        //筛选数据
+    activeIndex: 0,                    //tab切换下标
+    sliderOffset: 0,                   //坐标x
+    sliderLeft: 0,                     //坐标y
     tabsName: ['金额','类型','行业'],   //筛选类型
     str: {
       AmountOfMoney: [{
@@ -180,7 +37,46 @@ Page({
     isCaidan:true,          //底部菜单是否显示
     dahuo:1,                //搭伙菜单
     personal:1,             //个人菜单
+    dh:true,                //导航图片
+    tz:true,                //通知信息显示
     data:null               //请求参数
+  },
+
+  //获取是否有通知
+  getIsnotice: function (that) {
+    var url = app.config.basePath_web + "api/exe/get";
+    //请求头
+    var header = { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync("time"),
+      token: wx.getStorageSync("token"),
+      reqJson: JSON.stringify({
+        nameSpace: 'notice',       //发布信息表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          rows: [{
+            static: 0,                                      //0=未读
+            personalId: wx.getStorageSync("personalId")    //个人id
+          }],
+        }
+      })
+    };
+
+    //发送请求
+    app.request.reqPost(url, header, data, function (res) {
+      var row = res.data.rows;
+      if (row.length != 0) {
+        that.setData({ tz:true, isnotice: row.length });
+      } else {
+        that.setData({ tz:false, isnotice: 0 });
+      }
+    });
+  },
+
+  //关闭导航图片
+  bindtapCloseDh:function(e){
+    this.setData({dh:false});
   },
 
   //删除筛选条件,重复点击去除
@@ -387,7 +283,7 @@ Page({
       success: function (res) {
         var latitude = res.latitude;
         var longitude = res.longitude;
-        server.getJSON('/waimai/api/location.php', {
+        app.service.getJSON('/waimai/api/location.php', {
           latitude: latitude,
           longitude: longitude
         }, function (res) {
@@ -397,9 +293,7 @@ Page({
             if (app.checkInput(city)) return;
             if (city.lastIndexOf("市") != -1) city = city.substring(0,city.lastIndexOf("市"));
             else if (city.lastIndexOf("区") != -1) city = city.substring(0, city.lastIndexOf("区"));
-            that.setData({
-              addressInfo: city
-            });
+            that.setData({ addressInfo: city });
           } else {
             that.setData({
               addressInfo: '定位失败'
@@ -415,10 +309,10 @@ Page({
     //当前
     var that = this;
 
-    //定位
-    //that.getAddress(that);
     //调用默认请求
     that.requestData(that);
+    //获取是否有通知
+    that.getIsnotice(that);
 
     //设置页面高度
     that.setData({
@@ -497,7 +391,7 @@ Page({
 
     //发送请求  
     wx.request({
-      url: __config.basePath_web+"api/exe/get",
+      url: app.config.basePath_web+"api/exe/get",
       method: "POST",
       header: { cookie: wx.getStorageSync('cookie'),"Content-Type": "application/x-www-form-urlencoded"},
       data: {
@@ -525,7 +419,7 @@ Page({
 
         for (var i = 0, lenI = list.length; i < lenI; ++i) {
           var strTime = that.getDate(list[i].mdate);
-          if (list[i].imageArray !=null )list[i].imageArray = __config.domainImage + list[i].imageArray.split(',')[0];
+          if (list[i].imageArray !=null )list[i].imageArray = app.config.domainImage + list[i].imageArray.split(',')[0];
           if (list[i].projectDescription != null) list[i].projectDescription = list[i].projectDescription.substring(0, 55);
           if (list[i].incomeDescription != null) list[i].incomeDescription = list[i].incomeDescription.substring(0, 55);
           if (list[i].businessDescription != null) list[i].businessDescription = list[i].businessDescription.substring(0, 55);
@@ -550,24 +444,20 @@ Page({
     var date2 = new Date();    //结束时间
     var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
 
-      //计算出相差年
-      //还有一个小bug，当事件差为负数时，值为负数，将上面leftsecond代码改一下
-      //var leftsecond = parseInt(Math.abs((date2.getTime() - date1.getTime())) / 1000);
-
-      //计算出相差月
-      var months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    //计算出相差月
+    var months = (date2.getFullYear() - date1.getFullYear()) * 12;
     if(months != 0) {
       return months + "月";
     }
 
-      //计算出相差天数
-      var days = Math.floor(date3 / (24 * 3600 * 1000));
+    //计算出相差天数
+    var days = Math.floor(date3 / (24 * 3600 * 1000));
     if(days != 0) {
       return days + "天";
     }
 
-      //计算出小时数
-      var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
+    //计算出小时数
+    var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
     var hours = Math.floor(leave1 / (3600 * 1000));
     if(hours != 0) {
       return hours + "小时";
@@ -602,9 +492,7 @@ Page({
     })
   },
 
-  /**
-  * 生命周期函数--监听页面显示
-  */
+  //监听页面显示
   onShow: function () {
     //当前
     var that=this;
@@ -616,6 +504,9 @@ Page({
       });
       return;
     }
+    
+    //获取是否有通知
+    that.getIsnotice(that);
 
     //判断地址
     if (that.data.addressInfo != that.data.city && that.data.city!=null){
@@ -629,16 +520,12 @@ Page({
     }
   },
 
-  /**
-   * 隐藏
-   */
+  //隐藏价格
   onHide:function(){
     this.data.isPrices = false;
   },
 
-  /**
- * 页面相关事件处理函数--监听用户下拉动作
- */
+  //用户下拉动作
   onPullDownRefresh: function () {
     var that = this;
     that.setData({
@@ -651,9 +538,7 @@ Page({
     wx.stopPullDownRefresh();
   },
 
-  /**
- * 页面上拉触底事件的处理函数
- */
+  //页面上拉触底事件的处理函数
   onReachBottom: function () {
     var that = this;
     var num = that.data.pagenum;

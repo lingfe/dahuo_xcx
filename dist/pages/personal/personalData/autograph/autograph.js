@@ -40,8 +40,12 @@ Page({
         cudScriptName: 'Save',
         nameSpaceMap: {
           rows: [{
-            id: wx.getStorageSync("personalId") ,    //个人资料id
-            memo: that.data.autograph                //签名
+            sys_userinfo:{
+              save:{
+                memo: that.data.autograph            //签名
+              },
+              id: wx.getStorageSync("personalId"),    //个人资料id
+            }
           }],
         }
       })
@@ -72,7 +76,9 @@ Page({
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            id: that.data.personalId    //个人资料id
+            sys_userinfo:{
+              id: that.data.personalId    //个人资料id
+            }
           }],
         }
       })

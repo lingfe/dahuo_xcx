@@ -12,35 +12,8 @@
    height: auto;
    width: 100%;
  }
-.serach{
-    margin-top: 18rpx;
-    margin-left: 25rpx;
-    margin-right: 25rpx;
-    padding-left: 25rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
 
-}
-.select_text{
-  text-align: center;
-  color: #14BAC8;
-}
-
-.serach_view_show{
-    display: block;
-    color: #808080;
-    padding-left: 285rpx;
-    padding-top: 15rpx;
-    padding-bottom: 15rpx;
-    font-size: 18rpx;
-    background-color: #F3F3F3;
-    border-radius: 12rpx;
-}
-.message_list{
-  background-color: #f2f2f2;
-  padding-left: 8rpx;
-  padding-right: 8rpx;
-}
+ /*个人信息*/
 .item {
   display: flex;
   flex-direction: row;
@@ -104,19 +77,6 @@
 
 }
 
-.weui-navbar__title {
-display:inline-block;
-font-size:26rpx;
-max-width:8em;
-width:auto;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-word-wrap:normal;
-
-}
-
-
 .message{
   color: #fff;
   line-height: 10rpx;
@@ -150,18 +110,12 @@ word-wrap:normal;
     color: #ffffff;
     display:table-cell;
 }
+
 .line{
     height: 1px;
     width:100%;
     background-color: #E0E1E2;
 }
-.weui-tab {
-position:relative;
-height:100%;
-top: 17rpx;
-background-color: #fff;
-}
-
 
 
 /**内容**/
@@ -265,128 +219,4 @@ background-color: #fff;
   border-top: 1rpx solid #F0F0F0;
   height: auto;
   max-height: 40px;
-}
-/** 发布样式 **/
-.release{
- position: fixed;
- right: 1.3em;
- bottom: 1.3em;
-}
-.release image{
-  width: 60px;
-  height: 60px;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.data_top{
-  margin-left: 30rpx;
-  width: 645rpx;
-  background-color: #fff;
-  height:85rpx;
-  border-bottom:1rpx solid #D7D7D7;
-  margin-bottom: 10rpx;
-  float: left;
-}
-.float-btn{
-  float: right;
-  margin-right: 0rpx;
-  margin-top: 20rpx;
-  margin-left: 36rpx;
-}
-
-.weui-navbar {
-display:-webkit-box;
-display:-webkit-flex;
-display:flex;
-position:absolute;
-z-index:500;
-background-color: #fff;
-top:0;
-width:100%;
-
-}
-.button_css{
-  width:160rpx;height:55rpx;font-size:24rpx;background-color:#fff;border: 1px solid #999;
-  position: relative;
-  top: -4rpx;
-}
-button[type="default"] {
-color:#000000;
-background-color:#fff;
-
-}
-button::after {
-content:" ";
-width:200%;
-height:200%;
-position:absolute;
-top:0;
-left:0;
-border:0px solid rgba(0, 0, 0, 0.2);
--webkit-transform:scale(0.5);
-transform:scale(0.5);
--webkit-transform-origin:0 0;
-transform-origin:0 0;
-box-sizing:border-box;
-border-radius:10px;
-}
-
-.weui-tab__panel {
-  box-sizing:border-box;
-  height:49%;
-  padding-top:50px;
-  overflow:auto;
-  -webkit-overflow-scrolling:touch;
-  background-color: #E8EFEF;
-}
-
-.weui-navbar__slider {
-position:absolute;
-content:" ";
-left:0;
-bottom:0;
-width:3em;
-height:8rpx;
-background-color:#1aad19;
--webkit-transition:-webkit-transform .3s;
-transition:-webkit-transform .3s;
-transition:transform .3s;
-transition:transform .3s,-webkit-transform .3s;
-
-}
-
-.info_data_info {
-padding-top:17rpx;
-padding-bottom:28rpx;
-margin-left:30rpx;
-width:645rpx;
-background-color:#fff;
-color:#666;
-font-size:22rpx;
-border-top:1rpx solid #D7D7D7;
-float:left;
-height:22px;
-
-}
-.info_info {
-margin-right:15rpx;
-color:#808080;
-font-size:22rpx;
-overflow:hidden;
-text-overflow:ellipsis;
--overflow: ellipsis; /**文字隐藏后添加省略号*//** white-space: nowrap;强制不换行*/
 }

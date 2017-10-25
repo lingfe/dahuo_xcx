@@ -3,6 +3,8 @@
  *   描述:  搭伙信息发布规则
  * 
  * */
+
+ /*标题*/
 .title_top{
   width: 100%;
   text-align: center;
@@ -10,6 +12,7 @@
   margin-top: 30rpx;
 }
 
+/*内容*/
 .neiro{
   width: 100%;
   height: auto;

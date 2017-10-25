@@ -33,7 +33,7 @@
                 <view bindtap="bindtapService" session-from="weapp">
                     <text wx:if="{{isnotice!=0}}" class="mark">{{isnotice}}</text>
                    <image  mode="widthFix" src="/assets/images/tzhi.png" class="image_service"/> 
-                  <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"  class="image_service"></contact-button> -->
+                  <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"          class="image_service"></contact-button> -->
                 </view>
               </view>
           </view>
@@ -46,7 +46,9 @@
             <!-- 菜单  start -->
             <view class="weui-navbar" style="border-bottom:none;">
                 <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'select_text' : ''}}" data-name="{{item}}" bindtap="tabClick">
+                    <view id="{{index}}" 
+                      class="weui-navbar__item {{activeIndex == index ? 'select_text' : ''}}" 
+                      data-name="{{item}}" bindtap="tabClick">
                         <view class="weui-navbar__title">{{item}}</view>
                     </view>
                 </block>
@@ -81,8 +83,12 @@
                             <view class="data_titile title">{{item.title}}</view>
                             <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
                             <view class="data_biaoqian">
-                                <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
-                                <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                                <view class="data_biaoqian_view">
+                                  <image src="/assets/images/type.png"></image>{{item.releaseType}}
+                                </view>
+                                <view class="data_biaoqian_view">
+                                  <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}
+                                </view>
                                 <view class="data_biaoqian_view">{{item.mdate}}前</view>
                             </view>
                           </view>
@@ -111,15 +117,20 @@
                 <!-- 收藏夹  start-->                              
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <view class="dahuo_neiro">
-                    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="*this">
+                    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" 
+                    wx:for="{{list}}" wx:key="*this">
                     <view class="neiro_286">
                         <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
                           <view class="data_titile title">{{item.title}}</view>
                           <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
                           <view class="data_biaoqian">
-                              <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
-                              <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                              <view class="data_biaoqian_view">
+                                <image src="/assets/images/type.png"></image>{{item.releaseType}}
+                              </view>
+                              <view class="data_biaoqian_view">
+                                <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}
+                              </view>
                               <view class="data_biaoqian_view">{{item.mdate}}前</view>
                           </view>
                         </view>
@@ -149,7 +160,13 @@
                   <view class="dahuo_neiro">
                     <view class="neiro"  wx:for="{{list}}" wx:key="*this">
                         <view class="data_top">
-                            <view class="float-btn"><button wx:if="{{item.df==1}}" bindtap="bindtapTheShelves" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">上架</button></view>
+                            <view class="float-btn">
+                              <button wx:if="{{item.df==1}}" 
+                              bindtap="bindtapTheShelves" 
+                              id="{{item.id}}" 
+                              class="weui-btn mini-btn button_css" 
+                              type="default" size="mini">上架</button>
+                            </view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">
                               <view wx:if="{{item.df==1}}">已下架</view>
                               <view wx:if="{{item.df==2}}">未发布</view>
@@ -163,15 +180,28 @@
                             <view class="data_titile title">{{item.title}}</view>
                             <view class="data_pro">搭伙金额   <text>{{item.threshold}}</text>万</view>
                             <view class="data_biaoqian">
-                                <view class="data_biaoqian_view"><image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
-                                <view class="data_biaoqian_view"><image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
+                                <view class="data_biaoqian_view">
+                                  <image src="/assets/images/type.png"></image>{{item.releaseType}}
+                                </view>
+                                <view class="data_biaoqian_view">
+                                  <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}
+                                </view>
                                 <view class="data_biaoqian_view">{{item.mdate}}前</view>
                             </view>
                           </view>
                         </navigator>
                         <view class="data_info info">
-                            <view class="float-btn"><button bindtap="bindtapEdit" id="{{item.id}}" data-df="{{item.df}}" data-name="{{item.releaseType}}" class="weui-btn mini-btn button_css" type="default" size="mini">编辑</button></view>
-                            <view class="float-btn"><button bindtap="bindtapDelete" id="{{item.id}}" class="weui-btn mini-btn button_css" type="default" size="mini">删除</button></view>
+                            <view class="float-btn">
+                              <button bindtap="bindtapEdit" id="{{item.id}}" 
+                              data-df="{{item.df}}" 
+                              data-name="{{item.releaseType}}" 
+                              class="weui-btn mini-btn button_css" 
+                              type="default" size="mini">编辑</button></view>
+                            <view class="float-btn">
+                              <button bindtap="bindtapDelete" 
+                              id="{{item.id}}" 
+                              class="weui-btn mini-btn button_css" 
+                              type="default" size="mini">删除</button></view>
                         </view>
                     </view>
                   </view>

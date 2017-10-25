@@ -42,8 +42,6 @@
       </view>
     </view>
     <view class="top_right" bindtap="bindtapScreen">
-      <!-- <text wx:if="{{screen == false}}" class="mark"></text>
-      <image class="kind-list__img" src="/assets/images/fandaj.png"></image> -->
       筛选
     </view>
   </view>
@@ -80,8 +78,8 @@
             <!-- 营业描述 -->{{item.businessDescription == null ?'':item.businessDescription}}
           </view>
         </view>
-        <image src="/assets/images/dahuo.png" wx:if="{{item.top==100}}" class='img_jian'></image>
-        <image src="/assets/images/jian.png" wx:elif="{{item.top>0}}" class='img_jian'></image>
+        <image src="/assets/images/dahuo.png" wx:if="{{item.top==1}}" class='img_jian'></image>
+        <image src="/assets/images/jian.png" wx:elif="{{item.top>1}}" class='img_jian'></image>
       </view>
     </navigator>
     <view class="line"></view>
@@ -183,3 +181,18 @@
   <image src="/assets/images/fabu_2.png"></image>
 </view>
 <!-- 发布按钮  end-->
+
+<!--导航 start-->
+<view class='view_dh' wx:if="{{dh==true}}">
+  <image class='xx' bindtap='bindtapCloseDh' src="/assets/images/xx.png"></image>
+  <image class='dh' bindtap="bindtapfabu" src="/assets/images/dh.png"></image>
+</view>
+<!--导航 end-->
+
+<!-- 信息通知-->
+<view class='image_service' wx:if="{{tz == true}}">
+  <span class='mark'>留言{{isnotice}}</span>
+</view>
+<view class='image_service2' wx:if="{{tz == true}}">
+  <span class="triangle"></span>
+</view>

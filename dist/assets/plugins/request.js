@@ -3,18 +3,19 @@
  * 学习地址:http://blog.csdn.net/u010046908/article/details/53170130
  */
 
-var app = getApp();
+
 
 /**
  * get或post组合请求
  * url            请求路径
  * method         请求方式，get或post
+ * header         请求头
  * postData       参数data
  * doSuccess      成功的回调
  * doFail         失败的回调
  * doComplete     不管成功或失败的回调
  */
-function request(url,method, postData, header,  doSuccess, doFail, doComplete) {
+function request(url, method, header, postData,  doSuccess, doFail, doComplete) {
   wx.request({
     url: url,
     method: method,
@@ -41,7 +42,6 @@ function request(url,method, postData, header,  doSuccess, doFail, doComplete) {
 /**
  * get请求
  * url        请求地址
- * header     请求头
  * success    成功的回调
  * fail       失败的回调
  */

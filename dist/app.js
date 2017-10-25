@@ -2,12 +2,14 @@ import config from './config/config'
 import request from './assets/plugins/request'
 import md5 from './utils/md5.js'
 import service from './utils/server.js'
+import dahuoData from './helpers/dahuoData.js'
 
 App({
   config, //配置信息
   request,//请求
   md5,    //md5加密
   service,//位置服务
+  dahuoData, //筛选数据
 
   //生命周期函数--监听小程序显示	。当小程序启动，或从后台进入前台显示，会触发 onShow
   onShow: function () {
@@ -26,10 +28,6 @@ App({
 
   //生命周期函数--监听小程序初始化。	当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
   onLaunch: function () {
-    var app=this;
-    app.getOpenId(app);
-    app.getUserInfo(app);
-
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -38,45 +36,6 @@ App({
       success: function (res) {
         console.log("屏幕高度" + res.windowHeight);
         wx.setStorageSync("windowHeight", res.windowHeight)
-      }
-    })
-  },
-
-  //获取openid
-  getOpenId:function(app){
-    //调用登录接口
-    wx.login({
-      success: function (logRes) {
-        //获取openid
-        var url = config.login_sys + 'sns/jscode2session';
-        var data = {
-          appid: app.globalData.appid,
-          secret: app.globalData.secret,
-          js_code: logRes.code,
-          grant_type: 'authorization_code'
-        }
-        //发送请求
-        request.reqGet(url, data,
-          function (res) {
-            app.globalData.openid = res.data.openid;
-            wx.setStorageSync('openid', res.data.openid);
-          });
-      }
-    });
-  },
-
-  //自定义获取用户数据
-  getUserInfo: function (app) {
-    //调用登录接口
-    wx.login({
-      success: function () {
-        //获取用户
-        wx.getUserInfo({
-          success: function (res) {
-            app.globalData.userInfo = res.userInfo
-            wx.setStorageSync('userinfo', res.userInfo );
-          }
-        });
       }
     })
   },
@@ -98,6 +57,46 @@ App({
   getDateTime:function(){
     var dateTime = new Date().toLocaleString();
     return dateTime;
+  },
+
+  //时间间隔，传入一个时间计算与当前时间的间隔
+  getTimeInterval(date){
+    var date1 = new Date(date);    //开始时间
+    var date2 = new Date();    //结束时间
+    var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
+
+    //计算出相差月
+    var months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    if (months != 0) {
+      return months + "月";
+    }
+
+    //计算出相差天数
+    var days = Math.floor(date3 / (24 * 3600 * 1000));
+    if (days != 0) {
+      return days + "天";
+    }
+
+    //计算出小时数
+    var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
+    var hours = Math.floor(leave1 / (3600 * 1000));
+    if (hours != 0) {
+      return hours + "小时";
+    }
+
+    //计算相差分钟数
+    var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
+    var minutes = Math.floor(leave2 / (60 * 1000));
+    if (minutes != 0) {
+      return minutes + "分钟";
+    }
+
+    //计算相差秒数
+    var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
+    var seconds = Math.round(leave3 / 1000);
+    if (seconds != 0) {
+      return seconds + "秒";
+    }
   },
 
   //用户数据
