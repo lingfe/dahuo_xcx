@@ -291,12 +291,12 @@
                             <view class="weui-btn-area" wx:if="{{userAn}}">
                                 <view class="view_phon" bindtap="bindtapPhone">电话</view>
                                 <view class="view_1">|</view>
-                                <!-- <navigator bindlongpress='bindlongtapURL' 
+                                 <!-- <navigator bindlongpress='bindlongtapURL' 
                                 id='{{item.id}}' 
                                 data-index="{{index}}" 
-                                url="/pages/message/chat/chat?releaseId={{releaseInfo.id}}&personalId={{releaseInfo.personalId}}"> 
-                                   --><view class="view_info">私信</view>
-                                <!-- </navigator> -->
+                                url="/pages/message/chat/chat?releaseId={{releaseInfo.id}}&personalId={{releaseInfo.personalId}}">  -->
+                                   <view class="view_info" bindtap='bindtapConsultation'>咨询</view>
+                                 <!-- </navigator>  -->
                             </view>
                             <!-- 确定   start-->
                           </view>

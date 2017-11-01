@@ -61,13 +61,9 @@ Page({
         scriptName: 'com.echsoft.common.plugin.impl.BindPhone4UserPlugin',
         nameSpaceMap: {
           rows: [{
-            sys_userinfo:{
-              save:{
-                mobile: that.data.phone,
-                verifyCode: that.data.yzm,
-              },
-              id: wx.getStorageSync('personalId')   //个人资料id
-            }
+            mobile: that.data.phone,
+            verifyCode: that.data.yzm,
+            id: wx.getStorageSync('personalId')   //个人资料id
           }],
         }
       })

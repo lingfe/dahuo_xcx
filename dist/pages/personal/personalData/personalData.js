@@ -135,14 +135,10 @@ Page({
         cudScriptName: 'Save',
         nameSpaceMap: {
           rows: [{
-            sys_userinfo:{
-              save:{
-                realname: that.data.inputValue,                 //名称
-                avatarUrl: that.data.avatarUrl,                 //头像
-                provinceName: that.data.provinceName,           //城市
-              },
-              id: wx.getStorageSync("personalId"),            //个人资料id
-            }
+            realname: that.data.inputValue,                 //名称
+            avatarUrl: that.data.avatarUrl,                 //头像
+            provinceName: that.data.provinceName,           //城市
+            id: wx.getStorageSync("personalId"),            //个人资料id
           }]
         }
       })
@@ -177,9 +173,7 @@ Page({
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            sys_userinfo:{
-              id: wx.getStorageSync("personalId")    //个人资料id
-            }
+            id: wx.getStorageSync("personalId")    //个人资料id
           }],
         }
       })

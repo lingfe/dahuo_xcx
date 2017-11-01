@@ -48,19 +48,29 @@ page, .page, .page__bd {
   width: 100%;
   display: flex;
   margin-top: 30rpx;
-  padding-bottom: 56px;
 }
 
 .textBox {
   display: block;
   text-align: left;
-  max-width: 82%;
+  max-width: 500rpx;
   border-radius: 5px;
   font-size: 13px;
-  width: 500rpx;
+  width: auto;
   height: auto;
   margin-left:  48rpx;
   padding: 18rpx;
+}
+
+.img{
+   width: 500rpx;
+   height: 300rpx;   
+}
+.selectInfo{
+  color: #14BAC8;
+}
+.selectInfo:active{
+  color: #000;
 }
 
 .fl {

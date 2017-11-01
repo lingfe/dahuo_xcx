@@ -25,6 +25,7 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
+          
           that.data.id=id;
           that.data.index=index;
           //删除通知
@@ -93,7 +94,7 @@ Page({
         nameSpace: 'notice',       //通知表
         scriptName: 'Query',
         nameSpaceMap: {
-          rows: [{
+          rows: [{                
             personalId: wx.getStorageSync("personalId")    //个人id
           }],
         }
@@ -102,13 +103,19 @@ Page({
     //发送请求
     app.request.reqPost(url,header,data,function(res){
       var row = res.data.rows;
+      var list=[];
       for (var i = 0; i < row.length; ++i) {
-        if (row[i].imgUrl != null) row[i].imgUrl = row[i].imgUrl;
-        row[i].cdate = app.getTimeInterval(row[i].cdate);
-        if (row[i].static != 1) biaoweiyidu(that, row[i].id);
+        if (row[i].ntype != 0) {//通知类型 0=系统，1=其他
+          if (row[i].imgUrl != null) row[i].imgUrl = row[i].imgUrl;
+          row[i].cdate = app.getTimeInterval(row[i].cdate);
+          if (row[i].static != 1) biaoweiyidu(that, row[i].id);
+          list.push(row[i]);
+        }else{
+          if (row[i].static != 1) that.setData({ sysTZ:true });
+        }
       }
       //row.reverse();
-      that.setData({ messages: row });
+      that.setData({ messages: list });
     });
 
     //标为已读

@@ -355,9 +355,9 @@ Page({
       pagenum: that.data.pagenum,          //当前业
       pagesize: that.data.pagesize,        //数据大小长度
       rows:[{
-        df: 0,
-        releaseTypeList: [],
-        industryChoiceList: [],
+        static: 0,                      //状态
+        releaseTypeList: [],            //发布类型
+        industryChoiceList: [],         //行业
       }]  
     };
     //地址 

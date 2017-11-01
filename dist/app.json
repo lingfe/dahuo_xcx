@@ -42,7 +42,8 @@
     "pages/message/search/feedback/feedback",
     "pages/dahuo/releaseRule/releaseRule",
     "pages/dahuo/useProtocol/useProtocol",
-    "pages/dahuo/indexCity/indexCity"
+    "pages/dahuo/indexCity/indexCity",
+    "pages/message/messageNotice/messageNotice"
   ],
   "window": {
     "navigationBarTextStyle": "white",

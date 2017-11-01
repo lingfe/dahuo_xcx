@@ -151,7 +151,7 @@ Page({
           //参数
           that.data.notifyname = user.cnName;
           that.data.content = "我收藏了你的项目。";
-          that.data.ntype = 3;
+          that.data.ntype = 1;      //通知类型 0=系统，1=其他
           that.data.avatarUrl = user.avatarUrl;
           that.setNotice(that);
         }
@@ -194,7 +194,7 @@ Page({
           that.data.notifyname = user.cnName;
           that.data.content = "我取消收藏你的项目。";
           that.data.tile = "";
-          that.data.ntype = 3;
+          that.data.ntype = 1;              //通知类型 0=系统，1=其他
           that.data.avatarUrl = user.avatarUrl;
           that.setNotice(that);
         }
@@ -261,7 +261,7 @@ Page({
     var that=this;
     wx.showModal({
       title: '拨打电话',
-      content: '是否拨打？' + that.data.releaseInfo.phone ,
+      content: '很抱歉!拨打电话官方正在修复,是否复制？' + that.data.releaseInfo.phone ,
       confirmText: "确定",
       cancelText: "取消",
       success: function (res) {
@@ -271,10 +271,19 @@ Page({
           wx.makePhoneCall({
             phoneNumber: that.data.releaseInfo.phone 
           });
+
+          wx.setClipboardData({
+            data: that.data.releaseInfo.phone ,
+            success: function (res) {
+              wx.showModal({
+                title: '复制成功!',
+                showCancel: false 
+              });
+            }
+          })
         } 
       }
     });
-    
   },
   
   //输入评论内容事件
@@ -374,7 +383,7 @@ Page({
         //参数
         that.data.notifyname = user.cnName;
         that.data.content = res.data.rows[0].commentContent;
-        that.data.ntype = 2;
+        that.data.ntype = 1;                  //通知类型 0=系统，1=其他
         that.data.avatarUrl = user.avatarUrl;
 
         //设置通知
@@ -386,7 +395,7 @@ Page({
         //参数
         that.data.notifyname = user.cnName;
         that.data.content = "我评论了你的项目：‘" + res.data.rows[0].commentContent; + "'";
-        that.data.ntype = 1;
+        that.data.ntype = 1;            //通知类型 0=系统，1=其他
         that.data.avatarUrl = user.avatarUrl;
 
         //设置通知
@@ -458,6 +467,41 @@ Page({
       }
     });
   },
+
+  //咨询
+  bindtapConsultation:function(e){
+    this.setData({
+      activeIndex:1,
+    });
+  },
+
+  //私信
+  privateLetter:function(that){
+    //首先验证通知是否存在
+    var url = app.config.basePath_sys + "api/exe/get";
+    //请求头
+    var header = { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync('time'),
+      token: wx.getStorageSync('token'),
+      reqJson: JSON.stringify({
+        nameSpace: 'notice',
+        scriptName: 'Query',
+        nameSpaceMap: {
+          rows: [{
+            personalId: that.data.personalId,         //接收者id
+            releaseId: that.data.releaseId,           //发布信息id
+          }]
+        }
+      })
+    };
+    //发送请求
+    app.request.reqPost(url, header, data, function (res) {
+      console.log("获取通知:");
+      console.log(res);
+    });
+  },
   
   //设置通知
   setNotice: function (that){
@@ -477,12 +521,12 @@ Page({
             personalId: that.data.personalId,         //接收者id
             releaseId: that.data.releaseId,           //发布信息id
             imgUrl: that.data.imageArray[0],          //发布信息对应的图片
-            ntype: that.data.ntype,                   //通知类型 0=系统,1=评论，2=回复,3=收藏，4=审核，5=..',
+            ntype: that.data.ntype,                   //通知类型 0=系统,1=留言,2=私信',
             content: that.data.content,               //通知内容
             tile: that.data.tile,                     //通知标题
             creator: wx.getStorageSync("personalId"), //通知者
-            notifyname: that.data.notifyname,        //通知者名称
-            avatarUrl: that.data.avatarUrl          //头像
+            notifyname: that.data.notifyname,         //通知者名称
+            avatarUrl: that.data.avatarUrl            //头像
           }]
         }
       })
@@ -535,7 +579,7 @@ Page({
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            df: 0,
+            static: 0,
             personalId: wx.getStorageSync("personalId"),    //个人id
             releaseId: that.data.releaseId                  //发布信息id
           }],

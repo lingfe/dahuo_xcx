@@ -24,7 +24,7 @@ Page({
     phone: null,                          //电话号码
     imageArray: [],                       //图片数组，原始。不包含完整url，用于储存
     
-    df: 4,                                //发布信息状态，0=正常显示,1=已下架,2=未发布，4=审核中，5=未通过
+    static: 4,                                //发布信息状态，0=正常显示,1=已下架,2=未发布，4=审核中，5=未通过
     text: "发布",                         //默认
     dad:false,                            //是否保存到档案袋
   },
@@ -34,7 +34,7 @@ Page({
     var that = this;
     var dad=that.data.title==null?false:true;
     if(dad==true && that.data.dad==false){
-      that.setData({df:2,dad:dad});
+      that.setData({ static:2,dad:dad});
       //是否加入档案袋
       wx.showModal({
         title: '提示',
@@ -253,7 +253,7 @@ Page({
           nameSpaceMap: {
             rows: [{
               id: that.data.id,                                              //发布信息id
-              df: that.data.df,                                              //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
+              static: that.data.static,                                     //发布信息状态，0=正常显示,1=已下架，4=审核中，5=未通过
               releaseType: '其他',                                           //发布类型
               personalId: wx.getStorageSync("personalId"),                   //个人资料id
               title: that.data.title,                                        //标题
@@ -378,12 +378,12 @@ Page({
         });
       }
       //调用函数编辑
-      this.getReleaseInfo(options.releaseId, options.df);
+      this.getReleaseInfo(options.releaseId, options.static);
     }
   },
 
   //根据id获取发布信息
-  getReleaseInfo:function(id,df){
+  getReleaseInfo: function (id, staticDf){
     var that = this;
     //发送请求,获取发布信息,
     wx.request({
@@ -399,7 +399,7 @@ Page({
           nameSpaceMap: {
             rows: [{
               id: id,                        //发布信息id
-              df: df,
+              static: staticDf,
             }]
           }
         })

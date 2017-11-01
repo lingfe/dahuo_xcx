@@ -27,7 +27,17 @@
               <view class="imgtox"><image src="/assets/images/xms.jpg" class="image_left" /></view>
               <view class="textBox fl">
                 <view class='triangle'></view>
-                <text>{{item.value}}</text>
+                <view wx:if="{{item.infoType ==null}}">
+                  <text>{{item.content}}</text>
+                </view>
+                <view  wx:elif="{{item.infoType !=null}}">
+                    <text>{{item.content}}</text>
+                    <image class='img' src="https://static.daho.club/static/upload/{{item.imgUrl}}" />
+                    <view class='selectInfo' 
+                    bindtap="bindtapEdit" 
+                    id="{{item.releaseId}}" 
+                    data-name="{{item.infoType}}">查看详细</view>
+                </view>
               </view>
             </view>
           </view>

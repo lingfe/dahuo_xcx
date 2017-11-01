@@ -122,7 +122,7 @@ Page({
     //调用获取地址
     var url = app.config.basePath_sys + "api/exe/getCityList";
     //请求头
-    header= { 
+    var header= { 
       cookie: wx.getStorageSync("cookie"), 
       "Content-Type": "application/x-www-form-urlencoded" 
     };

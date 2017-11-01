@@ -77,7 +77,7 @@ Page({
         nameSpaceMap: {
           pageable: 0,
           rows: [{
-            df: 0,
+            static: 0,
             personalId: that.data.personalId    //发布信息id
           }],
         }

@@ -84,12 +84,7 @@ Page({
         cudScriptName: 'Save',
         nameSpaceMap: {
           rows: [{
-            releaseinfo:{
-              save:{
-                mdate:new Date()
-              },
-              id: releaseId,             //发布信息id
-            }
+            id: releaseId,             //发布信息id
           }],
         }
       })
@@ -105,9 +100,9 @@ Page({
   //下架
   bindtapOffTheShelf: function (e) {
     var that = this;
-    //得到df 0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
-    var df = e.currentTarget.dataset.df;
-    if ("0".indexOf(df)==-1){
+    //staticDf 0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
+    var staticDf = e.currentTarget.dataset.static;
+    if ("0".indexOf(staticDf)==-1){
       //提示
       wx.showToast({ title: "不允许下架！",icon: 'loading',duration: 1000 });
       return;
@@ -137,7 +132,7 @@ Page({
                 nameSpaceMap: {
                   rows: [{
                     id: e.currentTarget.id,             //发布信息id
-                    df: 1                               //0=正常;，1=已下架，2=未发布，4=审核中，5=未通过
+                    static: 1                               //0=正常;，1=已下架，2=未发布，4=审核中，5=未通过
                   }],
                 }
               })
@@ -160,9 +155,9 @@ Page({
     var id=e.currentTarget.id;
     //发布类型
     var name = e.currentTarget.dataset.name;
-    //得到df 0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
-    var df = e.currentTarget.dataset.df;
-    if ("0125".indexOf(df) == -1) {
+    //staticDf 0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
+    var staticDf = e.currentTarget.dataset.static;
+    if ("0125".indexOf(staticDf) == -1) {
       //提示
       wx.showToast({title: "不允许编辑！",icon: 'loading',duration: 1000, });
       return;
@@ -188,7 +183,7 @@ Page({
 
       //跳转
       wx.navigateTo({
-        url: url + "?releaseId=" + id + "&df=" + df + "&text=保存",
+        url: url + "?releaseId=" + id + "&static=" + staticDf + "&text=保存",
       });
     }
   },
@@ -219,7 +214,7 @@ Page({
               nameSpaceMap: {
                 rows: [{
                   id: e.currentTarget.id,             //发布信息id
-                  df: 0                      //0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
+                  static: 0                      //0=显示中，1=已下架，2=未发布，4=审核中，5=未通过
                 }],
               }
             })

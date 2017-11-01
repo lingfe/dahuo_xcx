@@ -94,19 +94,19 @@
                           </view>
                         </navigator>
                         <view class="data_info info">
-                            <image src='/assets/images/{{item.df}}.png' class='img_fabu'></image>
+                            <image src='/assets/images/{{item.static}}.png' class='img_fabu'></image>
                             <view class="float-btn">
                             <button  class="weui-btn mini-btn button_css"
                              bindtap="bindtapEdit" 
                              id="{{item.id}}"
-                             data-df="{{item.df}}" 
+                             data-static="{{item.static}}" 
                              data-name="{{item.releaseType}}"  
                              type="default" size="mini">编辑</button></view>
                             <view class="float-btn">
                             <button  class="weui-btn mini-btn button_css" 
                             bindtap="bindtapOffTheShelf" 
                             id="{{item.id}}"
-                            data-df="{{item.df}}" 
+                            data-static="{{item.static}}" 
                             type="default" size="mini">下架</button></view>
                         </view>
                       </view>
@@ -161,15 +161,15 @@
                     <view class="neiro"  wx:for="{{list}}" wx:key="*this">
                         <view class="data_top">
                             <view class="float-btn">
-                              <button wx:if="{{item.df==1}}" 
+                              <button wx:if="{{item.static==1}}" 
                               bindtap="bindtapTheShelves" 
                               id="{{item.id}}" 
                               class="weui-btn mini-btn button_css" 
                               type="default" size="mini">上架</button>
                             </view>
                             <view style="float:left;font-size:24rpx;margin-left:0rpx;" class="float-btn">
-                              <view wx:if="{{item.df==1}}">已下架</view>
-                              <view wx:if="{{item.df==2}}">未发布</view>
+                              <view wx:if="{{item.static==1}}">已下架</view>
+                              <view wx:if="{{item.static==2}}">未发布</view>
                             </view>
                         </view>
                         <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}"> 
@@ -193,7 +193,7 @@
                         <view class="data_info info">
                             <view class="float-btn">
                               <button bindtap="bindtapEdit" id="{{item.id}}" 
-                              data-df="{{item.df}}" 
+                              data-static="{{item.static}}" 
                               data-name="{{item.releaseType}}" 
                               class="weui-btn mini-btn button_css" 
                               type="default" size="mini">编辑</button></view>
