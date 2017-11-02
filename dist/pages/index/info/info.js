@@ -10,7 +10,7 @@ import __config from '../../../config/config'
 Page({
   data:{
     bl:false,                      //是否显示查看全文
-    tabs: ["项目细节", "问问看"],    //tab
+    tabs: ["项目细节", "留言"],    //tab
     activeIndex: 0,                //tab切换索引
     sliderOffset: 0,               //x坐标    
     sliderLeft: 0,                 //y坐标
@@ -27,6 +27,7 @@ Page({
     releaseInfo:null,              //发布信息，单个
     length:null,                   //信息描述     
     userAn:true,                 //是否是自己的项目    
+    commNumber:0,                 //评论数量
   },
 
   //预览
@@ -253,6 +254,7 @@ Page({
 
   //tab切换,切换索引
   tabClick: function (e) {
+    console.log(e.currentTarget.offsetLeft);
     this.setData({ sliderOffset: e.currentTarget.offsetLeft, activeIndex: e.currentTarget.id    });
   },
 
@@ -377,30 +379,17 @@ Page({
       })
     };
     app.request.reqPost(url,header,data,function(res){
-      if (that.data.inputHf == true) {
-        that.setData({ inputHf: false, inputValue: '' });
-        wx.showToast({ title: '已回复!', icon: 'toast', duration: 1000 });//提示
-        //参数
-        that.data.notifyname = user.cnName;
-        that.data.content = res.data.rows[0].commentContent;
-        that.data.ntype = 1;                  //通知类型 0=系统，1=其他
-        that.data.avatarUrl = user.avatarUrl;
+      //初始化设置
+      that.setData({ inputValue: '' });
+      wx.showToast({ title: '评论成功!', icon: 'toast', duration: 1000 });//提示
+      //参数
+      that.data.notifyname = user.cnName;
+      that.data.content = "我评论了你的项目：‘" + res.data.rows[0].commentContent; + "'";
+      that.data.ntype = 1;            //通知类型 0=系统，1=其他
+      that.data.avatarUrl = user.avatarUrl;
 
-        //设置通知
-        that.setNotice(that);
-      } else {
-        //初始化设置
-        that.setData({ inputValue: ''});
-        wx.showToast({ title: '评论成功!', icon: 'toast', duration: 1000 });//提示
-        //参数
-        that.data.notifyname = user.cnName;
-        that.data.content = "我评论了你的项目：‘" + res.data.rows[0].commentContent; + "'";
-        that.data.ntype = 1;            //通知类型 0=系统，1=其他
-        that.data.avatarUrl = user.avatarUrl;
-
-        //设置通知
-        that.setNotice(that);
-      }
+      //设置通知
+      that.setNotice(that);
       //获取评论信息
       that.conmmentGetData(that);
     });
@@ -408,11 +397,67 @@ Page({
 
   //回复
   commentHuiFu: function (e) {
-    this.setData({
+    var that=this;
+    that.setData({
       inputHf: true,
-      inputHfName: e.currentTarget.dataset.name,
-      inputValue: '回复@'+e.currentTarget.dataset.name+':',
-      HF: '回复@' + e.currentTarget.dataset.name
+      commentinfoId: e.currentTarget.dataset.commentinfoid,//评论id
+      replypersonalId: e.currentTarget.dataset.replypersonalid,//评论者id
+      inputHfName: e.currentTarget.dataset.name,    //回复谁的名称
+    });
+  },
+
+  //添加跳回复信息
+  setReplyInfo:function(e){
+    var that=this;
+
+    //添加一条回复纪录
+    var url = app.config.basePath_web + "api/exe/save";
+    //请求头
+    var header = { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var releaseId = that.data.releaseId;  //发布信息id
+    var commentinfoId = that.data.commentinfoId; //评论id
+    var replypersonalId = that.data.replypersonalId;//评论者id
+    var content = '回复 ' + that.data.inputHfName + ":" + that.data.inputValue;//回复内容
+    //获取评论人
+    var user = wx.getStorageSync("user");
+    var data = {
+      timeStamp: wx.getStorageSync('time'),
+      token: wx.getStorageSync('token'),
+      reqJson: JSON.stringify({
+        nameSpace: 'reply', //回复表
+        scriptName: 'Query',
+        cudScriptName: 'Save',
+        nameSpaceMap: {
+          rows: [{
+            commentinfoId: commentinfoId,       //评论信息id
+            releaseId: releaseId,               //发布信息id
+            personalId: wx.getStorageSync("personalId"),//回复者id
+            personalName: user.cnName,          //回复者名称
+            avatarUrl: user.avatarUrl,          //头像
+            content: content,                   //回复内容
+            replypersonalId: replypersonalId,   //回复谁的id
+          }]
+        }
+      })
+    };
+    //发送请求
+    app.request.reqPost(url, header, data, function (res) {
+      //初始化
+      that.setData({ inputHf: false, inputValue: '' });
+      console.log(res);
+      wx.showToast({ title: '已回复!', icon: 'toast', duration: 1000 });//提示
+
+      //参数
+      that.data.notifyname = user.cnName;
+      that.data.content = content;
+      that.data.ntype = 1;            //通知类型 0=系统，1=其他
+      that.data.avatarUrl = user.avatarUrl;
+
+      //设置通知
+      that.setNotice(that);
+      //获取评论信息
+      that.conmmentGetData(that);
     });
   },
 
@@ -472,6 +517,7 @@ Page({
   bindtapConsultation:function(e){
     this.setData({
       activeIndex:1,
+      sliderOffset:188,
     });
   },
 
@@ -661,11 +707,48 @@ Page({
     //发送请求
     app.request.reqPost(url,header,data,function(res){
       var row = res.data.rows;
-      for (var i = 0; i < row.length; ++i) {
-        row[i].cdate = that.getDate(row[i].cdate) + "评论";
+      if(row==null) return;
+      var commNumber=row.length;
+      for (var j = 0; j < row.length; ++j) {
+        //得到回复信息
+        getReply(row[j].id,j);
+        row[j].cdate = that.getDate(row[j].cdate) + "评论";
       }
-      //row.reverse();
-      that.setData({ allContentList: row });
+
+
+      //获取该评论的回复信息
+      function getReply(id,j){
+        var url = app.config.basePath_web + "api/exe/get";
+        //请求头
+        var header = { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" };
+        //参数
+        var data = {
+          timeStamp: wx.getStorageSync('time'),
+          token: wx.getStorageSync('token'),
+          reqJson: JSON.stringify({
+            nameSpace: 'reply',       //回复表
+            scriptName: 'Query',
+            nameSpaceMap: {
+              rows: [{
+                commentinfoId: id    //评论id
+              }],
+            }
+          })
+        };
+        //发送请求
+        app.request.reqPost(url, header, data, function (res2) {
+          var row2 = res2.data.rows;
+          if (row2 == null) return;
+          commNumber+=row2.length;
+          for (var i = 0; i < row2.length; ++i) {
+            row2[i].cdate = that.getDate(row2[i].cdate) + "回复";
+          }
+          //设置回复信息
+          row[j].replyList=row2;
+          //row.reverse();
+          that.setData({ allContentList: row, commNumber: commNumber});
+        });
+      }
     });
   },
 

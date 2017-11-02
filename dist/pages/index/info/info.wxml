@@ -101,7 +101,7 @@
                       <view class="weui-navbar_to" style="border:none;">
                           <block wx:for="{{tabs}}" wx:key="*this">
                               <view id="{{index}}" class="weui-navbar__item  {{activeIndex == index ? ' select_text' : ''}}" bindtap="tabClick">
-                                  <view class="weui-navbar__title">{{item}}</view>
+                                  <view class="weui-navbar__title">{{item =='留言' ?item+'('+commNumber+')':item}}</view>
                               </view>
                           </block>
                           <view class="weui-navbar__slider" style="background-color:#14BAC8;width:150rpx;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
@@ -295,7 +295,8 @@
                                 id='{{item.id}}' 
                                 data-index="{{index}}" 
                                 url="/pages/message/chat/chat?releaseId={{releaseInfo.id}}&personalId={{releaseInfo.personalId}}">  -->
-                                   <view class="view_info" bindtap='bindtapConsultation'>咨询</view>
+                                   <view class="view_info"  bindtap='bindtapConsultation' >咨询</view>
+                                   
                                  <!-- </navigator>  -->
                             </view>
                             <!-- 确定   start-->
@@ -311,27 +312,61 @@
                                   <view class="item-left">
                                         <image src="{{item.avatarUrl}}" class="image"/>
                                   </view>
-                                  <view class="item-middle">
+                                  <view class="item-middle" bindtap="commentHuiFu" 
+                                      data-commentinfoId="{{item.id}}"
+                                      data-replypersonalId="{{item.personalId}}"
+                                      data-name="{{item.remark}}">
                                         <view>
                                             <text class="select_text_to" style="float:none;">{{item.remark}}</text>
+                                             <text class="lozhu" wx:if="{{item.personalId == releaseInfo.personalId }}">楼主</text> 
+                                            <text class="message">{{item.cdate}}</text>
                                         </view>
                                         <view>
                                             <text style="width:575rpx;" class="data_info">{{item.commentContent}}</text>
                                         </view>
-                                        <view>
-                                            <text class="message">{{item.cdate}}</text>
+                                        <!-- 回复内容 start -->
+                                        <view class='huifu' wx:for="{{item.replyList}}" wx:key="*this" wx:for-item="reply">
+                                          <view class="item-left">
+                                            <image src="{{reply.avatarUrl}}" class="huifu_image"/>
+                                          </view>
+                                          <view class="item-middle" catchtap="commentHuiFu"
+                                            data-commentinfoId="{{item.id}}"
+                                            data-releaseId="{{releaseInfo.id}}"
+                                            data-replypersonalId="{{item.personalId}}"
+                                            data-name="{{reply.personalName}}">
+                                                <view>
+                                                    <text class="select_text_to" style="float:none;">{{reply.personalName}}</text>
+                                                    <text class="lozhu" wx:if="{{item.personalId == releaseInfo.personalId }}">楼主</text>
+                                                    <text class="message">{{reply.cdate}}</text>
+                                                </view>
+                                                <view>
+                                                    <text style="width:475rpx;" class="data_info_to">{{reply.content}}</text>
+                                                </view>
+                                          </view>
+                                          <!-- <view class="item_right">
+                                             <view bindtap="commentHuiFu"
+                                            data-commentinfoId="{{item.id}}"
+                                            data-releaseId="{{releaseInfo.id}}"
+                                            data-replypersonalId="{{item.personalId}}"
+                                            data-name="{{reply.personalName}}">
+                                            <text  class="time">回复</text></view> 
+                                          </view> -->
                                         </view>
+                                        <!-- 回复内容 end -->
                                   </view>
-                                  <view class="item_right">
-                                    <view bindtap="commentHuiFu" data-name="{{item.remark}}"><text  class="time">回复</text></view>
-                                  </view>
+                                   <!-- <view class="item_right">
+                                     <view bindtap="commentHuiFu" 
+                                      data-commentinfoId="{{item.id}}"
+                                      data-replypersonalId="{{item.personalId}}"
+                                      data-name="{{item.remark}}"><text  class="time">回复</text></view> 
+                                  </view>  -->
                               </view>
                               <view  class="line"></view>
                             </view>
                             <view  style="width:640rpx;"></view>
                             <view wx:if="{{allContentList.length == 0}}" class="select_img">还没有人留言</view>
-                        </view>
-                        <!-- 讨论区  end-->
+                          </view>
+                          <!-- 讨论区  end-->
                       </view>
                       <!-- tab切换  end-->
                   </view>
@@ -358,18 +393,28 @@
 
 <!-- 评论文本框  start-->
 <view class="handleBox" hidden="{{activeIndex != 1}}">
-  <form bindsubmit="submitTo" report-submit = "true">
+  <!-- 评论 start -->
+  <form bindsubmit="submitTo" wx:if="{{!inputHf}}" report-submit = "true">
     <view class="inputValue">
-      <input class="input_submit" style="display: {{inputHf == true? 'none':'black'}}"  
-      value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
-      <input class="input_submit" style="display: {{inputHf == true? 'black':'none'}}"  
-      value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+      <input class="input_submit" value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请输入评论内容.."/>
     </view>
-    
     <view style="float:left;">
       <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  />
       <button class='faso_button' formType="submit"></button>
     </view>
   </form>
+  <!-- 评论 end -->
+
+  <!-- 回复 start -->
+  <form bindsubmit="setReplyInfo" wx:else="{{inputHf}}" report-submit = "true">
+    <view class="inputValue">
+      <input class="input_submit" focus="{{inputHf}}" value="{{inputValue}}" bindinput="bindKeyInput" placeholder="请回复@{{inputHfName}}" />
+    </view>
+    <view style="float:left;">
+      <image class="faso" src="/assets/images/faso.png" data-rid="{{releaseInfo.id}}"  />
+      <button class='faso_button' formType="submit"></button>
+    </view>
+  </form>
+  <!-- 回复 end -->
 </view>
 <!-- 评论文本框  end-->

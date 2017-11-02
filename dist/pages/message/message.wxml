@@ -9,7 +9,9 @@
 <view stytle=" overflow-x: hidden; overflow-y: auto;">
   <view class="message__list">
     <!--搭伙小秘书 start -->
-    <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/search/search">
+    <navigator bindlongpress='bindlongtapURL' 
+    id='{{item.id}}' 
+    data-index="{{index}}" url="/pages/message/search/search">
       <view class="item">
         <view class="item-left">
            <text wx:if="{{sysTZ==true}}" class="mark text"></text> 
@@ -32,18 +34,20 @@
     <!--搭伙小秘书 end -->
 
     <!--留言通知 start -->
-    <navigator bindlongpress='bindlongtapURL' id='{{item.id}}' data-index="{{index}}" url="/pages/message/search/search">
+    <navigator bindlongpress='bindlongtapURL' 
+    id='{{item.id}}' 
+    data-index="{{index}}" url="/pages/message/messageNotice/messageNotice">
       <view class="item">
         <view class="item-left">
-           <text wx:if="{{sysTZ==true}}" class="mark text"></text> 
-          <image src="/assets/images/xms.jpg" class="image" />
+           <text wx:if="{{msgTZ==true}}" class="mark text"></text> 
+          <image src="/assets/images/xms.png" class="image" />
         </view>
         <view class="item-middle">
           <view class='bujugo'>
-            <text class="title">搭伙小秘书</text>
+            <text class="title">留言通知</text>
           </view>
           <view class='bujugo'>
-            <text class="message"> {{sysTZ ==true ?'有新的消息未查看':'没有消息哦'}}</text>
+            <text class="message"> {{msgTZ ==true ?'有新的消息未查看':'没有消息哦'}}</text>
           </view>
           <view class='bujugo'>
             <text class="time">刚刚</text>
@@ -53,38 +57,5 @@
       <view class="line"></view>
     </navigator>
     <!--留言通知 end -->
-
-    <!-- 消息 start -->
-    <block wx:for="{{messages}}" wx:key="{{*this}}">
-        <navigator url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}&activeIndex=1" 
-       bindlongpress='bindlongtapURL' 
-       id='{{item.id}}' data-index="{{index}}">  
-        <!-- <navigator bindlongpress='bindlongtapURL' 
-      id='{{item.id}}' 
-      data-index="{{index}}" url="/pages/message/chat/chat?releaseId={{item.releaseId}}&personalId={{item.personalId}}">   -->
-        <view class="item">
-          <view class="item-left">
-            <text wx:if="{{item.static !=1 }}" class="mark text"></text>
-            <image src="{{item.avatarUrl}}" class="image" />
-          </view>
-          <view class="item-middle">
-            <view class='bujugo'>
-              <text class="title">{{item.notifyname}}</text>
-            </view>
-            <view class='bujugo'>
-              <text class="message">{{item.content}}</text>
-            </view>
-            <view class='bujugo'>
-              <text class="time">{{item.cdate}}</text>
-            </view>
-          </view>
-          <view class="item_right">
-            <image  src="{{item.imgUrl}}" class="image_right" />
-          </view>
-        </view>
-        <view class="line"></view>
-      </navigator>
-    </block>
-    <!-- 消息 end -->
   </view>
 </view>

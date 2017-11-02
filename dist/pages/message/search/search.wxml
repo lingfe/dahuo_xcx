@@ -32,11 +32,11 @@
                 </view>
                 <view  wx:elif="{{item.infoType !=null}}">
                     <text>{{item.content}}</text>
-                    <image class='img' src="https://static.daho.club/static/upload/{{item.imgUrl}}" />
+                    <image class='img' mode="widthFix" src="https://static.daho.club/static/upload/{{item.imgUrl}}" />
                     <view class='selectInfo' 
                     bindtap="bindtapEdit" 
                     id="{{item.releaseId}}" 
-                    data-name="{{item.infoType}}">查看详细</view>
+                    data-name="{{item.infoType}}">查看编辑</view>
                 </view>
               </view>
             </view>

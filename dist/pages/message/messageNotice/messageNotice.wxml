@@ -1,0 +1,44 @@
+<!--
+  /**  
+ *   作者:  lingfe 
+ *   时间:  2017-11-1
+ *   描述:  留言通知页面
+ * 
+ * */
+-->
+<view stytle=" overflow-x: hidden; overflow-y: auto;">
+  <view class="message__list">
+    <!-- 消息 start -->
+    <block wx:for="{{messages}}" wx:key="{{*this}}">
+        <navigator url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}&activeIndex=1" 
+       bindlongpress='bindlongtapURL' 
+       id='{{item.id}}' data-index="{{index}}">  
+        <!-- <navigator bindlongpress='bindlongtapURL' 
+      id='{{item.id}}' 
+      data-index="{{index}}" url="/pages/message/chat/chat?releaseId={{item.releaseId}}&personalId={{item.personalId}}">   -->
+        <view class="item">
+          <view class="item-left">
+            <text wx:if="{{item.static !=1 }}" class="mark text"></text>
+            <image src="{{item.avatarUrl}}" class="image" />
+          </view>
+          <view class="item-middle">
+            <view class='bujugo'>
+              <text class="title">{{item.notifyname}}</text>
+            </view>
+            <view class='bujugo'>
+              <text class="message">{{item.content}}</text>
+            </view>
+            <view class='bujugo'>
+              <text class="time">{{item.cdate}}</text>
+            </view>
+          </view>
+          <view class="item_right">
+            <image  src="{{item.imgUrl}}" class="image_right" />
+          </view>
+        </view>
+        <view class="line"></view>
+      </navigator>
+    </block>
+    <!-- 消息 end -->
+  </view>
+</view>

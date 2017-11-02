@@ -203,11 +203,11 @@
 }
 
 .image {
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50px;
   background-color: #eee;
-  margin-left: 10rpx;
+  margin-left: 24rpx;
 }
 .img_top{
   position: relative;
@@ -411,6 +411,17 @@ weui-tab__panel {
   margin-left:20rpx;
    word-wrap: break-word;   /* 强制换行*/
 }
+
+.data_info_to {
+  margin-top: 10rpx;
+  color: #666;
+  height: auto;
+  float: left;
+  font-size: 26rpx;
+  width: 580rpx;
+  margin-left:10rpx;
+   word-wrap: break-word;   /* 强制换行*/
+}
 .weui-btn-area{
   width:88%;
   margin-left:23rpx;
@@ -508,4 +519,35 @@ weui-tab__panel {
   margin-top: 0rpx;
   margin-bottom: 2rpx;
   background-color: #fff;
+}
+
+.huifu{
+  width: 575rpx;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8rpx;
+  background-color: #fff;
+  /* border-top: 1rpx solid #F0F0F0; */
+  /* float: left; */
+}
+.lozhu{
+    color: #fff;
+  line-height: 10rpx;
+  font-size: 20rpx;
+  margin-left: 20rpx;
+  background-color: #F7C76A;
+  padding: 6rpx;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis; /**文字隐藏后添加省略号*/
+  white-space: nowrap; /**强制不换行*/
+  border-radius: 4px;
+}
+.huifu_image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50px;
+  background-color: #eee;
+  margin-left: 10rpx;
 }

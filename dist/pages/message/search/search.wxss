@@ -68,6 +68,7 @@ page, .page, .page__bd {
 }
 .selectInfo{
   color: #14BAC8;
+  text-align: right;
 }
 .selectInfo:active{
   color: #000;
