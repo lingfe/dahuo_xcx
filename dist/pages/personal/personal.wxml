@@ -118,7 +118,7 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <view class="dahuo_neiro">
                     <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" 
-                    wx:for="{{list}}" wx:key="*this">
+                    wx:for="{{scjList}}" wx:key="*this">
                     <view class="neiro_286">
                         <view class="neiro_img"><image src="{{item.imageArray}}"></image></view>
                         <view class="neiro_data">
@@ -158,7 +158,7 @@
                 <!-- 回收站  start-->
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                   <view class="dahuo_neiro">
-                    <view class="neiro"  wx:for="{{list}}" wx:key="*this">
+                    <view class="neiro"  wx:for="{{dadList}}" wx:key="*this">
                         <view class="data_top">
                             <view class="float-btn">
                               <button wx:if="{{item.static==1}}" 

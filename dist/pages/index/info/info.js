@@ -679,7 +679,8 @@ Page({
         } else {
           mdate = that.getDate(row.mdate);
         }
-        that.setData({ strTime: mdate, previewinCount: row.previewinCount });
+        var previewinCount = row.previewinCount*3;
+        that.setData({ strTime: mdate, previewinCount: previewinCount });
       }
     });
   },

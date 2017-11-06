@@ -17,12 +17,14 @@ Page({
     activeIndex: 0,         //tab切换下标
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
-    list: [],               //发布信息数据
     pagenum: 0,             //分页，第几业
     data: null,             //请求参数
     userinfo:null,          //个人信息
     numBer:1,               //帖子数量
-    isnotice:0              //是否有通知
+    isnotice:0,             //是否有通知
+    list: [],               //我发布信息数据
+    scjList:[],             //收藏夹数据集合
+    dadList:[],             //档案袋数据集合
   },
 
   //个人资料,跳转
@@ -426,14 +428,20 @@ Page({
       }
 
       //设置数据
-      that.setData({
-        list: pageList
-      });
-      
-      //我发布的帖子数量
-      if (that.data.tizhi == "tizhi") {
-        //设置数据，提示框
+      if(that.data.tizhi == "dad"){
         that.setData({
+          dadlist: pageList,
+        });
+      }
+      //收藏夹
+      else if(that.data.tizhi == "scj"){
+        that.setData({
+          scjList: that.data.scjList.concat(pageList)
+        });
+      }//我发布的帖子数量
+      else if (that.data.tizhi == "tizhi") {
+        that.setData({
+          list: pageList,
           numBer: pageList.length
         });
       }
@@ -458,7 +466,7 @@ Page({
           }
         })
     };
-    that.setData({ data:data,tizhi: 'tizhi', list: [] });
+    that.setData({ data:data,tizhi: 'tizhi' });
     //请求获取数据,我发布的
     that.requestData(that);
   },
@@ -486,6 +494,7 @@ Page({
     app.request.reqPost(url,header,data,function(res){
       //得到数据
       var list = res.data.rows;
+      that.data.scjList=[];//清空收藏夹数据集合
       for (var i = 0, lenI = list.length; i < lenI; ++i) {
         //设置参数
         data = {
@@ -501,7 +510,7 @@ Page({
             }
           })
         };
-        that.setData({ data: data, tizhi: '', list: [] });
+        that.setData({ data: data, tizhi: 'scj' });
         //请求获取数据
         that.requestData(that);
       }
@@ -525,7 +534,7 @@ Page({
         }
       })
     };
-    that.setData({ data: data,tizhi: '',list:[]});
+    that.setData({ data: data,tizhi: 'dad'});
     //请求获取数据
     that.requestData(that);
   },
@@ -542,7 +551,7 @@ Page({
    */
   onPullDownRefresh: function () {
     var that= this;
-
+    
     //获取个人信息
     that.personalGetData(that);
     //获取是否有通知
