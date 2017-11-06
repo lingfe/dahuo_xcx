@@ -31,8 +31,8 @@
                   <text class="title_address">个人资料></text>
                 </view>
                 <view bindtap="bindtapService" session-from="weapp">
-                    <text wx:if="{{isnotice!=0}}" class="mark">{{isnotice}}</text>
-                   <image  mode="widthFix" src="/assets/images/tzhi.png" class="image_service"/> 
+                    <!-- <text wx:if="{{isnotice!=0}}" class="mark">{{isnotice}}</text>
+                   <image  mode="widthFix" src="/assets/images/tzhi.png" class="image_service"/>  -->
                   <!-- <contact-button   type="default-dark"   size="20"  session-from="weapp"          class="image_service"></contact-button> -->
                 </view>
               </view>

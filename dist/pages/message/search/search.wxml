@@ -24,7 +24,7 @@
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view wx:key="{{index}}" wx:for="{{allContentList}}">
             <view class="containerBox">
-              <view class="imgtox"><image src="/assets/images/xms.jpg" class="image_left" /></view>
+              <view class="imgtox"><image src="/assets/images/xms.png" class="image_left" /></view>
               <view class="textBox fl">
                 <view class='triangle'></view>
                 <view wx:if="{{item.infoType ==null}}">
@@ -32,11 +32,13 @@
                 </view>
                 <view  wx:elif="{{item.infoType !=null}}">
                     <text>{{item.content}}</text>
-                    <image class='img' mode="widthFix" src="https://static.daho.club/static/upload/{{item.imgUrl}}" />
+                    <image class='img' src="https://static.daho.club/static/upload/{{item.imgUrl}}" />
                     <view class='selectInfo' 
                     bindtap="bindtapEdit" 
                     id="{{item.releaseId}}" 
-                    data-name="{{item.infoType}}">查看编辑</view>
+                    data-name="{{item.infoType}}">
+                      <span class="span">点击编辑</span>
+                    </view>
                 </view>
               </view>
             </view>

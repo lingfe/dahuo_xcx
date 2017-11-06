@@ -60,18 +60,19 @@ page, .page, .page__bd {
   height: auto;
   margin-left:  48rpx;
   padding: 18rpx;
+  padding-bottom: 28rpx;
 }
 
 .img{
    width: 500rpx;
    height: 300rpx;   
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
 }
 .selectInfo{
   color: #14BAC8;
-  text-align: right;
-}
-.selectInfo:active{
-  color: #000;
+  text-align: center;
+  margin-top: 10rpx;
 }
 
 .fl {
@@ -127,4 +128,18 @@ transform-origin:0 0;
 box-sizing:border-box;
 border-radius:10px;
 
+}
+
+/*点击编辑*/
+.span{
+  background-color:#14BAC8;
+  padding:50rpx;
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+  color:#FFFFFF;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+}
+.span:active{
+  color: rgb(255, 255, 255);
 }

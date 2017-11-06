@@ -308,7 +308,7 @@ Page({
   onLoad: function () {
     //当前
     var that = this;
-
+    app.getfiltertypeinfo();
     //调用默认请求
     that.requestData(that);
     //获取是否有通知

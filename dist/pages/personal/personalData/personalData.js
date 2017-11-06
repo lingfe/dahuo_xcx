@@ -26,6 +26,7 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        console.log(res);
         if (res.tempFilePaths.length>1){
           wx.showToast({title: '只能选择一张照片',icon: 'error',duration: 3000,});
           return;

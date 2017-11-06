@@ -24,7 +24,7 @@
 				{
 					"id": 1,
 					"name": "通知",
-					"pathName": "pages/search/search",
+					"pathName": "pages/message/search/search",
 					"query": "",
 					"scene": "1001"
 				},

@@ -11,6 +11,36 @@ App({
   service,//位置服务
   dahuoData, //筛选数据
 
+  //获取删选数据
+  getfiltertypeinfo:function(){
+    var url = config.basePath_web + "api/exe/get";
+    //请求头
+    var header = {
+      cookie: wx.getStorageSync("cookie"),
+      "Content-Type": "application/x-www-form-urlencoded"
+    };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync("time"),
+      token: wx.getStorageSync("token"),
+      reqJson: JSON.stringify({
+        nameSpace: 'reply',       //删选数据表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          rows: [{
+            df:0
+          }]
+        }
+      })
+    };
+    //发送请求
+    request.reqPost(url, header, data, function (res) {
+      console.log(res);
+      //放入缓存中
+      wx.setStorageSync("sxData", res.data.rows);
+    });
+  },
+
   //生命周期函数--监听小程序显示	。当小程序启动，或从后台进入前台显示，会触发 onShow
   onShow: function () {
     console.log('App Show')

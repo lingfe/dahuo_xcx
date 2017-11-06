@@ -15,7 +15,7 @@
       <view class="item">
         <view class="item-left">
            <text wx:if="{{sysTZ==true}}" class="mark text"></text> 
-          <image src="/assets/images/xms.jpg" class="image" />
+          <image src="/assets/images/xms.png" class="image" />
         </view>
         <view class="item-middle">
           <view class='bujugo'>
@@ -40,7 +40,7 @@
       <view class="item">
         <view class="item-left">
            <text wx:if="{{msgTZ==true}}" class="mark text"></text> 
-          <image src="/assets/images/xms.png" class="image" />
+          <image src="/assets/images/ly.png" class="image" />
         </view>
         <view class="item-middle">
           <view class='bujugo'>
