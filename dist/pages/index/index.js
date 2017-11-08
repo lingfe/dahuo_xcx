@@ -308,7 +308,7 @@ Page({
   onLoad: function () {
     //当前
     var that = this;
-    app.getfiltertypeinfo();
+    
     //调用默认请求
     that.requestData(that);
     //获取是否有通知
@@ -534,6 +534,7 @@ Page({
       list: []           //发布信息数据    
     });
     that.requestData(that);
+    app.getfiltertypeinfo();
     //下拉完成后执行回退
     wx.stopPullDownRefresh();
   },

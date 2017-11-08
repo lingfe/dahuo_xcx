@@ -11,7 +11,7 @@ App({
   service,//位置服务
   dahuoData, //筛选数据
 
-  //获取删选数据
+  //获取筛选数据
   getfiltertypeinfo:function(){
     var url = config.basePath_web + "api/exe/get";
     //请求头
@@ -24,7 +24,7 @@ App({
       timeStamp: wx.getStorageSync("time"),
       token: wx.getStorageSync("token"),
       reqJson: JSON.stringify({
-        nameSpace: 'reply',       //删选数据表
+        nameSpace: 'filtertypeinfo',       //删选数据表
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
