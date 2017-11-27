@@ -76,6 +76,7 @@ Page({
     var url = app.config.basePath_web + "api/exe/save";
     //请求头
     var header = { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" };
+    
     //参数
     var data = {
       timeStamp: wx.getStorageSync("time"),
@@ -407,7 +408,10 @@ Page({
     //发送请求
     app.request.reqPost(url,header,data,function(res){
       //定义空数组
-      var pageList = [];
+      var scjList = [];
+      var mylist =[];
+      var dadList=[];
+
       //得到数据
       var list = res.data.rows;
       for (var i = 0, lenI = list.length; i < lenI; ++i) {
@@ -423,26 +427,41 @@ Page({
         list[i].mdate = strTime.date;
         //计算剩余天数
         list[i].timeNuber = (60 - strTime.timeNuber);
-        //添加到当前数组
-        pageList.push(list[i]);
+        
+
+        //分类数据
+        //档案袋
+        if (that.data.tizhi == "dad" && "12".indexOf(list[i].static) != -1) {
+          //添加到当前数组
+          dadList.push(list[i]);
+        } //我发布的
+        else if (that.data.tizhi == "tizhi" && "045".indexOf(list[i].static) != -1) {
+          if (list[i].static == 0) that.data.numBer++;
+          //添加到当前数组
+          mylist.push(list[i]);
+        } //收藏夹
+         else if (that.data.tizhi == "scj" ){
+          //添加到当前数组
+          scjList.push(list[i]);
+        }
       }
 
       //设置数据
+      //档案袋
       if(that.data.tizhi == "dad"){
         that.setData({
-          dadlist: pageList,
+          dadList: dadList,
         });
       }
       //收藏夹
       else if(that.data.tizhi == "scj"){
         that.setData({
-          scjList: that.data.scjList.concat(pageList)
+          scjList: that.data.scjList.concat(scjList)
         });
       }//我发布的帖子数量
       else if (that.data.tizhi == "tizhi") {
         that.setData({
-          list: pageList,
-          numBer: pageList.length
+          list: mylist,
         });
       }
     });
@@ -460,7 +479,7 @@ Page({
           nameSpaceMap: {
             pageable: 0,
             rows: [{
-              inDf: [0, 4, 5],                      //0=正常显示，4=正在审核中，5=审核未通过
+              //inDf: [0, 4, 5],                      //0=正常显示，4=正在审核中，5=审核未通过
               personalId: wx.getStorageSync("personalId"),    //个人资料id
             }],
           }
@@ -528,7 +547,7 @@ Page({
         scriptName: 'Query',
         nameSpaceMap: {
           rows: [{
-            inDf: [1, 2],            //0=正常显示，1=已下架，2=未发布，4=正在审核中，5=审核未通过
+            //inDf: [1, 2],            //0=正常显示，1=已下架，2=未发布，4=正在审核中，5=审核未通过
             personalId: wx.getStorageSync("personalId"),    //个人资料id
           }],
         }

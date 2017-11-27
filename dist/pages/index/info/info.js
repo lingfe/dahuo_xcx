@@ -790,14 +790,15 @@ Page({
 
     //计算出相差月
     var months = (date2.getFullYear() - date1.getFullYear()) * 12;
-    if (months != 0) {
-      return months + "月前";
-    }
+    // if (months != 0) {
+    //   return months + "月前";
+    // }
 
     //计算出相差天数
     var days = Math.floor(date3 / (24 * 3600 * 1000));
     if (days != 0) {
-      return days + "天前";
+      //return days + "天前";
+      return (date1.getMonth() + 1) + "-" + date1.getDate();
     }
 
     //计算出小时数

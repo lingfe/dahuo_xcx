@@ -27,8 +27,8 @@ Page({
         minThreshold:'全部',
         maxThreshold:null,i:0
       }],                           //金额
-      releaseTypeList: [],          //类型
-      industryChoiceList: [],       //行业
+      in_releaseType: [],          //类型
+      in_industryChoice: [],       //行业
     },
     num:0,                  //获取选中的价格索引，控制样式
     list:[],                //发布信息数据
@@ -113,18 +113,18 @@ Page({
           tabs[0].content[k].checked = false;
         }
       }
-    } else if (name == 'releaseTypeList') {
+    } else if (name == 'in_releaseType') {
       if (value == "全部") {
-        str.releaseTypeList = [];
+        str.in_releaseType = [];
         if (tabs[1].content[0].checked == true){
           for (var k = 0; k < tabs[1].content.length; ++k) {
             tabs[1].content[k].checked = false;
-            str.releaseTypeList.splice(k, 1);
+            str.in_releaseType.splice(k, 1);
           }
         }else{
           for (var k = 0; k < tabs[1].content.length; ++k) {
             tabs[1].content[k].checked = true;
-            str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+            str.in_releaseType.push({ releaseType: tabs[1].content[k].name, i: k });
           }
         }
         
@@ -133,12 +133,12 @@ Page({
           if (tabs[1].content[k].name == value) {
             if (tabs[1].content[k].checked == false) {
               tabs[1].content[k].checked = true;
-              str.releaseTypeList.push({ releaseType: tabs[1].content[k].name, i: k });
+              str.in_releaseType.push({ releaseType: tabs[1].content[k].name, i: k });
             } else {
               tabs[1].content[k].checked = false;
-              for(var j=0;j<str.releaseTypeList.length;++j){
-                if (str.releaseTypeList[j].i==k){
-                  str.releaseTypeList.splice(j, 1);
+              for (var j = 0; j < str.in_releaseType.length;++j){
+                if (str.in_releaseType[j].i==k){
+                  str.in_releaseType.splice(j, 1);
                   break;
                 }
               }
@@ -147,18 +147,18 @@ Page({
           }
         }
       }
-    } else if (name == "industryChoiceList") {
+    } else if (name == "in_industryChoice") {
       if (value == "全部") {
-        str.industryChoiceList=[];
+        str.in_industryChoice=[];
         if (tabs[2].content[0].checked == true) {
           for (var k = 0; k < tabs[2].content.length; ++k) {
             tabs[2].content[k].checked = false;
-            str.industryChoiceList.splice(k, 1);
+            str.in_industryChoice.splice(k, 1);
           }
         }else{
           for (var k = 0; k < tabs[2].content.length; ++k) {
             tabs[2].content[k].checked = true;
-            str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+            str.in_industryChoice.push({ industryChoice: tabs[2].content[k].name, i: k });
           }
         }
 
@@ -167,12 +167,12 @@ Page({
           if (tabs[2].content[k].name == value) {
             if (tabs[2].content[k].checked ==false){
               tabs[2].content[k].checked=true;
-              str.industryChoiceList.push({ industryChoice: tabs[2].content[k].name, i: k });
+              str.in_industryChoice.push({ industryChoice: tabs[2].content[k].name, i: k });
             }else{
               tabs[2].content[k].checked=false;
-              for (var j = 0; j < str.industryChoiceList.length; ++j) {
-                if (str.industryChoiceList[j].i == k) {
-                  str.industryChoiceList.splice(j, 1);
+              for (var j = 0; j < str.in_industryChoice.length; ++j) {
+                if (str.in_industryChoice[j].i == k) {
+                  str.in_industryChoice.splice(j, 1);
                   break;
                 }
               }
@@ -207,7 +207,7 @@ Page({
       tabs:tabs,
       priceIndex:0,
       num:0,
-      str: { AmountOfMoney: [{ minThreshold: '全部', maxThreshold:null,i:0}],releaseTypeList: [],industryChoiceList: [] },
+      str: { AmountOfMoney: [{ minThreshold: '全部', maxThreshold: null, i: 0 }], in_releaseType: [], in_industryChoice: [] },
     });
   },
 
@@ -356,8 +356,9 @@ Page({
       pagesize: that.data.pagesize,        //数据大小长度
       rows:[{
         static: 0,                      //状态
-        releaseTypeList: [],            //发布类型
-        industryChoiceList: [],         //行业
+        in_releaseType: [],            //发布类型
+        in_industryChoice: [],         //行业
+        rangeq_threshold:{},  //金额
       }]  
     };
     //地址 
@@ -365,18 +366,18 @@ Page({
     if (currentCity.length != 0) query.rows[0].currentCity = currentCity;
 
     //类型
-    var releaseTypeList = that.data.str.releaseTypeList;
-    if (releaseTypeList.length != 0){
-      for (var i = 0; i < releaseTypeList.length; ++i) {
-        query.rows[0].releaseTypeList[i] = releaseTypeList[i].releaseType;
+    var in_releaseType = that.data.str.in_releaseType;
+    if (in_releaseType.length != 0){
+      for (var i = 0; i < in_releaseType.length; ++i) {
+        query.rows[0].in_releaseType[i] = in_releaseType[i].releaseType;
       }
     } 
 
     //行业
-    var industryChoiceList = that.data.str.industryChoiceList;
-    if (industryChoiceList.length != 0) {
-      for(var i=0;i<industryChoiceList.length;++i){
-        query.rows[0].industryChoiceList[i] = industryChoiceList[i].industryChoice;
+    var in_industryChoice = that.data.str.in_industryChoice;
+    if (in_industryChoice.length != 0) {
+      for (var i = 0; i < in_industryChoice.length;++i){
+        query.rows[0].in_industryChoice[i] = in_industryChoice[i].industryChoice;
       }
     }
 
@@ -384,8 +385,11 @@ Page({
     var AmountOfMoney = that.data.str.AmountOfMoney;
     if (AmountOfMoney.length != 0) {
       if (AmountOfMoney[0].minThreshold != '全部') {
-        query.rows[0].minThreshold = AmountOfMoney[0].minThreshold;
-        if (AmountOfMoney[0].maxThreshold != null) query.rows[0].maxThreshold = AmountOfMoney[0].maxThreshold;
+        //query.rows[0].minThreshold = AmountOfMoney[0].minThreshold;
+        query.rows[0].rangeq_threshold.min = AmountOfMoney[0].minThreshold;
+        if (AmountOfMoney[0].maxThreshold != null) 
+          query.rows[0].rangeq_threshold.max = AmountOfMoney[0].maxThreshold;
+        //query.rows[0].maxThreshold = AmountOfMoney[0].maxThreshold;
       }
     }
 
@@ -445,36 +449,43 @@ Page({
     var date3 = date2.getTime() - date1.getTime()  //时间差的毫秒数
 
     //计算出相差月
-    var months = (date2.getFullYear() - date1.getFullYear()) * 12;
-    if(months != 0) {
-      return months + "月";
-    }
+    var months = ((date2.getMonth()+1) - (date1.getMonth()+1));
 
-    //计算出相差天数
+    //计算出相差天数,月数
     var days = Math.floor(date3 / (24 * 3600 * 1000));
     if(days != 0) {
-      return days + "天";
+      // if(days<30){
+      //   var months = parseInt(days / 30);
+      //   var tt = (days % 30);
+      //   // if (months!=0){
+      //   //   var tt = (days % 30);
+      //   //   return (months) + "-" + tt;
+      //   // }
+      //   // return days + "天前";
+      //   return (date1.getMonth() + 1) + "-" + tt;
+      // }
+      return (date1.getMonth() + 1) + "-" + date1.getDate();
     }
 
     //计算出小时数
     var leave1 = date3 % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
     var hours = Math.floor(leave1 / (3600 * 1000));
     if(hours != 0) {
-      return hours + "小时";
+      return hours + "小时前";
     }
 
     //计算相差分钟数
     var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
     var minutes = Math.floor(leave2 / (60 * 1000));
     if(minutes != 0) {
-      return minutes + "分钟";
+      return minutes + "分钟前";
     }
 
     //计算相差秒数
     var leave3 = leave2 % (60 * 1000);     //计算分钟数后剩余的毫秒数
     var seconds = Math.round(leave3 / 1000);
     if(seconds != 0) {
-      return seconds + "秒";
+      return seconds + "秒前";
     }
   },
 

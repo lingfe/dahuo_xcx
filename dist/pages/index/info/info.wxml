@@ -336,7 +336,7 @@
                                             data-name="{{reply.personalName}}">
                                                 <view>
                                                     <text class="select_text_to" style="float:none;">{{reply.personalName}}</text>
-                                                    <text class="lozhu" wx:if="{{item.personalId == releaseInfo.personalId }}">楼主</text>
+                                                    <text class="lozhu" wx:if="{{reply.personalId == releaseInfo.personalId }}">楼主</text>
                                                     <text class="message">{{reply.cdate}}</text>
                                                 </view>
                                                 <view>

@@ -64,7 +64,8 @@
               <image src="/assets/images/type.png"></image>{{item.releaseType}}</view>
             <view class="data_biaoqian_view">
               <image src="/assets/images/hanye.png"></image>{{item.industryChoice}}</view>
-            <view class="data_biaoqian_view">{{item.top>0?'今天':item.mdate+'前'}}</view>
+            <view class="data_biaoqian_view">
+              <image src="/assets/images/time.png"></image>{{item.top>0?'今天':item.mdate}}</view>
           </view>
         </view>
         <view class="data_info info">
@@ -127,7 +128,7 @@
         <!-- 类型  start -->
         <view class="" hidden="{{activeIndex != 1}}">
           <checkbox-group style="overflow:scroll;height:515px;" data-index="{{activeIndex}}">
-            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="releaseTypeList" wx:key="{{*this}}">
+            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_releaseType" wx:key="{{*this}}">
               <view class="weui-navbar__item stop">
                 <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
@@ -143,7 +144,7 @@
         <!-- 行业  start -->
         <view class="" hidden="{{activeIndex != 2}}">
           <checkbox-group style="overflow:scroll;max-height:515px;" data-index="{{activeIndex}}">
-            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="industryChoiceList" wx:key="{{*this}}">
+            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_industryChoice" wx:key="{{*this}}">
               <view class="weui-navbar__item stop">
                 <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
