@@ -4,14 +4,23 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"minified": true
+		"minified": true,
+		"newFeature": true
 	},
-	"compileType": "weapp",
+	"compileType": "miniprogram",
 	"libVersion": "1.5.3",
 	"appid": "wxdb07051dc3fc031e",
 	"projectname": "dahuo",
 	"condition": {
-		"weapp": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
 			"current": 5,
 			"list": [
 				{
@@ -68,16 +77,14 @@
 					"name": "dahuo",
 					"pathName": "pages/dahuo/dahuo",
 					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "a",
+					"pathName": "pages/dahuo/indexCity/indexCity",
+					"query": ""
 				}
 			]
-		},
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
 		}
 	}
 }
