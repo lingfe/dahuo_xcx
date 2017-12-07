@@ -1,0 +1,63 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-12-7
+ *   描述:  申请入伙
+ * 
+ * */-->
+ <view class='page'>
+  <view class='neiro'>
+    <view class='neiro_top'>
+      <view class='top_content'>
+        申请入伙为您的入伙意向，并非正式入伙。
+      </view>
+      <view>
+        填写表单后将会拉您就项目群，然后在签订项目合作伙伴。
+      </view>
+    </view>
+    <view class="neiro_form">
+      <view class='form_top'>
+        <view class='form_top_text'>￥20000/份</view>
+        <view class='form_top_text'>可申请份数: 5</view>
+      </view>
+
+      <view class='text_input'>
+        <view class='input_jian' bindtap='bindtapJian'>-</view>
+        <view class='input_num'>
+          <input value='{{form.num}}' placeholder='请输入份数' class='num_input'></input>
+        </view>
+        <view class='input_jia' bindtap='bindtapJia'>+</view>
+      </view>
+
+      <view class='form'>
+        <view class='form_view'>
+          <view class='form_title'>姓名</view>
+          <view class='form_input'>
+            <input class='input' placeholder='输入您的姓名' />
+          </view>
+        </view>
+        <view class='form_view'>
+          <view class='form_title'>电话</view>
+          <view class='form_input'>
+            <input class='input' placeholder='与微信绑定的号码' />
+          </view>
+        </view>
+        <view class='form_view'>
+          <view class='form_title'>个人描述</view>
+          <view class='form_input'>
+            <textarea bindinput="dataChange" 
+            placeholder="请描述您的个人情况，包括您现在或之前从事的工作，是否有对项目有帮助的资源，比较熟悉的行业及兴趣爱好." 
+            maxlength="801" class="text" />
+          </view>
+        </view>
+
+      </view>
+    </view>  
+  </view>
+
+  <!-- 底部 start -->
+  <view class='dibu'>
+    <view class='dibu_img'>￥20000</view>
+    <view class='dibu_btn' bindtap='bindtapShengqing'>提交确认</view>
+  </view>
+  <!-- 底部 start -->
+</view>

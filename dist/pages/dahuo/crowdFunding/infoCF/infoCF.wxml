@@ -1,0 +1,95 @@
+<!--/**  
+ *   作者:  lingfe 
+ *   时间:  2017-12-7
+ *   描述:  众筹项目详情_合伙创业
+ * 
+ * */-->
+<view class='page'>
+  <view class='neiro'>
+    <view class='neiro_model'>
+      <view class='model_img'>
+        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
+      </view>
+      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
+      <view class='model_style'>
+        <view class="data_biaoqian_view">
+        <image src="/assets/images/time.png"></image>
+        25万元
+        </view>
+        <view class="data_biaoqian_view">
+        <image src="/assets/images/type.png"></image>
+        生意转让
+        </view>
+        <view class="data_biaoqian_view">
+        <image src="/assets/images/hanye.png"></image>
+        餐饮
+        </view>
+        <view class="data_biaoqian_view">
+         15025人预览
+        </view>
+      </view>
+      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
+    </view>
+
+    <!-- 众筹进度 start-->
+    <view class='jindu'>
+      <progress percent="65" active='true' show-info="true" activeColor="#14BAC8" class='jdtiao'/>
+      <view class='jd_data'>
+        <view class='data'>
+          <view class='title'>已众筹(￥)</view>
+          <view class='prices'>102345</view>
+        </view>
+        <view class='data'>
+          <view class='title'>起投金额</view>
+          <view class='prices'>20000</view>
+        </view>
+        <view class='data'>
+          <view class='title'>众筹人数</view>
+          <view class='prices'>100</view>
+        </view>
+      </view>
+    </view>
+    <!-- 众筹进度 end-->
+
+    <!-- tab切换  start -->
+    <view class="weui-tab">
+       <!-- 菜单  start -->
+        <view class="weui-navbar" style="border-bottom:none;">
+          <block wx:for="{{tabs}}" wx:key="*this">
+            <view id="{{index}}" 
+             class="weui-navbar__item_to {{activeIndex == index ? 'select_text' : ''}}" 
+             data-name="{{item}}" bindtap="tabClick">
+                <view class="weui-navbar__title">{{item}}</view>
+            </view>
+          </block>
+          <view class="weui-navbar__slider" 
+          style="background-color:#14BAC8;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+        </view>
+        <!-- 菜单  end -->
+    </view>
+    <!-- tab切换 end -->
+
+    <!-- 内容  start-->
+    <view class="weui-tab__panel">
+      <!-- 我的发布  start-->
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+      </view>
+    </view>
+  </view>
+  <!-- 底部 start -->
+  <view class='dibu'>
+    <view class='dibu_img'>
+        <view class="data_biaoqian_view">
+        <image src="/assets/images/type.png"></image>
+        12
+        </view>
+        <view class="data_biaoqian_view">
+        <image src="/assets/images/hanye.png"></image>
+        56
+        </view>
+    </view>
+    <view class='dibu_btn' bindtap='bindtapShengqing'>申请入伙</view>
+  </view>
+  <!-- 底部 start -->
+</view>
+

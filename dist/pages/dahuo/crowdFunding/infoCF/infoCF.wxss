@@ -1,0 +1,205 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-12-7
+ *   描述:  众筹项目详情_合伙创业
+ * 
+ * */
+  page{
+   background-color: #e8efef;
+ }
+ 
+ .neiro{
+   width: 100%;
+   height: 100%;
+ }
+
+ .neiro_model{
+   width: 100%;
+   margin: auto;
+   height: auto;
+   background-color: #fff;
+ }
+
+ .model_img{
+   width: 100%;
+   height: auto;
+   padding-top: 10rpx;
+   padding-bottom: 10rpx;
+ }
+ .img{
+   width: 100%;
+   height: 350rpx;
+ }
+ .model_title{
+   width: 97%;
+   height: 70rpx;
+   line-height: 70rpx;
+   font-size: 34rpx;
+     overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+  margin-left:20rpx;
+ }
+ .model_content{
+   width: 97%;
+   height: auto;
+   max-height: 200rpx;
+   font-size: 26rpx;
+   color: #AAA;
+   margin-left:20rpx;
+   padding-bottom: 30rpx;
+ }
+ .model_style{
+   width: 97%;
+  height: 50rpx;
+  margin: auto;
+  line-height: 50rpx;
+  margin-left:20rpx;
+  padding-bottom: 20rpx;
+ }
+ .data_biaoqian_view{
+  font-size: 22rpx;
+  float: left;
+  color: #AAA;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+  margin-right: 4%;
+}
+.data_biaoqian_view image{
+  margin-right: 12rpx;
+  height: 19rpx;
+  width: 22rpx;
+}
+
+/*众筹进度*/
+.jindu{
+  width: 100%;
+  height: 230rpx;
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+.jdtiao{
+  width: 90%;
+  margin: auto;
+  padding-top: 20rpx;
+}
+.jd_data{
+  width: 90%;
+  margin: auto;
+}
+.data{
+  width: 30%;
+  float: left;
+  padding-top: 20rpx;
+  text-align: center;
+  padding: 10rpx;
+}
+.title{
+  font-size: 28rpx;
+  color: #AAA;
+}
+.prices{
+  font-size: 40rpx;
+}
+
+/*tab 菜单*/
+.weui-tab {
+  position:relative;
+  height:100%;
+  top: 17rpx;
+  background-color: #fff;
+}
+.weui-navbar {
+display:-webkit-box;
+display:-webkit-flex;
+display:flex;
+position:absolute;
+z-index:500;
+background-color: #fff;
+top:0;
+width:100%;
+
+}
+.select_text{
+  text-align: center;
+  color: #14BAC8;
+}
+.weui-navbar__item_to {
+  position:relative;
+  display:block;
+  padding:13px 0;
+  text-align:center;
+  font-size:0;
+  width:26%;
+}
+.weui-navbar__title {
+  display:inline-block;
+  font-size:26rpx;
+  max-width:8em;
+  width:auto;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-wrap:normal;
+
+}
+.weui-navbar__slider {
+  position:absolute;
+  content:" ";
+  left:0;
+  bottom:0;
+  width:14%;
+  height:8rpx;
+  background-color:#1aad19;
+  -webkit-transition:-webkit-transform .3s;
+  transition:-webkit-transform .3s;
+  transition:transform .3s;
+  transition:transform .3s,-webkit-transform .3s;
+
+}
+
+/*tab 内容*/
+.weui-tab__panel {
+  box-sizing:border-box;
+  height:49%;
+  padding-top:50px;
+  overflow:auto;
+  padding-bottom:57rpx; 
+  -webkit-overflow-scrolling:touch;
+  background-color: #E8EFEF;
+}
+
+/*底部内容*/
+.dibu{
+  width: 100%;
+  height: 90rpx;
+  position: fixed;
+  left: 0rpx;
+  bottom: -1rpx;
+  background-color: #fff;
+}
+.dibu_img{
+  width: 60%;
+  float: left;
+  height: 90rpx;
+  line-height:90rpx;
+  margin-left:20rpx;
+}
+.dibu_btn{
+  width: 20%;
+  float: right;
+  height: 70rpx;
+  margin-top:10rpx;
+  margin-right:20rpx;
+  background-color: #14BAC8;
+  border-radius:14rpx;
+  font-size:26rpx;
+  text-align:center;
+  line-height:70rpx;
+  color:#fff;
+}
+.dibu_btn:active{
+  opacity: 0.7;
+}
+

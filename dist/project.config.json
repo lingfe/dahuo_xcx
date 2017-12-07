@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 9,
 			"list": [
 				{
 					"id": 0,
@@ -82,6 +82,30 @@
 					"id": 8,
 					"name": "a",
 					"pathName": "pages/dahuo/indexCity/indexCity",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "众筹",
+					"pathName": "pages/dahuo/crowdFunding/crowdFunding",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "众筹项目详情",
+					"pathName": "pages/dahuo/crowdFunding/info/info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请入伙",
+					"pathName": "pages/dahuo/crowdFunding/crowdFunding",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请入伙",
+					"pathName": "pages/dahuo/crowdFunding/infoCF/applyOccupation/applyOccupation",
 					"query": ""
 				}
 			]

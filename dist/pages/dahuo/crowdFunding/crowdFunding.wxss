@@ -1,0 +1,89 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-17-7
+ *   描述:  众筹
+ * 
+ * */
+ page{
+   background-color: #e8efef;
+ }
+ 
+ .neiro{
+   width: 100%;
+   height: 100%;
+ }
+
+ .neiro_model{
+   width: 96%;
+   margin: auto;
+   height: auto;
+   background-color: #fff;
+   margin-top: 20rpx;
+ }
+
+ .model_img{
+   width: 100%;
+   height: auto;
+   padding-top: 10rpx;
+   padding-bottom: 10rpx;
+ }
+ .img{
+   width: 100%;
+   height: 350rpx;
+ }
+ .model_title{
+   width: 100%;
+   height: 50rpx;
+   line-height: 50rpx;
+   text-align: center;
+   font-size: 26rpx;
+     overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+ }
+ .model_content{
+   width: 90%;
+   margin: auto;
+   height: 50rpx;
+   line-height: 50rpx;
+   font-size: 22rpx;
+   color: #AAA;
+   text-align: center;
+     overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+  padding-bottom: 10rpx;
+ }
+ .model_style{
+   width: 60%;
+  height: 50rpx;
+  margin: auto;
+  line-height: 50rpx;
+  text-align: center;
+  padding-bottom: 10rpx;
+ }
+ .data_biaoqian_view{
+  font-size: 22rpx;
+  float: left;
+  color: #AAA;
+  width: 30%;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+}
+.data_biaoqian_view image{
+  margin-right: 12rpx;
+  height: 19rpx;
+  width: 22rpx;
+}
+
+/*链接*/
+.navigator-hover {
+  background-color:#fff;/*rgba(0, 0, 0, 0.1);*/
+  opacity:0.7;
+}
+navigator {
+  height:auto;
+  width:auto;
+  display:block;
+}
