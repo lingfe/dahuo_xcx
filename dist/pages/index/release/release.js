@@ -7,6 +7,24 @@
 
 Page({
 
+  //拨打电话
+  bindtapPhone: function () {
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定拨打？0851-84700294',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+            phoneNumber: '0851-84700294'
+          });
+        }
+      }
+    });
+  },
+
   //合伙创业
   bindtapPartnership:function(){
     wx.navigateTo({

@@ -24,7 +24,7 @@ Page({
     phone: null,                          //电话号码
     imageArray: [],                       //图片数组，原始。不包含完整url，用于储存
     
-    static: 4,                                //发布信息状态，0=正常显示,1=已下架,2=未发布，4=审核中，5=未通过
+    static: 4,                            //发布信息状态，0=正常显示,1=已下架,2=未发布，4=审核中，5=未通过
     text: "发布",                         //默认
     dad:false,                            //是否保存到档案袋
   },
@@ -133,11 +133,11 @@ Page({
     }
 
     //收益描述
-    var incomeDescription = e.detail.value.incomeDescription;
-    if (app.checkInput(incomeDescription)) {
-      that.showModal("收益描述不能为空!");
-      return;
-    }
+    // var incomeDescription = e.detail.value.incomeDescription;
+    // if (app.checkInput(incomeDescription)) {
+    //   that.showModal("收益描述不能为空!");
+    //   return;
+    // }
 
     //电话号码
     var phone = e.detail.value.phone;
@@ -260,7 +260,7 @@ Page({
               threshold: that.data.threshold,                                //入伙门槛
               industryChoice: that.data.industryChoice,                      //行业选择
               projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
-              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              //incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
               phone: that.data.phone,                                        //电话号码
               currentCity: wx.getStorageSync("currentCity"),                 //当前城市
               imageArray: pathArr                                            //图片数组

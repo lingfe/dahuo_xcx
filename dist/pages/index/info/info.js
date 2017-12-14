@@ -262,8 +262,8 @@ Page({
   bindtapPhone: function () {
     var that=this;
     wx.showModal({
-      title: '拨打电话',
-      content: '很抱歉!拨打电话官方正在修复,是否复制？' + that.data.releaseInfo.phone ,
+      title: '提示',
+      content: '确定拨打？' + that.data.releaseInfo.phone ,
       confirmText: "确定",
       cancelText: "取消",
       success: function (res) {
@@ -273,16 +273,6 @@ Page({
           wx.makePhoneCall({
             phoneNumber: that.data.releaseInfo.phone 
           });
-
-          wx.setClipboardData({
-            data: that.data.releaseInfo.phone ,
-            success: function (res) {
-              wx.showModal({
-                title: '复制成功!',
-                showCancel: false 
-              });
-            }
-          })
         } 
       }
     });

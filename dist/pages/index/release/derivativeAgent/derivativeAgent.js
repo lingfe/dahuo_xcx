@@ -221,11 +221,11 @@ Page({
     }
 
     //收益描述
-    var incomeDescription = e.detail.value.incomeDescription;
-    if (app.checkInput(incomeDescription)) {
-      that.showModal("收益描述不能为空!");
-      return;
-    } 
+    // var incomeDescription = e.detail.value.incomeDescription;
+    // if (app.checkInput(incomeDescription)) {
+    //   that.showModal("收益描述不能为空!");
+    //   return;
+    // } 
 
     //转让原因
     var transferReason = e.detail.value.transferReason;
@@ -372,7 +372,7 @@ Page({
               geographicalPosition: that.data.geographicalPosition,          //地理位置
               projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
               operatingArea: that.data.operatingArea,                        //项目面积
-              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              //incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
               transferReason: wx.getStorageSync('transferReason'),           //转让原因
               phone: that.data.phone,                                        //电话号码
               currentCity: wx.getStorageSync("currentCity"),                 //当前城市

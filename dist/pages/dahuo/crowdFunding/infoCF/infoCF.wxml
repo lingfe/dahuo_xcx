@@ -8,44 +8,44 @@
   <view class='neiro'>
     <view class='neiro_model'>
       <view class='model_img'>
-        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
+        <image class='img' src='{{info.imageArray}}'></image>
       </view>
-      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
+      <view class='model_title'>{{info.title}}</view>
       <view class='model_style'>
         <view class="data_biaoqian_view">
-        <image src="/assets/images/time.png"></image>
-        25万元
+        <image src="/assets/images/info/qtje.png"></image>
+        {{info.threshold}}万元
         </view>
         <view class="data_biaoqian_view">
         <image src="/assets/images/type.png"></image>
-        生意转让
+        {{info.releaseType}}
         </view>
         <view class="data_biaoqian_view">
         <image src="/assets/images/hanye.png"></image>
-        餐饮
+        {{info.industryChoice}}
         </view>
         <view class="data_biaoqian_view">
          15025人预览
         </view>
       </view>
-      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
+      <view class='model_content'>{{info.projectDescription}}</view>
     </view>
 
     <!-- 众筹进度 start-->
     <view class='jindu'>
-      <progress percent="65" active='true' show-info="true" activeColor="#14BAC8" class='jdtiao'/>
+      <progress percent="{{renshu}}" active='true' show-info="true" activeColor="#14BAC8" class='jdtiao'/>
       <view class='jd_data'>
         <view class='data'>
-          <view class='title'>已众筹(￥)</view>
-          <view class='prices'>102345</view>
+          <view class='title'>已申请(￥)</view>
+          <view class='prices'>{{prices * 10000}}</view>
         </view>
         <view class='data'>
           <view class='title'>起投金额</view>
-          <view class='prices'>20000</view>
+          <view class='prices'>{{info.threshold * 10000}}</view>
         </view>
         <view class='data'>
-          <view class='title'>众筹人数</view>
-          <view class='prices'>100</view>
+          <view class='title'>申请人数</view>
+          <view class='prices'>{{renshu}}</view>
         </view>
       </view>
     </view>
@@ -73,23 +73,81 @@
     <view class="weui-tab__panel">
       <!-- 我的发布  start-->
       <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+       <view class='tab_content'  wx:for="{{info.dockingPlan}}" wx:key="*this">
+          <view class='content_title' wx:if="{{item.title !=null}}">{{item.title}}</view>
+          <view class='content_pro' wx:for-item="pro" wx:for="{{item.content}}" wx:key="*this">
+            <view class='pro_content'>{{pro.content}}</view>
+            <image mode="widthFix" class='pro_img' src='{{pro.img}}'></image>
+          </view>
+       </view>
       </view>
     </view>
   </view>
   <!-- 底部 start -->
   <view class='dibu'>
     <view class='dibu_img'>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/type.png"></image>
-        12
+        <view class="img_info" bindtap='bindtabXX'>
+        <image src="/assets/images/info/xx.png"></image>
         </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/hanye.png"></image>
-        56
+        <view class="img_info" bindtap='bindtabAX'>
+        <image src="/assets/images/info/ax{{ax}}.png"></image>
         </view>
     </view>
-    <view class='dibu_btn' bindtap='bindtapShengqing'>申请入伙</view>
+    <view class='dibu_btn_false' 
+    bindtap='bindtapShengqing' 
+    id='{{info.id}}' 
+    wx:if="{{personalId !=true }}"
+    data-maxApplyNumber="{{info.maxApplyNumber}}" 
+    data-threshold="{{info.threshold}}" >申请入伙</view>
+    
+    <view class='dibu_btn_ture' bindtap='bindtapYes' wx:elif="{{personalId}}" >已申请</view>
   </view>
   <!-- 底部 start -->
+
+
+  <!-- 已申请 start-->
+  <view class='Calculationlist' wx:if="{{yes == true}}" id='eixt' bindtap='CalculationlistBindtap'>
+    <form bindsubmit="submitForm">
+    <view class='huishou_form' catchtap='CalculationlistBindtap'> 
+      <view class='form_frist'>已申请</view>
+      <view class='form'>
+        <view class='title'>份数</view>
+        <view class='input'>
+          <input disabled="disabled" value='{{personaInfo.applyNumber}}' type='text' placeholder='份数'/>
+        </view>
+      </view>
+
+      <view class='form'>
+        <view class='title'>金额</view>
+        <view class='input'>
+          <input disabled="disabled" value='{{personaInfo.amountofMoney * 10000}}' type='text' placeholder='金额'/>
+        </view>
+      </view>
+
+      <view class='form'>
+        <view class='title'>姓名</view>
+        <view class='input'>
+          <input disabled="disabled" value='{{personaInfo.userName}}'   type='text' placeholder='姓名'/>
+        </view>
+      </view>
+
+      <view class='form'>
+        <view class='title'>电话</view>
+        <view class='input'>
+          <input disabled="disabled" value='{{personaInfo.phone}}' type='text' placeholder='电话' />
+        </view>
+      </view>
+
+      <view class='form'>
+        <view class='title'>个人描述</view>
+        <view class='input'>
+          <input disabled="disabled" value='{{personaInfo.userRemark}}' type='text' placeholder='个人描述' />
+        </view>
+      </view>
+      <button class='form_last' bindtap='bindtapYes'>确定</button>
+    </view>
+    </form>
+  </view>
+  <!-- 已申请 end-->
 </view>
 

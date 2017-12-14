@@ -23,7 +23,6 @@
  .model_img{
    width: 100%;
    height: auto;
-   padding-top: 10rpx;
    padding-bottom: 10rpx;
  }
  .img{
@@ -44,8 +43,8 @@
    width: 97%;
    height: auto;
    max-height: 200rpx;
-   font-size: 26rpx;
-   color: #AAA;
+   font-size: 28rpx;
+   color: #868686;
    margin-left:20rpx;
    padding-bottom: 30rpx;
  }
@@ -67,9 +66,10 @@
   margin-right: 4%;
 }
 .data_biaoqian_view image{
-  margin-right: 12rpx;
-  height: 19rpx;
+  height: 22rpx;
   width: 22rpx;
+  position: relative;
+  top: 3rpx;
 }
 
 /*众筹进度*/
@@ -82,7 +82,7 @@
 .jdtiao{
   width: 90%;
   margin: auto;
-  padding-top: 20rpx;
+  padding-top: 30rpx;
 }
 .jd_data{
   width: 90%;
@@ -106,8 +106,8 @@
 /*tab 菜单*/
 .weui-tab {
   position:relative;
-  height:100%;
-  top: 17rpx;
+  height:100rpx;
+  top: 20rpx;
   background-color: #fff;
 }
 .weui-navbar {
@@ -115,7 +115,7 @@ display:-webkit-box;
 display:-webkit-flex;
 display:flex;
 position:absolute;
-z-index:500;
+z-index:0;
 background-color: #fff;
 top:0;
 width:100%;
@@ -142,7 +142,7 @@ width:100%;
   text-overflow:ellipsis;
   white-space:nowrap;
   word-wrap:normal;
-
+  color: #868686;
 }
 .weui-navbar__slider {
   position:absolute;
@@ -163,7 +163,7 @@ width:100%;
 .weui-tab__panel {
   box-sizing:border-box;
   height:49%;
-  padding-top:50px;
+  padding-top:20rpx;
   overflow:auto;
   padding-bottom:57rpx; 
   -webkit-overflow-scrolling:touch;
@@ -175,7 +175,6 @@ width:100%;
   width: 100%;
   height: 90rpx;
   position: fixed;
-  left: 0rpx;
   bottom: -1rpx;
   background-color: #fff;
 }
@@ -186,20 +185,259 @@ width:100%;
   line-height:90rpx;
   margin-left:20rpx;
 }
-.dibu_btn{
+ .img_info{
+  font-size: 26rpx;
+  float: left;
+  color: #AAA;
+  overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+  margin-right: 8%;
+  margin-left: 2%;
+}
+.img_info image{
+  height: 34rpx;
+  width: 34rpx;
+  position: relative;
+  top: 6rpx;
+}
+.dibu_btn_false{
   width: 20%;
   float: right;
-  height: 70rpx;
-  margin-top:10rpx;
+  height: 60rpx;
+  margin-top:15rpx;
   margin-right:20rpx;
   background-color: #14BAC8;
   border-radius:14rpx;
   font-size:26rpx;
   text-align:center;
-  line-height:70rpx;
+  line-height:60rpx;
   color:#fff;
 }
-.dibu_btn:active{
+
+.dibu_btn_ture{
+  width: 20%;
+  float: right;
+  height: 60rpx;
+  margin-top:15rpx;
+  margin-right:20rpx;
+  background-color: #999;
+  border-radius:14rpx;
+  font-size:26rpx;
+  text-align:center;
+  line-height:60rpx;
+  color:#fff;
+}
+.dibu_btn_ture dibu_btn_false:active{
   opacity: 0.7;
 }
 
+
+/*表单 已申请*/
+.Calculationlist{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0rpx;
+  background: rgba(0,0,0,0.8);
+}
+
+.huishou_form{
+  width: 80%;
+  height:770rpx;
+  position:relative;
+  margin: 0rpx auto;
+  background-color: #fff;
+  top: 175rpx;
+  border-radius: 10px;
+}
+
+.form{
+  position: relative;
+  top: 20rpx;
+  width: 70%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin: 0px auto;
+  font-size: 24rpx;
+}
+.form_text{
+  position: relative;
+  top: 20rpx;
+  width: 70%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin: 0px auto;
+  font-size: 24rpx;
+}
+.text_text{
+    width: 50%;
+    font-size: 24rpx;
+    color: #aaa;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.text_text_last{
+    width: 60%;
+    font-size: 24rpx;
+    color: #aaa;
+    height: 50rpx;
+    line-height: 50rpx;
+    float: left;
+}
+.text_text_right{
+    width: 40%;
+    font-size: 24rpx;
+    color: #aaa;
+    height: 50rpx;
+    text-align: right;
+    line-height: 50rpx;
+    float: right;
+}
+.form_frist{
+  position: relative;
+  top: 20rpx;
+  width: 70%;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  margin: 0px auto;
+  font-size: 30rpx;
+}
+
+.form_last{
+  position: relative;
+  top: 40rpx;
+  width: 50%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin: 0px auto;
+  margin-top: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+  background-color: #14bac8;
+  color: #666;
+}
+
+.form_last:active{
+  opacity: 0.7;
+}
+.title{
+  color: #999999;
+  float: left;
+  font-size: 26rpx;
+}
+.title_img{
+  width: 20rpx;
+  height: 20rpx;
+}
+.span{
+  color: #14bac8;
+}
+
+/*文本框默认属性*/
+.input-placeholder {
+  font-size: 26rpx;
+  font-family: "黑体";
+  color: #CCCCCC;
+}
+.input_other{
+  width: 200rpx;
+  float: left;
+  position: relative;
+  top: 22rpx;
+  color: #000000;
+  margin-left: 100rpx;
+}
+.input{
+  width: 270rpx;
+  float: left;
+  position: relative;
+  top: 22rpx;
+  color: #000000;
+  margin-left: 40rpx;
+}
+
+/*按钮*/
+.consultation_bottom_btn{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 22rpx;
+  margin-left: 20rpx;
+  margin-bottom: 56rpx;
+  background-color: #E9F01D;
+  color: #fff;
+}
+.consultation_bottom_btn:active{
+  background-color: #EACF02;
+}
+
+
+button[type="primary"] {
+  color: #fff;
+  background-color: #14bac8;
+  border-radius: 8px;
+}
+
+.button-hover[type="primary"] {
+  background-color: #14bac8;
+}
+
+button::after {
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #e8efef;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+
+/*项目介绍*/
+.weui-tab__content{
+  width:100%;
+  height: auto;
+}
+.tab_content{
+  font-size:26rpx;
+  width: 100%;
+  margin:auto;
+  line-height:30rpx;
+  padding-bottom:80rpx;
+  padding-top:30rpx;
+  background-color:#fff;
+  margin-top: 20rpx;
+}
+.content_title{
+  width: 100%;
+   height: 70rpx;
+   line-height: 70rpx;
+   font-size: 34rpx;
+     overflow: hidden; /**自动隐藏文字*/
+  text-overflow: ellipsis;/**文字隐藏后添加省略号*/
+  white-space: nowrap;/**强制不换行*/
+  text-align: center;
+  padding-top: 40rpx;
+}
+.content_pro{
+  width: 100%;
+}
+.pro_content{
+  letter-spacing: 2rpx;
+  line-height: 54rpx;
+  font-size: 28rpx;
+  color: #868686;
+  padding: 50rpx;
+}
+.pro_img{
+   width: 100%;
+ }

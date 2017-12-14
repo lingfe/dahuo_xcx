@@ -47,7 +47,8 @@
     "pages/dahuo/crowdFunding/crowdFunding",
     "pages/dahuo/crowdFunding/info/info",
     "pages/dahuo/crowdFunding/infoCF/infoCF",
-    "pages/dahuo/crowdFunding/infoCF/applyOccupation/applyOccupation"
+    "pages/dahuo/crowdFunding/infoCF/applyOccupation/applyOccupation",
+    "pages/dahuo/crowdFunding/info/applyO/applyO"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -64,15 +65,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "搭伙",
-        "iconPath": "assets/images/dahuo_1.jpg",
-        "selectedIconPath": "assets/images/dahuo_0.jpg"
+        "text": "主页",
+        "iconPath": "assets/images/index1.png",
+        "selectedIconPath": "assets/images/index0.png"
       },
       {
         "pagePath": "pages/dahuo/crowdFunding/crowdFunding",
         "text": "优质",
-        "iconPath": "assets/images/news1.png",
-        "selectedIconPath": "assets/images/news0.png"
+        "iconPath": "assets/images/yz0.png",
+        "selectedIconPath": "assets/images/yz1.png"
       },
       {
         "pagePath": "pages/message/message",

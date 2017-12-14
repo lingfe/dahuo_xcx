@@ -243,11 +243,11 @@ Page({
           //删除发布信息
           var url = app.config.basePath_web + "api/exe/save";
           //请求头
-          var header = { cookie: that.data.cookie, "Content-Type": "application/x-www-form-urlencoded" };
+          var header = { cookie: wx.getStorageSync("cookie"), "Content-Type": "application/x-www-form-urlencoded" };
           //设置参数
           var data = {
-            timeStamp: that.data.time,
-            token: that.data.token,
+            timeStamp: wx.getStorageSync("time"),
+            token: wx.getStorageSync("token"),
             reqJson: JSON.stringify({
               nameSpace: 'releaseinfo',       //发布信息信息表
               scriptName: 'Query',
@@ -263,6 +263,8 @@ Page({
           app.request.reqPost(url,header,data,function(res){
             //调用获取档案袋
             that.requestDataRecovery(that);
+            //我发布的
+            that.requestDataRelease(that);
           });
         } 
       }

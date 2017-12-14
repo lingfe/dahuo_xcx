@@ -7,100 +7,28 @@
 <view class='page'>
   <view class='neiro'>
  
-    <view class='neiro_model'>
-      <navigator url='/pages/dahuo/crowdFunding/infoCF/infoCF'>
+    <view class='neiro_model' wx:for="{{data.rows}}" wx:key="*this">
+      <view  class='navigator' bindtap='bindtapNavigator' id='{{item.id}}' data-releasetype='{{item.releaseType}}'>
       <view class='model_img'>
-        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
+        <image class='img' src='{{item.imageArray}}'></image>
       </view>
-      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
-      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
+      <view class='model_title'>{{item.title}}</view>
+      <view class='model_content'>{{item.projectDescription}} </view>
       <view class='model_style'>
         <view class="data_biaoqian_view">
-        <image src="/assets/images/time.png"></image>
-        25万元
+        <image src="/assets/images/info/qtje.png"></image>
+        {{item.threshold}}万元
         </view>
         <view class="data_biaoqian_view">
         <image src="/assets/images/type.png"></image>
-        生意转让
+        {{item.releaseType}}
         </view>
         <view class="data_biaoqian_view">
         <image src="/assets/images/hanye.png"></image>
-        餐饮
+        {{item.industryChoice}}
         </view>
       </view>
-      </navigator>
-    </view>
-
-    <view class='neiro_model'>
-      <navigator url='/pages/dahuo/crowdFunding/info/info'>
-      <view class='model_img'>
-        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
       </view>
-      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
-      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
-      <view class='model_style'>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/type.png"></image>
-        生意转让
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/hanye.png"></image>
-        餐饮
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/time.png"></image>
-        39分钟前
-        </view>
-      </view>
-      </navigator>
-    </view>
-
-    <view class='neiro_model'>
-      <navigator>
-      <view class='model_img'>
-        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
-      </view>
-      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
-      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
-      <view class='model_style'>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/type.png"></image>
-        生意转让
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/hanye.png"></image>
-        餐饮
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/time.png"></image>
-        39分钟前
-        </view>
-      </view>
-      </navigator>
-    </view>
-    
-    <view class='neiro_model'>
-      <navigator>
-      <view class='model_img'>
-        <image class='img' src='https://static.daho.club/static/upload/web.daho.club/oNWj80OPZA_tvXxf2eIpI-VVqP4E/20171014/369dd450fe964c8e911f3ac088824b32.jpg'></image>
-      </view>
-      <view class='model_title'>搭伙首批“种子”用户现金激励活动</view>
-      <view class='model_content'>奖励一：前300名发布内容的用户，工作人员将联系您并将您拉至微信群。人满后，官方发送红包，手气最佳者收获利益。 </view>
-      <view class='model_style'>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/type.png"></image>
-        生意转让
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/hanye.png"></image>
-        餐饮
-        </view>
-        <view class="data_biaoqian_view">
-        <image src="/assets/images/time.png"></image>
-        39分钟前
-        </view>
-      </view>
-      </navigator>
     </view>
   </view>
 </view>

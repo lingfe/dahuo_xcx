@@ -179,11 +179,11 @@ Page({
       return;
     }
     //店铺面积 
-    var operatingArea = e.detail.value.operatingArea;
-    if (app.checkInput(operatingArea)) {
-      that.showModal("店铺面积不能为空!");
-      return;
-    }
+    // var operatingArea = e.detail.value.operatingArea;
+    // if (app.checkInput(operatingArea)) {
+    //   that.showModal("店铺面积不能为空!");
+    //   return;
+    // }
     //发布人身份
     var publisherIdentity = e.detail.value.publisherIdentity;
     if (app.checkInput(publisherIdentity)) {
@@ -336,7 +336,7 @@ Page({
               title: that.data.title,                             //标题
               threshold: that.data.threshold,                     //入伙门槛
               monthlyRent: that.data.monthlyRent,                 //每月租金
-              operatingArea: that.data.operatingArea,             //店铺面积
+              //operatingArea: that.data.operatingArea,             //店铺面积
               publisherIdentity: that.data.publisherIdentity,     //发布人身份
               industryChoice: that.data.industryChoice,           //行业选择
               geographicalPosition: that.data.geographicalPosition,          //地理位置

@@ -99,3 +99,11 @@
         </view>
     </view>
 </view>
+
+    <view class='phone'>
+      <view class='phone_img'>
+        <image src='/assets/images/phone.png' bindtap='bindtapPhone' class='img'></image>
+      </view>
+      <view class='phone_title'>优 质 项 目 热 线</view>
+      <view class='phone_content'>入伙 ' 加盟 ' 转让</view>
+    </view>

@@ -72,7 +72,7 @@ App({
 
   //验证非空
   checkInput: function (data) {
-    if (data == null || data == undefined || data == "" || data == 'null') {
+    if (data == null || data == undefined || data == "" || data == 'null'  ) {
       return true;
     }
     if (typeof data == "string") {

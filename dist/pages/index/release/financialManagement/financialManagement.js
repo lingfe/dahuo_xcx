@@ -18,7 +18,7 @@ Page({
     isAgree: false,                       //同意条款
 
     productCategory: ["基金", "保险", "债券", "股票", "P2P", "其他"],
-    productCategoryIndex:0,
+    productCategoryIndex:-1,
 
     title: null,                          //标题
     threshold: null,                      //入伙门槛

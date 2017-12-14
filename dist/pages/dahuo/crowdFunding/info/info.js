@@ -17,6 +17,69 @@ Page({
     activeIndex: 0,         //tab切换下标
     sliderOffset: 0,        //坐标x
     sliderLeft: 0,          //坐标y
+    ax: 1,
+  },
+
+  //根据id获取优质项目申请数据
+  gethighQualityProjectApply: function (that) {
+    //请求获取数据
+    var url = app.config.basePath_web + "api/exe/get";
+    //请求头
+    var header = { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync('time'),
+      token: wx.getStorageSync('token'),
+      reqJson: JSON.stringify({
+        nameSpace: 'highQualityProjectApply',       //优质项目申请表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          rows: [{
+            highQualityProjectId: that.data.id,//id
+          }],
+        }
+      })
+    };
+
+    //发送请求
+    app.request.reqPost(url, header, data, function (res) {
+      var row = res.data.rows;
+      if (!app.checkInput(row)) {
+        var personalId = wx.getStorageSync('personalId');
+        for (var i = 0; i < row.length; ++i) {
+          //验证是否已经申请
+          if (personalId == row[i].personalId) {
+            personalId = true;
+          }
+        }
+
+        that.setData({
+          personalId: personalId,
+        });
+      }
+    });
+  },
+
+  //申请加盟
+  bindtapShengqing:function(e){
+    wx.navigateTo({
+      url: "/pages/dahuo/crowdFunding/info/applyO/applyO?id=" + e.currentTarget.id
+    })
+  },
+
+  //收藏
+  bindtabAX: function (e) {
+    this.setData({
+      ax: this.data.ax == 1 ? 2 : 1,
+    });
+  },
+
+  //信息
+  bindtabXX: function (e) {
+    wx.showModal({
+      title: '提示',
+      content: '请申请加盟,我们会联系您!',
+    })
   },
 
   //tab点击切换
@@ -53,6 +116,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
+          id:options.id,
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
@@ -60,52 +124,57 @@ Page({
     });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    //根据id获取优质项目申请数据
+    that.gethighQualityProjectApply(that);
+    //根据id获取优质项目数据
+    that.gethighQualityProject(that);
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+  //根据id获取优质项目数据
+  gethighQualityProject: function (that) {
+    //请求获取数据
+    var url = app.config.basePath_web + "api/exe/get";
+    //请求头
+    var header = { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync('time'),
+      token: wx.getStorageSync('token'),
+      reqJson: JSON.stringify({
+        nameSpace: 'highQualityProject',       //收藏夹表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          rows: [{
+            state: 0, //状态
+            id: that.data.id,//id
+          }],
+        }
+      })
+    };
+    //发送请求
+    app.request.reqPost(url, header, data, function (res) {
+      // 得到数据
+      var row=res.data.rows[0];
+      var projectIntroduction = JSON.parse(row.projectIntroduction);
+      var dockingPlan = JSON.parse(row.dockingPlan);
+      var standardofJoining = JSON.parse(row.standardofJoining);
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+      row.projectIntroduction = projectIntroduction;
+      row.dockingPlan = dockingPlan;
+      row.standardofJoining = standardofJoining;
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
+      that.setData({
+        data: res.data,
+        info: row,
+      });
+    });
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
   
-  }
 })

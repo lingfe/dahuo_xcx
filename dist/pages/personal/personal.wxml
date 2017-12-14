@@ -102,9 +102,17 @@
                              data-static="{{item.static}}" 
                              data-name="{{item.releaseType}}"  
                              type="default" size="mini">编辑</button></view>
+                             <view class="float-btn"> 
+                              <button class="weui-btn mini-btn button_css" 
+                              bindtap="bindtapDelete" 
+                              wx:if="{{item.static == 5}}"
+                              id="{{item.id}}" 
+                              type="default" size="mini">删除</button>
+                             </view>
                             <view class="float-btn">
                             <button  class="weui-btn mini-btn button_css" 
                             bindtap="bindtapOffTheShelf" 
+                            wx:if="{{item.static != 5}}"
                             id="{{item.id}}"
                             data-static="{{item.static}}" 
                             type="default" size="mini">下架</button></view>

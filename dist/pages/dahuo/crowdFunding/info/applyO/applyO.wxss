@@ -1,0 +1,184 @@
+/**  
+ *   作者:  lingfe 
+ *   时间:  2017-12-12
+ *   描述:  申请加盟
+ * 
+ * */
+  page{
+   background-color: #e8efef;
+ }
+ 
+ .neiro{
+   width: 100%;
+   height: 100%;
+ }
+
+ .neiro_top{
+   width: 87%;
+   margin: auto;
+   height: auto;
+   color: #FFF;
+   background-color: #666;
+   margin-top: 20rpx;
+   font-size: 24rpx;
+   text-align: center;
+   padding: 22rpx;
+   border-radius: 10rpx;
+   line-height: 50rpx;
+ }
+  .neiro_form{
+   width: 90%;
+   margin: auto;
+   height: auto;
+   color: #888;
+   background-color: #FFF;
+   margin-top: 20rpx;
+   font-size: 26rpx;
+   text-align: center;
+   padding: 10rpx;
+   border-radius: 10rpx;
+   box-shadow: 0 3rpx 8rpx #888;
+ }
+ .form_top{
+   width: 90%;
+   margin: auto;
+   height: 90rpx;
+   line-height: 90rpx;
+   background-color: #f5f5f5;
+   margin-top: 30rpx;
+   margin-bottom: 10rpx;
+ }
+ .form_top_text{
+  width: 48%;
+  float: left;
+  font-size: 26rpx;
+ }
+
+ /*数值*/
+  .text_input{
+  font-size:60rpx;
+  width:90%;
+  text-align:center;
+  height:90rpx;
+  line-height:90rpx;
+  margin:auto;
+  padding-top:30rpx;
+ }
+ 
+ .input_jian{
+  width:80rpx;
+  height:80rpx;
+  float:left;
+  border:1rpx solid #aaa;
+  border-radius:50rpx;
+  margin-right:5%;
+  line-height:80rpx;
+
+ }
+
+ .input_num{
+  width:61%;
+  height:80rpx;
+  float:left;
+  border:1rpx solid #aaa;
+  border-radius:30rpx;
+  margin-right:5%;
+  line-height:80rpx;
+
+ }
+ .num_input{
+   font-size: 26rpx;
+   padding-top: 16rpx;
+   width: 97%;
+   margin: auto;
+ }
+
+ .input_jia{
+  width:80rpx;
+  height:80rpx;
+  float:left;
+  border:1rpx solid #aaa;
+  border-radius:50rpx;
+  line-height:80rpx;
+ }
+
+ /*文本框部分*/
+ .form{
+   width: 90%;
+   margin: auto;
+   padding-top: 50rpx;
+  height: 500rpx;
+ }
+ .form_view{
+   width: 100%;
+   padding: 10rpx;
+   height: 50rpx;
+   line-height: 50rpx;
+ }
+ .form_title{
+   font-size: 26rpx;
+   width: 35%;
+   text-align: left;
+   float: left;
+ }
+ .form_input{
+   width:60%;
+   text-align: left;
+   font-size: 26rpx;
+   float: left;
+   letter-spacing: 2rpx;
+ }
+textarea {
+  height: 200rpx;
+  width: 100%;
+  color: #808080;
+}
+ /*文本框默认属性*/
+  .input-placeholder {
+  font-size: 26rpx;
+  font-family:"黑体";
+  color: #c6c6c6;
+  letter-spacing: 7rpx;
+}
+ .textarea-placeholder {
+  font-size: 26rpx;
+  font-family:"黑体";
+  color: #c6c6c6;
+}
+.text{
+  letter-spacing: 7rpx;
+}
+ /*底部内容*/
+.dibu{
+  width: 100%;
+  height: 90rpx;
+  position: fixed;
+  left: 0rpx;
+  bottom: -1rpx;
+  background-color: #fff;
+}
+.dibu_img{
+  width: 70%;
+  float: left;
+  height: 90rpx;
+  text-align: right;
+  line-height:90rpx;
+  margin-left:20rpx;
+  color: #14BAC8;
+}
+.dibu_btn{
+  width: 20%;
+  float: right;
+  height: 60rpx;
+  margin-top:15rpx;
+  margin-right:20rpx;
+  background-color: #14BAC8;
+  border-radius:14rpx;
+  font-size:26rpx;
+  text-align:center;
+  line-height:60rpx;
+  color:#fff;
+}
+.dibu_btn:active{
+  opacity: 0.7;
+}

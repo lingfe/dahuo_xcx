@@ -159,11 +159,11 @@ Page({
       return;
     }
     //资金规划
-    var fundDistribution = e.detail.value.fundDistribution;
-    if (app.checkInput(fundDistribution)){
-      that.showModal("资金规划不能为空!");
-      return;
-    } 
+    // var fundDistribution = e.detail.value.fundDistribution;
+    // if (app.checkInput(fundDistribution)){
+    //   that.showModal("资金规划不能为空!");
+    //   return;
+    // } 
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
     if (app.checkInput(projectDescription)){
@@ -171,11 +171,11 @@ Page({
       return;
     }
     //收益描述
-    var incomeDescription = e.detail.value.incomeDescription;
-    if (app.checkInput(incomeDescription)){
-      that.showModal("收益描述不能为空!");
-      return;
-    }
+    // var incomeDescription = e.detail.value.incomeDescription;
+    // if (app.checkInput(incomeDescription)){
+    //   that.showModal("收益描述不能为空!");
+    //   return;
+    // }
     
     //电话号码
     var phone = e.detail.value.phone;
@@ -297,9 +297,9 @@ Page({
               title: that.data.title,                                        //标题
               threshold: that.data.threshold,                     //入伙门槛
               industryChoice: that.data.industryChoice,                      //行业选择
-              fundDistribution: wx.getStorageSync("fundDistribution"),       //资金规划
+              //fundDistribution: wx.getStorageSync("fundDistribution"),       //资金规划
               projectDescription: wx.getStorageSync("projectDescription"),   //项目描述
-              incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
+              //incomeDescription: wx.getStorageSync("incomeDescription"),     //收益描述
               phone: that.data.phone,                                        //电话号码
               currentCity: wx.getStorageSync("currentCity"),                 //当前城市
               imageArray: pathArr                                            //图片数组

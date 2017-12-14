@@ -46,7 +46,7 @@
         <!-- 输入行业选择    end -->
 
         <!-- 输入总部位置 start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="geographicalPositionClick">
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="geographicalPositionClick">
           <view class="weui-cell__bd">
             <view class="weui-label title">总部位置</view>
           </view>
@@ -57,11 +57,11 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入总部位置    end -->
 
         <!-- 输入资金规划   start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="fundsLayoutClick">
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="fundsLayoutClick">
           <view class="weui-cell__bd">
             <view class="weui-label title">资金规划</view>
           </view>
@@ -72,7 +72,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入资金规划    end -->
 
         <!-- 输入项目描述    start -->
@@ -91,7 +91,7 @@
         <!-- 输入项目描述   end -->
 
         <!-- 输入收益描述    start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="incomeDescriptionClick">
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="incomeDescriptionClick">
           <view class="weui-cell__bd">
             <view class="weui-label title">收益描述</view>
           </view>
@@ -102,7 +102,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入收益描述    end -->
 
         <!-- 输入团队介绍    start -->
@@ -121,7 +121,7 @@
         <!-- 输入团队介绍    end -->
 
         <!-- 投放城市    start -->
-        <view class="weui-cell_to weui-cells_to  weui-cells_after-title" bindtap='throwInTheCityClick'>
+        <!-- <view class="weui-cell_to weui-cells_to  weui-cells_after-title" bindtap='throwInTheCityClick'>
           <view class="weui-cell__bd">
             <view class="weui-label title">投放城市</view>
           </view>
@@ -132,7 +132,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 投放城市    end -->
 
         <!-- 输入联系方式    start -->

@@ -16,11 +16,57 @@ Page({
   
   },
 
+  //跳转
+  bindtapNavigator:function(e){
+    var id = e.currentTarget.id;
+    var releaseType = e.currentTarget.dataset.releasetype;
+    if (releaseType == "加盟代理"){
+      wx.navigateTo({
+        url:'/pages/dahuo/crowdFunding/info/info?id='+id,
+      });
+    } else if (releaseType == "众筹"){
+      wx.navigateTo({
+        url: '/pages/dahuo/crowdFunding/infoCF/infoCF?id=' + id,
+      });
+    }
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
   
+  },
+
+  //获取优质项目数据
+  gethighQualityProject:function(that){
+    //请求获取数据
+    var url = app.config.basePath_web + "api/exe/get";
+    //请求头
+    var header = { cookie: wx.getStorageSync('cookie'), "Content-Type": "application/x-www-form-urlencoded" };
+    //参数
+    var data = {
+      timeStamp: wx.getStorageSync('time'),
+      token: wx.getStorageSync('token'),
+      reqJson: JSON.stringify({
+        nameSpace: 'highQualityProject',       //收藏夹表
+        scriptName: 'Query',
+        nameSpaceMap: {
+          orderByClause: 'mdate desc',
+          rows: [{
+            state:0, //状态
+          }],
+        }
+      })
+    };
+    //发送请求
+    app.request.reqPost(url,header,data,function(res){
+      that.setData({
+        data:res.data,
+      });
+    });
+
   },
 
   /**
@@ -34,7 +80,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that=this;
+    
+    that.gethighQualityProject(that);
   },
 
   /**

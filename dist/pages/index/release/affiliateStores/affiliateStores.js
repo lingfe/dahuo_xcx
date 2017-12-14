@@ -186,17 +186,17 @@ Page({
       return;
     }
     //总部位置
-    var headquartersLocation = e.detail.value.headquartersLocation;
-    if (app.checkInput(headquartersLocation)) {
-      that.showModal("总部位置不能为空!");
-      return;
-    }
+    // var headquartersLocation = e.detail.value.headquartersLocation;
+    // if (app.checkInput(headquartersLocation)) {
+    //   that.showModal("总部位置不能为空!");
+    //   return;
+    // }
     //资金规划
-    var fundDistribution = e.detail.value.fundDistribution;
-    if (app.checkInput(fundDistribution)) {
-      that.showModal("资金规划不能为空!");
-      return;
-    } 
+    // var fundDistribution = e.detail.value.fundDistribution;
+    // if (app.checkInput(fundDistribution)) {
+    //   that.showModal("资金规划不能为空!");
+    //   return;
+    // } 
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
     if (app.checkInput(projectDescription)) {
@@ -204,11 +204,11 @@ Page({
       return;
     }
     //收益描述
-    var incomeDescription = e.detail.value.incomeDescription;
-    if (app.checkInput(incomeDescription)) {
-      that.showModal("收益描述不能为空!");
-      return;
-    }
+    // var incomeDescription = e.detail.value.incomeDescription;
+    // if (app.checkInput(incomeDescription)) {
+    //   that.showModal("收益描述不能为空!");
+    //   return;
+    // }
     //公司、团队介绍
     // var teamIntroduction = e.detail.value.teamIntroduction;
     // if (app.checkInput(teamIntroduction)) {
@@ -216,11 +216,11 @@ Page({
     //   return;
     // }
     //投放城市
-    var throwInTheCity = e.detail.value.throwInTheCity;
-    if (app.checkInput(throwInTheCity)) {
-      that.showModal("投放城市不能为空!");
-      return;
-    }
+    // var throwInTheCity = e.detail.value.throwInTheCity;
+    // if (app.checkInput(throwInTheCity)) {
+    //   that.showModal("投放城市不能为空!");
+    //   return;
+    // }
     //电话号码
     var phone = e.detail.value.phone;
     if (app.checkInput(phone)) {
@@ -342,12 +342,12 @@ Page({
               title: that.data.title,                                         //标题
               threshold: that.data.threshold,                                 //入伙门槛
               industryChoice: that.data.industryChoice,                       //行业选择
-              headquartersLocation: that.data.headquartersLocation,           //总部位置
-              fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划
+              //headquartersLocation: that.data.headquartersLocation,           //总部位置
+              //fundDistribution: wx.getStorageSync("fundDistribution"),        //资金规划
               projectDescription: wx.getStorageSync("projectDescription"),    //项目描述
-              incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
+              //incomeDescription: wx.getStorageSync("incomeDescription"),      //收益描述
               //teamIntroduction: wx.getStorageSync("teamIntroduction"),        //公司、团队介绍
-              throwInTheCity: that.data.throwInTheCity,                       //投放城市
+              //throwInTheCity: that.data.throwInTheCity,                       //投放城市
               phone: that.data.phone,                                         //电话号码
               currentCity: wx.getStorageSync("currentCity"),                  //当前城市
               imageArray: pathArr                                             //数组

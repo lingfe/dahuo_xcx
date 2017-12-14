@@ -155,11 +155,11 @@ Page({
       return;
     }
     //股份划分
-    var shareDivision = e.detail.value.shareDivision;
-    if (app.checkInput(shareDivision)) {
-      that.showModal("股份划分不能为空!");
-      return;
-    }
+    // var shareDivision = e.detail.value.shareDivision;
+    // if (app.checkInput(shareDivision)) {
+    //   that.showModal("股份划分不能为空!");
+    //   return;
+    // }
     //项目描述
     var projectDescription = e.detail.value.projectDescription;
     if (app.checkInput(projectDescription)) {
@@ -167,11 +167,11 @@ Page({
       return;
     }
     //收益描述
-    var incomeDescription = e.detail.value.incomeDescription;
-    if (app.checkInput(incomeDescription)) {
-      that.showModal("收益描述不能为空!");
-      return;
-    }
+    // var incomeDescription = e.detail.value.incomeDescription;
+    // if (app.checkInput(incomeDescription)) {
+    //   that.showModal("收益描述不能为空!");
+    //   return;
+    // }
 
     //电话号码
     var phone = e.detail.value.phone;
@@ -303,11 +303,11 @@ Page({
               releaseType: '干股纳才',                                      //发布类型
               personalId: wx.getStorageSync("personalId"),                 //个人资料id
               title: that.data.title,                                      //标题
-              resourceRequirements: that.data.resourceRequirements,        //技能/资源要求
+              resourceRequirements: that.data.resourceRequirements,        //能力要求
               industryChoice: that.data.industryChoice,                    //行业选择
-              shareDivision: that.data.shareDivision,                      //股份划分
+              //shareDivision: that.data.shareDivision,                      //股份划分
               projectDescription: wx.getStorageSync("projectDescription"), //项目描述
-              incomeDescription: wx.getStorageSync("incomeDescription"),   //收益描述
+              //incomeDescription: wx.getStorageSync("incomeDescription"),   //收益描述
               phone: that.data.phone,                                      //电话号码
               currentCity: wx.getStorageSync("currentCity"),               //当前城市
               imageArray: pathArr                                          //图片url

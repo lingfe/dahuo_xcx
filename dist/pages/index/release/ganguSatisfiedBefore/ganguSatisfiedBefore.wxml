@@ -51,7 +51,7 @@
         <!-- 输入行业选择    end -->
 
         <!-- 输入股份划分 start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap='setshareDivision'>
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap='setshareDivision'>
           <view class="weui-cell__bd">
             <view class="weui-label title">股权配出</view>
           </view>
@@ -62,7 +62,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入股份划分    end -->
 
 
@@ -82,7 +82,7 @@
         <!-- 输入项目描述   end -->
 
         <!-- 输入收益描述    start -->
-        <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="incomeDescriptionClick">
+        <!-- <view class="weui-cell_to weui-cells_to weui-cells_after-title" bindtap="incomeDescriptionClick">
           <view class="weui-cell__bd">
             <view class="weui-label title">收益描述</view>
           </view>
@@ -93,7 +93,7 @@
               <image class="img_wh" src="/assets/images/uii.png" />
             </view>
           </view>
-        </view>
+        </view> -->
         <!-- 输入收益描述    end -->
 
         <!-- 输入联系方式    start -->

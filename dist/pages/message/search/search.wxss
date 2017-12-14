@@ -32,7 +32,7 @@ page, .page, .page__bd {
 
 /*三角*/
 .triangle{
-  position: absolute;
+  position: relative;
   margin-top:23rpx;
   margin-left:-32rpx;
   width:0;
@@ -40,7 +40,7 @@ page, .page, .page__bd {
   border-top:5px solid transparent;
   border-right:12px solid #fff;
   border-bottom:5px solid transparent;
-
+  
 }
 
 /*系统消息*/
