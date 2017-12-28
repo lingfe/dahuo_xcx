@@ -134,19 +134,19 @@
                                 </view>
                             </view>
                             <!-- 经营面积 -->
-                            <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.operatingArea !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">经营面积:</view>
                                     <view class="data_info">{{releaseInfo.operatingArea}} 平方</view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 每月租金 -->
-                            <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
+                             <view class="prices" wx:if="{{releaseInfo.monthlyRent !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">每月租金:</view>
                                     <view class="data_info">{{releaseInfo.monthlyRent}} 元/月</view>
                                 </view>
-                            </view>
+                            </view> 
                             <!-- 行业选择 -->
                             <view class="prices">
                                 <view class="prices_info">
@@ -176,26 +176,26 @@
                                 </view>
                             </view>
                             <!-- 经营描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.businessDescription !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">经营描述:</view>
                                     <text class="data_info">{{releaseInfo.businessDescription}} </text>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 收益描述 -->
-                            <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
+                             <view class="prices" wx:if="{{releaseInfo.incomeDescription !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">收益描述:</view>
                                     <text class="data_info">{{releaseInfo.incomeDescription}} </text>
                                 </view>
-                            </view>
+                            </view> 
                             <!--资金规划 -->
-                            <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.fundDistribution !=null}}">
                                 <view class="prices_info">
                                   <view class="data_title">资金规划:</view>
                                   <text class="data_info">{{releaseInfo.fundDistribution}}</text>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 转让原因 -->
                             <view class="prices" wx:if="{{releaseInfo.transferReason !=null}}">
                                 <view class="prices_info">
@@ -204,19 +204,19 @@
                                 </view>
                             </view>
                             <!-- 投放城市 -->
-                            <view class="prices" wx:if="{{releaseInfo.throwInTheCity !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.throwInTheCity !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">投放城市:</view>
                                     <view class="data_info">{{releaseInfo.throwInTheCity}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 总部位置 -->
-                            <view class="prices" wx:if="{{releaseInfo.headquartersLocation !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.headquartersLocation !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">总部位置:</view>
                                     <view class="data_info">{{releaseInfo.headquartersLocation}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 技能/资源要求 -->
                             <view class="prices" wx:if="{{releaseInfo.resourceRequirements !=null}}">
                                 <view class="prices_info">
@@ -225,12 +225,12 @@
                                 </view>
                             </view>
                             <!-- 产品种类 -->
-                            <view class="prices" wx:if="{{releaseInfo.productType !=null}}">
+                             <view class="prices" wx:if="{{releaseInfo.productType !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">产品种类:</view>
                                     <view class="data_info">{{releaseInfo.productType}} </view>
                                 </view>
-                            </view>
+                            </view> 
                             <!-- 房产类型 -->
                             <view class="prices" wx:if="{{releaseInfo.houseType !=null}}">
                                 <view class="prices_info">
@@ -239,40 +239,40 @@
                                 </view>
                             </view>
                             <!-- 项目优势 -->
-                            <view class="prices" wx:if="{{releaseInfo.projectAdvantage !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.projectAdvantage !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">项目优势:</view>
                                     <text class="data_info">{{releaseInfo.projectAdvantage}} </text>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 产品类目 -->
-                            <view class="prices" wx:if="{{releaseInfo.productCategory !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.productCategory !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">产品类目:</view>
                                     <view class="data_info">{{releaseInfo.productCategory}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 产品亮点 -->
-                            <view class="prices" wx:if="{{releaseInfo.productHighlights !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.productHighlights !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">产品亮点:</view>
                                     <view class="data_info">{{releaseInfo.productHighlights}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 代理条件 -->
-                            <view class="prices" wx:if="{{releaseInfo.agentCondition !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.agentCondition !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">代理条件:</view>
                                     <view class="data_info">{{releaseInfo.agentCondition}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 代理规则 -->
-                            <view class="prices" wx:if="{{releaseInfo.agencyRule !=null}}">
+                            <!-- <view class="prices" wx:if="{{releaseInfo.agencyRule !=null}}">
                                 <view class="prices_info">
                                     <view class="data_title">代理规则:</view>
                                     <view class="data_info">{{releaseInfo.agencyRule}} </view>
                                 </view>
-                            </view>
+                            </view> -->
                             <!-- 项目详细信息  end-->
 
                             <!-- 图片  start-->

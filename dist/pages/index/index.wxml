@@ -191,9 +191,9 @@
 <!--导航 end-->
 
 <!-- 信息通知-->
-<view class='image_service' wx:if="{{tz == true}}">
+<!-- <view class='image_service' wx:if="{{tz == true}}">
   <span class='mark'>留言{{isnotice}}</span>
 </view>
 <view class='image_service2' wx:if="{{tz == true}}">
   <span class="triangle"></span>
-</view>
+</view> -->

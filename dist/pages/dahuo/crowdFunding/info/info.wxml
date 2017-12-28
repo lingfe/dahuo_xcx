@@ -67,6 +67,8 @@
               <span class='content_Bold' wx:if="{{pro.content_Bold != null}}">{{pro.content_Bold}}</span>
             </view>
 
+            <view class='img_title' wx:if="{{pro.title != null}}">{{pro.title}}</view>
+
             <image mode="widthFix" wx:if="{{pro.img !=null}}" class='pro_img' src='{{pro.img}}'></image>
           </view>
           <!-- 模块内容 end  -->

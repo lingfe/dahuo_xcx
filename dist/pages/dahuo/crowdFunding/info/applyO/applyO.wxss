@@ -126,12 +126,13 @@
    text-align: left;
    font-size: 26rpx;
    float: left;
+   color: #000;
    letter-spacing: 2rpx;
  }
 textarea {
   height: 200rpx;
   width: 100%;
-  color: #808080;
+  color: #000;
 }
  /*文本框默认属性*/
   .input-placeholder {
