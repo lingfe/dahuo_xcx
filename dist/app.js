@@ -136,7 +136,7 @@ App({
 
     loginAppid:'3DF7469FD3A1485B95ED16ED794780A8',  //登录服务器的appid
     appid: 'wxdb07051dc3fc031e',                    //小程序id
-    secret: 'b2dec689f9b117a311891c6ac5ae9407',     //小程序的 app secret
+    secret: '955755f5b32225c397c9a61a044b5db6',     //小程序的 app secret
     token: '31963CBD8CA24DEFB48B9799766F0583',      //请求唯一标识
   },
 });

@@ -150,20 +150,32 @@ Page({
     //调用登录接口
     wx.login({
       success: function (logRes) {
-        //获取openid
-        var url = app.config.login_sys + 'sns/jscode2session';
-        var data = {
-          appid: app.globalData.appid,
-          secret: app.globalData.secret,
-          js_code: logRes.code,
-          grant_type: 'authorization_code'
+        //获取openid  gang/manage/openid.action
+        //var url = app.config.login_sys + 'sns/jscode2session';
+        var url = app.config.login_sys + 'gang/manage/openid.action';
+        // var data = {
+        //   appid: app.globalData.appid,
+        //   secret: app.globalData.secret,
+        //   js_code: logRes.code,
+        //   grant_type: 'authorization_code'
+        // }
+        var data={
+          code:logRes.code
         }
         //发送请求
+        // app.request.reqGet(url, data,
+        //   function (res) {
+        //     app.globalData.openid = res.data.openid;
+        //     wx.setStorageSync('openid', res.data.openid);
+        //     that.setData({ openid: res.data.openid });
+        //     //自动登录第二步，获取微信用户
+        //     that.getUserInfo(that);
+        //   });
         app.request.reqGet(url, data,
           function (res) {
-            app.globalData.openid = res.data.openid;
-            wx.setStorageSync('openid', res.data.openid);
-            that.setData({ openid: res.data.openid });
+            app.globalData.openid = res.data;
+            wx.setStorageSync('openid', res.data);
+            that.setData({ openid: res.data });
             //自动登录第二步，获取微信用户
             that.getUserInfo(that);
           });
