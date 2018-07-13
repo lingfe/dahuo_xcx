@@ -173,6 +173,7 @@ Page({
         //   });
         app.request.reqGet(url, data,
           function (res) {
+            console.log(res);
             app.globalData.openid = res.data;
             wx.setStorageSync('openid', res.data);
             that.setData({ openid: res.data });
