@@ -36,7 +36,7 @@
     <!--留言通知 start -->
     <navigator bindlongpress='bindlongtapURL' 
     id='{{item.id}}' 
-    data-index="{{index}}" url="/pages/message/messageNotice/messageNotice">
+    data-index="{{index}}" url="/pages/message/messageNotice/messageNotice" >
       <view class="item">
         <view class="item-left">
            <text wx:if="{{msgTZ==true}}" class="mark text"></text> 

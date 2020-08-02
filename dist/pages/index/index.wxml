@@ -21,7 +21,7 @@
       <view class="pricesList" wx:if="{{isPrices == true}}">
         <image class="img" src="/assets/images/u218.png"></image>
         <view class="bor">
-          <view class="border_bottom" wx:for="{{tabs[0].content}}" wx:key="{{*this}}">
+          <view class="border_bottom" wx:for="{{tabs[0].content}}" wx:key="{{item}}">
             <view wx:if="{{tabs[0].content[index].minThreshold != 50}}" 
             class="prices {{index == num ? 'color': ''}}" 
             bindtap="bindtapPrices" 
@@ -49,7 +49,7 @@
 
   <!-- 内容 end  -->
   <view class="dahuo_neiro">
-    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="*this">
+    <navigator url="/pages/index/info/info?releaseId={{item.id}}&personalId={{item.personalId}}" wx:for="{{list}}" wx:key="item">
       <view class="neiro" bindtap="getInputValue" id="10001" name="userId" data-value="123456">
         <view class="neiro_img">
           <image src="{{item.imageArray}}"></image>
@@ -96,18 +96,19 @@
     <view class="weui-tab">
       <!-- tab菜单  start -->
       <view class="www">
-        <block wx:for="{{tabs}}" wx:key="{{*this}}">
+        <block wx:for="{{tabs}}" wx:key="{{item}}">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
             <view class="weui-navbar__title stop_1">{{item.name}}</view>
           </view>
         </block>
       </view>
       <!-- tab菜单  end -->
+
       <view class="ccc">
         <!-- 金额  start -->
         <view class="" hidden="{{activeIndex != 0}}">
           <checkbox-group data-index="{{activeIndex}}">
-            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.minThreshold}}' data-index='{{index}}' data-name="AmountOfMoney" wx:key="{{*this}}">
+            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.minThreshold}}' data-index='{{index}}' data-name="AmountOfMoney" wx:key="{{item}}">
               <view class="weui-navbar__item stop">
                 <view wx:if="{{item.minThreshold == 50}}" class="weui-navbar__title stop_1 flaot_left">
                   50万+
@@ -128,7 +129,7 @@
         <!-- 类型  start -->
         <view class="" hidden="{{activeIndex != 1}}">
           <checkbox-group style="overflow:scroll;height:515px;" data-index="{{activeIndex}}">
-            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_releaseType" wx:key="{{*this}}">
+            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_releaseType" wx:key="{{item}}">
               <view class="weui-navbar__item stop">
                 <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
@@ -144,7 +145,7 @@
         <!-- 行业  start -->
         <view class="" hidden="{{activeIndex != 2}}">
           <checkbox-group style="overflow:scroll;max-height:515px;" data-index="{{activeIndex}}">
-            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_industryChoice" wx:key="{{*this}}">
+            <label wx:for="{{tabs[activeIndex].content}}" bindtap='clearBtn_to' data-value='{{item.name}}' data-index='{{index}}' data-name="in_industryChoice" wx:key="{{item}}">
               <view class="weui-navbar__item stop">
                 <view class="weui-navbar__title stop_1 flaot_left">{{item.name}}</view>
                 <view class="flaot_right" wx:if="{{item.checked}}">
@@ -164,6 +165,7 @@
         </view>
         <!-- 行业  end -->
       </view>
+      
       <view class="botton_view">
         <!-- 操作  start -->
         <view class="operation">

@@ -9,7 +9,7 @@
 <view stytle=" overflow-x: hidden; overflow-y: auto;">
   <view class="message__list">
     <!-- 消息 start -->
-    <block wx:for="{{messages}}" wx:key="{{*this}}">
+    <block wx:for="{{messages}}" wx:key="{{item}}">
         <navigator url="/pages/index/info/info?releaseId={{item.releaseId}}&personalId={{item.personalId}}&activeIndex=1" 
        bindlongpress='bindlongtapURL' 
        id='{{item.id}}' data-index="{{index}}">  

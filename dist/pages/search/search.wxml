@@ -36,7 +36,7 @@
           <view class="bg_b_text">{{addressInfo}}</view>
         </view>
       </view>
-      <view wx:for="{{Letter26}}" wx:key="{{*this}}">
+      <view wx:for="{{Letter26}}" wx:key="{{item}}">
         <view class="weui-cells__title ">{{item}}</view>
         <view class="weui-cells__title border_bottom" 
         hover-class="weui-cell_active" 
@@ -44,7 +44,7 @@
         wx:for="{{address}}" 
         wx:for-item="lettt" 
         wx:if="{{item == lettt.firstChar}}" 
-        wx:key="{{*this}}" data-info="{{lettt.shortName}}">
+        wx:key="{{item}}" data-info="{{lettt.shortName}}">
           <view class="font_left">{{lettt.shortName}}</view>
         </view>
       </view>

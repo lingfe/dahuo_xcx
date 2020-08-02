@@ -41,7 +41,7 @@
             <view wx:if="{{item.to.dex == 0}}">
               <!-- 图片  start-->
               <view wx:if="{{item.to.imgs != null }}">
-                <view class='show_right' wx:for-item="img"  wx:key="{{*this}}" wx:for="{{item.to.imgs}}" >
+                <view class='show_right' wx:for-item="img"  wx:key="{{item}}" wx:for="{{item.to.imgs}}" >
                   <view class='imgtox_right'>
                     <image src="http://img1.3lian.com/gif/more/11/201212/04b335ead07530a6188a27549fad1a68.jpg" class="image_right"/>
                   </view>

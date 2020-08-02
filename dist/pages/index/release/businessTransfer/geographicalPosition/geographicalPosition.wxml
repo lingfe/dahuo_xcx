@@ -27,7 +27,7 @@
               <view class="weui-navbar__title stop_1">全{{addressInfo == '定位中..'?'贵阳':addressInfo}}</view>
             </view>
           </block>
-          <block wx:for="{{ad_info}}" wx:key="{{*this}}">
+          <block wx:for="{{ad_info}}" wx:key="{{item}}">
             <view id="{{index}}" data-shortName='{{item.shortName}}' 
             class="weui-navbar__item {{activeIndex == index ? ' border_tab' : 'stop_title'}}" bindtap="tabClick">
               <view class="weui-navbar__title stop_1">{{item.shortName}}</view>
